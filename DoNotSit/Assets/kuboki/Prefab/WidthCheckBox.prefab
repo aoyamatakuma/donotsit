@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 301092119307525234}
   - component: {fileID: 6631959768703777346}
   - component: {fileID: 6168130346680695967}
-  - component: {fileID: 3434123886886340765}
   - component: {fileID: 1542148419486341120}
+  - component: {fileID: -4611403233245372949}
   m_Layer: 0
   m_Name: WidthCheckBox
   m_TagString: Untagged
@@ -95,18 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3434123886886340765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009651107627324745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce2e4cb8658c934385d14346d30eeac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1542148419486341120
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,3 +111,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4611403233245372949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009651107627324745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf7f7a9468632149916f43a2fb27ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

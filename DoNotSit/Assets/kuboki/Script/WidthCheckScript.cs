@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCheckBox : MonoBehaviour
+public class WidthCheckScript : MonoBehaviour
 {
     Vector3 playerPos;
     CameraScript cameraCS;
@@ -19,7 +19,6 @@ public class MoveCheckBox : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             playerPos = col.gameObject.transform.position;
-            Debug.Log("接触した");
         }
     }
 
@@ -27,22 +26,19 @@ public class MoveCheckBox : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("離れました");
-            if (playerPos.x<col.gameObject.transform.position.x)
+            if (col.gameObject.transform.position.x > gameObject.transform.position.x)
             {
-                cameraCS.RightMoveCamera();
+                if (playerPos.x < gameObject.transform.position.x)
+                {
+                    cameraCS.RightMoveCamera();
+                }              
             }
-            else if(playerPos.x>col.gameObject.transform.position.x)
+            else if (col.gameObject.transform.position.x < gameObject.transform.position.x)
             {
-                cameraCS.LeftMoveCamera();
-            }
-            else if(playerPos.y<col.gameObject.transform.position.y)
-            {
-                cameraCS.UpMoveCamera();
-            }
-            else if (playerPos.y > col.gameObject.transform.position.y)
-            {
-                cameraCS.DownMoveCamera();
+                if (playerPos.x > gameObject.transform.position.x) 
+                {
+                    cameraCS.LeftMoveCamera();
+                }    
             }
         }
     }

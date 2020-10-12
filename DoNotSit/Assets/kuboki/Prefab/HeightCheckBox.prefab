@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4688575047615542995}
   - component: {fileID: 5224676606950436878}
   - component: {fileID: -1419020007295888799}
-  - component: {fileID: -1229933423107153239}
+  - component: {fileID: -3087177531368983192}
   m_Layer: 0
   m_Name: HeightCheckBox
   m_TagString: Untagged
@@ -111,7 +111,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-1229933423107153239
+--- !u!114 &-3087177531368983192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,6 +120,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1376797717590940120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce2e4cb8658c934385d14346d30eeac, type: 3}
+  m_Script: {fileID: 11500000, guid: 263a8f82c8503034ab759da7613c0ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
