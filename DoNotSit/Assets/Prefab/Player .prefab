@@ -315,12 +315,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f55c1d5d20ff44a8083d0290c0fe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 250
+  jumpForce: 10
   attackForce: 100
   attackTime: 0
   speed: 10
   jumpFlag: 0
   attackFlag: 0
   hp: 0
-  attackCount: 0
+  attackCount: 100
+  chargeCount: 0
   currentPlayerState: 0
