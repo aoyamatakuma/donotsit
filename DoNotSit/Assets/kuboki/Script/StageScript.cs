@@ -13,12 +13,18 @@ public class StageScript : MonoBehaviour
     private int[] Map;
     //マップサイズ
     private Vector2 mapSize = new Vector2(160, 90);
+    //マップの境目の判定を生成
+    [SerializeField]
+    private GameObject widthObj;
+    [SerializeField]
+    private GameObject heightObj;
 
     
 
     // Start is called before the first frame update
     void Start()
     {
+        CreateMap();
     }
 
     // Update is called once per frame
@@ -33,6 +39,22 @@ public class StageScript : MonoBehaviour
         for (int i = 0; i < Map.Length; i++)
         {
             Map[i] = i;
+        }
+        //横の当たり判定生成
+        for (int w = 1; w < mapWidth; w++)
+        {
+            GameObject widthBox = Instantiate(widthObj, 
+                new Vector3((mapSize.x - 20) * w + 10, ((mapSize.y - 20) * mapHeight + 20) / 2, 0),Quaternion.identity);
+            widthBox.transform.localScale = new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 0);
+            widthBox.transform.parent = transform;
+        }
+        //縦の当たり判定の生成
+        for (int h = 1; h < mapHeight; h++)
+        {
+            GameObject heightBox = Instantiate(heightObj,
+                new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, (mapSize.y - 20) * h + 10, 0), Quaternion.identity);
+            heightBox.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20, 1, 0);
+            heightBox.transform.parent = transform;
         }
     }
 
@@ -58,9 +80,6 @@ public class StageScript : MonoBehaviour
     public void GetDrawMap()
     {
         Vector3 originMapVec = new Vector3(mapSize.x / 2, mapSize.y / 2, 0);
-
-
-
         //マップの横の判定を生成
         Gizmos.color = Color.green;
         for (int w = 1; w < mapWidth; w++)

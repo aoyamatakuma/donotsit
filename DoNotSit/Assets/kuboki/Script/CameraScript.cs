@@ -36,7 +36,7 @@ public class CameraScript : MonoBehaviour
     #region CameraMove
 
     //右
-    void RightMoveCamera()
+    public void RightMoveCamera()
     {
         moveCameraPosition = new Vector3(stageCS.GetMapSize().x - 20, 0, 0);
         nowCameraPosition += moveCameraPosition;
@@ -52,7 +52,7 @@ public class CameraScript : MonoBehaviour
         }
     }
     //左
-    void LeftMoveCamera()
+    public void LeftMoveCamera()
     {
         moveCameraPosition = new Vector3(-(stageCS.GetMapSize().x - 20), 0, 0);
         nowCameraPosition += moveCameraPosition;
@@ -68,7 +68,7 @@ public class CameraScript : MonoBehaviour
         }
     }
     //上
-    void UpMoveCamera()
+    public void UpMoveCamera()
     {
         moveCameraPosition = new Vector3(0, stageCS.GetMapSize().y-20, 0);
         nowCameraPosition += moveCameraPosition;
@@ -84,7 +84,7 @@ public class CameraScript : MonoBehaviour
         }
     }
     //下
-    void DownMoveCamera()
+    public void DownMoveCamera()
     {
         moveCameraPosition = new Vector3(0, -(stageCS.GetMapSize().y - 20), 0);
         nowCameraPosition += moveCameraPosition;
