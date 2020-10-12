@@ -18,6 +18,8 @@ public class StageScript : MonoBehaviour
     private GameObject widthObj;
     [SerializeField]
     private GameObject heightObj;
+    [SerializeField]
+    private GameObject wallObj;
 
     
 
@@ -56,6 +58,27 @@ public class StageScript : MonoBehaviour
             heightBox.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20, 1, 0);
             heightBox.transform.parent = transform;
         }
+
+        GameObject wall = Instantiate(wallObj, 
+            new Vector3(0, ((mapSize.y - 20) * mapHeight + 20) / 2,0), Quaternion.identity);
+        wall.transform.localScale = new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 5);
+        wall.transform.parent = transform;
+
+        GameObject wall2 = Instantiate(wallObj,
+    new Vector3((mapSize.x-20)*mapWidth+20, ((mapSize.y - 20) * mapHeight + 20) / 2, 0), Quaternion.identity);
+        wall2.transform.localScale = new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 5);
+        wall2.transform.parent = transform;
+
+        GameObject wall3 = Instantiate(wallObj,
+            new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, 0, 0), Quaternion.identity);
+        wall3.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20,1, 5);
+        wall3.transform.parent = transform;
+
+        GameObject wall4 = Instantiate(wallObj,
+    new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, (mapSize.y-20)*mapHeight+20, 0), Quaternion.identity);
+        wall4.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20, 1, 5);
+        wall4.transform.parent = transform;
+
     }
 
     #region Getter
