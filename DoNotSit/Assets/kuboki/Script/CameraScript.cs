@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CameraScript : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class CameraScript : MonoBehaviour
         testButton();
     }
 
-    //カメラの視点移動処理
+    //カメラの視点移動処理()あとでまとめる
     #region CameraMove
 
     //右
@@ -45,11 +46,13 @@ public class CameraScript : MonoBehaviour
     }
     IEnumerator RightMove()
     {
+        Time.timeScale = 0;
         for(float f = 1f; f>=0;f-=0.1f)
         {
             mainCamera.transform.position += Vector3.right*14;
             yield return null;
         }
+        Time.timeScale = 1;
     }
     //左
     public void LeftMoveCamera()
@@ -61,11 +64,13 @@ public class CameraScript : MonoBehaviour
     }
     IEnumerator LeftMove()
     {
+        Time.timeScale = 0;
         for (float f = 1f; f >= 0; f -= 0.1f)
         {
             mainCamera.transform.position += Vector3.left * 14;
             yield return null;
         }
+        Time.timeScale = 1;
     }
     //上
     public void UpMoveCamera()
@@ -73,15 +78,16 @@ public class CameraScript : MonoBehaviour
         moveCameraPosition = new Vector3(0, stageCS.GetMapSize().y-20, 0);
         nowCameraPosition += moveCameraPosition;
         StartCoroutine(UpMove());
-        //mainCamera.transform.position = nowCameraPosition;
     }
     IEnumerator UpMove()
     {
+        Time.timeScale = 0;
         for (float f = 1f; f >= 0; f -= 0.1f)
         {
             mainCamera.transform.position += Vector3.up * 7;
             yield return null;
         }
+        Time.timeScale = 1;
     }
     //下
     public void DownMoveCamera()
@@ -93,11 +99,13 @@ public class CameraScript : MonoBehaviour
     }
     IEnumerator DownMove()
     {
+        Time.timeScale = 0;
         for (float f = 1f; f >= 0; f -= 0.1f)
         {
             mainCamera.transform.position += Vector3.down * 7;
             yield return null;
         }
+        Time.timeScale = 1;
     }
     #endregion
 
