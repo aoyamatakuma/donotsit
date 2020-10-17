@@ -10,16 +10,19 @@ public class MovetestScript : MonoBehaviour
     float jumpForce = 0;
     float maxJumpForce = 1000;
     Vector3 jumpAngle = new Vector3(1,1,0);
+    Vector3 Scale;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRig = gameObject.GetComponent<Rigidbody>();
+        Scale = gameObject.transform.localScale;
     }
     // Update is called once per frame
     void Update()
     {
         JumpMove();
+        testMove();
     }
     void JumpMove()
     {
@@ -34,7 +37,7 @@ public class MovetestScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             playerRig.velocity += jumpAngle * jumpForce;
-            gameObject.transform.localScale = new Vector3(10, 10, 5);
+            gameObject.transform.localScale = Scale;
             jumpForce = 0;
         }
     }

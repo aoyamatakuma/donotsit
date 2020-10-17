@@ -15,6 +15,10 @@ public class CameraScript : MonoBehaviour
     private Vector3 startCameraPosition;
     //マップの1部分の番号取得用
     private int mapNumber;
+    //キャラの当たり判定幅
+    private float colBox = 20;
+
+    private float cameraPosZ;
 
     //ステージスクリプトコンポーネント
     [SerializeField, Header("ステージスクリプト")]
@@ -22,9 +26,11 @@ public class CameraScript : MonoBehaviour
 
     void Start()
     {
+        cameraPosZ = mainCamera.transform.position.z;
+        stageCS = gameObject.GetComponent<StageScript>();
         //カメラのスタート地点を設定
         startCameraPosition = Vector3.forward * -78;
-        nowCameraPosition = new Vector3(stageCS.GetMapSize().x / 2, stageCS.GetMapSize().y / 2, -78);
+        nowCameraPosition = new Vector3(stageCS.GetMapSize().x / 2, stageCS.GetMapSize().y / 2, cameraPosZ);
         mainCamera.transform.position = nowCameraPosition;        
     }
 
@@ -39,7 +45,7 @@ public class CameraScript : MonoBehaviour
     //右
     public void RightMoveCamera()
     {
-        moveCameraPosition = new Vector3(stageCS.GetMapSize().x - 20, 0, 0);
+        moveCameraPosition = new Vector3(stageCS.GetMapSize().x - colBox, 0, 0);
         nowCameraPosition += moveCameraPosition;
         StartCoroutine(RightMove());
        // mainCamera.transform.position = nowCameraPosition;
@@ -49,7 +55,7 @@ public class CameraScript : MonoBehaviour
         Time.timeScale = 0;
         for(float f = 1f; f>=0;f-=0.1f)
         {
-            mainCamera.transform.position += Vector3.right*14;
+            mainCamera.transform.position += Vector3.right*((stageCS.mapSize.x-colBox)/10);
             yield return null;
         }
         Time.timeScale = 1;
@@ -67,7 +73,7 @@ public class CameraScript : MonoBehaviour
         Time.timeScale = 0;
         for (float f = 1f; f >= 0; f -= 0.1f)
         {
-            mainCamera.transform.position += Vector3.left * 14;
+            mainCamera.transform.position += Vector3.left * ((stageCS.mapSize.x-colBox)/10);
             yield return null;
         }
         Time.timeScale = 1;
@@ -84,7 +90,7 @@ public class CameraScript : MonoBehaviour
         Time.timeScale = 0;
         for (float f = 1f; f >= 0; f -= 0.1f)
         {
-            mainCamera.transform.position += Vector3.up * 7;
+            mainCamera.transform.position += Vector3.up * ((stageCS.mapSize.y-colBox)/10);
             yield return null;
         }
         Time.timeScale = 1;
@@ -102,7 +108,7 @@ public class CameraScript : MonoBehaviour
         Time.timeScale = 0;
         for (float f = 1f; f >= 0; f -= 0.1f)
         {
-            mainCamera.transform.position += Vector3.down * 7;
+            mainCamera.transform.position += Vector3.down * ((stageCS.mapSize.y - colBox) / 10);
             yield return null;
         }
         Time.timeScale = 1;
