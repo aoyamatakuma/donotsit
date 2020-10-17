@@ -47,7 +47,7 @@ public class StageScript : MonoBehaviour
         {
             GameObject widthBox = Instantiate(widthObj, 
                 new Vector3((mapSize.x - 20) * w + 10, ((mapSize.y - 20) * mapHeight + 20) / 2, 0),Quaternion.identity);
-            widthBox.transform.localScale = new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 0);
+            widthBox.transform.localScale = new Vector3(20, (mapSize.y - 20) * mapHeight + 20, 0);
             widthBox.transform.parent = transform;
         }
         //縦の当たり判定の生成
@@ -55,25 +55,28 @@ public class StageScript : MonoBehaviour
         {
             GameObject heightBox = Instantiate(heightObj,
                 new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, (mapSize.y - 20) * h + 10, 0), Quaternion.identity);
-            heightBox.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20, 1, 0);
+            heightBox.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20, 20, 0);
             heightBox.transform.parent = transform;
         }
 
+
+        //外枠の生成
+        //左
         GameObject wall = Instantiate(wallObj, 
             new Vector3(0, ((mapSize.y - 20) * mapHeight + 20) / 2,0), Quaternion.identity);
         wall.transform.localScale = new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 5);
         wall.transform.parent = transform;
-
+        //右
         GameObject wall2 = Instantiate(wallObj,
     new Vector3((mapSize.x-20)*mapWidth+20, ((mapSize.y - 20) * mapHeight + 20) / 2, 0), Quaternion.identity);
         wall2.transform.localScale = new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 5);
         wall2.transform.parent = transform;
-
+        //下
         GameObject wall3 = Instantiate(wallObj,
             new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, 0, 0), Quaternion.identity);
         wall3.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20,1, 5);
         wall3.transform.parent = transform;
-
+        //上
         GameObject wall4 = Instantiate(wallObj,
     new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, (mapSize.y-20)*mapHeight+20, 0), Quaternion.identity);
         wall4.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20, 1, 5);
