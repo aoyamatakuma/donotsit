@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public enum PlayerState
@@ -19,20 +20,19 @@ public class PlayerControl : MonoBehaviour
     public float minAngle = -70f; // 最小回転角度
     public float timer = 60f;//タイマー
     public int combo;//コンボ
-    public Vector3 localGravity;
+    public Text timerText;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         jumpFlag = false;
         currentPlayerState = PlayerState.Normal;
-       
+      
     }
 
     // Update is called once per frame
     void Update()
     {
-        setLocalGravity();
         //ノーマルステート
         if (currentPlayerState == PlayerState.Normal)
         {
@@ -41,14 +41,14 @@ public class PlayerControl : MonoBehaviour
         }
         //アタックステート
         if (currentPlayerState == PlayerState.Attack)
-        {
-            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+        {//, ForceMode.Impulse
+            rb.AddForce(transform.up * jumpSpeed);
         }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
-        if (timer == 0)
+        if (timer <= 0)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
     void Move()//移動系
@@ -72,10 +72,6 @@ public class PlayerControl : MonoBehaviour
             currentPlayerState = PlayerState.Attack;
         }
     }
-    void setLocalGravity()
-    {
-        rb.AddForce(localGravity, ForceMode.Acceleration);
-    }
     void OnCollisionEnter(Collision col)
     {
 
@@ -83,7 +79,7 @@ public class PlayerControl : MonoBehaviour
         {
             jumpFlag = false;
             currentPlayerState = PlayerState.Normal;
-            //rb.useGravity = false;
+            rb.useGravity = false;
         }
         //当たるとタイマー減少
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
