@@ -12,7 +12,7 @@ public class StageScript : MonoBehaviour
     //ステージのマップをリスト化
     private int[] Map;
     //マップサイズ
-    private Vector2 mapSize = new Vector2(160, 90);
+    public Vector2 mapSize = new Vector2(1280, 720);
     //マップの境目の判定を生成
     [SerializeField]
     private GameObject widthObj;
