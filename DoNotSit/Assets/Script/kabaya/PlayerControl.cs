@@ -2,121 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public enum PlayerState
 {
     Normal,
-    Charge,
-    Attack,
-    PowerAttack
+    Attack
 }
 public class PlayerControl : MonoBehaviour
 {
-    public float jumpForce = 2.0f;//ジャンプの力
-    public float attackForce = 2.0f;//アタックの力
-    public float attackTime;//チャージ
-    public float speed = 2.0f;//地上での移動速度
+    public float jumpSpeed = 2.0f;//ジャンプの力
+    public float roateSpeed = 2.0f;//回るスピード
     Rigidbody rb;
     public bool jumpFlag;//ジャンプフラグ
-    public bool attackFlag;//アタックフラグ
-    public int hp;//Hp
-    public int attackCount;
-    public int chargeCount;
     public PlayerState currentPlayerState; //現在の状態
+    public float maxAngle = 70f; // 最大回転角度
+    public float minAngle = -70f; // 最小回転角度
+    public float timer = 60f;//タイマー
+    public int combo;//コンボ
+    public Vector3 localGravity;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         jumpFlag = false;
-        attackFlag = false;
-        hp = 3;
         currentPlayerState = PlayerState.Normal;
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Jump();
-        Attack();
-        PowerAttack();
+        setLocalGravity();
+        //ノーマルステート
+        if (currentPlayerState == PlayerState.Normal)
+        {
+            Move();
+            Jump();
+        }
+        //アタックステート
+        if (currentPlayerState == PlayerState.Attack)
+        {
+            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+        }
+        //タイマー
+        timer -= 1.0f * Time.deltaTime;
+        if (timer == 0)
+        {
+            Destroy(gameObject);
+        }
     }
     void Move()//移動系
     {
         //左スティック
-        float h = Input.GetAxis("Horizontal");
-        if (currentPlayerState == PlayerState.Normal)
-        {
-            rb.velocity = new Vector2(speed * h, rb.velocity.y);
-            if (h > 0)//右
-            {
-                //  transform.localRotation = new Quaternion(0, 0, 0, 0);
-            }
-            else if (h < 0)//左
-            {
-                //  transform.localRotation = new Quaternion(0, 180, 0, 0);
-            }
-        }
+        float turn = Input.GetAxis("Horizontal");
+        // 現在の回転角度を0～360から-180～180に変換
+        float rotateZ = (transform.eulerAngles.z > 180) ? transform.eulerAngles.z - 360 : transform.eulerAngles.z;
+        // 現在の回転角度に入力(turn)を加味した回転角度をMathf.Clamp()を使いminAngleからMaxAngle内に収まるようにする
+        float angleZ = Mathf.Clamp(rotateZ - turn * roateSpeed, minAngle, maxAngle);
+        // 回転角度を-180～180から0～360に変換
+        angleZ = (angleZ < 0) ? angleZ + 360 : angleZ;
+        // 回転角度をオブジェクトに適用
+        transform.rotation = Quaternion.Euler(0, 0, angleZ);
     }
     void Jump()//ジャンプ系
     {
-        //Aボタン Input.GetButtonDown("Jump")&&
-        if (Input.GetButtonDown("Jump") && jumpFlag == false)
+        if (Input.GetButtonDown("Jump")&&jumpFlag==false)
         {
-            // rb.AddForce(Vector2.up * jumpForce);
-            rb.velocity = Vector2.up * jumpForce;
             jumpFlag = true;
+            currentPlayerState = PlayerState.Attack;
         }
     }
-    void Attack()//攻撃
+    void setLocalGravity()
     {
-        var h1 = Input.GetAxis("Horizontal");
-        var v1 = Input.GetAxis("Vertical");
-        //Bボタン
-        if (Input.GetButtonUp("Attack"))
-        {
-            if (h1 != 0 || v1 != 0)
-            {
-                transform.position += new Vector3(h1 * Time.deltaTime, v1 * Time.deltaTime, 0) * attackForce;
-                attackFlag = true;
-                currentPlayerState = PlayerState.Attack;
-            }
-        }
-        else
-        {
-            attackFlag = false;
-            currentPlayerState = PlayerState.Normal;
-        }
-    }
-    void PowerAttack()//強攻撃
-    {
-        var h1 = Input.GetAxis("Horizontal");
-        var v1 = Input.GetAxis("Vertical");
-        //長押しBボタン
-        if (Input.GetButton("Attack") && attackFlag == false)
-        {
-            chargeCount++;
-            currentPlayerState = PlayerState.Charge;
-        }
-        else if (Input.GetButtonUp("Attack") && attackCount <= chargeCount && attackFlag == false)
-        {
-            if (h1 != 0 || v1 != 0)
-            {
-                transform.position += new Vector3(h1 * Time.deltaTime, v1 * Time.deltaTime, 0) * (attackForce * 2);
-                attackFlag = true;
-            }
-            //else
-            //{
-            //    transform.position += new Vector3(attackForce * Time.deltaTime, 0, 0) * 2 ;
-            //    attackFlag = true;
-            //}
-            currentPlayerState = PlayerState.PowerAttack;
-        }
-        else
-        {
-            attackFlag = false;
-            chargeCount = 0;
-            currentPlayerState = PlayerState.Normal;
-        }
+        rb.AddForce(localGravity, ForceMode.Acceleration);
     }
     void OnCollisionEnter(Collision col)
     {
@@ -124,6 +82,28 @@ public class PlayerControl : MonoBehaviour
         if (col.gameObject.CompareTag("Wall"))
         {
             jumpFlag = false;
+            currentPlayerState = PlayerState.Normal;
+            //rb.useGravity = false;
         }
+        //当たるとタイマー減少
+        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
+        {
+            timer -= 10.0f;
+        }
+        //アタック(移動中に当たると)タイマー増加
+        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
+        {
+            timer += 2.0f * Time.deltaTime;
+        }
+    }
+    //反射
+    public void ReflectionUp()
+    {
+
+    }
+    //レベルアップ
+    public void LevelUp()
+    {
+
     }
 }
