@@ -66,7 +66,6 @@ public class MovetestScript : MonoBehaviour
     {
         if (col.gameObject.tag == "wall")
         {
-            Debug.Log("触れた");
             wa = col.gameObject.GetComponent<WallAbility>();
             switch (wa.abilityNumber)
             {
@@ -78,54 +77,59 @@ public class MovetestScript : MonoBehaviour
                 case 1://反射
                     //進行方向
                     float playerVec = playerRig.velocity.x*playerRig.velocity.y;
-                    //上にいるとき
-                    if (wa.Height(true).y < gameObject.transform.position.y)
+
+                    //縦の中心
+                    if (wa.Height(true).y-(Scale.y/2) >= gameObject.transform.position.y-(Scale.y/2))
                     {
-                        if (wa.Width(true).x <gameObject.transform.position.x)//右上
+                        if(wa.Height(false).y+(Scale.y/2) <= gameObject.transform.position.y + (Scale.y / 2))
                         {
-                            playerRig.velocity = new Vector3(-playerRig.velocity.x, -playerRig.velocity.y, 0);
+                            Debug.Log("yoko");
+                            playerRig.velocity = new Vector3(-playerRig.velocity.x, playerRig.velocity.y, 0);
                         }
-                        else if(wa.Width(false).x<gameObject.transform.position.x)//真ん中
+                        else
                         {
+                            Debug.Log("tate");
                             playerRig.velocity = new Vector3(playerRig.velocity.x, -playerRig.velocity.y, 0);
                         }
-                        else//左上
-                        {
-                            playerRig.velocity = new Vector3(-playerRig.velocity.x, -playerRig.velocity.y, 0);
-                        }
                     }
-                    //真ん中
-                    else if(wa.Height(false).y<gameObject.transform.position.y)
-                    {
-                        playerRig.velocity = new Vector3(-playerRig.velocity.x, playerRig.velocity.y, 0);
-                    }
-                    //下にいるとき
                     else
-                    {
-                        if (wa.Width(true).x < gameObject.transform.position.x)//右下
+                    {                       
+                        if(wa.Width(true).x-(Scale.x/2)<=gameObject.transform.position.x-(Scale.x/2)|| wa.Width(false).x + (Scale.x/2) >= gameObject.transform.position.x + (Scale.x / 2))
                         {
-                            playerRig.velocity = new Vector3(-playerRig.velocity.x, -playerRig.velocity.y, 0);
+                            Debug.Log("横");
+                            playerRig.velocity = new Vector3(-playerRig.velocity.x, playerRig.velocity.y, 0);
                         }
-                        else if (wa.Width(false).x < gameObject.transform.position.x)//真ん中
+                        else
                         {
+                            Debug.Log("縦");
                             playerRig.velocity = new Vector3(playerRig.velocity.x, -playerRig.velocity.y, 0);
                         }
-                        else//左下
-                        {
-                            playerRig.velocity = new Vector3(-playerRig.velocity.x, -playerRig.velocity.y, 0);
-                        }
+                      
                     }
+                    
                     break;
                 case 2://沼の床
                     playerRig.velocity = Vector3.zero;
                     maxJumpForce = maxJumpForce / 2;
                     //ジャンプしたらmaxJumpForceをもとに戻す；
-
+                    break;
+                case 3:
+                    ReflectAction(col.gameObject);
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    private void ReflectAction(GameObject col)
+    {
+        Vector3 d = gameObject.transform.position - col.gameObject.transform.position;
+        float h = Vector3.Dot(d, col.gameObject.transform.up);
+        Vector3 n = col.gameObject.transform.up;
+        h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        Vector3 r = playerRig.velocity + 2 * n * h;
+        playerRig.velocity = r;
     }
  }
 
