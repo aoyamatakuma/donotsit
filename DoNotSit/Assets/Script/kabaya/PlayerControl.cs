@@ -11,23 +11,33 @@ public enum PlayerState
 }
 public class PlayerControl : MonoBehaviour
 {
-    public float jumpSpeed = 2.0f;//ジャンプの力
-    public float roateSpeed = 2.0f;//回るスピード
+
     Rigidbody rb;
     public bool jumpFlag;//ジャンプフラグ
+    public bool restratFlag;//障害物の当たり判定のフラグ
+    public float jumpSpeed = 2.0f;//ジャンプの力
+    public float jumpSpeedUp = 1.2f;//ジャンプアップの力
+    public float roateSpeed = 2.0f;//回るスピード
     public PlayerState currentPlayerState; //現在の状態
-    public float maxAngle = 70f; // 最大回転角度
-    public float minAngle = -70f; // 最小回転角度
+    public float maxAngle = 45f; // 最大回転角度
+    public float minAngle = -45f; // 最小回転角度
+    public float RemaxAngle = 135f; // 最大回転角度
+    public float ReminAngle = -135f; // 最小回転角度
     public float timer = 60f;//タイマー
+    public float comboTimer = 1.0f;//コンボタイマー
     public int combo;//コンボ
-    public Text timerText;
+    public int level;//レベル
+    public int speedCount;//連続用
+    public int exp;//経験値
+    public Text timerText;//タイマーテキスト
+    public Text levelText;//レベルテキスト
+    public GameObject ob;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         jumpFlag = false;
         currentPlayerState = PlayerState.Normal;
-      
     }
 
     // Update is called once per frame
@@ -38,14 +48,17 @@ public class PlayerControl : MonoBehaviour
         {
             Move();
             Jump();
+            ob.SetActive(true);
         }
         //アタックステート
         if (currentPlayerState == PlayerState.Attack)
         {//, ForceMode.Impulse
             rb.AddForce(transform.up * jumpSpeed);
+            ob.SetActive(false);
         }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
+        timerText.text = timer.ToString("f1") + "秒";
         if (timer <= 0)
         {
             Destroy(this.gameObject);
@@ -66,20 +79,28 @@ public class PlayerControl : MonoBehaviour
     }
     void Jump()//ジャンプ系
     {
-        if (Input.GetButtonDown("Jump")&&jumpFlag==false)
+        if (Input.GetButtonDown("Jump") && jumpFlag == false)
         {
             jumpFlag = true;
             currentPlayerState = PlayerState.Attack;
         }
     }
+    //壁との当たり判定
     void OnCollisionEnter(Collision col)
     {
-
         if (col.gameObject.CompareTag("Wall"))
         {
             jumpFlag = false;
             currentPlayerState = PlayerState.Normal;
+            //this.transform.Rotate(Vector3.forward,this.transform.rotation.z +180);
             rb.useGravity = false;
+        }
+    }
+    //リスタート用
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Wall"))
+        {
         }
         //当たるとタイマー減少
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
@@ -90,16 +111,37 @@ public class PlayerControl : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
         {
             timer += 2.0f * Time.deltaTime;
+            combo++;
+            //Destroy(col.gameObject);
+            //敵を倒すパターン
+            //jumpSpeed *= jumpSpeedUp;
         }
     }
-    //反射
+    //コンボ系
+    public void Combo()
+    {
+     
+    }
+    //反射パターン
     public void ReflectionUp()
     {
-
+        jumpSpeed *= jumpSpeedUp;
     }
-    //レベルアップ
+    //レベルアップパターン
     public void LevelUp()
     {
-
+        //経験値UP
+        exp++; 
+       // レベル系
+        if (level == 0 & exp >= 1)
+        {
+            level += 1;
+            jumpSpeed *= jumpSpeedUp;
+        }
+        if (level == 1 && exp >= 5)
+        {
+            level += 1;
+            jumpSpeed *= jumpSpeedUp;
+        }
     }
 }
