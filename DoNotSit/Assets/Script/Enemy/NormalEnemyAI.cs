@@ -28,6 +28,7 @@ public class NormalEnemyAI : MonoBehaviour
         transform.position = pos;
     }
 
+
     public void ReturnBool(Collision col)
     {
         if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy"))
