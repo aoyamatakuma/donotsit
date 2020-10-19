@@ -124,10 +124,8 @@ public class MovetestScript : MonoBehaviour
 
     private void ReflectAction(GameObject col)
     {
-        Vector3 d = gameObject.transform.position - col.gameObject.transform.position;
-        float h = Vector3.Dot(d, col.gameObject.transform.up);
         Vector3 n = col.gameObject.transform.up;
-        h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        float h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
         Vector3 r = playerRig.velocity + 2 * n * h;
         playerRig.velocity = r;
     }
