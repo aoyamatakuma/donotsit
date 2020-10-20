@@ -7,5 +7,7 @@ public enum EnemyState
   Idle,
   Move,
   UP,
-  DOWN
+  DOWN,
+  Right,
+  Left
 };
