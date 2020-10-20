@@ -6,4 +6,6 @@ public enum EnemyState
 {
   Idle,
   Move,
+  UP,
+  DOWN
 };
