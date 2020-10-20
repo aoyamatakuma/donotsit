@@ -68,7 +68,7 @@ public class PlayerControl : MonoBehaviour
     }
     void Move()//移動系
     {
-        //////左スティック
+        //左スティック
         float turn = Input.GetAxis("Horizontal");
         //// 現在の回転角度を0～360から-180～180に変換
         //float rotateZ = (transform.eulerAngles.z > 180) ? transform.eulerAngles.z - 360 : transform.eulerAngles.z;
@@ -80,20 +80,22 @@ public class PlayerControl : MonoBehaviour
         //transform.rotation = Quaternion.Euler(0, 0, angleZ);
         if (turn >= 1)
         {
-          //   transform.Rotate(0f, 0f, -roateAngle);
-            transform.RotateAround(basePosition.transform.position,transform.forward,-roateAngle );
-            if(roateAngle < minAngle)
+            // transform.Rotate(0f, 0f, -roateAngle);
+            // transform.RotateAround(basePosition.transform.position,transform.forward,-roateAngle );
+            if (this.transform.rotation.z > minAngle)
             {
-                transform.RotateAround(basePosition.transform.position, transform.forward, roateAngle);
+                // transform.RotateAround(basePosition.transform.position, transform.forward, roateAngle);
+                transform.RotateAround(basePosition.transform.position, transform.forward, -roateAngle);
             }
         }
         if (turn <= -1)
         {
-         //  transform.Rotate(0f, 0f, roateAngle);
-            transform.RotateAround(basePosition.transform.position, transform.forward,roateAngle);
-            if (roateAngle > maxAngle)
+            //transform.Rotate(0f, 0f, roateAngle);
+            //  transform.RotateAround(basePosition.transform.position, transform.forward,roateAngle);
+            if (this.transform.rotation.z < maxAngle)
             {
-                transform.RotateAround(basePosition.transform.position, transform.forward, -roateAngle);
+                //  transform.RotateAround(basePosition.transform.position, transform.forward, -roateAngle);
+                transform.RotateAround(basePosition.transform.position, transform.forward, roateAngle);
             }
         }
     }
@@ -111,10 +113,10 @@ public class PlayerControl : MonoBehaviour
         if (col.gameObject.CompareTag("Wall") && currentPlayerState == PlayerState.Attack)
         {
             jumpFlag = false;
+            rb.velocity = Vector3.zero;
             currentPlayerState = PlayerState.Normal;
             //↓こいつでくっついて反転！！
             this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
-            rb.velocity = Vector3.zero;
             // ReflectionUp();
         }
     }
