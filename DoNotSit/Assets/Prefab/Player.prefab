@@ -194,7 +194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4565892433753073479
 Transform:
   m_ObjectHideFlags: 0
@@ -295,8 +295,13 @@ MonoBehaviour:
   RemaxAngle: 135
   ReminAngle: -135
   timer: 60
+  comboTimer: 0
   combo: 0
+  level: 0
+  speedCount: 0
+  exp: 0
   timerText: {fileID: 0}
+  levelText: {fileID: 0}
   ob: {fileID: 3065693076365291079}
 --- !u!54 &4565892433753073478
 Rigidbody:
