@@ -11,6 +11,7 @@ public class MovetestScript : MonoBehaviour
     float maxJumpForce = 1000;
     Vector3 jumpAngle = new Vector3(1,1,0);
     Vector3 Scale;
+    bool jump;
 
     // Start is called before the first frame update
     void Start()
@@ -26,46 +27,45 @@ public class MovetestScript : MonoBehaviour
     }
     void JumpMove()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if(!jump)
         {
-            if (jumpForce < maxJumpForce)
+            if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
-                jumpForce+=10;
-                gameObject.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
+                if (jumpForce < maxJumpForce)
+                {
+                    jumpForce += 10;
+                    gameObject.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
+                }
+            }
+            //ボタンの動き
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                playerRig.velocity += jumpAngle * jumpForce;
+                gameObject.transform.localScale = Scale;
+                jumpForce = 0;
+                jump = true;
+            }
+            //マウスでの動き
+            if (Input.GetMouseButtonUp(0))
+            {
+                //マウスの位置取得
+                Vector3 mousePos = Input.mousePosition;
+                //メインカメラのZを０にしたい
+                mousePos.z = 311;
+                //マウスの位置をワールド座標に変換
+                Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos) - gameObject.transform.position;
+                Vector3 a = objPos.normalized;
+                playerRig.velocity = a * jumpForce;
+                gameObject.transform.localScale = Scale;
+                jumpForce = 0;
+                jump = true;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            playerRig.velocity += jumpAngle * jumpForce;
-            gameObject.transform.localScale = Scale;
-            jumpForce = 0;
-        }
+        
     }
     void testMove()
     {
-
-        if (Input.GetMouseButton(0))
-        {
-            if (jumpForce < maxJumpForce)
-            {
-                jumpForce += 10;
-                gameObject.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
-            }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            //マウスの位置取得
-            Vector3 mousePos = Input.mousePosition;
-            //メインカメラのZを０にしたい
-            mousePos.z = 311;
-       　//マウスの位置をワールド座標に変換
-            Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos)-gameObject.transform.position;
-            Vector3 a = objPos.normalized;
-            playerRig.velocity = a * jumpForce;
-            gameObject.transform.localScale = Scale;
-            jumpForce = 0;
-
-        }
+        
         if (Input.GetKey(KeyCode.W))
         {
             playerRig.velocity += Vector3.up*10;
@@ -132,6 +132,7 @@ public class MovetestScript : MonoBehaviour
                 case 2://沼の床
                     playerRig.velocity = Vector3.zero;
                     maxJumpForce = maxJumpForce / 2;
+                    jump = false;
                     //ジャンプしたらmaxJumpForceをもとに戻す；
                     break;
                 case 3://反射
@@ -139,21 +140,24 @@ public class MovetestScript : MonoBehaviour
                     break;
                 case 4://滑る床
                     SripAction(col.gameObject);
+                    jump = false;
                     break;
                 case 5://とげ
 
+                    break;
+                case 6://斜めの反射
+                    SkewRefrect(col.gameObject);
                     break;
                 default:
                     break;
             }
         }
     }
-
+    //平面反射
     private void ReflectAction(GameObject col)
     {
         //Z回転軸取得
         float a = col.gameObject.transform.localEulerAngles.z;
-        a = 0;
         if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
         {
             if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
@@ -205,9 +209,28 @@ public class MovetestScript : MonoBehaviour
         //代入
         playerRig.velocity = r;
         //
-        Debug.Log("呼んだ");
+        Debug.Log("平面呼んだ");
         gameObject.transform.localRotation=Quaternion.Euler(0,0,0);
     }
+    //斜め４５度の反射
+    private void SkewRefrect(GameObject col)
+    {
+        //Z回転軸取得
+        float a = col.gameObject.transform.localEulerAngles.z;
+        gameObject.transform.Rotate(Vector3.forward * (45+a));
+        //当たったオブジェの向き取得
+        Vector3 n = gameObject.transform.up;
+        //内積
+        float h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        //反射ベクトル
+        Vector3 r = playerRig.velocity + 2 * n * h;
+        //代入
+        playerRig.velocity = r;
+        //
+        Debug.Log("斜め呼んだ");
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+    //滑る床
     private void SripAction(GameObject col)
     {
         if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
@@ -253,5 +276,6 @@ public class MovetestScript : MonoBehaviour
             }
         }
     }
+
  }
 
