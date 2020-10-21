@@ -17,29 +17,29 @@ public class PlayerControl : MonoBehaviour
     public bool restratFlag;//障害物の当たり判定のフラグ
     public float jumpSpeed = 20.0f;//ジャンプの力
     public float jumpSpeedUp = 1.2f;//ジャンプアップの力
-    public float roateSpeed = 2.0f;//回るスピード
-    public PlayerState currentPlayerState; //現在の状態
-    public float maxAngle = 45.0f; // 最大回転角度
-    public float minAngle = -45.0f; // 最小回転角度
-    public float roateAngle=1.0f;
+    public float MaxjumpSpeed;//ジャンプ最大値
+    public float maxAngle = 44.0f; // 最大回転角度
+    public float minAngle = -44.0f; // 最小回転角度
+    public float roateSpeed = 1.0f;//回るスピード
+    public float angleZ;//こいつ大事回転制御
     public float timer = 60.0f;//タイマー
-    public float comboTimer = 1.0f;//コンボタイマー
-    public int combo;//コンボ
+    public float comboTimer = 0f;//コンボタイマー
+    public float combo;//コンボ
     public int level;//レベル
     public int speedCount;//連続用
     public int exp;//経験値
+    public Text comboText;
     public Text timerText;//タイマーテキスト
     public Text levelText;//レベルテキスト
-    public GameObject ob;
-    Vector3 angle;
-    public Transform basePosition;
+    public GameObject ob;//矢印
+    public Transform basePosition;//支点
+    public PlayerState currentPlayerState; //現在の状態
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         jumpFlag = false;
         currentPlayerState = PlayerState.Normal;
-        angle = transform.localEulerAngles;
     }
 
     // Update is called once per frame
@@ -60,11 +60,18 @@ public class PlayerControl : MonoBehaviour
         }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
-        timerText.text = timer.ToString("f2") + "秒";
+        timerText.text = timer.ToString("f2") + "秒";//制限時間
+        comboText.text = combo.ToString();//コンボ
+        Combo();//コンボ関連
+       // levelText.text = level.ToString();
         if (timer <= 0)
         {
             Destroy(this.gameObject);
         }
+        //if(jumpSpeed<=MaxjumpSpeed)
+        //{
+        //    jumpSpeed = MaxjumpSpeed;
+        //}
     }
     void Move()//移動系
     {
@@ -78,24 +85,22 @@ public class PlayerControl : MonoBehaviour
         //angleZ = (angleZ < 0) ? angleZ + 360 : angleZ;
         //// 回転角度をオブジェクトに適用
         //transform.rotation = Quaternion.Euler(0, 0, angleZ);
-        if (turn >= 1)
+        if (turn >= 0.5f)
         {
-            // transform.Rotate(0f, 0f, -roateAngle);
-            // transform.RotateAround(basePosition.transform.position,transform.forward,-roateAngle );
-            if (this.transform.rotation.z > minAngle)
+            if (angleZ >= minAngle)
             {
-                // transform.RotateAround(basePosition.transform.position, transform.forward, roateAngle);
-                transform.RotateAround(basePosition.transform.position, transform.forward, -roateAngle);
+                //  transform.Rotate(0f, 0f, -roateAngle);
+                angleZ--;
+                transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
             }
         }
-        if (turn <= -1)
+        if (turn <= -0.5f)
         {
-            //transform.Rotate(0f, 0f, roateAngle);
-            //  transform.RotateAround(basePosition.transform.position, transform.forward,roateAngle);
-            if (this.transform.rotation.z < maxAngle)
+            if (angleZ <= maxAngle)
             {
-                //  transform.RotateAround(basePosition.transform.position, transform.forward, -roateAngle);
-                transform.RotateAround(basePosition.transform.position, transform.forward, roateAngle);
+                //transform.Rotate(0f, 0f, roateAngle);
+                angleZ++;
+                transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
             }
         }
     }
@@ -104,6 +109,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpFlag == false)
         {
             jumpFlag = true;
+            angleZ = 0;
             currentPlayerState = PlayerState.Attack;
         }
     }
@@ -116,7 +122,9 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = Vector3.zero;
             currentPlayerState = PlayerState.Normal;
             //↓こいつでくっついて反転！！
-            this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
+             this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
+            combo = 0;
+            //transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.back);
             // ReflectionUp();
         }
     }
@@ -125,6 +133,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Wall"))
         {
+
         }
         //当たるとタイマー減少
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
@@ -134,17 +143,23 @@ public class PlayerControl : MonoBehaviour
         //アタック(移動中に当たると)タイマー増加
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
         {
-            timer += 2.0f * Time.deltaTime;
-            combo++;
-            //Destroy(col.gameObject);
-            //敵を倒すパターン
-            //EnemeyUp();
+            combo++;//コンボ増加
+           // timer += combo;//コンボ時間に反映
+            //  Destroy(col.gameObject);
+            //EnemeyUp();//敵を倒すパターン
         }
     }
     //コンボ系
     public void Combo()
     {
-
+        if (combo>=1)
+        {
+            comboText.enabled = true;
+        }
+        else
+        {
+            comboText.enabled = false;
+        }
     }
     //反射パターン ①
     public void ReflectionUp()
