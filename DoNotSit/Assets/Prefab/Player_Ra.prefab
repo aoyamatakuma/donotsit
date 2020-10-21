@@ -673,21 +673,22 @@ MonoBehaviour:
   jumpSpeed: 20
   jumpSpeedUp: 1.2
   MaxjumpSpeed: 0
-  currentPlayerState: 0
   maxAngle: 44
   minAngle: -44
   roateSpeed: 1
   angleZ: 0
   timer: 60
-  comboTimer: 1
+  comboTimer: 0
   combo: 0
   level: 0
   speedCount: 0
   exp: 0
+  comboText: {fileID: 0}
   timerText: {fileID: 0}
   levelText: {fileID: 0}
   ob: {fileID: 7747556278060116243}
   basePosition: {fileID: 892862368}
+  currentPlayerState: 0
 --- !u!1 &9093745778188397153
 GameObject:
   m_ObjectHideFlags: 0
