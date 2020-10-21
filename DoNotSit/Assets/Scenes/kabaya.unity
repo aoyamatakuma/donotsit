@@ -1106,16 +1106,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4850341239745552393, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: timerText
-      value: 
-      objectReference: {fileID: 681336957}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: comboText
@@ -1123,9 +1113,9 @@ PrefabInstance:
       objectReference: {fileID: 1039151119}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
-      propertyPath: comboTimer
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 681336957}
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: m_LocalPosition.x
