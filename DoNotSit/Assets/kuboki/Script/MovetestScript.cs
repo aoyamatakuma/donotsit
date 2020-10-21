@@ -44,6 +44,28 @@ public class MovetestScript : MonoBehaviour
     void testMove()
     {
 
+        if (Input.GetMouseButton(0))
+        {
+            if (jumpForce < maxJumpForce)
+            {
+                jumpForce += 10;
+                gameObject.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
+            }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            //マウスの位置取得
+            Vector3 mousePos = Input.mousePosition;
+            //メインカメラのZを０にしたい
+            mousePos.z = 311;
+       　//マウスの位置をワールド座標に変換
+            Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos)-gameObject.transform.position;
+            Vector3 a = objPos.normalized;
+            playerRig.velocity = a * jumpForce;
+            gameObject.transform.localScale = Scale;
+            jumpForce = 0;
+
+        }
         if (Input.GetKey(KeyCode.W))
         {
             playerRig.velocity += Vector3.up*10;
@@ -72,6 +94,7 @@ public class MovetestScript : MonoBehaviour
                 
                 case 0://着地
                     playerRig.velocity = Vector3.zero;
+                    //めり込んだ時の処理を書く
                     break;
                     
                 case 1://反射
@@ -111,8 +134,14 @@ public class MovetestScript : MonoBehaviour
                     maxJumpForce = maxJumpForce / 2;
                     //ジャンプしたらmaxJumpForceをもとに戻す；
                     break;
-                case 3:
+                case 3://反射
                     ReflectAction(col.gameObject);
+                    break;
+                case 4://滑る床
+                    SripAction(col.gameObject);
+                    break;
+                case 5://とげ
+
                     break;
                 default:
                     break;
@@ -178,6 +207,51 @@ public class MovetestScript : MonoBehaviour
         //
         Debug.Log("呼んだ");
         gameObject.transform.localRotation=Quaternion.Euler(0,0,0);
+    }
+    private void SripAction(GameObject col)
+    {
+        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+        {
+            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+                else
+                {
+                    Debug.Log("left");
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+            }
+            else
+            {
+                Debug.Log("Down");
+                playerRig.velocity = new Vector3(playerRig.velocity.x,0, 0);
+            }
+        }
+        else
+        {
+            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+                else
+                {
+                    Debug.Log("left");
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+            }
+            else
+            {
+                Debug.Log("UP");
+                playerRig.velocity = new Vector3(playerRig.velocity.x,0, 0);
+            }
+        }
     }
  }
 
