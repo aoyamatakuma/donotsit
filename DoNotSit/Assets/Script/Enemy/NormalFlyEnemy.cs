@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 左右に飛ぶ敵
+/// </summary>
 public class NormalFlyEnemy : MonoBehaviour
 {
     // 移動速度

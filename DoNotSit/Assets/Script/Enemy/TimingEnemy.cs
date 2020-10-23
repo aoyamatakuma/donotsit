@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// タイミングで出てくる敵
+/// </summary>
 public class TimingEnemy : MonoBehaviour
 {
     // 移動速度
