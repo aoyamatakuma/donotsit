@@ -11,7 +11,7 @@ public enum PlayerState
 }
 public class PlayerControl : MonoBehaviour
 {
-    Rigidbody rb;
+    Rigidbody playerRig;
     public bool jumpFlag;//ジャンプフラグ
     public bool restratFlag;//障害物の当たり判定のフラグ
     public bool rayFlag;//壁云々
@@ -35,10 +35,13 @@ public class PlayerControl : MonoBehaviour
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
+
+    WallAbility wa;
+    Vector3 Scale;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        playerRig = GetComponent<Rigidbody>();
         jumpFlag = false;
         rayFlag =　false;
         currentPlayerState = PlayerState.Normal;
@@ -53,11 +56,6 @@ public class PlayerControl : MonoBehaviour
             Move();
             Jump();
             RayObject();
-        }
-        //アタックステート
-        if (currentPlayerState == PlayerState.Attack)
-        {
-            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
         }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
@@ -97,11 +95,13 @@ public class PlayerControl : MonoBehaviour
     }
     void Jump()//ジャンプ系
     {
-        if (Input.GetButtonDown("Jump") && jumpFlag == false && rayFlag　==　true)
+        if (Input.GetButtonUp("Jump") && jumpFlag == false && rayFlag　==　true)
         {
             jumpFlag = true;
             angleZ = 0;
             currentPlayerState = PlayerState.Attack;
+            playerRig.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+            
         }
     }
     //壁があるない
@@ -132,14 +132,28 @@ public class PlayerControl : MonoBehaviour
         if (col.gameObject.CompareTag("Wall") && currentPlayerState == PlayerState.Attack)
         {
             jumpFlag = false;
-            rb.velocity = Vector3.zero;
+            playerRig.velocity = Vector3.zero;
             currentPlayerState = PlayerState.Normal;
             //↓こいつでくっついて反転！！
-             this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
+            this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
             combo = 0;
             Debug.Log("当たった");
             //transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.back);
             // ReflectionUp();
+            wa = col.gameObject.GetComponent<WallAbility>();
+            switch (wa.abilityNumber)
+            {
+                case 2://沼の床
+                    playerRig.velocity = Vector3.zero;
+                    jumpSpeed = jumpSpeed / 2;
+                    //ジャンプしたらmaxJumpForceをもとに戻す；
+                    break;
+                case 3://反射
+                    ReflectAction(col.gameObject);
+                    break;
+                default:
+                    break;
+            }
         }
     }
     //リスタート用
@@ -147,6 +161,22 @@ public class PlayerControl : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Wall"))
         {
+            wa = col.gameObject.GetComponent<WallAbility>();
+            switch (wa.abilityNumber)
+            {
+                case 4://滑る床
+                    SripAction(col.gameObject);
+                    break;
+                case 5://とげ
+                    timer -= 10.0f;
+                    //Destroy(this.gameObject);
+                    break;
+                case 6://斜めの反射
+                    SkewRefrect(col.gameObject);
+                    break;
+                default:
+                    break;
+            }
         }
         //当たるとタイマー減少
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
@@ -199,6 +229,127 @@ public class PlayerControl : MonoBehaviour
         {
             level += 1;
             jumpSpeed *= jumpSpeedUp;
+        }
+    }
+    private void ReflectAction(GameObject col)
+    {
+        //Z回転軸取得
+        float a = col.gameObject.transform.localEulerAngles.z;
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+        {
+            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
+                }
+                else
+                {
+                    Debug.Log("left");
+                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
+                }
+            }
+            else
+            {
+                Debug.Log("Down");
+                gameObject.transform.Rotate(Vector3.forward * (-180 - a));
+            }
+        }
+        else
+        {
+            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
+                }
+                else
+                {
+                    Debug.Log("left");
+                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
+                }
+            }
+            else
+            {
+                Debug.Log("UP");
+                gameObject.transform.Rotate(Vector3.forward * (-a));
+            }
+        }
+        //当たったオブジェの向き取得
+        Vector3 n = gameObject.transform.up;
+        //内積
+        float h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        //反射ベクトル
+        Vector3 r = playerRig.velocity + 2 * n * h;
+        //代入
+        playerRig.velocity = r;
+        //
+        Debug.Log("平面呼んだ");
+    }
+    private void SkewRefrect(GameObject col)
+    {
+        //Z回転軸取得
+        float a = col.gameObject.transform.localEulerAngles.z;
+        gameObject.transform.Rotate(Vector3.forward * (45 + a));
+        //当たったオブジェの向き取得
+        Vector3 n = gameObject.transform.up;
+        //内積
+        float h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        //反射ベクトル
+        Vector3 r = playerRig.velocity + 2 * n * h;
+        //代入
+        playerRig.velocity = r;
+        //
+        Debug.Log("斜め呼んだ");
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+    //滑る床
+    private void SripAction(GameObject col)
+    {
+        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+        {
+            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+                else
+                {
+                    Debug.Log("left");
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+            }
+            else
+            {
+                Debug.Log("Down");
+                playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
+            }
+        }
+        else
+        {
+            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+                else
+                {
+                    Debug.Log("left");
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+            }
+            else
+            {
+                Debug.Log("UP");
+                playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
+            }
         }
     }
 }
