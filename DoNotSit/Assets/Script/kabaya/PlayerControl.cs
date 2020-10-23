@@ -11,10 +11,10 @@ public enum PlayerState
 }
 public class PlayerControl : MonoBehaviour
 {
-
     Rigidbody rb;
     public bool jumpFlag;//ジャンプフラグ
     public bool restratFlag;//障害物の当たり判定のフラグ
+    public bool rayFlag;//壁云々
     public float jumpSpeed = 20.0f;//ジャンプの力
     public float jumpSpeedUp = 1.2f;//ジャンプアップの力
     public float MaxjumpSpeed;//ジャンプ最大値
@@ -23,10 +23,11 @@ public class PlayerControl : MonoBehaviour
     public float roateSpeed = 1.0f;//回るスピード
     public float angleZ;//こいつ大事回転制御
     public float timer = 60.0f;//タイマー
-    public float comboTimer = 0f;//コンボタイマー
+  //  public float comboTimer = 0f;//コンボタイマー
     public float combo;//コンボ
+    public float rayline;//レイ長さ
     public int level;//レベル
-    public int speedCount;//連続用
+  //  public int speedCount;//連続用
     public int exp;//経験値
     public Text comboText;
     public Text timerText;//タイマーテキスト
@@ -39,6 +40,7 @@ public class PlayerControl : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         jumpFlag = false;
+        rayFlag =　false;
         currentPlayerState = PlayerState.Normal;
     }
 
@@ -50,20 +52,19 @@ public class PlayerControl : MonoBehaviour
         {
             Move();
             Jump();
-            ob.SetActive(true);
+            RayObject();
         }
         //アタックステート
         if (currentPlayerState == PlayerState.Attack)
-        {//, ForceMode.Impulse
-            rb.AddForce(transform.up * jumpSpeed);
-            ob.SetActive(false);
+        {
+            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
         }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
         timerText.text = timer.ToString("f2") + "秒";//制限時間
         comboText.text = combo.ToString();//コンボ
         Combo();//コンボ関連
-       // levelText.text = level.ToString();
+        // levelText.text = level.ToString();
         if (timer <= 0)
         {
             Destroy(this.gameObject);
@@ -77,19 +78,10 @@ public class PlayerControl : MonoBehaviour
     {
         //左スティック
         float turn = Input.GetAxis("Horizontal");
-        //// 現在の回転角度を0～360から-180～180に変換
-        //float rotateZ = (transform.eulerAngles.z > 180) ? transform.eulerAngles.z - 360 : transform.eulerAngles.z;
-        //// 現在の回転角度に入力(turn)を加味した回転角度をMathf.Clamp()を使いminAngleからMaxAngle内に収まるようにする
-        //float angleZ = Mathf.Clamp(rotateZ - turn * roateSpeed, minAngle, maxAngle);
-        //// 回転角度を-180～180から0～360に変換
-        //angleZ = (angleZ < 0) ? angleZ + 360 : angleZ;
-        //// 回転角度をオブジェクトに適用
-        //transform.rotation = Quaternion.Euler(0, 0, angleZ);
         if (turn >= 0.5f)
         {
             if (angleZ >= minAngle)
             {
-                //  transform.Rotate(0f, 0f, -roateAngle);
                 angleZ--;
                 transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
             }
@@ -98,7 +90,6 @@ public class PlayerControl : MonoBehaviour
         {
             if (angleZ <= maxAngle)
             {
-                //transform.Rotate(0f, 0f, roateAngle);
                 angleZ++;
                 transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
             }
@@ -106,13 +97,35 @@ public class PlayerControl : MonoBehaviour
     }
     void Jump()//ジャンプ系
     {
-        if (Input.GetButtonDown("Jump") && jumpFlag == false)
+        if (Input.GetButtonDown("Jump") && jumpFlag == false && rayFlag　==　true)
         {
             jumpFlag = true;
             angleZ = 0;
             currentPlayerState = PlayerState.Attack;
         }
     }
+    //壁があるない
+    void RayObject()
+    {
+        Ray ray = new Ray(transform.position, transform.up);
+        RaycastHit hit;
+        //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
+        if (Physics.Raycast(ray, out hit, rayline)) //壁がある時
+        {
+            if (hit.collider.tag == "Wall") 
+            {
+                rayFlag = true;
+                ob.SetActive(true);
+            }
+        }
+        else //壁がない時
+        {
+            rayFlag = false;
+            ob.SetActive(false);
+        }
+        Debug.DrawRay(transform.position, transform.up * rayline, Color.red);
+    }
+    
     //壁との当たり判定
     void OnCollisionEnter(Collision col)
     {
@@ -124,6 +137,7 @@ public class PlayerControl : MonoBehaviour
             //↓こいつでくっついて反転！！
              this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
             combo = 0;
+            Debug.Log("当たった");
             //transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.back);
             // ReflectionUp();
         }
@@ -133,7 +147,6 @@ public class PlayerControl : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Wall"))
         {
-
         }
         //当たるとタイマー減少
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)

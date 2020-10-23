@@ -641,7 +641,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &4850341239745552398
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -670,6 +670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpFlag: 0
   restratFlag: 0
+  rayFlag: 0
   jumpSpeed: 20
   jumpSpeedUp: 1.2
   MaxjumpSpeed: 0
@@ -678,10 +679,9 @@ MonoBehaviour:
   roateSpeed: 1
   angleZ: 0
   timer: 60
-  comboTimer: 0
   combo: 0
+  rayline: 50
   level: 0
-  speedCount: 0
   exp: 0
   comboText: {fileID: 0}
   timerText: {fileID: 0}
