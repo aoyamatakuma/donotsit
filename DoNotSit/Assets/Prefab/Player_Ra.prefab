@@ -671,8 +671,10 @@ MonoBehaviour:
   jumpFlag: 0
   restratFlag: 0
   rayFlag: 0
-  jumpSpeed: 20
+  matFlag: 0
+  jumpSpeed: 40
   jumpSpeedUp: 1.2
+  jumpDefalut: 20
   MaxjumpSpeed: 0
   maxAngle: 44
   minAngle: -44

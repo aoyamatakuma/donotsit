@@ -15,8 +15,10 @@ public class PlayerControl : MonoBehaviour
     public bool jumpFlag;//ジャンプフラグ
     public bool restratFlag;//障害物の当たり判定のフラグ
     public bool rayFlag;//壁云々
+    public bool matFlag;//沼フラグ
     public float jumpSpeed = 20.0f;//ジャンプの力
     public float jumpSpeedUp = 1.2f;//ジャンプアップの力
+    public float jumpDefalut;//※ジャンプデフォルト
     public float MaxjumpSpeed;//ジャンプ最大値
     public float maxAngle = 44.0f; // 最大回転角度
     public float minAngle = -44.0f; // 最小回転角度
@@ -100,8 +102,7 @@ public class PlayerControl : MonoBehaviour
             jumpFlag = true;
             angleZ = 0;
             currentPlayerState = PlayerState.Attack;
-            playerRig.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
-            
+            playerRig.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);//ジャンプする
         }
     }
     //壁があるない
@@ -145,7 +146,7 @@ public class PlayerControl : MonoBehaviour
             {
                 case 2://沼の床
                     playerRig.velocity = Vector3.zero;
-                    jumpSpeed = jumpSpeed / 2;
+                    jumpSpeed = jumpDefalut;
                     //ジャンプしたらmaxJumpForceをもとに戻す；
                     break;
                 case 3://反射
