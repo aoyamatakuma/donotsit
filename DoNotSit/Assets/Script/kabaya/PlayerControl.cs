@@ -37,7 +37,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
-
+    Vector3 playerVec;
     WallAbility wa;
     Vector3 Scale;
     // Start is called before the first frame update
@@ -103,6 +103,7 @@ public class PlayerControl : MonoBehaviour
             angleZ = 0;
             currentPlayerState = PlayerState.Attack;
             playerRig.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);//ジャンプする
+            playerVec = transform.up * jumpSpeed;
         }
     }
     //壁があるない
@@ -134,7 +135,6 @@ public class PlayerControl : MonoBehaviour
         {
             jumpFlag = false;
             playerRig.velocity = Vector3.zero;
-            currentPlayerState = PlayerState.Normal;
             //↓こいつでくっついて反転！！
             this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
             combo = 0;
@@ -144,17 +144,36 @@ public class PlayerControl : MonoBehaviour
             wa = col.gameObject.GetComponent<WallAbility>();
             switch (wa.abilityNumber)
             {
-                case 2://沼の床
+                case 0://着地
+                    currentPlayerState = PlayerState.Normal;
+                    //めり込んだ時の処理を書く
+                    break;
+                case 1://沼の床
                     playerRig.velocity = Vector3.zero;
                     jumpSpeed = jumpDefalut;
+                    currentPlayerState = PlayerState.Normal;
                     //ジャンプしたらmaxJumpForceをもとに戻す；
                     break;
-                case 3://反射
+                case 2://反射
                     ReflectAction(col.gameObject);
                     break;
                 default:
                     break;
             }
+        }
+        //EnemyCollision場合
+        //当たるとタイマー減少
+        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
+        {
+            timer -= 10.0f;
+        }
+        //アタック(移動中に当たると)タイマー増加
+        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
+        {
+            combo++;//コンボ増加
+                    // timer += combo;//コンボ時間に反映
+                    //  Destroy(col.gameObject);
+                    //EnemeyUp();//敵を倒すパターン
         }
     }
     //リスタート用
@@ -165,20 +184,21 @@ public class PlayerControl : MonoBehaviour
             wa = col.gameObject.GetComponent<WallAbility>();
             switch (wa.abilityNumber)
             {
-                case 4://滑る床
+                case 3://滑る床
                     SripAction(col.gameObject);
                     break;
-                case 5://とげ
+                case 4://とげ
                     timer -= 10.0f;
                     //Destroy(this.gameObject);
                     break;
-                case 6://斜めの反射
+                case 5://斜めの反射
                     SkewRefrect(col.gameObject);
                     break;
                 default:
                     break;
             }
         }
+        //EnemyTrigger場合
         //当たるとタイマー減少
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
         {
@@ -282,11 +302,12 @@ public class PlayerControl : MonoBehaviour
         //当たったオブジェの向き取得
         Vector3 n = gameObject.transform.up;
         //内積
-        float h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        float h = Mathf.Abs(Vector3.Dot(playerVec, n));
         //反射ベクトル
-        Vector3 r = playerRig.velocity + 2 * n * h;
+        Vector3 r = playerVec + 2 * n * h;
         //代入
         playerRig.velocity = r;
+        playerVec = playerRig.velocity;
         //
         Debug.Log("平面呼んだ");
     }
@@ -298,9 +319,9 @@ public class PlayerControl : MonoBehaviour
         //当たったオブジェの向き取得
         Vector3 n = gameObject.transform.up;
         //内積
-        float h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        float h = Mathf.Abs(Vector3.Dot(playerVec, n));
         //反射ベクトル
-        Vector3 r = playerRig.velocity + 2 * n * h;
+        Vector3 r = playerVec + 2 * n * h;
         //代入
         playerRig.velocity = r;
         //
