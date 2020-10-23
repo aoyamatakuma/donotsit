@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// トゲの敵
+/// </summary>
 public class SpineEnemy : NormalEnemyAI
 {
     public float speed;

@@ -1,6 +1,6 @@
 ﻿
 /// <summary>
-/// プレイヤーのステート
+/// 敵のステート
 /// </summary>
 public enum EnemyState 
 {
