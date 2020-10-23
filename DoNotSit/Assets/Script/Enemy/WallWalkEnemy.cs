@@ -59,18 +59,32 @@ public class WallWalkEnemy : MonoBehaviour
     void Rotate()
     {
 
-        if (!isTouch && currentState == EnemyState.UP)
+        if (!isTouch && currentState == EnemyState.UP && !isRotate)
         {
-            StartCoroutine(RotateCoroutine(2.0f));
+            StartCoroutine(RotateCoroutine(1.0f));
             transform.RotateAround(hitPoint,Vector3.forward, 90);
             currentState = EnemyState.Left;
         }
 
-        if (!isTouch && currentState == EnemyState.Left)
+        if (!isTouch && currentState == EnemyState.Left && !isRotate)
         {
             StartCoroutine(RotateCoroutine(1.0f));
             transform.RotateAround(hitPoint, Vector3.forward, 90);
             currentState = EnemyState.DOWN;
+        }
+
+        if (!isTouch && currentState == EnemyState.DOWN && !isRotate)
+        {
+            StartCoroutine(RotateCoroutine(1.0f));
+            transform.RotateAround(hitPoint, Vector3.forward, 90);
+            currentState = EnemyState.Right;
+        }
+
+        if (!isTouch && currentState == EnemyState.Right&& !isRotate)
+        {
+            StartCoroutine(RotateCoroutine(1.0f));
+            transform.RotateAround(hitPoint, Vector3.forward, 90);
+            currentState = EnemyState.UP;
         }
     }
 
@@ -144,10 +158,16 @@ public class WallWalkEnemy : MonoBehaviour
         {
             if (currentState == EnemyState.Right)
             {
+                Vector3 angle = transform.eulerAngles;
+                angle.y = 0f;
+                transform.eulerAngles = angle;
                 currentState = EnemyState.Left;
             }
             else if (currentState == EnemyState.Left)
             {
+                Vector3 angle = transform.eulerAngles;
+                angle.y = 180f;
+                transform.eulerAngles = angle;
                 currentState = EnemyState.Right;
             }
         }
@@ -157,24 +177,45 @@ public class WallWalkEnemy : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Wall"))
         {
-            if (isUp)
+            if(currentState == EnemyState.Left || currentState == EnemyState.Right)
             {
-                Debug.Log("up");
-                StartCoroutine(RotateCoroutine(1.0f));
-                Vector3 angle = transform.eulerAngles;
-                angle.z = -90.0f;
-                transform.eulerAngles = angle;
-                //Quaternion rotation = transform.localRotation;
-                //Vector3 rotationAngles = rotation.eulerAngles;
-                //rotationAngles.x += 90;
-                //rotation = Quaternion.Euler(rotationAngles);
-                //transform.localRotation = rotation;
-                currentState = EnemyState.UP;
+                if (isUp)
+                {
+                    StartCoroutine(RotateCoroutine(1.0f));
+                    Vector3 angle = transform.eulerAngles;
+                    angle.z = -90.0f;
+                    transform.eulerAngles = angle;
+                    currentState = EnemyState.UP;
+                }
+                else
+                {
+                    StartCoroutine(RotateCoroutine(1.0f));
+                    Vector3 angle = transform.eulerAngles;
+                    angle.z = 90.0f;
+                    transform.eulerAngles = angle;
+                    currentState = EnemyState.DOWN;
+                }
             }
             else
             {
-
+                if(currentState == EnemyState.DOWN)
+                {
+                    StartCoroutine(RotateCoroutine(1.0f));
+                    Vector3 angle = transform.eulerAngles;
+                    angle.z = 0f;
+                    transform.eulerAngles = angle;
+                    currentState = EnemyState.Left;
+                }
+                else
+                {
+                    StartCoroutine(RotateCoroutine(1.0f));
+                    Vector3 angle = transform.eulerAngles;
+                    angle.z = 180f;
+                    transform.eulerAngles = angle;
+                    currentState = EnemyState.Right;
+                }
             }
+           
         }
     }
 
