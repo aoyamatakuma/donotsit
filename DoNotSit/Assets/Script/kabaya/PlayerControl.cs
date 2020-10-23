@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 
 public enum PlayerState
@@ -35,6 +39,10 @@ public class PlayerControl : MonoBehaviour
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
+
+
+    //プレイヤーのベクトル
+    Vector3 playerVec;
 
     WallAbility wa;
     Vector3 Scale;
@@ -101,7 +109,7 @@ public class PlayerControl : MonoBehaviour
             angleZ = 0;
             currentPlayerState = PlayerState.Attack;
             playerRig.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
-            
+            playerVec = transform.up * jumpSpeed;
         }
     }
     //壁があるない
@@ -135,7 +143,7 @@ public class PlayerControl : MonoBehaviour
             playerRig.velocity = Vector3.zero;
             currentPlayerState = PlayerState.Normal;
             //↓こいつでくっついて反転！！
-            this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
+            //this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
             combo = 0;
             Debug.Log("当たった");
             //transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.back);
@@ -231,11 +239,15 @@ public class PlayerControl : MonoBehaviour
             jumpSpeed *= jumpSpeedUp;
         }
     }
+    //反射挙動
     private void ReflectAction(GameObject col)
     {
+        Debug.Log(playerVec);
         //Z回転軸取得
         float a = col.gameObject.transform.localEulerAngles.z;
+        //プレイヤーの回転軸を0にする
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        //当たったオブジェクトのどこにあたったかで向きを変える
         if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
         {
             if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
@@ -243,18 +255,18 @@ public class PlayerControl : MonoBehaviour
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
                     Debug.Log("right");
-                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
+                    gameObject.transform.Rotate(Vector3.forward * -90);
                 }
                 else
                 {
                     Debug.Log("left");
-                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
+                    gameObject.transform.Rotate(Vector3.forward * 90);
                 }
             }
             else
             {
                 Debug.Log("Down");
-                gameObject.transform.Rotate(Vector3.forward * (-180 - a));
+                gameObject.transform.Rotate(Vector3.forward * 180);
             }
         }
         else
@@ -264,31 +276,33 @@ public class PlayerControl : MonoBehaviour
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
                     Debug.Log("right");
-                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
+                    gameObject.transform.Rotate(Vector3.forward * -90);
                 }
                 else
                 {
                     Debug.Log("left");
-                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
+                    gameObject.transform.Rotate(Vector3.forward *90);
                 }
             }
             else
             {
                 Debug.Log("UP");
-                gameObject.transform.Rotate(Vector3.forward * (-a));
+                gameObject.transform.Rotate(Vector3.forward*0);
             }
         }
-        //当たったオブジェの向き取得
+        //playerの向き取得
         Vector3 n = gameObject.transform.up;
         //内積
-        float h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        float h = Mathf.Abs(Vector3.Dot(playerVec, n));
         //反射ベクトル
-        Vector3 r = playerRig.velocity + 2 * n * h;
+        Vector3 r = playerVec+2* n * h;
         //代入
         playerRig.velocity = r;
-        //
-        Debug.Log("平面呼んだ");
+        //値変更
+        playerVec = playerRig.velocity;
+
     }
+    //斜めの床反射
     private void SkewRefrect(GameObject col)
     {
         //Z回転軸取得
@@ -297,11 +311,12 @@ public class PlayerControl : MonoBehaviour
         //当たったオブジェの向き取得
         Vector3 n = gameObject.transform.up;
         //内積
-        float h = Mathf.Abs(Vector3.Dot(playerRig.velocity, n));
+        float h = Mathf.Abs(Vector3.Dot(playerVec, n));
         //反射ベクトル
-        Vector3 r = playerRig.velocity + 2 * n * h;
+        Vector3 r = playerVec + 2 * n * h;
         //代入
         playerRig.velocity = r;
+        playerVec = playerRig.velocity;
         //
         Debug.Log("斜め呼んだ");
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
