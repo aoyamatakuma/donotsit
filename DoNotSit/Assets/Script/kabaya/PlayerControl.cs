@@ -162,11 +162,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
         //EnemyCollision場合
-        //当たるとタイマー減少
-        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
-        {
-            timer -= 10.0f;
-        }
         //アタック(移動中に当たると)タイマー増加
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
         {
@@ -199,11 +194,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
         //EnemyTrigger場合
-        //当たるとタイマー減少
-        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
-        {
-            timer -= 10.0f;
-        }
         //アタック(移動中に当たると)タイマー増加
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
         {
@@ -212,6 +202,10 @@ public class PlayerControl : MonoBehaviour
             //  Destroy(col.gameObject);
             //EnemeyUp();//敵を倒すパターン
         }
+    }
+    public void Damage(float damage)
+    {
+        timer -= damage;
     }
     //コンボ系
     public void Combo()
