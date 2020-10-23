@@ -7,8 +7,11 @@ using UnityEngine.UI;
 public class StageSelect : MonoBehaviour
 {
     public List<GameObject> selectObjects;
+    public GameObject rightObj;
+    public GameObject leftObj;
     private int selectNum;
     private bool isSelect;
+    private bool isMove;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,18 +38,19 @@ public class StageSelect : MonoBehaviour
         }
         for (int i = 0; i < selectObjects.Count; i++)
         {
-            selectObjects[i].GetComponent<Outline>().enabled = false;
+            selectObjects[i].SetActive(false);
         }
-        selectObjects[selectNum].GetComponent<Outline>().enabled = true;
+        selectObjects[selectNum].SetActive(true);
         isSelect = true;
     }
 
     void SelectMove()
     {
         float hol = Input.GetAxis("SelectMove");
-        if(hol < 0.5f)
+        if(hol < -0.5f && !isMove)
         {
             selectNum --;
+            StartCoroutine(ChangeCoroutine(false));
             if (selectNum < 0)
             {
                 selectNum = 0;
@@ -54,9 +58,10 @@ public class StageSelect : MonoBehaviour
             isSelect = false;
         }
 
-        if(hol > 0.5f)
+        if(hol > 0.5f && !isMove)
         {
             selectNum ++;
+            StartCoroutine(ChangeCoroutine(true));
             if (selectNum > selectObjects.Count -1)
             {
                selectNum = selectObjects.Count - 1;
@@ -65,5 +70,28 @@ public class StageSelect : MonoBehaviour
         }
 
         Select();
+    }
+
+    IEnumerator ChangeCoroutine(bool isRight)
+    {
+        isMove = true;
+        if (isRight)
+        {
+            rightObj.GetComponent<Outline>().enabled = true;
+        }
+        else
+        {
+            leftObj.GetComponent<Outline>().enabled = true;
+        }
+        yield return new WaitForSeconds(0.4f);
+        if (isRight)
+        {
+            rightObj.GetComponent<Outline>().enabled = false;
+        }
+        else
+        {
+            leftObj.GetComponent<Outline>().enabled = false;
+        }
+        isMove = false;
     }
 }
