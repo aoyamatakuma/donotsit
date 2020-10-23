@@ -674,7 +674,7 @@ MonoBehaviour:
   matFlag: 0
   jumpSpeed: 40
   jumpSpeedUp: 1.2
-  jumpDefalut: 20
+  jumpDefalut: 40
   MaxjumpSpeed: 0
   maxAngle: 44
   minAngle: -44
@@ -683,7 +683,7 @@ MonoBehaviour:
   timer: 60
   combo: 0
   rayline: 50
-  level: 0
+  level: 1
   exp: 0
   comboText: {fileID: 0}
   timerText: {fileID: 0}
