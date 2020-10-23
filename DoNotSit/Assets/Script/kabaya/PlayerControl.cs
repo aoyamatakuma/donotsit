@@ -28,7 +28,7 @@ public class PlayerControl : MonoBehaviour
   //  public float comboTimer = 0f;//コンボタイマー
     public float combo;//コンボ
     public float rayline;//レイ長さ
-    public int level;//レベル
+    public int level =1;//レベル
   //  public int speedCount;//連続用
     public int exp;//経験値
     public Text comboText;
@@ -46,6 +46,7 @@ public class PlayerControl : MonoBehaviour
         playerRig = GetComponent<Rigidbody>();
         jumpFlag = false;
         rayFlag =　false;
+        MaxjumpSpeed = jumpDefalut * 2;
         currentPlayerState = PlayerState.Normal;
     }
 
@@ -59,6 +60,10 @@ public class PlayerControl : MonoBehaviour
             Jump();
             RayObject();
         }
+        if(currentPlayerState == PlayerState.Attack)
+        {
+            ob.SetActive(false);
+        }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
         timerText.text = timer.ToString("f2") + "秒";//制限時間
@@ -68,6 +73,11 @@ public class PlayerControl : MonoBehaviour
         if (timer <= 0)
         {
             Destroy(this.gameObject);
+        }
+        //最大スピード
+        if(jumpSpeed>=MaxjumpSpeed)
+        {
+            jumpSpeed = MaxjumpSpeed;
         }
         //if(jumpSpeed<=MaxjumpSpeed)
         //{
@@ -146,6 +156,7 @@ public class PlayerControl : MonoBehaviour
             {
                 case 0://着地
                     currentPlayerState = PlayerState.Normal;
+                  //  ReflectionUp();
                     //めり込んだ時の処理を書く
                     break;
                 case 1://沼の床
@@ -162,11 +173,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
         //EnemyCollision場合
-        //当たるとタイマー減少
-        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
-        {
-            timer -= 10.0f;
-        }
         //アタック(移動中に当たると)タイマー増加
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
         {
@@ -199,19 +205,20 @@ public class PlayerControl : MonoBehaviour
             }
         }
         //EnemyTrigger場合
-        //当たるとタイマー減少
-        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Normal)
-        {
-            timer -= 10.0f;
-        }
         //アタック(移動中に当たると)タイマー増加
         if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
         {
-            combo++;//コンボ増加
-           // timer += combo;//コンボ時間に反映
-            //  Destroy(col.gameObject);
+            combo++;
+            //コンボ増加        
+            //timer += combo;//コンボ時間に反映
+            Destroy(col.gameObject);
             //EnemeyUp();//敵を倒すパターン
+          //  LevelUp();
         }
+    }
+    public void Damage(float damage)
+    {
+        timer -= damage;
     }
     //コンボ系
     public void Combo()
@@ -241,15 +248,46 @@ public class PlayerControl : MonoBehaviour
         //経験値UP
         exp++;
         // レベル系
-        if (level == 0 & exp >= 1)
+        if (level == 1 && exp >= 5)//レベル2
         {
             level += 1;
-            jumpSpeed *= jumpSpeedUp;
+            jumpSpeed *= 1.2f;
         }
-        if (level == 1 && exp >= 5)
+        if (level == 2 & exp >= 10)//レベル3
         {
             level += 1;
-            jumpSpeed *= jumpSpeedUp;
+            jumpSpeed = jumpDefalut;
+            if (jumpSpeed == jumpDefalut)
+            {
+                jumpSpeed *= 1.4f;
+            }
+        }
+        if (level == 3 && exp >= 15)//レベル4
+        {
+            level += 1;
+            jumpSpeed = jumpDefalut;
+            if (jumpSpeed == jumpDefalut)
+            {
+                jumpSpeed *= 1.6f;
+            }
+        }
+        if (level == 4 & exp >= 20)//レベル5
+        {
+            level += 1;
+            jumpSpeed = jumpDefalut;
+            if (jumpSpeed == jumpDefalut)
+            {
+                jumpSpeed *= 1.8f;
+            }
+        }
+        if (level == 5 && exp >= 25)//レベル6
+        {
+            level += 1;
+            jumpSpeed = jumpDefalut;
+            if (jumpSpeed == jumpDefalut)
+            {
+                jumpSpeed *= 2.0f;
+            }
         }
     }
     private void ReflectAction(GameObject col)
