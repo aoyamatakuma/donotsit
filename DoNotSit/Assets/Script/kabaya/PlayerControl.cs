@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,14 @@ public class PlayerControl : MonoBehaviour
     WallAbility wa;
     Vector3 Scale;
     PlayerControl player;
+
+    //追加
+    Vector3 hitPoint;
+    Vector3 playerRot;
+    GameObject hitObject;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -132,6 +141,11 @@ public class PlayerControl : MonoBehaviour
             {
                 rayFlag = true;
                 ob.SetActive(true);
+                //ヒットしてる位置を取得
+                hitPoint = hit.point;
+                //オブジェクトを取得
+                hitObject = hit.collider.gameObject;
+                test();
             }
         }
         else //壁がない時
@@ -154,8 +168,10 @@ public class PlayerControl : MonoBehaviour
             switch (wa.abilityNumber)
             {
                 case 0://着地
+                    gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    gameObject.transform.Rotate(playerRot);
                     currentPlayerState = PlayerState.Normal;
-                    NormalBlock(col.gameObject);
+                    //NormalBlock(col.gameObject);
                     break;
                 case 1://沼の床
                     playerRig.velocity = Vector3.zero;
@@ -331,6 +347,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
+    //
     private void ReflectAction(GameObject col)
     {
         //Z回転軸取得
@@ -452,5 +469,55 @@ public class PlayerControl : MonoBehaviour
                 playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
             }
         }
+    }
+    //
+    private void test()
+    {
+        //コンポーネント取得
+        wa = hitObject.GetComponent<WallAbility>();
+        //どの位置にあたったか判定
+        if (wa.Height(true).y > hitPoint.y)
+        {
+            if (wa.Height(false).y < hitPoint.y)
+            {
+                if (hitPoint.x > hitObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    playerRot = Vector3.forward * -90;
+                }
+                else
+                {
+                    Debug.Log("left");
+                    playerRot = Vector3.forward * 90;
+                }
+            }
+            else
+            {
+                Debug.Log("Down");
+                playerRot = Vector3.forward * 180;
+            }
+        }
+        else
+        {
+            if (wa.Width(true).x < hitPoint.x || wa.Width(false).x  > hitPoint.x)
+            {
+                if (hitPoint.x > hitObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    playerRot = Vector3.forward * -90;
+                }
+                else
+                {
+                    Debug.Log("left");
+                    playerRot = Vector3.forward * 90;
+                }
+            }
+            else
+            {
+                Debug.Log("UP");
+                playerRot = Vector3.forward * 0;
+            }
+        }
+
     }
 }
