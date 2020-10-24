@@ -40,14 +40,18 @@ public class PlayerControl : MonoBehaviour
     Vector3 playerVec;
     WallAbility wa;
     Vector3 Scale;
+    PlayerControl player;
     // Start is called before the first frame update
     void Start()
     {
         playerRig = GetComponent<Rigidbody>();
-        jumpFlag = false;
-        rayFlag =　false;
+        //フラグ達
+        jumpFlag = false;//ジャンプ
+        rayFlag =　false;//レイ
+        restratFlag = false;//トゲ
         MaxjumpSpeed = jumpDefalut * 2;
         currentPlayerState = PlayerState.Normal;
+        Scale = gameObject.transform.localScale;
     }
 
     // Update is called once per frame
@@ -141,32 +145,34 @@ public class PlayerControl : MonoBehaviour
     //壁との当たり判定
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.CompareTag("Wall") && currentPlayerState == PlayerState.Attack)
-        {
+            if (col.gameObject.CompareTag("Wall") && currentPlayerState == PlayerState.Attack)
+        { 
+            wa = col.gameObject.GetComponent<WallAbility>();
             jumpFlag = false;
             playerRig.velocity = Vector3.zero;
-            //↓こいつでくっついて反転！！
-            this.transform.Rotate(Vector3.forward, this.transform.rotation.z + 180);
             combo = 0;
-            Debug.Log("当たった");
-            //transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.back);
-            // ReflectionUp();
-            wa = col.gameObject.GetComponent<WallAbility>();
             switch (wa.abilityNumber)
             {
                 case 0://着地
                     currentPlayerState = PlayerState.Normal;
-                  //  ReflectionUp();
-                    //めり込んだ時の処理を書く
+                    NormalBlock(col.gameObject);
                     break;
                 case 1://沼の床
                     playerRig.velocity = Vector3.zero;
                     jumpSpeed = jumpDefalut;
                     currentPlayerState = PlayerState.Normal;
-                    //ジャンプしたらmaxJumpForceをもとに戻す；
+                    NormalBlock(col.gameObject);
                     break;
                 case 2://反射
                     ReflectAction(col.gameObject);
+                    break;
+                case 6://斜め着地左
+                    currentPlayerState = PlayerState.Normal;
+                    SkewBlockLeft(col.gameObject);
+                    break;
+                case 7://斜め着地右
+                    currentPlayerState = PlayerState.Normal;
+                    SkewBlockRight(col.gameObject);
                     break;
                 default:
                     break;
@@ -185,7 +191,7 @@ public class PlayerControl : MonoBehaviour
     //リスタート用
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Wall"))
+        if (col.gameObject.CompareTag("Wall") && currentPlayerState == PlayerState.Attack)
         {
             wa = col.gameObject.GetComponent<WallAbility>();
             switch (wa.abilityNumber)
@@ -194,7 +200,8 @@ public class PlayerControl : MonoBehaviour
                     SripAction(col.gameObject);
                     break;
                 case 4://とげ
-                    timer -= 10.0f;
+                    StartCoroutine("ThornTime");
+                    restratFlag = true;//トゲ
                     //Destroy(this.gameObject);
                     break;
                 case 5://斜めの反射
@@ -216,9 +223,84 @@ public class PlayerControl : MonoBehaviour
           //  LevelUp();
         }
     }
+    //垂直くっつく
+    private void NormalBlock(GameObject col)
+    {
+        //Z回転軸取得
+        float a = col.gameObject.transform.localEulerAngles.z;
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+        {
+            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
+                }
+                else
+                {
+                    Debug.Log("left");
+                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
+                }
+            }
+            else
+            {
+                Debug.Log("Down");
+                gameObject.transform.Rotate(Vector3.forward * (-180 - a));
+            }
+        }
+        else
+        {
+            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    Debug.Log("right");
+                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
+                }
+                else
+                {
+                    Debug.Log("left");
+                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
+                }
+            }
+            else
+            {
+                Debug.Log("UP");
+                gameObject.transform.Rotate(Vector3.forward * (-a));
+            }
+        }
+    }
+    //斜め左
+    private void SkewBlockLeft(GameObject col)
+    {
+        //Z回転軸取得
+        float a = col.gameObject.transform.localEulerAngles.z;
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+         gameObject.transform.Rotate(Vector3.forward * (45 - a));
+    }
+    //斜め右
+    private void SkewBlockRight(GameObject col)
+    {
+        //Z回転軸取得
+        float a = col.gameObject.transform.localEulerAngles.z;
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, -90);
+        gameObject.transform.Rotate(Vector3.forward * (-45 - a));
+    }
     public void Damage(float damage)
     {
         timer -= damage;
+    }
+    IEnumerator ThornTime()
+    {
+        if (restratFlag == true)
+        {
+            timer -= 10.0f;
+        }
+        yield return new WaitForSeconds(1.0f);
+        restratFlag = false;
+        yield break;
     }
     //コンボ系
     public void Combo()
