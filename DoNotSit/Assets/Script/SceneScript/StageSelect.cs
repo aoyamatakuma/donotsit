@@ -12,11 +12,15 @@ public class StageSelect : MonoBehaviour
     private int selectNum;
     private bool isSelect;
     private bool isMove;
+    private AudioSource audio;
+    public AudioClip selectSE;
+    public AudioClip moveSE;
     // Start is called before the first frame update
     void Start()
     {
         selectNum = 0;
         Select();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,10 +28,11 @@ public class StageSelect : MonoBehaviour
     {
        
         SelectMove();
-        //if (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump"))
-        //{
-        //    SceneManager.LoadScene("Main");
-        //}
+        if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
+        {
+            audio.PlayOneShot(selectSE);
+            //SceneManager.LoadScene("Main");
+        }
     }
 
     void Select()
@@ -75,6 +80,7 @@ public class StageSelect : MonoBehaviour
     IEnumerator ChangeCoroutine(bool isRight)
     {
         isMove = true;
+        audio.PlayOneShot(moveSE);
         if (isRight)
         {
             rightObj.GetComponent<Outline>().enabled = true;
