@@ -24,7 +24,7 @@ public class TitleFadeManager : MonoBehaviour
         Destroy(fadeInInstance);
         if (fadeOutInstance == null)
         {
-            fadeOutInstance = GameObject.Instantiate(fadeOutPrefab) as GameObject;
+            //fadeOutInstance = GameObject.Instantiate(fadeOutPrefab) as GameObject;
         }
 
         select = true;
