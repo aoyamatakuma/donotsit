@@ -9,9 +9,13 @@ public class GameClearScene : MonoBehaviour
     public GameObject stageSelect;
     public GameObject title;
     private bool select;
+    private AudioSource audio;
+    public AudioClip selectSE;
+    public AudioClip moveSE;
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         select = true;
     }
 
@@ -19,15 +23,17 @@ public class GameClearScene : MonoBehaviour
     void Update()
     {
         Select();
-        if (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump"))
+        if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
         {
+            audio.PlayOneShot(selectSE);
             if (select)
             {
-                SceneManager.LoadScene("StageSelect");
+               
+                //SceneManager.LoadScene("StageSelect");
             }
             else
             {
-                SceneManager.LoadScene("Title");
+                // SceneManager.LoadScene("Title");
             }
         }
     }
@@ -38,22 +44,32 @@ public class GameClearScene : MonoBehaviour
 
         if (select)
         {
+           
             stageSelect.GetComponent<Outline>().enabled = true;
             title.GetComponent<Outline>().enabled = false;
         }
         else
         {
+          
             stageSelect.GetComponent<Outline>().enabled = false;
             title.GetComponent<Outline>().enabled = true;
         }
 
         if (ver > 0.5f)
         {
+            if (!select)
+            {
+                audio.PlayOneShot(moveSE);
+            }
             select = true;
 
         }
         else if (ver < -0.5f)
         {
+            if (select)
+            {
+                audio.PlayOneShot(moveSE);
+            }
             select = false;
         }
 
