@@ -229,48 +229,7 @@ public class PlayerControl : MonoBehaviour
         //Z回転軸取得
         float a = col.gameObject.transform.localEulerAngles.z;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
-        {
-            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
-            {
-                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
-                {
-                    Debug.Log("right");
-                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
-                }
-                else
-                {
-                    Debug.Log("left");
-                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
-                }
-            }
-            else
-            {
-                Debug.Log("Down");
-                gameObject.transform.Rotate(Vector3.forward * (-180 - a));
-            }
-        }
-        else
-        {
-            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
-            {
-                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
-                {
-                    Debug.Log("right");
-                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
-                }
-                else
-                {
-                    Debug.Log("left");
-                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
-                }
-            }
-            else
-            {
-                Debug.Log("UP");
-                gameObject.transform.Rotate(Vector3.forward * (-a));
-            }
-        }
+        gameObject.transform.Rotate(Vector3.forward + new Vector3(0, 0, a));
     }
     //斜め左
     private void SkewBlockLeft(GameObject col)

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 95848284872145372}
   - component: {fileID: 2787854373570645270}
   - component: {fileID: 8849336246094481687}
+  - component: {fileID: 5493440517836321790}
   m_Layer: 0
   m_Name: GrassBlock
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,5 +93,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.002453, y: 1, z: 1.0500002}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5493440517836321790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445209753150106819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityNumber: 0
