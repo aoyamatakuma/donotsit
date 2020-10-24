@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 
 public enum PlayerState
@@ -47,6 +50,8 @@ public class PlayerControl : MonoBehaviour
     Vector3 hitPoint;
     Vector3 playerRot;
     GameObject hitObject;
+    int wallNum;
+    bool colFlag;
 
 
 
@@ -160,38 +165,41 @@ public class PlayerControl : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
             if (col.gameObject.CompareTag("Wall") && currentPlayerState == PlayerState.Attack)
-        { 
-            wa = col.gameObject.GetComponent<WallAbility>();
-            jumpFlag = false;
-            playerRig.velocity = Vector3.zero;
-            combo = 0;
-            switch (wa.abilityNumber)
+        {
+            if (!colFlag)
             {
-                case 0://着地
-                    gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                    gameObject.transform.Rotate(playerRot);
-                    currentPlayerState = PlayerState.Normal;
-                   // NormalBlock(col.gameObject);
-                    break;
-                case 1://沼の床
-                    playerRig.velocity = Vector3.zero;
-                    jumpSpeed = jumpDefalut;
-                    currentPlayerState = PlayerState.Normal;
-                    NormalBlock(col.gameObject);
-                    break;
-                case 2://反射
-                    ReflectAction();
-                    break;
-                case 6://斜め着地左
-                    currentPlayerState = PlayerState.Normal;
-                    SkewBlockLeft(col.gameObject);
-                    break;
-                case 7://斜め着地右
-                    currentPlayerState = PlayerState.Normal;
-                    SkewBlockRight(col.gameObject);
-                    break;
-                default:
-                    break;
+                jumpFlag = false;
+                playerRig.velocity = Vector3.zero;
+                combo = 0;
+                switch (wallNum)
+                {
+                    case 0://着地
+                        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                        gameObject.transform.Rotate(playerRot);
+                        currentPlayerState = PlayerState.Normal;
+                        //NormalBlock(col.gameObject);
+                        break;
+                    case 1://沼の床
+                        playerRig.velocity = Vector3.zero;
+                        jumpSpeed = jumpDefalut;
+                        currentPlayerState = PlayerState.Normal;
+                        NormalBlock(col.gameObject);
+                        break;
+                    case 2://反射
+                        ReflectAction();
+                        break;
+                    case 6://斜め着地左
+                        currentPlayerState = PlayerState.Normal;
+                        SkewBlockLeft(col.gameObject);
+                        break;
+                    case 7://斜め着地右
+                        currentPlayerState = PlayerState.Normal;
+                        SkewBlockRight(col.gameObject);
+                        break;
+                    default:
+                        break;
+                }
+                colFlag = true;
             }
         }
         //EnemyCollision場合
@@ -204,6 +212,14 @@ public class PlayerControl : MonoBehaviour
                     //EnemeyUp();//敵を倒すパターン
         }
     }
+    void OnCollisionExit(Collision col)
+    {
+        if(colFlag)
+        {
+            colFlag = false;
+        }
+    }
+
     //リスタート用
     void OnTriggerEnter(Collider col)
     {
@@ -361,9 +377,9 @@ public class PlayerControl : MonoBehaviour
         //代入
         playerRig.velocity = r;
         playerVec = playerRig.velocity;
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        transform.rotation = Quaternion.FromToRotation(gameObject.transform.up,r);
         RayObject();
-        //
-        Debug.Log("平面呼んだ");
     }
     private void SkewRefrect(GameObject col)
     {
@@ -433,7 +449,7 @@ public class PlayerControl : MonoBehaviour
     {
         //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
-        //どの位置にあたったか判定
+        //どの位置にあたったか判定し回転する
         if (wa.Height(true).y > hitPoint.y)
         {
             if (wa.Height(false).y < hitPoint.y)
@@ -476,6 +492,6 @@ public class PlayerControl : MonoBehaviour
                 playerRot = Vector3.forward * 0;
             }
         }
-
+        wallNum = wa.abilityNumber;
     }
 }
