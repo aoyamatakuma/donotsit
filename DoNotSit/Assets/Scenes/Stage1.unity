@@ -10267,6 +10267,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719819765}
     m_Modifications:
+    - target: {fileID: 4791545978445325152, guid: 627d735857e97df44805ef1ad04e0864,
+        type: 3}
+      propertyPath: abilityNumber
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4794452096206976730, guid: 627d735857e97df44805ef1ad04e0864,
         type: 3}
       propertyPath: m_Name
@@ -14635,6 +14640,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719819765}
     m_Modifications:
+    - target: {fileID: 4791545978445325152, guid: 627d735857e97df44805ef1ad04e0864,
+        type: 3}
+      propertyPath: abilityNumber
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4794452096206976730, guid: 627d735857e97df44805ef1ad04e0864,
         type: 3}
       propertyPath: m_Name
@@ -19462,6 +19472,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719819765}
     m_Modifications:
+    - target: {fileID: 4791545978445325152, guid: 627d735857e97df44805ef1ad04e0864,
+        type: 3}
+      propertyPath: abilityNumber
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4794452096206976730, guid: 627d735857e97df44805ef1ad04e0864,
         type: 3}
       propertyPath: m_Name
@@ -20413,6 +20428,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719819765}
     m_Modifications:
+    - target: {fileID: 4791545978445325152, guid: 627d735857e97df44805ef1ad04e0864,
+        type: 3}
+      propertyPath: abilityNumber
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4794452096206976730, guid: 627d735857e97df44805ef1ad04e0864,
         type: 3}
       propertyPath: m_Name
@@ -20874,6 +20894,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719819765}
     m_Modifications:
+    - target: {fileID: 4791545978445325152, guid: 627d735857e97df44805ef1ad04e0864,
+        type: 3}
+      propertyPath: abilityNumber
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4794452096206976730, guid: 627d735857e97df44805ef1ad04e0864,
         type: 3}
       propertyPath: m_Name
@@ -21671,6 +21696,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719819765}
     m_Modifications:
+    - target: {fileID: 4791545978445325152, guid: 627d735857e97df44805ef1ad04e0864,
+        type: 3}
+      propertyPath: abilityNumber
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4794452096206976730, guid: 627d735857e97df44805ef1ad04e0864,
         type: 3}
       propertyPath: m_Name
@@ -28503,6 +28533,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719819765}
     m_Modifications:
+    - target: {fileID: 4791545978445325152, guid: 627d735857e97df44805ef1ad04e0864,
+        type: 3}
+      propertyPath: abilityNumber
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4794452096206976730, guid: 627d735857e97df44805ef1ad04e0864,
         type: 3}
       propertyPath: m_Name

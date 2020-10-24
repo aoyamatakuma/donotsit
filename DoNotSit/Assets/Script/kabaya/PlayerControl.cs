@@ -171,7 +171,7 @@ public class PlayerControl : MonoBehaviour
                     gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                     gameObject.transform.Rotate(playerRot);
                     currentPlayerState = PlayerState.Normal;
-                    //NormalBlock(col.gameObject);
+                   // NormalBlock(col.gameObject);
                     break;
                 case 1://沼の床
                     playerRig.velocity = Vector3.zero;
@@ -180,7 +180,7 @@ public class PlayerControl : MonoBehaviour
                     NormalBlock(col.gameObject);
                     break;
                 case 2://反射
-                    ReflectAction(col.gameObject);
+                    ReflectAction();
                     break;
                 case 6://斜め着地左
                     currentPlayerState = PlayerState.Normal;
@@ -348,53 +348,10 @@ public class PlayerControl : MonoBehaviour
         }
     }
     //
-    private void ReflectAction(GameObject col)
+    private void ReflectAction()
     {
-        //Z回転軸取得
-        float a = col.gameObject.transform.localEulerAngles.z;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
-        {
-            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
-            {
-                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
-                {
-                    Debug.Log("right");
-                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
-                }
-                else
-                {
-                    Debug.Log("left");
-                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
-                }
-            }
-            else
-            {
-                Debug.Log("Down");
-                gameObject.transform.Rotate(Vector3.forward * (-180 - a));
-            }
-        }
-        else
-        {
-            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
-            {
-                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
-                {
-                    Debug.Log("right");
-                    gameObject.transform.Rotate(Vector3.forward * (-90 - a));
-                }
-                else
-                {
-                    Debug.Log("left");
-                    gameObject.transform.Rotate(Vector3.forward * (90 - a));
-                }
-            }
-            else
-            {
-                Debug.Log("UP");
-                gameObject.transform.Rotate(Vector3.forward * (-a));
-            }
-        }
+        gameObject.transform.Rotate(playerRot);
         //当たったオブジェの向き取得
         Vector3 n = gameObject.transform.up;
         //内積
@@ -404,6 +361,7 @@ public class PlayerControl : MonoBehaviour
         //代入
         playerRig.velocity = r;
         playerVec = playerRig.velocity;
+        RayObject();
         //
         Debug.Log("平面呼んだ");
     }
