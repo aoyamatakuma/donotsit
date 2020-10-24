@@ -31,7 +31,11 @@ public class StageSelect : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
         {
             audio.PlayOneShot(selectSE);
-            //SceneManager.LoadScene("Main");
+           // SceneManager.LoadScene("Stage" + selectNum + 1);
+           if(selectNum == 0)
+            {
+                SceneManager.LoadScene("Stage1" );
+            }
         }
     }
 

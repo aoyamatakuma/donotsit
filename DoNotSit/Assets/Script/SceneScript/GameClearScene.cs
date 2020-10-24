@@ -29,11 +29,11 @@ public class GameClearScene : MonoBehaviour
             if (select)
             {
                
-                //SceneManager.LoadScene("StageSelect");
+                SceneManager.LoadScene("StageSelect");
             }
             else
             {
-                // SceneManager.LoadScene("Title");
+                SceneManager.LoadScene("Title");
             }
         }
     }
