@@ -96,7 +96,7 @@ public class PlayerControl : MonoBehaviour
         comboText.text = combo.ToString();//コンボ
         Combo();//コンボ関連
         ReverseMove();//反転スティック
-        //if (SceneManager.GetActiveScene().name == "Stage1")
+        //if (SceneManager.GetActiveScene().name == "Stage4")
         //{
         // levelText.text = level.ToString();
         // }
@@ -118,6 +118,8 @@ public class PlayerControl : MonoBehaviour
     {
         //左スティック
         float turn = Input.GetAxis("Horizontal");
+        float up = Input.GetAxis("Vertical");
+        float radian = Mathf.Atan2(turn, up) * Mathf.Rad2Deg;
         if (revFlag == false)
         {
             if (turn >= 0.5f)
@@ -229,8 +231,8 @@ public class PlayerControl : MonoBehaviour
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         gameObject.transform.Rotate(playerRot);
                         currentPlayerState = PlayerState.Normal;
-                        //①パターン
-                        //if (SceneManager.GetActiveScene().name == "Stage1")
+                        //②パターン
+                        //if (SceneManager.GetActiveScene().name == "Stage2")
                         //{
                         //    ReflectionUp();
                         //}
@@ -267,8 +269,8 @@ public class PlayerControl : MonoBehaviour
             combo++;//コンボ増加
                     // timer += combo;//コンボ時間に反映
                     //  Destroy(col.gameObject);
-                    //②パターン
-                    //if (SceneManager.GetActiveScene().name == "Stage1")
+                    //③パターン
+                    //if (SceneManager.GetActiveScene().name == "Stage3")
                     //{
                     //    EnemeyUp();//敵を倒すパターン
                     //}
@@ -312,13 +314,13 @@ public class PlayerControl : MonoBehaviour
             combo++;
             //コンボ増加        
             //timer += combo;//コンボ時間に反映
-            //②パターン
-            //if (SceneManager.GetActiveScene().name == "Stage1")
+            //③パターン
+            //if (SceneManager.GetActiveScene().name == "Stage3")
             //{
             //    EnemeyUp();//敵を倒すパターン
             //}
-            //③パターン
-            //if (SceneManager.GetActiveScene().name == "Stage1")
+            //④パターン
+            //if (SceneManager.GetActiveScene().name == "Stage4")
             //{
             //    LevelUp();
             //}
