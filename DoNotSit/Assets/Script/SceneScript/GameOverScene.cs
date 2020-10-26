@@ -9,10 +9,14 @@ public class GameOverScene : MonoBehaviour
     public GameObject stageSelect;
     public GameObject title;
     private bool select;
+    private AudioSource audio;
+    public AudioClip selectSE;
+    public AudioClip moveSE;
     // Start is called before the first frame update
     void Start()
     {
         select = true;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -21,6 +25,7 @@ public class GameOverScene : MonoBehaviour
         Select();
         if (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump"))
         {
+            audio.PlayOneShot(selectSE);
             if (select)
             {
                 SceneManager.LoadScene("StageSelect");
@@ -49,11 +54,19 @@ public class GameOverScene : MonoBehaviour
 
         if (ver > 0.5f)
         {
+            if (!select)
+            {
+                audio.PlayOneShot(moveSE);
+            }
             select = true;
 
         }
         else if (ver < -0.5f)
         {
+            if (select)
+            {
+                audio.PlayOneShot(moveSE);
+            }
             select = false;
         }
 

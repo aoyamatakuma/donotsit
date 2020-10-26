@@ -5,13 +5,15 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
 
 public enum PlayerState
 {
     Normal,
-    Attack
+    Attack,
+    Stop
 }
 public class PlayerControl : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     public bool restratFlag;//障害物の当たり判定のフラグ
     public bool rayFlag;//壁云々
     public bool matFlag;//沼フラグ
+    public bool revFlag;//スティック反転フラグ
     public float jumpSpeed = 20.0f;//ジャンプの力
     public float jumpSpeedUp = 1.2f;//ジャンプアップの力
     public float jumpDefalut;//※ジャンプデフォルト
@@ -28,12 +31,13 @@ public class PlayerControl : MonoBehaviour
     public float minAngle = -44.0f; // 最小回転角度
     public float roateSpeed = 1.0f;//回るスピード
     public float angleZ;//こいつ大事回転制御
-    public float timer = 60.0f;//タイマー
-  //  public float comboTimer = 0f;//コンボタイマー
+    public static float timer;//タイマー
+    public float starttimer = 60f;
+    //  public float comboTimer = 0f;//コンボタイマー
     public float combo;//コンボ
     public float rayline;//レイ長さ
-    public int level =1;//レベル
-  //  public int speedCount;//連続用
+    public int level = 1;//レベル
+                         //  public int speedCount;//連続用
     public int exp;//経験値
     public Text comboText;
     public Text timerText;//タイマーテキスト
@@ -44,7 +48,6 @@ public class PlayerControl : MonoBehaviour
     Vector3 playerVec;
     WallAbility wa;
     Vector3 Scale;
-    PlayerControl player;
 
     //追加
     Vector3 hitPoint;
@@ -52,48 +55,57 @@ public class PlayerControl : MonoBehaviour
     GameObject hitObject;
     int wallNum;
     bool colFlag;
-
-
-
     // Start is called before the first frame update
     void Start()
     {
         playerRig = GetComponent<Rigidbody>();
         //フラグ達
         jumpFlag = false;//ジャンプ
-        rayFlag =　false;//レイ
+        rayFlag = false;//レイ
         restratFlag = false;//トゲ
+        revFlag = false;//スティック
         MaxjumpSpeed = jumpDefalut * 2;
         currentPlayerState = PlayerState.Normal;
         Scale = gameObject.transform.localScale;
+        timer = starttimer;
     }
 
     // Update is called once per frame
     void Update()
     {
         //ノーマルステート
-        if (currentPlayerState == PlayerState.Normal)
+        if (currentPlayerState == PlayerState.Normal)//ノーマル
         {
-            Move();
+            Invoke("Move", 0.0001f);//プレイに支障はないはず
             Jump();
             RayObject();
+            playerRig.velocity = Vector3.zero;
         }
-        if(currentPlayerState == PlayerState.Attack)
+        if (currentPlayerState == PlayerState.Attack)//アタック中
         {
             ob.SetActive(false);
+        }
+        if (currentPlayerState == PlayerState.Stop)//ストップ中
+        {
+            ob.SetActive(false);
+            playerRig.velocity = Vector3.zero;
         }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
         timerText.text = timer.ToString("f2") + "秒";//制限時間
         comboText.text = combo.ToString();//コンボ
         Combo();//コンボ関連
+        ReverseMove();//反転スティック
+        //if (SceneManager.GetActiveScene().name == "Stage1")
+        //{
         // levelText.text = level.ToString();
+        // }
         if (timer <= 0)
         {
-            Destroy(this.gameObject);
+            SceneManager.LoadScene("GameOver");
         }
         //最大スピード
-        if(jumpSpeed>=MaxjumpSpeed)
+        if (jumpSpeed >= MaxjumpSpeed)
         {
             jumpSpeed = MaxjumpSpeed;
         }
@@ -106,33 +118,71 @@ public class PlayerControl : MonoBehaviour
     {
         //左スティック
         float turn = Input.GetAxis("Horizontal");
-        if (turn >= 0.5f)
+        if (revFlag == false)
         {
-            if (angleZ >= minAngle)
+            if (turn >= 0.5f)
             {
-                angleZ--;
-                transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
+                if (angleZ >= minAngle)
+                {
+                    angleZ--;
+                    transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
+                }
+            }
+            if (turn <= -0.5f)
+            {
+                if (angleZ <= maxAngle)
+                {
+                    angleZ++;
+                    transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
+                }
             }
         }
-        if (turn <= -0.5f)
+        else if (revFlag == true)
         {
-            if (angleZ <= maxAngle)
+            if (turn >= 0.5f)
             {
-                angleZ++;
-                transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
+                if (angleZ <= maxAngle)
+                {
+                    angleZ++;
+                    transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
+                }
+            }
+            if (turn <= -0.5f)
+            {
+                if (angleZ >= minAngle)
+                {
+                    angleZ--;
+                    transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
+                }
             }
         }
     }
     void Jump()//ジャンプ系
     {
-        if (Input.GetButtonUp("Jump") && jumpFlag == false && rayFlag　==　true)
+        if (Input.GetButtonUp("Jump") && jumpFlag == false && rayFlag == true)
         {
             jumpFlag = true;
+            revFlag = false;
             angleZ = 0;
             currentPlayerState = PlayerState.Attack;
             playerRig.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);//ジャンプする
             playerVec = transform.up * jumpSpeed;
         }
+    }
+    void ReverseMove()
+    {
+        if (this.gameObject.transform.localRotation == Quaternion.Euler(0, 0, 180))
+        {
+            revFlag = true;
+        }
+        if (this.gameObject.transform.localRotation == Quaternion.Euler(0, 0, 0))
+        {
+            revFlag = false;
+        }
+    }
+    public static float TimeScore()
+    {
+        return timer;
     }
     //壁があるない
     void RayObject()
@@ -140,9 +190,10 @@ public class PlayerControl : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
         //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
-        if (Physics.SphereCast(ray,10,out hit, rayline)) //壁がある時
+        if (Physics.Raycast(ray, out hit, rayline)) //壁がある時
         {
-            if (hit.collider.tag == "Wall") 
+            Physics.queriesHitTriggers = false;//こいつでトリガーのやつは無視するぽい
+            if (hit.collider.tag == "Wall")
             {
                 rayFlag = true;
                 ob.SetActive(true);
@@ -150,7 +201,7 @@ public class PlayerControl : MonoBehaviour
                 hitPoint = hit.point;
                 //オブジェクトを取得
                 hitObject = hit.collider.gameObject;
-                Debug.Log(hit.collider.gameObject.name);
+                //   Debug.Log(hit.collider.gameObject.name);
                 test();
             }
         }
@@ -161,11 +212,11 @@ public class PlayerControl : MonoBehaviour
         }
         Debug.DrawRay(transform.position, transform.up * rayline, Color.red);
     }
-    
+
     //壁との当たり判定
     void OnCollisionEnter(Collision col)
     {
-            if (col.gameObject.CompareTag("Wall") && currentPlayerState == PlayerState.Attack)
+        if (col.gameObject.CompareTag("Wall") && currentPlayerState == PlayerState.Attack)
         {
             if (!colFlag)
             {
@@ -178,13 +229,19 @@ public class PlayerControl : MonoBehaviour
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         gameObject.transform.Rotate(playerRot);
                         currentPlayerState = PlayerState.Normal;
+                        //①パターン
+                        //if (SceneManager.GetActiveScene().name == "Stage1")
+                        //{
+                        //    ReflectionUp();
+                        //}
                         //NormalBlock(col.gameObject);
                         break;
                     case 1://沼の床
-                        playerRig.velocity = Vector3.zero;
+                        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                        gameObject.transform.Rotate(playerRot);
                         jumpSpeed = jumpDefalut;
                         currentPlayerState = PlayerState.Normal;
-                        NormalBlock(col.gameObject);
+                        // NormalBlock(col.gameObject);
                         break;
                     case 2://反射
                         ReflectAction();
@@ -210,12 +267,16 @@ public class PlayerControl : MonoBehaviour
             combo++;//コンボ増加
                     // timer += combo;//コンボ時間に反映
                     //  Destroy(col.gameObject);
-                    //EnemeyUp();//敵を倒すパターン
+                    //②パターン
+                    //if (SceneManager.GetActiveScene().name == "Stage1")
+                    //{
+                    //    EnemeyUp();//敵を倒すパターン
+                    //}
         }
     }
     void OnCollisionExit(Collision col)
     {
-        if(colFlag)
+        if (colFlag)
         {
             colFlag = false;
         }
@@ -233,9 +294,9 @@ public class PlayerControl : MonoBehaviour
                     SripAction(col.gameObject);
                     break;
                 case 4://とげ
+                    restratFlag = true;
                     StartCoroutine("ThornTime");
-                    restratFlag = true;//トゲ
-                    //Destroy(this.gameObject);
+                    Debug.Log("togeHit");
                     break;
                 case 5://斜めの反射
                     SkewRefrect(col.gameObject);
@@ -251,9 +312,16 @@ public class PlayerControl : MonoBehaviour
             combo++;
             //コンボ増加        
             //timer += combo;//コンボ時間に反映
-            Destroy(col.gameObject);
-            //EnemeyUp();//敵を倒すパターン
-          //  LevelUp();
+            //②パターン
+            //if (SceneManager.GetActiveScene().name == "Stage1")
+            //{
+            //    EnemeyUp();//敵を倒すパターン
+            //}
+            //③パターン
+            //if (SceneManager.GetActiveScene().name == "Stage1")
+            //{
+            //    LevelUp();
+            //}
         }
     }
     //垂直くっつく
@@ -270,7 +338,7 @@ public class PlayerControl : MonoBehaviour
         //Z回転軸取得
         float a = col.gameObject.transform.localEulerAngles.z;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-         gameObject.transform.Rotate(Vector3.forward * (45 - a));
+        gameObject.transform.Rotate(Vector3.forward * (45 - a));
     }
     //斜め右
     private void SkewBlockRight(GameObject col)
@@ -286,18 +354,21 @@ public class PlayerControl : MonoBehaviour
     }
     IEnumerator ThornTime()
     {
+        yield return new WaitForSeconds(0.1f);
         if (restratFlag == true)
         {
-            timer -= 10.0f;
+            timer -= 5.0f;
         }
-        yield return new WaitForSeconds(1.0f);
         restratFlag = false;
+        currentPlayerState = PlayerState.Stop;
+        yield return new WaitForSeconds(2.0f);
+        currentPlayerState = PlayerState.Normal;
         yield break;
     }
     //コンボ系
     public void Combo()
     {
-        if (combo>=1)
+        if (combo >= 1)
         {
             comboText.enabled = true;
         }
@@ -379,8 +450,7 @@ public class PlayerControl : MonoBehaviour
         playerRig.velocity = r;
         playerVec = playerRig.velocity;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        
-        transform.rotation = Quaternion.FromToRotation(gameObject.transform.up,r);
+        transform.rotation = Quaternion.FromToRotation(gameObject.transform.up, r);
         RayObject();
     }
     private void SkewRefrect(GameObject col)
@@ -475,7 +545,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (wa.Width(true).x < hitPoint.x || wa.Width(false).x  > hitPoint.x)
+            if (wa.Width(true).x < hitPoint.x || wa.Width(false).x > hitPoint.x)
             {
                 if (hitPoint.x > hitObject.transform.position.x)
                 {

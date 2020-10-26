@@ -9,21 +9,29 @@ public class TitleScene : MonoBehaviour
     public GameObject startImage;
     public GameObject exitImage;
     private bool select;
+    public AudioClip moveSE;
+    public AudioClip selectSE;
+    AudioSource audio;
+
+    Fade fade;
     // Start is called before the first frame update
     void Start()
     {
         select = true;
+        audio = GetComponent<AudioSource>();
+        fade = GetComponent<Fade>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Select();
-        if (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump"))
+        if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
         {
+            audio.PlayOneShot(selectSE);
             if (select)
             {
-                SceneManager.LoadScene("StageSelect");
+                fade.StartFadeIn("StageSelect");
             }
             else
             {
@@ -59,11 +67,19 @@ public class TitleScene : MonoBehaviour
 
         if(ver > 0.5f)
         {
+            if (!select)
+            {
+                audio.PlayOneShot(moveSE);
+            }
             select = true;
            
         }
         else if(ver < -0.5f)
         {
+            if (select)
+            {
+                audio.PlayOneShot(moveSE);
+            }
             select = false;
         }
 
