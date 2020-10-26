@@ -27,23 +27,19 @@ public class Fade : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartFadeIn(string SceneName,bool isWait)
     {
-        
+        StartCoroutine(End(SceneName,isWait));
     }
 
-
-    public void StartFadeIn(string SceneName)
-    {
-        StartCoroutine(End(SceneName));
-    }
-
-     IEnumerator End(string SceneName)
+     IEnumerator End(string SceneName,bool isWait)
     {
         if (fadeInInstance == null)
         {
-            yield return new WaitForSeconds(0.5f);
+            if (isWait)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
             audio.PlayOneShot(fadeSE);
             fadeInInstance = GameObject.Instantiate(fadeInPrefab) as GameObject;
             yield return new WaitForSeconds(1);

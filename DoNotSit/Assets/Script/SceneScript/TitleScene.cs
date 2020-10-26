@@ -31,7 +31,7 @@ public class TitleScene : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (select)
             {
-                fade.StartFadeIn("StageSelect");
+                fade.StartFadeIn("StageSelect",true);
             }
             else
             {
