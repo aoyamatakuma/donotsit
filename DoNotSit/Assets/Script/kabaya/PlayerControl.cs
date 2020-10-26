@@ -189,28 +189,41 @@ public class PlayerControl : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
-        //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
-        if (Physics.Raycast(ray, out hit, rayline)) //壁がある時
+        float a = 1000;
+        for (int i = 0; i < 3; i++)
         {
-            Physics.queriesHitTriggers = false;//こいつでトリガーのやつは無視するぽい
-            if (hit.collider.tag == "Wall")
+            ray = new Ray(transform.position + Vector3.right*(i-1)/2, transform.up);
+            //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
+            if (Physics.Raycast(ray, out hit, rayline)) //壁がある時
             {
-                rayFlag = true;
-                ob.SetActive(true);
-                //ヒットしてる位置を取得
-                hitPoint = hit.point;
-                //オブジェクトを取得
-                hitObject = hit.collider.gameObject;
-                //   Debug.Log(hit.collider.gameObject.name);
-                test();
+                Physics.queriesHitTriggers = false;//こいつでトリガーのやつは無視するぽい
+                if (hit.collider.tag == "Wall")
+                {
+                    rayFlag = true;
+                    ob.SetActive(true);
+                    //令の長さを取得
+                    float dis = Vector3.Distance(hit.point, transform.position + Vector3.right * (i - 1));
+                    if(a>dis)
+                    {
+                        a = dis;
+                        //ヒットしてる位置を取得
+                        hitPoint = hit.point;
+                        //オブジェクトを取得
+                        hitObject = hit.collider.gameObject;
+                    }
+                    Debug.Log("令の当たる位置"+hitPoint);
+                    Debug.Log("令の当たってるもの"+hitObject);
+                    Debug.DrawRay(transform.position + Vector3.right * (i - 1) / 2, transform.up * rayline, Color.red, 0, true);
+                                        
+                }
+            }
+            else //壁がない時
+            {
+                rayFlag = false;
+                ob.SetActive(false);
             }
         }
-        else //壁がない時
-        {
-            rayFlag = false;
-            ob.SetActive(false);
-        }
-        Debug.DrawRay(transform.position, transform.up * rayline, Color.red);
+        test();
     }
 
     //壁との当たり判定
@@ -526,42 +539,48 @@ public class PlayerControl : MonoBehaviour
         {
             if (wa.Height(false).y < hitPoint.y)
             {
-                if (hitPoint.x > hitObject.transform.position.x)
+                if (hitPoint.x >= wa.Width(true).x)
                 {
-                    Debug.Log("right");
+                    Debug.Log("みぎ");
                     playerRot = Vector3.forward * -90;
+                    Debug.Log(wa.Width(true));
                 }
-                else
+                else if(hitPoint.x<=wa.Width(false).x)
                 {
-                    Debug.Log("left");
+                    Debug.Log("ひだり");
                     playerRot = Vector3.forward * 90;
+                    Debug.Log(wa.Width(false));
                 }
+                
             }
             else
             {
                 Debug.Log("Down");
                 playerRot = Vector3.forward * 180;
+                Debug.Log(wa.Height(false));
             }
+
+
         }
         else
         {
-            if (wa.Width(true).x < hitPoint.x || wa.Width(false).x > hitPoint.x)
+            if (hitPoint.x >= wa.Width(true).x)
             {
-                if (hitPoint.x > hitObject.transform.position.x)
-                {
-                    Debug.Log("right");
-                    playerRot = Vector3.forward * -90;
-                }
-                else
-                {
-                    Debug.Log("left");
-                    playerRot = Vector3.forward * 90;
-                }
+                Debug.Log("right");
+                playerRot = Vector3.forward * -90;
+                Debug.Log(wa.Width(true));
+            }
+            else if(hitPoint.x <= wa.Width(false).x)
+            {
+                Debug.Log("left");
+                playerRot = Vector3.forward * 90;
+                Debug.Log(wa.Width(false));
             }
             else
             {
                 Debug.Log("UP");
                 playerRot = Vector3.forward * 0;
+                Debug.Log(wa.Height(true));
             }
         }
         wallNum = wa.abilityNumber;
