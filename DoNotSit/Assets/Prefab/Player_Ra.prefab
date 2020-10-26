@@ -677,8 +677,8 @@ MonoBehaviour:
   jumpSpeedUp: 1.2
   jumpDefalut: 40
   MaxjumpSpeed: 0
-  maxAngle: 44
-  minAngle: -44
+  maxAngle: 49
+  minAngle: -49
   roateSpeed: 1
   angleZ: 0
   starttimer: 60

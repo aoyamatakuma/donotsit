@@ -12,7 +12,8 @@ using Debug = UnityEngine.Debug;
 public enum PlayerState
 {
     Normal,
-    Attack
+    Attack,
+    Stop
 }
 public class PlayerControl : MonoBehaviour
 {
@@ -73,16 +74,21 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         //ノーマルステート
-        if (currentPlayerState == PlayerState.Normal)
+        if (currentPlayerState == PlayerState.Normal)//ノーマル
         {
             Invoke("Move", 0.0001f);//プレイに支障はないはず
             Jump();
             RayObject();
             playerRig.velocity = Vector3.zero;
         }
-        if (currentPlayerState == PlayerState.Attack)
+        if (currentPlayerState == PlayerState.Attack)//アタック中
         {
             ob.SetActive(false);
+        }
+        if (currentPlayerState == PlayerState.Stop)//ストップ中
+        {
+            ob.SetActive(false);
+            playerRig.velocity = Vector3.zero;
         }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
@@ -354,6 +360,9 @@ public class PlayerControl : MonoBehaviour
             timer -= 5.0f;
         }
         restratFlag = false;
+        currentPlayerState = PlayerState.Stop;
+        yield return new WaitForSeconds(2.0f);
+        currentPlayerState = PlayerState.Normal;
         yield break;
     }
     //コンボ系
