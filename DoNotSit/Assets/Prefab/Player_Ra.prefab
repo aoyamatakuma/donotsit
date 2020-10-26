@@ -611,7 +611,7 @@ Transform:
   m_GameObject: {fileID: 7959630063671580638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -73.43, y: -1.37, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 7855466505648773709}
   - {fileID: 6493243048703521570}
@@ -652,7 +652,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 0.5
   m_Height: 3.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
@@ -672,6 +672,7 @@ MonoBehaviour:
   restratFlag: 0
   rayFlag: 0
   matFlag: 0
+  revFlag: 0
   jumpSpeed: 40
   jumpSpeedUp: 1.2
   jumpDefalut: 40
@@ -680,7 +681,7 @@ MonoBehaviour:
   minAngle: -44
   roateSpeed: 1
   angleZ: 0
-  timer: 60
+  starttimer: 60
   combo: 0
   rayline: 50
   level: 1

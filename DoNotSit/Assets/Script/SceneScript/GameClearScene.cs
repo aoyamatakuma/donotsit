@@ -12,11 +12,15 @@ public class GameClearScene : MonoBehaviour
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
+    public Text goalTimeText;
+    float goaltimer;
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
         select = true;
+        goaltimer = PlayerControl.TimeScore();
+        goalTimeText.text = "GT:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
     }
 
     // Update is called once per frame
