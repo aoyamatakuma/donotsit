@@ -3,7 +3,12 @@ guid: e0b92d1207a0b5f459ce32138f76d555
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fadeOutPrefab: {fileID: 985631437893514359, guid: b1acbd4931931ca49aaf2004eee088ea,
+      type: 3}
+  - fadeInPrefab: {fileID: 770964606592112835, guid: 33a41c8c3cbe97743a30e8dee3811c30,
+      type: 3}
+  - fadeSE: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

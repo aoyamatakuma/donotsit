@@ -21,6 +21,10 @@ public class Fade : MonoBehaviour
         Destroy(fadeOutInstance);
         Destroy(fadeInInstance);
         audio = GetComponent<AudioSource>();
+        if (fadeOutInstance == null)
+        {
+            fadeOutInstance = GameObject.Instantiate(fadeOutPrefab) as GameObject;
+        }
     }
 
     // Update is called once per frame
