@@ -55,6 +55,7 @@ public class PlayerControl : MonoBehaviour
     GameObject hitObject;
     int wallNum;
     bool colFlag;
+    Fade fade;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +69,7 @@ public class PlayerControl : MonoBehaviour
         currentPlayerState = PlayerState.Normal;
         Scale = gameObject.transform.localScale;
         timer = starttimer;
+        fade = GetComponent<Fade>();
     }
 
     // Update is called once per frame
@@ -102,7 +104,7 @@ public class PlayerControl : MonoBehaviour
         // }
         if (timer <= 0)
         {
-            SceneManager.LoadScene("GameOver");
+            fade.StartFadeIn("GameOver", false);
         }
         //最大スピード
         if (jumpSpeed >= MaxjumpSpeed)
