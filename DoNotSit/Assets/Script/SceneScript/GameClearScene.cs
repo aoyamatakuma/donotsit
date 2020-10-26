@@ -20,7 +20,7 @@ public class GameClearScene : MonoBehaviour
         audio = GetComponent<AudioSource>();
         select = true;
         goaltimer = PlayerControl.TimeScore();
-        goalTimeText.text = "GT:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
+        goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
     }
 
     // Update is called once per frame
