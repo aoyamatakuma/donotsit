@@ -5456,7 +5456,7 @@ PrefabInstance:
     - target: {fileID: 985631437893514359, guid: b1acbd4931931ca49aaf2004eee088ea,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 985631437893514379, guid: b1acbd4931931ca49aaf2004eee088ea,
         type: 3}
@@ -5563,6 +5563,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 985631438081129621, guid: b1acbd4931931ca49aaf2004eee088ea,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9e3f3d250e4342429669948e6e91995,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1acbd4931931ca49aaf2004eee088ea, type: 3}
 --- !u!1001 &770964606832746431
