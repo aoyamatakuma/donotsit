@@ -16,7 +16,7 @@ public class CameraScript : MonoBehaviour
     //マップの1部分の番号取得用
     private int mapNumber;
     //キャラの当たり判定幅
-    private float colBox = 20;
+    private float colBox;
 
     private float cameraPosZ;
 
@@ -28,6 +28,7 @@ public class CameraScript : MonoBehaviour
     {
         cameraPosZ = mainCamera.transform.position.z;
         stageCS = gameObject.GetComponent<StageScript>();
+        colBox = stageCS.colBoxSize;
         //カメラのスタート地点を設定
         startCameraPosition = Vector3.forward * -78;
         nowCameraPosition = new Vector3(stageCS.GetMapSize().x / 2, stageCS.GetMapSize().y / 2, cameraPosZ);

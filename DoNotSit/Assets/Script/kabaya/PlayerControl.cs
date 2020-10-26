@@ -140,7 +140,7 @@ public class PlayerControl : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
         //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
-        if (Physics.Raycast(ray, out hit, rayline)) //壁がある時
+        if (Physics.SphereCast(ray,10,out hit, rayline)) //壁がある時
         {
             if (hit.collider.tag == "Wall") 
             {
@@ -150,6 +150,7 @@ public class PlayerControl : MonoBehaviour
                 hitPoint = hit.point;
                 //オブジェクトを取得
                 hitObject = hit.collider.gameObject;
+                Debug.Log(hit.collider.gameObject.name);
                 test();
             }
         }
@@ -378,6 +379,7 @@ public class PlayerControl : MonoBehaviour
         playerRig.velocity = r;
         playerVec = playerRig.velocity;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        
         transform.rotation = Quaternion.FromToRotation(gameObject.transform.up,r);
         RayObject();
     }

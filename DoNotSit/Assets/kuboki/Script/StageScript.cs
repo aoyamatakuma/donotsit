@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class StageScript : MonoBehaviour
 {
     //ステージのマップ数の設定
@@ -20,6 +21,9 @@ public class StageScript : MonoBehaviour
     private GameObject heightObj;
     [SerializeField]
     private GameObject wallObj;
+
+    //当たり判定のサイズ
+    public float colBoxSize = 50;
 
     
 
@@ -46,16 +50,16 @@ public class StageScript : MonoBehaviour
         for (int w = 1; w < mapWidth; w++)
         {
             GameObject widthBox = Instantiate(widthObj, 
-                new Vector3((mapSize.x - 20) * w + 10, ((mapSize.y - 20) * mapHeight + 20) / 2, 0),Quaternion.identity);
-            widthBox.transform.localScale = new Vector3(20, (mapSize.y - 20) * mapHeight + 20, 0);
+                new Vector3((mapSize.x - colBoxSize) * w + (colBoxSize/2), ((mapSize.y - colBoxSize) * mapHeight + colBoxSize) / 2, 0),Quaternion.identity);
+            widthBox.transform.localScale = new Vector3(colBoxSize, (mapSize.y - colBoxSize) * mapHeight + colBoxSize, 0);
             widthBox.transform.parent = transform;
         }
         //縦の当たり判定の生成
         for (int h = 1; h < mapHeight; h++)
         {
             GameObject heightBox = Instantiate(heightObj,
-                new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, (mapSize.y - 20) * h + 10, 0), Quaternion.identity);
-            heightBox.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20, 20, 0);
+                new Vector3(((mapSize.x - colBoxSize) * mapWidth + colBoxSize) / 2, (mapSize.y - colBoxSize) * h + (colBoxSize/2), 0), Quaternion.identity);
+            heightBox.transform.localScale = new Vector3((mapSize.x - colBoxSize) * mapWidth + colBoxSize, colBoxSize, 0);
             heightBox.transform.parent = transform;
         }
 
@@ -63,23 +67,23 @@ public class StageScript : MonoBehaviour
         //外枠の生成
         //左
         GameObject wall = Instantiate(wallObj, 
-            new Vector3(0, ((mapSize.y - 20) * mapHeight + 20) / 2,0), Quaternion.identity);
-        wall.transform.localScale = new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 5);
+            new Vector3(0, ((mapSize.y - colBoxSize) * mapHeight + colBoxSize) / 2,0), Quaternion.identity);
+        wall.transform.localScale = new Vector3(colBoxSize, (mapSize.y - colBoxSize) * mapHeight + colBoxSize, 5);
         wall.transform.parent = transform;
         //右
         GameObject wall2 = Instantiate(wallObj,
-    new Vector3((mapSize.x-20)*mapWidth+20, ((mapSize.y - 20) * mapHeight + 20) / 2, 0), Quaternion.identity);
-        wall2.transform.localScale = new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 5);
+    new Vector3((mapSize.x-colBoxSize)*mapWidth+colBoxSize, ((mapSize.y - colBoxSize) * mapHeight + colBoxSize) / 2, 0), Quaternion.identity);
+        wall2.transform.localScale = new Vector3(colBoxSize, (mapSize.y - colBoxSize) * mapHeight + colBoxSize, 5);
         wall2.transform.parent = transform;
         //下
         GameObject wall3 = Instantiate(wallObj,
-            new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, 0, 0), Quaternion.identity);
-        wall3.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20,1, 5);
+            new Vector3(((mapSize.x - colBoxSize) * mapWidth + colBoxSize) / 2, 0, 0), Quaternion.identity);
+        wall3.transform.localScale = new Vector3((mapSize.x - colBoxSize) * mapWidth + colBoxSize,colBoxSize, 5);
         wall3.transform.parent = transform;
         //上
         GameObject wall4 = Instantiate(wallObj,
-    new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, (mapSize.y-20)*mapHeight+20, 0), Quaternion.identity);
-        wall4.transform.localScale = new Vector3((mapSize.x - 20) * mapWidth + 20, 1, 5);
+    new Vector3(((mapSize.x - colBoxSize) * mapWidth + colBoxSize) / 2, (mapSize.y-colBoxSize)*mapHeight+colBoxSize, 0), Quaternion.identity);
+        wall4.transform.localScale = new Vector3((mapSize.x - colBoxSize) * mapWidth + colBoxSize, colBoxSize, 5);
         wall4.transform.parent = transform;
 
     }
@@ -111,22 +115,22 @@ public class StageScript : MonoBehaviour
         for (int w = 1; w < mapWidth; w++)
         {
             Gizmos.DrawCube(
-                new Vector3((mapSize.x - 20) * w + 10, ((mapSize.y - 20) * mapHeight + 20) / 2, 0),
-                new Vector3(20, (mapSize.y - 20) * mapHeight + 20, 0));
+                new Vector3((mapSize.x - colBoxSize) * w + (colBoxSize/2), ((mapSize.y - colBoxSize) * mapHeight + colBoxSize) / 2, 0),
+                new Vector3(colBoxSize, (mapSize.y - colBoxSize) * mapHeight + colBoxSize, 0));
         }
         //マップの縦の判定を生成
         Gizmos.color = Color.yellow;
         for (int h = 1; h < mapHeight; h++)
         {
-            Gizmos.DrawCube(new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, (mapSize.y - 20) * h + 10, 0),
-                new Vector3((mapSize.x - 20) * mapWidth + 20, 20, 0));
+            Gizmos.DrawCube(new Vector3(((mapSize.x - colBoxSize) * mapWidth + colBoxSize) / 2, (mapSize.y - colBoxSize) * h + (colBoxSize/2), 0),
+                new Vector3((mapSize.x - colBoxSize) * mapWidth + colBoxSize, colBoxSize, 0));
         }
         //マップ全体の枠を表示
         Gizmos.color = Color.white;
         for (int i = 0; i < mapWidth * mapHeight; i++)
         {
             Gizmos.DrawWireCube(originMapVec +
-                new Vector3(i % mapWidth * (mapSize.x - 20), i / mapWidth % mapHeight * (mapSize.y - 20), 0),
+                new Vector3(i % mapWidth * (mapSize.x - colBoxSize), i / mapWidth % mapHeight * (mapSize.y - colBoxSize), 0),
                 mapSize);
         }
         //マップ移動時の指標の線
@@ -134,13 +138,13 @@ public class StageScript : MonoBehaviour
         for (int w = 1; w < mapWidth; w++)
         {
             Gizmos.DrawCube(
-                new Vector3((mapSize.x - 20) * w + 10, ((mapSize.y - 20) * mapHeight + 20) / 2, 0),
-                new Vector3(1, (mapSize.y - 20) * mapHeight + 20, 0));
+                new Vector3((mapSize.x - colBoxSize) * w + (colBoxSize/2), ((mapSize.y - colBoxSize) * mapHeight + colBoxSize) / 2, 0),
+                new Vector3(1, (mapSize.y - colBoxSize) * mapHeight + colBoxSize, 0));
         }
         for (int h = 1; h < mapHeight; h++)
         {
-            Gizmos.DrawCube(new Vector3(((mapSize.x - 20) * mapWidth + 20) / 2, (mapSize.y - 20) * h + 10, 0),
-                new Vector3((mapSize.x - 20) * mapWidth + 20, 1, 0));
+            Gizmos.DrawCube(new Vector3(((mapSize.x - colBoxSize) * mapWidth + colBoxSize) / 2, (mapSize.y - colBoxSize) * h + (colBoxSize/2), 0),
+                new Vector3((mapSize.x - colBoxSize) * mapWidth + colBoxSize, 1, 0));
         }
 
 
