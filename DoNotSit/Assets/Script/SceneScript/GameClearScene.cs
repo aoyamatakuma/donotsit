@@ -14,6 +14,7 @@ public class GameClearScene : MonoBehaviour
     public AudioClip moveSE;
     public Text goalTimeText;
     float goaltimer;
+    Fade fade;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class GameClearScene : MonoBehaviour
         select = true;
         goaltimer = PlayerControl.TimeScore();
         goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
+        fade = GetComponent<Fade>();
     }
 
     // Update is called once per frame
@@ -32,12 +34,12 @@ public class GameClearScene : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (select)
             {
-               
-                SceneManager.LoadScene("StageSelect");
+
+                fade.StartFadeIn("StageSelect", true);
             }
             else
             {
-                SceneManager.LoadScene("Title");
+                fade.StartFadeIn("Title", true);
             }
         }
     }

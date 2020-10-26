@@ -5,13 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
-   
+    Fade fade;
+
+    void Start()
+    {
+        fade = GetComponent<Fade>();
+    }
 
     void OnTriggerEnter(Collider col)
     {
         if(col.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("GameClear");
+            fade.StartFadeIn("GameClear",false);
         }
     }
 }
