@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 1
+  abilityNumber: 2
 --- !u!1001 &186394788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3987,7 +3987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 0
+  abilityNumber: 2
 --- !u!65 &1864489638
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4708,7 +4708,7 @@ PrefabInstance:
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -72.3
+      value: -61.9
       objectReference: {fileID: 0}
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
