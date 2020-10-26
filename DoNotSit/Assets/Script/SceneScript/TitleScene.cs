@@ -12,11 +12,14 @@ public class TitleScene : MonoBehaviour
     public AudioClip moveSE;
     public AudioClip selectSE;
     AudioSource audio;
+
+    Fade fade;
     // Start is called before the first frame update
     void Start()
     {
         select = true;
         audio = GetComponent<AudioSource>();
+        fade = GetComponent<Fade>();
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class TitleScene : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (select)
             {
-                SceneManager.LoadScene("StageSelect");
+                fade.StartFadeIn("StageSelect");
             }
             else
             {

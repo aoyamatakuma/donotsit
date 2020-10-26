@@ -15,26 +15,28 @@ public class StageSelect : MonoBehaviour
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
+    Fade fade;
     // Start is called before the first frame update
     void Start()
     {
         selectNum = 0;
         Select();
         audio = GetComponent<AudioSource>();
+        fade = GetComponent<Fade>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
         SelectMove();
         if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
         {
             audio.PlayOneShot(selectSE);
-           // SceneManager.LoadScene("Stage" + selectNum + 1);
-           if(selectNum == 0)
+            // SceneManager.LoadScene("Stage" + selectNum + 1);
+            if (selectNum == 0)
             {
-                SceneManager.LoadScene("Stage1" );
+                fade.StartFadeIn("Stage1");
             }
         }
     }
@@ -56,9 +58,9 @@ public class StageSelect : MonoBehaviour
     void SelectMove()
     {
         float hol = Input.GetAxis("SelectMove");
-        if(hol < -0.5f && !isMove)
+        if (hol < -0.5f && !isMove)
         {
-            selectNum --;
+            selectNum--;
             StartCoroutine(ChangeCoroutine(false));
             if (selectNum < 0)
             {
@@ -67,13 +69,13 @@ public class StageSelect : MonoBehaviour
             isSelect = false;
         }
 
-        if(hol > 0.5f && !isMove)
+        if (hol > 0.5f && !isMove)
         {
-            selectNum ++;
+            selectNum++;
             StartCoroutine(ChangeCoroutine(true));
-            if (selectNum > selectObjects.Count -1)
+            if (selectNum > selectObjects.Count - 1)
             {
-               selectNum = selectObjects.Count - 1;
+                selectNum = selectObjects.Count - 1;
             }
             isSelect = false;
         }
@@ -84,23 +86,28 @@ public class StageSelect : MonoBehaviour
     IEnumerator ChangeCoroutine(bool isRight)
     {
         isMove = true;
-        audio.PlayOneShot(moveSE);
-        if (isRight)
+        if (selectNum >= 0 && selectNum < selectObjects.Count)
         {
-            rightObj.GetComponent<Outline>().enabled = true;
-        }
-        else
-        {
-            leftObj.GetComponent<Outline>().enabled = true;
-        }
-        yield return new WaitForSeconds(0.4f);
-        if (isRight)
-        {
-            rightObj.GetComponent<Outline>().enabled = false;
-        }
-        else
-        {
-            leftObj.GetComponent<Outline>().enabled = false;
+            audio.PlayOneShot(moveSE);
+
+
+            if (isRight)
+            {
+                rightObj.GetComponent<Outline>().enabled = true;
+            }
+            else
+            {
+                leftObj.GetComponent<Outline>().enabled = true;
+            }
+            yield return new WaitForSeconds(0.4f);
+            if (isRight)
+            {
+                rightObj.GetComponent<Outline>().enabled = false;
+            }
+            else
+            {
+                leftObj.GetComponent<Outline>().enabled = false;
+            }
         }
         isMove = false;
     }
