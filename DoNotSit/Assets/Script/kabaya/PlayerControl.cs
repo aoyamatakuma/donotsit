@@ -82,7 +82,7 @@ public class PlayerControl : MonoBehaviour
         timer = starttimer;
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();
-        //SetAngle();
+        SetAngle();
     }
 
     // Update is called once per frame
