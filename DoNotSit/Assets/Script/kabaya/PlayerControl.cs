@@ -45,17 +45,24 @@ public class PlayerControl : MonoBehaviour
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
-    Vector3 playerVec;
-    WallAbility wa;
-    Vector3 Scale;
 
-    //追加
+    Vector3 playerVec;//プレイヤーのベクトル
+    WallAbility wa;//wallのscript
+    Vector3 Scale;//プレイヤーの大きさ
+
     Vector3 hitPoint;
     Vector3 playerRot;
     GameObject hitObject;
     int wallNum;
     bool colFlag;
     Fade fade;
+
+    //
+    GameObject carsol;
+
+
+    private float maxAngleSet;
+    private float minAngleSet;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +77,7 @@ public class PlayerControl : MonoBehaviour
         Scale = gameObject.transform.localScale;
         timer = starttimer;
         fade = GetComponent<Fade>();
+        SetAngle();
     }
 
     // Update is called once per frame
@@ -121,45 +129,59 @@ public class PlayerControl : MonoBehaviour
         //左スティック
         float turn = Input.GetAxis("Horizontal");
         float up = Input.GetAxis("Vertical");
-        float radian = Mathf.Atan2(turn, up) * Mathf.Rad2Deg;
-        if (revFlag == false)
+        Vector3 angle = transform.localEulerAngles;
+        if (turn<0)
         {
-            if (turn >= 0.5f)
+            if(angle.z>-90)
             {
-                if (angleZ >= minAngle)
-                {
-                    angleZ--;
-                    transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
-                }
+                angle.z++;
             }
-            if (turn <= -0.5f)
+            else
             {
-                if (angleZ <= maxAngle)
-                {
-                    angleZ++;
-                    transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
-                }
+                angle.z--;
             }
         }
-        else if (revFlag == true)
+        else
         {
-            if (turn >= 0.5f)
+            if (angle.z > 90)
             {
-                if (angleZ <= maxAngle)
-                {
-                    angleZ++;
-                    transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
-                }
+                angle.z--;
             }
-            if (turn <= -0.5f)
+            else
             {
-                if (angleZ >= minAngle)
-                {
-                    angleZ--;
-                    transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
-                }
+                angle.z++;
             }
         }
+        if(up<0)
+        {
+            if (angle.z > 90)
+            {
+                angle.z--;
+            }
+            else
+            {
+                angle.z++;
+            }
+        }
+
+
+        float radian = Mathf.Atan2(up,turn) * Mathf.Rad2Deg;
+        angle.z = radian;
+        transform.localEulerAngles = angle;
+        ////角度調整
+        if (transform.localEulerAngles.z > maxAngleSet && transform.eulerAngles.z <= maxAngleSet + 180.0f)
+        {
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, maxAngleSet);
+        }
+        else if (transform.localEulerAngles.z < minAngleSet && transform.eulerAngles.z >= minAngleSet - 180.0f)
+        {
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, minAngleSet);
+        }
+
+
+
+
+
     }
     void Jump()//ジャンプ系
     {
@@ -229,6 +251,11 @@ public class PlayerControl : MonoBehaviour
         }
         test();
     }
+    void SetAngle()
+    {
+        maxAngleSet = transform.localEulerAngles.z + maxAngle;
+        minAngleSet = transform.localEulerAngles.z - minAngle;
+    }
 
     //壁との当たり判定
     void OnCollisionEnter(Collision col)
@@ -246,6 +273,7 @@ public class PlayerControl : MonoBehaviour
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         gameObject.transform.Rotate(playerRot);
                         currentPlayerState = PlayerState.Normal;
+                        SetAngle();
                         //②パターン
                         //if (SceneManager.GetActiveScene().name == "Stage2")
                         //{
@@ -258,6 +286,7 @@ public class PlayerControl : MonoBehaviour
                         gameObject.transform.Rotate(playerRot);
                         jumpSpeed = jumpDefalut;
                         currentPlayerState = PlayerState.Normal;
+                        SetAngle();
                         // NormalBlock(col.gameObject);
                         break;
                     case 2://反射

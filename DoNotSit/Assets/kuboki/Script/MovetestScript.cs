@@ -16,6 +16,11 @@ public enum PlayerMode
     Default,
     Skill
 }
+public enum Player
+{
+    Ground,
+    Jump
+}
 public class MovetestScript : MonoBehaviour
 {
     //コンポーネント取得
@@ -44,12 +49,16 @@ public class MovetestScript : MonoBehaviour
 
     public PlayerMode playerMode;
     public PlayerSkill playerSkill;
+    public Player isPlayer;
+
+    bool reflect = false;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMode = PlayerMode.Default;
         playerSkill = PlayerSkill.Normal;
+        isPlayer = Player.Ground;
         playerRig = gameObject.GetComponent<Rigidbody>();
         Scale = gameObject.transform.localScale;
     }
@@ -86,7 +95,6 @@ public class MovetestScript : MonoBehaviour
                 ClickPos = Camera.main.ScreenToWorldPoint(mousePos);//クリックした場所を保存
                 playerVec = a * jumpForce;//飛ぶベクトルを保存
                 jump = true;
-                ColObject = null;
                 Debug.Log("←押した");
             }
             //右クリック
@@ -116,7 +124,6 @@ public class MovetestScript : MonoBehaviour
                         ClickPos = Camera.main.ScreenToWorldPoint(mousePos);//クリックした場所を保存
                         playerVec = a * jumpForce;//飛ぶベクトルを保存
                         jump = true;
-                        ColObject = null;
                         Debug.Log("→押した");
                     }
 
@@ -152,6 +159,7 @@ public class MovetestScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
+        //はじめに触れたオブジェクトをとる
         if(ColObject == null)
         {
             Debug.Log("入れた");
@@ -164,16 +172,28 @@ public class MovetestScript : MonoBehaviour
             {
                 if (playerMode == PlayerMode.Skill && playerSkill == PlayerSkill.Normal)
                 {
-                    Debug.Log("跳ねるよ");
-                    ReflectAction(ColObject);
-                    ColObject = null;
-                    playerMode = PlayerMode.Default;
+                    if (!reflect)
+                    {
+                        ReflectAction(ColObject);
+                        reflect = true;
+                        ColObject = null;
+                    }
+                    else
+                    {
+                        Debug.Log("とまるよ");
+                        playerRig.velocity = Vector3.zero;
+                        jump = false;
+                        isPlayer = Player.Ground;
+                        playerMode = PlayerMode.Default;
+                        reflect = false;
+                    }
                 }
                 else
                 {
                     Debug.Log("とまるよ");
                     playerRig.velocity = Vector3.zero;
                     jump = false;
+                    isPlayer = Player.Ground;
                 }
             }
            
@@ -184,115 +204,121 @@ public class MovetestScript : MonoBehaviour
         if(ColObject == col.gameObject)
         {
             ColObject = null;
+            isPlayer = Player.Jump;
         }
-        Debug.Log("離れた");
     }
-    private void OnCollisionStay(Collision col)
+
+
+    void StopPos()
     {
-        if(ColObject!=null)
+        if (isPlayer == Player.Ground)
         {
-            Debug.Log("止めるよ");
-            //クリックした位置と現在の場所を確認
-            if (ClickPos.x >= gameObject.transform.position.x)
+            Debug.Log("地面にいる");
+            if (jump)
             {
-                if (ClickPos.x < oldPlayerPos.x)
+                Debug.Log("ジャッジ");
+                //クリックした位置と現在の場所を確認
+                if (ClickPos.x >= gameObject.transform.position.x)
                 {
-                    Debug.Log("止めるよん");
-                    playerRig.velocity = Vector3.zero;
-                    jump = false;
+                    if (ClickPos.x <= oldPlayerPos.x)
+                    {
+                        Debug.Log("止めるよん");
+                        playerRig.velocity = Vector3.zero;
+                    }
+                }
+                else if (ClickPos.x <= gameObject.transform.position.x)
+                {
+                    if (ClickPos.x >= oldPlayerPos.x)
+                    {
+                        Debug.Log("止めるよね");
+                        playerRig.velocity = Vector3.zero;
+
+                    }
+                }
+                else if (ClickPos.y >= gameObject.transform.position.y)
+                {
+                    if (ClickPos.y <= oldPlayerPos.y)
+                    {
+                        Debug.Log("止めるよな");
+                        playerRig.velocity = Vector3.zero;
+
+                    }
+                }
+                else if (ClickPos.y <= gameObject.transform.position.y)
+                {
+                    if (ClickPos.y >= oldPlayerPos.y)
+                    {
+                        Debug.Log("止めるよの");
+                        playerRig.velocity = Vector3.zero;
+                    }
                 }
 
             }
-            else
-            {
-                if (ClickPos.x > oldPlayerPos.x)
-                {
-                    Debug.Log("止めるよね");
-                    playerRig.velocity = Vector3.zero;
-                    jump = false;
-                }
-            }
-            if (ClickPos.y >= gameObject.transform.position.y)
-            {
-                if (ClickPos.y < oldPlayerPos.y)
-                {
-                    Debug.Log("止めるよな");
-                    playerRig.velocity = Vector3.zero;
-                    jump = false;
-                }
-            }
-            else
-            {
-                if (ClickPos.y > oldPlayerPos.y)
-                {
-                    Debug.Log("止めるよの");
-                    playerRig.velocity = Vector3.zero;
-                    jump = false;
-                }
-            }
         }
-       
     }
     #endregion
     //平面反射
     private void ReflectAction(GameObject col)
     {      
-        //どこにあたったかで角度を決める
-        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+        if(!reflect)
         {
-            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+            //どこにあたったかで角度を決める
+            if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
             {
-                if(gameObject.transform.position.x>col.gameObject.transform.position.x)
+                if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
                 {
-                    Debug.Log("right");
-                    gameObject.transform.Rotate(Vector3.forward * -90);
+                    if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                    {
+                        Debug.Log("right");
+                        gameObject.transform.Rotate(Vector3.forward * -90);
+                    }
+                    else
+                    {
+                        Debug.Log("left");
+                        gameObject.transform.Rotate(Vector3.forward * 90);
+                    }
                 }
                 else
                 {
-                    Debug.Log("left");
-                    gameObject.transform.Rotate(Vector3.forward * 90);
+                    Debug.Log("Down");
+                    gameObject.transform.Rotate(Vector3.forward * 180);
                 }
             }
             else
             {
-                Debug.Log("Down");
-                gameObject.transform.Rotate(Vector3.forward * 180);
-            }
-        }
-        else
-        {
-            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
-            {
-                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
                 {
-                    Debug.Log("right");
-                    gameObject.transform.Rotate(Vector3.forward * -90);
+                    if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                    {
+                        Debug.Log("right");
+                        gameObject.transform.Rotate(Vector3.forward * -90);
+                    }
+                    else
+                    {
+                        Debug.Log("left");
+                        gameObject.transform.Rotate(Vector3.forward * 90);
+                    }
                 }
                 else
                 {
-                    Debug.Log("left");
-                    gameObject.transform.Rotate(Vector3.forward * 90);
+                    Debug.Log("UP");
+                    gameObject.transform.Rotate(Vector3.forward * 0);
                 }
             }
-            else
-            {
-                Debug.Log("UP");
-                gameObject.transform.Rotate(Vector3.forward * 0);
-            }
-        }
-        //当たったオブジェの向き取得
-        Vector3 n = gameObject.transform.up;
-        //内積
-        float h = Mathf.Abs(Vector3.Dot(playerVec, n));
-        //反射ベクトル
-        Vector3 r = playerVec + 2 * n * h;
-        //代入
-        playerRig.velocity = r;
-        //回転を戻す
-        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        //飛ぶベクトルを保存
-        playerVec = r;
-        
+            //当たったオブジェの向き取得
+            Vector3 n = gameObject.transform.up;
+            //内積
+            float h = Mathf.Abs(Vector3.Dot(playerVec, n));
+            //反射ベクトル
+            Vector3 r = playerVec + 2 * n * h;
+            //代入
+            playerRig.velocity = r;
+            //回転を戻す
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            //飛ぶベクトルを保存
+            playerVec = r;
+
+        }        
     }
     //斜め４５度の反射
     private void SkewRefrect(GameObject col)
