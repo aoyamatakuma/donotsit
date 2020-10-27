@@ -317,17 +317,13 @@ public class PlayerControl : MonoBehaviour
                         gameObject.transform.Rotate(playerRot);
                         SetAngle();
                         currentPlayerState = PlayerState.Normal;
-                        //②パターン
-                        //if (SceneManager.GetActiveScene().name == "Stage2")
-                        //{
-                        //    ReflectionUp();
-                        //}
                         //NormalBlock(col.gameObject);
                         break;
                     case 1://沼の床
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         gameObject.transform.Rotate(playerRot);
                         jumpSpeed = jumpDefalut;
+                        SetAngle();
                         currentPlayerState = PlayerState.Normal;
                         // NormalBlock(col.gameObject);
                         break;
@@ -355,11 +351,6 @@ public class PlayerControl : MonoBehaviour
             combo++;//コンボ増加
                     // timer += combo;//コンボ時間に反映
                     //  Destroy(col.gameObject);
-                    //③パターン
-                    //if (SceneManager.GetActiveScene().name == "Stage3")
-                    //{
-                    //    EnemeyUp();//敵を倒すパターン
-                    //}
         }
     }
     void OnCollisionExit(Collision col)
@@ -400,13 +391,8 @@ public class PlayerControl : MonoBehaviour
             combo++;
             //コンボ増加        
             //timer += combo;//コンボ時間に反映
-            //③パターン
-            //if (SceneManager.GetActiveScene().name == "Stage3")
-            //{
-            //    EnemeyUp();//敵を倒すパターン
-            //}
             //④パターン
-            //if (SceneManager.GetActiveScene().name == "Stage4")
+            //if (SceneManager.GetActiveScene().name == "Stage2")
             //{
             //    LevelUp();
             //}
@@ -465,17 +451,7 @@ public class PlayerControl : MonoBehaviour
             comboText.enabled = false;
         }
     }
-    //反射パターン ①
-    public void ReflectionUp()
-    {
-        jumpSpeed *= jumpSpeedUp;
-    }
-    //敵を倒すパターン　②
-    public void EnemeyUp()
-    {
-        jumpSpeed *= jumpSpeedUp;
-    }
-    //レベルアップパターン　③
+    //レベルアップパターン　②
     public void LevelUp()
     {
         //経験値UP

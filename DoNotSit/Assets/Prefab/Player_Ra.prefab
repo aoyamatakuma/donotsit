@@ -680,10 +680,10 @@ MonoBehaviour:
   jumpDefalut: 40
   MaxjumpSpeed: 0
   maxAngle: 49
-  minAngle: -49
+  minAngle: 49
   roateSpeed: 1
   angleZ: 0
-  starttimer: 60
+  starttimer: Infinity
   combo: 0
   rayline: 50
   level: 1
@@ -697,6 +697,7 @@ MonoBehaviour:
   jumpEffect: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 3}
   jumpSE: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   effectPos: {fileID: 892862367}
+  angleLimit: 40
 --- !u!114 &3120219963439737769
 MonoBehaviour:
   m_ObjectHideFlags: 0
