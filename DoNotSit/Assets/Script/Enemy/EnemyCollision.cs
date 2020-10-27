@@ -30,6 +30,14 @@ public class EnemyCollision : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Bomb")
+        {
+            Death();
+        }
+    }
+
     void Death()
     {
         int num = Random.Range(0, effects.Count);
