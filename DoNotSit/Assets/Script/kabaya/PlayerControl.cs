@@ -45,24 +45,23 @@ public class PlayerControl : MonoBehaviour
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
+    Vector3 playerVec;
+    WallAbility wa;
+    Vector3 Scale;
+    public GameObject jumpEffect;
+    AudioSource audio;
+    public AudioClip jumpSE;
+    public GameObject effectPos;
+    private float maxAngleSet;
+    private float minAngleSet;
 
-    Vector3 playerVec;//プレイヤーのベクトル
-    WallAbility wa;//wallのscript
-    Vector3 Scale;//プレイヤーの大きさ
-
+    //追加
     Vector3 hitPoint;
     Vector3 playerRot;
     GameObject hitObject;
     int wallNum;
     bool colFlag;
     Fade fade;
-
-    //
-    GameObject carsol;
-
-
-    private float maxAngleSet;
-    private float minAngleSet;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +76,7 @@ public class PlayerControl : MonoBehaviour
         Scale = gameObject.transform.localScale;
         timer = starttimer;
         fade = GetComponent<Fade>();
+        audio = GetComponent<AudioSource>();
         SetAngle();
     }
 
@@ -129,65 +129,102 @@ public class PlayerControl : MonoBehaviour
         //左スティック
         float turn = Input.GetAxis("Horizontal");
         float up = Input.GetAxis("Vertical");
-        Vector3 angle = transform.localEulerAngles;
-        if (turn<0)
+        float radian = Mathf.Atan2(up, turn) * Mathf.Rad2Deg - 90;
+        if (revFlag == false)
         {
-            if(angle.z>-90)
+            if(turn != 0 || up !=0)
             {
-                angle.z++;
+                Vector3 angle = transform.localEulerAngles;
+                angle.z = radian;
+                transform.localEulerAngles = angle;
             }
-            else
+           
+            ////角度調整
+            if (transform.localEulerAngles.z > maxAngleSet && transform.eulerAngles.z <= maxAngleSet + 180.0f)
             {
-                angle.z--;
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, maxAngleSet);
             }
+            else if (transform.localEulerAngles.z < minAngleSet && transform.eulerAngles.z >= minAngleSet - 180.0f)
+            {
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, minAngleSet);
+            }
+            //if (turn >= 0.5f)
+            //{
+            //    if (angleZ >= minAngle)
+            //    {
+            //        angleZ--;
+            //        transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
+            //    }
+            //}
+            //if (turn <= -0.5f)
+            //{
+            //    if (angleZ <= maxAngle)
+            //    {
+            //        angleZ++;
+            //        transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
+            //    }
+            //}
         }
-        else
+        else if (revFlag == true)
         {
-            if (angle.z > 90)
+            if (turn != 0 || up != 0)
             {
-                angle.z--;
+                Vector3 angle = transform.localEulerAngles;
+                angle.z = radian;
+                transform.localEulerAngles = angle;
             }
-            else
+            ////角度調整
+            if (transform.localEulerAngles.z > maxAngleSet)
             {
-                angle.z++;
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, maxAngleSet);
             }
+            else if (transform.localEulerAngles.z < minAngleSet)
+            {
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, minAngleSet);
+            }
+            //if (turn >= 0.5f)
+            //{
+            //    if (angleZ <= maxAngle)
+            //    {
+            //        angleZ++;
+            //        transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
+            //    }
+            //}
+            //if (turn <= -0.5f)
+            //{
+            //    if (angleZ >= minAngle)
+            //    {
+            //        angleZ--;
+            //        transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
+            //    }
+            //}
         }
-        if(up<0)
+    }
+
+    void SetAngle()
+    {
+        maxAngleSet = transform.localEulerAngles.z + maxAngle;
+        minAngleSet = transform.localEulerAngles.z - minAngle;
+
+
+        if (maxAngleSet >= 360.0f)
         {
-            if (angle.z > 90)
-            {
-                angle.z--;
-            }
-            else
-            {
-                angle.z++;
-            }
+            maxAngleSet -= 360.0f;
         }
-
-
-        float radian = Mathf.Atan2(up,turn) * Mathf.Rad2Deg;
-        angle.z = radian;
-        transform.localEulerAngles = angle;
-        ////角度調整
-        if (transform.localEulerAngles.z > maxAngleSet && transform.eulerAngles.z <= maxAngleSet + 180.0f)
+        else if (minAngleSet <= 0.0f)
         {
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, maxAngleSet);
+            minAngleSet += 360.0f;
         }
-        else if (transform.localEulerAngles.z < minAngleSet && transform.eulerAngles.z >= minAngleSet - 180.0f)
-        {
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, minAngleSet);
-        }
-
-
-
-
-
+        Debug.Log("最大"+maxAngleSet);
+        Debug.Log("最小"+minAngleSet);
     }
     void Jump()//ジャンプ系
     {
         if (Input.GetButtonUp("Jump") && jumpFlag == false && rayFlag == true)
         {
             jumpFlag = true;
+            audio.PlayOneShot(jumpSE);
+            Instantiate(jumpEffect, effectPos.transform.position, transform.rotation);
             revFlag = false;
             angleZ = 0;
             currentPlayerState = PlayerState.Attack;
@@ -237,8 +274,8 @@ public class PlayerControl : MonoBehaviour
                         //オブジェクトを取得
                         hitObject = hit.collider.gameObject;
                     }
-                    Debug.Log("令の当たる位置" + hitPoint);
-                    Debug.Log("令の当たってるもの" + hitObject);
+                    //Debug.Log("令の当たる位置" + hitPoint);
+                    //Debug.Log("令の当たってるもの" + hitObject);
                     Debug.DrawRay(transform.position + Vector3.right * (i - 1) / 2, transform.up * rayline, Color.red, 0, true);
 
                 }
@@ -250,11 +287,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
         test();
-    }
-    void SetAngle()
-    {
-        maxAngleSet = transform.localEulerAngles.z + maxAngle;
-        minAngleSet = transform.localEulerAngles.z - minAngle;
     }
 
     //壁との当たり判定
@@ -272,8 +304,8 @@ public class PlayerControl : MonoBehaviour
                     case 0://着地
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         gameObject.transform.Rotate(playerRot);
-                        currentPlayerState = PlayerState.Normal;
                         SetAngle();
+                        currentPlayerState = PlayerState.Normal;
                         //②パターン
                         //if (SceneManager.GetActiveScene().name == "Stage2")
                         //{
@@ -286,7 +318,6 @@ public class PlayerControl : MonoBehaviour
                         gameObject.transform.Rotate(playerRot);
                         jumpSpeed = jumpDefalut;
                         currentPlayerState = PlayerState.Normal;
-                        SetAngle();
                         // NormalBlock(col.gameObject);
                         break;
                     case 2://反射
@@ -513,7 +544,7 @@ public class PlayerControl : MonoBehaviour
         //代入
         playerRig.velocity = r;
         //
-        Debug.Log("斜め呼んだ");
+    //    Debug.Log("斜め呼んだ");
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
     //滑る床
@@ -525,18 +556,18 @@ public class PlayerControl : MonoBehaviour
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
-                    Debug.Log("right");
+                   // Debug.Log("right");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
                 else
                 {
-                    Debug.Log("left");
+                   // Debug.Log("left");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
             }
             else
             {
-                Debug.Log("Down");
+               // Debug.Log("Down");
                 playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
             }
         }
@@ -546,18 +577,18 @@ public class PlayerControl : MonoBehaviour
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
-                    Debug.Log("right");
+                   // Debug.Log("right");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
                 else
                 {
-                    Debug.Log("left");
+                  //  Debug.Log("left");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
             }
             else
             {
-                Debug.Log("UP");
+              //  Debug.Log("UP");
                 playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
             }
         }
@@ -574,23 +605,23 @@ public class PlayerControl : MonoBehaviour
             {
                 if (hitPoint.x >= wa.Width(true).x)
                 {
-                    Debug.Log("みぎ");
+                   // Debug.Log("みぎ");
                     playerRot = Vector3.forward * -90;
-                    Debug.Log(wa.Width(true));
+                   // Debug.Log(wa.Width(true));
                 }
                 else if (hitPoint.x <= wa.Width(false).x)
                 {
-                    Debug.Log("ひだり");
+                   // Debug.Log("ひだり");
                     playerRot = Vector3.forward * 90;
-                    Debug.Log(wa.Width(false));
+                   // Debug.Log(wa.Width(false));
                 }
 
             }
             else
             {
-                Debug.Log("Down");
+               // Debug.Log("Down");
                 playerRot = Vector3.forward * 180;
-                Debug.Log(wa.Height(false));
+               // Debug.Log(wa.Height(false));
             }
 
 
@@ -599,21 +630,21 @@ public class PlayerControl : MonoBehaviour
         {
             if (hitPoint.x >= wa.Width(true).x)
             {
-                Debug.Log("right");
+              //  Debug.Log("right");
                 playerRot = Vector3.forward * -90;
-                Debug.Log(wa.Width(true));
+              //  Debug.Log(wa.Width(true));
             }
             else if (hitPoint.x <= wa.Width(false).x)
             {
-                Debug.Log("left");
+                //Debug.Log("left");
                 playerRot = Vector3.forward * 90;
-                Debug.Log(wa.Width(false));
+              //  Debug.Log(wa.Width(false));
             }
             else
             {
-                Debug.Log("UP");
+                //Debug.Log("UP");
                 playerRot = Vector3.forward * 0;
-                Debug.Log(wa.Height(true));
+               // Debug.Log(wa.Height(true));
             }
         }
         wallNum = wa.abilityNumber;
