@@ -57,11 +57,16 @@ public class PlayerControl : MonoBehaviour
 
     //追加
     Vector3 hitPoint;
-    Vector3 playerRot;
+    Vector3 playerRot = Vector3.zero;
     GameObject hitObject;
     int wallNum;
     bool colFlag;
     Fade fade;
+
+    //
+    public float angleLimit;
+    float playerAngle = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +82,7 @@ public class PlayerControl : MonoBehaviour
         timer = starttimer;
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();
-        SetAngle();
+        //SetAngle();
     }
 
     // Update is called once per frame
@@ -106,10 +111,7 @@ public class PlayerControl : MonoBehaviour
         comboText.text = combo.ToString();//コンボ
         Combo();//コンボ関連
         ReverseMove();//反転スティック
-        //if (SceneManager.GetActiveScene().name == "Stage4")
-        //{
-        // levelText.text = level.ToString();
-        // }
+
         if (timer <= 0)
         {
             fade.StartFadeIn("GameOver", false);
@@ -119,104 +121,113 @@ public class PlayerControl : MonoBehaviour
         {
             jumpSpeed = MaxjumpSpeed;
         }
-        //if(jumpSpeed<=MaxjumpSpeed)
-        //{
-        //    jumpSpeed = MaxjumpSpeed;
-        //}
     }
     void Move()//移動系
     {
         //左スティック
         float turn = Input.GetAxis("Horizontal");
         float up = Input.GetAxis("Vertical");
-        float radian = Mathf.Atan2(up, turn) * Mathf.Rad2Deg - 90;
-        if (revFlag == false)
+        Vector3 Rot = transform.localEulerAngles;
+        switch (playerAngle)
         {
-            if(turn != 0 || up !=0)
-            {
-                Vector3 angle = transform.localEulerAngles;
-                angle.z = radian;
-                transform.localEulerAngles = angle;
-            }
-           
-            ////角度調整
-            if (transform.localEulerAngles.z > maxAngleSet && transform.eulerAngles.z <= maxAngleSet + 180.0f)
-            {
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, maxAngleSet);
-            }
-            else if (transform.localEulerAngles.z < minAngleSet && transform.eulerAngles.z >= minAngleSet - 180.0f)
-            {
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, minAngleSet);
-            }
-            //if (turn >= 0.5f)
-            //{
-            //    if (angleZ >= minAngle)
-            //    {
-            //        angleZ--;
-            //        transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
-            //    }
-            //}
-            //if (turn <= -0.5f)
-            //{
-            //    if (angleZ <= maxAngle)
-            //    {
-            //        angleZ++;
-            //        transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
-            //    }
-            //}
-        }
-        else if (revFlag == true)
-        {
-            if (turn != 0 || up != 0)
-            {
-                Vector3 angle = transform.localEulerAngles;
-                angle.z = radian;
-                transform.localEulerAngles = angle;
-            }
-            ////角度調整
-            if (transform.localEulerAngles.z > maxAngleSet)
-            {
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, maxAngleSet);
-            }
-            else if (transform.localEulerAngles.z < minAngleSet)
-            {
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, minAngleSet);
-            }
-            //if (turn >= 0.5f)
-            //{
-            //    if (angleZ <= maxAngle)
-            //    {
-            //        angleZ++;
-            //        transform.RotateAround(basePosition.transform.position, transform.forward, roateSpeed);
-            //    }
-            //}
-            //if (turn <= -0.5f)
-            //{
-            //    if (angleZ >= minAngle)
-            //    {
-            //        angleZ--;
-            //        transform.RotateAround(basePosition.transform.position, transform.forward, -roateSpeed);
-            //    }
-            //}
+            case 0:
+                if (Rot.z <= maxAngleSet || Rot.z >= minAngleSet)
+                {
+                    if (turn > 0)
+                    { transform.Rotate(Vector3.back); }
+                    else if (turn < 0)
+                    { transform.Rotate(Vector3.forward); }
+                }
+                else
+                {
+                    if(maxAngleSet<=Rot.z&&90>=Rot.z)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet-1);
+                    }
+                    if(Rot.z<=minAngleSet&&270<=Rot.z)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet+1);
+                    }
+                }
+                break;
+            case 90:
+                if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
+                {
+                    if (up > 0)
+                    { transform.Rotate(Vector3.back); }
+                    else if (up < 0)
+                    { transform.Rotate(Vector3.forward); }
+                }
+                else
+                {
+                    if (maxAngleSet <= Rot.z)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet-1);
+                    }
+                    if (minAngleSet >= Rot.z)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet+1);
+                    }
+                }
+                break;
+            case 180:
+                if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
+                {
+                    if (turn > 0)
+                    { transform.Rotate(Vector3.forward); }
+                    else if (turn < 0)
+                    { transform.Rotate(Vector3.back); }
+                }
+                else
+                {
+                    if (maxAngleSet <= Rot.z)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet-1);
+                    }
+                    if (minAngleSet >= Rot.z)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet+1);
+                    }
+                }
+                break;
+            case 270:
+                if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
+                {
+                    if (up > 0)
+                    { transform.Rotate(Vector3.forward); }
+                    else if (up < 0)
+                    { transform.Rotate(Vector3.back); }
+                }
+                else
+                {
+                    if (maxAngleSet < Rot.z)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet-1);
+                    }
+                    if (minAngleSet > Rot.z)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet+1);
+                    }
+                }
+                break;
         }
     }
 
     void SetAngle()
     {
-        maxAngleSet = transform.localEulerAngles.z + maxAngle;
-        minAngleSet = transform.localEulerAngles.z - minAngle;
-
-
-        if (maxAngleSet >= 360.0f)
+        playerAngle = playerRot.z;
+        if(playerAngle == 0)
         {
-            maxAngleSet -= 360.0f;
+            maxAngleSet = angleLimit;
+            minAngleSet = 360 - angleLimit;
         }
-        else if (minAngleSet <= 0.0f)
+        else
         {
-            minAngleSet += 360.0f;
+            maxAngleSet = playerAngle + angleLimit;
+            minAngleSet = playerAngle - angleLimit;
         }
-        Debug.Log("最大"+maxAngleSet);
-        Debug.Log("最小"+minAngleSet);
+        Debug.Log("最大" + maxAngleSet);
+        Debug.Log("最小" + minAngleSet);
     }
     void Jump()//ジャンプ系
     {
@@ -605,23 +616,17 @@ public class PlayerControl : MonoBehaviour
             {
                 if (hitPoint.x >= wa.Width(true).x)
                 {
-                   // Debug.Log("みぎ");
-                    playerRot = Vector3.forward * -90;
-                   // Debug.Log(wa.Width(true));
+                    playerRot = Vector3.forward * 270;
                 }
                 else if (hitPoint.x <= wa.Width(false).x)
                 {
-                   // Debug.Log("ひだり");
                     playerRot = Vector3.forward * 90;
-                   // Debug.Log(wa.Width(false));
                 }
 
             }
             else
             {
-               // Debug.Log("Down");
                 playerRot = Vector3.forward * 180;
-               // Debug.Log(wa.Height(false));
             }
 
 
@@ -630,21 +635,15 @@ public class PlayerControl : MonoBehaviour
         {
             if (hitPoint.x >= wa.Width(true).x)
             {
-              //  Debug.Log("right");
-                playerRot = Vector3.forward * -90;
-              //  Debug.Log(wa.Width(true));
+                playerRot = Vector3.forward * 270;
             }
             else if (hitPoint.x <= wa.Width(false).x)
             {
-                //Debug.Log("left");
                 playerRot = Vector3.forward * 90;
-              //  Debug.Log(wa.Width(false));
             }
             else
             {
-                //Debug.Log("UP");
                 playerRot = Vector3.forward * 0;
-               // Debug.Log(wa.Height(true));
             }
         }
         wallNum = wa.abilityNumber;
