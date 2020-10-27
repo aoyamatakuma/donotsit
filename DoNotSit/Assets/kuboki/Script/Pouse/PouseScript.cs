@@ -15,7 +15,7 @@ public class PouseScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("q"))
+        if (Input.GetButtonDown("Select"))
         {
             if (pauseUIInstance == null)
             {
