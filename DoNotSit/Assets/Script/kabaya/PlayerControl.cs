@@ -40,7 +40,6 @@ public class PlayerControl : MonoBehaviour
                          //  public int speedCount;//連続用
     public int exp;//経験値
     public Text comboText;
-    public Text timerText;//タイマーテキスト
     public Text levelText;//レベルテキスト
     public Text expText;
     public GameObject ob;//矢印
@@ -108,7 +107,6 @@ public class PlayerControl : MonoBehaviour
         }
         //タイマー
         timer -= 1.0f * Time.deltaTime;
-        timerText.text = timer.ToString("f2") + "秒";//制限時間
         comboText.text = combo.ToString();//コンボ
         //if (SceneManager.GetActiveScene().name == "Stage2")
         //{ 
