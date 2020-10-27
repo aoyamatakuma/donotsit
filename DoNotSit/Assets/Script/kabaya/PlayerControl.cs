@@ -42,6 +42,7 @@ public class PlayerControl : MonoBehaviour
     public Text comboText;
     public Text timerText;//タイマーテキスト
     public Text levelText;//レベルテキスト
+    public Text expText;
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
@@ -109,6 +110,11 @@ public class PlayerControl : MonoBehaviour
         timer -= 1.0f * Time.deltaTime;
         timerText.text = timer.ToString("f2") + "秒";//制限時間
         comboText.text = combo.ToString();//コンボ
+        //if (SceneManager.GetActiveScene().name == "Stage2")
+        //{ 
+            //levelText.text = "Level:" + level.ToString();
+            //expText.text = "Exp:" + exp.ToString();
+        //}
         Combo();//コンボ関連
         ReverseMove();//反転スティック
 
@@ -140,13 +146,13 @@ public class PlayerControl : MonoBehaviour
                 }
                 else
                 {
-                    if(maxAngleSet<=Rot.z&&90>=Rot.z)
+                    if (maxAngleSet <= Rot.z && 90 >= Rot.z)
                     {
-                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet-1);
+                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
                     }
-                    if(Rot.z<=minAngleSet&&270<=Rot.z)
+                    if (Rot.z <= minAngleSet && 270 <= Rot.z)
                     {
-                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet+1);
+                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
                     }
                 }
                 break;
@@ -162,11 +168,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (maxAngleSet <= Rot.z)
                     {
-                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet-1);
+                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
                     }
                     if (minAngleSet >= Rot.z)
                     {
-                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet+1);
+                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
                     }
                 }
                 break;
@@ -182,11 +188,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (maxAngleSet <= Rot.z)
                     {
-                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet-1);
+                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
                     }
                     if (minAngleSet >= Rot.z)
                     {
-                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet+1);
+                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
                     }
                 }
                 break;
@@ -202,11 +208,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (maxAngleSet < Rot.z)
                     {
-                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet-1);
+                        transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
                     }
                     if (minAngleSet > Rot.z)
                     {
-                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet+1);
+                        transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
                     }
                 }
                 break;
@@ -216,7 +222,7 @@ public class PlayerControl : MonoBehaviour
     void SetAngle()
     {
         playerAngle = playerRot.z;
-        if(playerAngle == 0)
+        if (playerAngle == 0)
         {
             maxAngleSet = angleLimit;
             minAngleSet = 360 - angleLimit;
@@ -462,7 +468,7 @@ public class PlayerControl : MonoBehaviour
             level += 1;
             jumpSpeed *= 1.2f;
         }
-        if (level == 2 & exp >= 10)//レベル3
+        if (level == 2 && exp >= 10)//レベル3
         {
             level += 1;
             jumpSpeed = jumpDefalut;
@@ -480,7 +486,7 @@ public class PlayerControl : MonoBehaviour
                 jumpSpeed *= 1.6f;
             }
         }
-        if (level == 4 & exp >= 20)//レベル5
+        if (level == 4 && exp >= 20)//レベル5
         {
             level += 1;
             jumpSpeed = jumpDefalut;
@@ -531,7 +537,7 @@ public class PlayerControl : MonoBehaviour
         //代入
         playerRig.velocity = r;
         //
-    //    Debug.Log("斜め呼んだ");
+        //    Debug.Log("斜め呼んだ");
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
     //滑る床
@@ -543,18 +549,18 @@ public class PlayerControl : MonoBehaviour
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
-                   // Debug.Log("right");
+                    // Debug.Log("right");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
                 else
                 {
-                   // Debug.Log("left");
+                    // Debug.Log("left");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
             }
             else
             {
-               // Debug.Log("Down");
+                // Debug.Log("Down");
                 playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
             }
         }
@@ -564,18 +570,18 @@ public class PlayerControl : MonoBehaviour
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
-                   // Debug.Log("right");
+                    // Debug.Log("right");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
                 else
                 {
-                  //  Debug.Log("left");
+                    //  Debug.Log("left");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
             }
             else
             {
-              //  Debug.Log("UP");
+                //  Debug.Log("UP");
                 playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
             }
         }
