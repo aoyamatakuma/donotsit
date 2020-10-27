@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemyCollision : MonoBehaviour
 {
     public float damage;
-    public GameObject effect;
     private CameraShakeScript camera;
- 
+    public List<GameObject> effects;
 
     void Start()
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
+      
     }
 
     void OnTriggerEnter(Collider col)
@@ -32,9 +32,11 @@ public class EnemyCollision : MonoBehaviour
 
     void Death()
     {
+        int num = Random.Range(0, effects.Count);
+        Debug.Log(num);
         camera.Shake(camera.durations, camera.magnitudes);
-        Instantiate(effect, transform.position, transform.rotation);
-        effect.GetComponent<AudioSource>().Play();
+        Instantiate(effects[num], transform.position, transform.rotation);
+        effects[num].GetComponent<AudioSource>().Play();
         Destroy(gameObject);
     }
 

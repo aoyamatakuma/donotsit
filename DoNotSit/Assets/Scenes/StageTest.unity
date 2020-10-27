@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &12637701
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &30906150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &93267597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1013,7 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &108167879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &123319396
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1221,7 +1221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &135116618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1379,7 +1379,7 @@ PrefabInstance:
     - target: {fileID: 2809272606360401662, guid: e6c618e8ec6083d4ea14b50aa7dcd244,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2809272606360401662, guid: e6c618e8ec6083d4ea14b50aa7dcd244,
         type: 3}
@@ -1684,7 +1684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &189357015
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &192502719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1760,7 +1760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &197450836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2916,7 +2916,7 @@ PrefabInstance:
     - target: {fileID: 1357329368190913638, guid: 5157968ccdb367147b45b9149723ee53,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1357329368190913638, guid: 5157968ccdb367147b45b9149723ee53,
         type: 3}
@@ -4045,7 +4045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &340675357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4459,7 +4459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &357485965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4829,6 +4829,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5157968ccdb367147b45b9149723ee53, type: 3}
+--- !u!114 &398608091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8344334602034976466, guid: a28a62aed92154b4f8760e097fe4e9bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 774535022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &406380769 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eb95b15b4ee2e3a4ca0416857231a8f4,
@@ -5117,7 +5129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &447486653
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5255,7 +5267,7 @@ Transform:
   - {fileID: 1591571138}
   - {fileID: 1197260830}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &458668878
 PrefabInstance:
@@ -5563,7 +5575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &477217174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5865,7 +5877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &559816103
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6129,7 +6141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &592028919
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6393,7 +6405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &608712321
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6673,7 +6685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &697231443
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7013,7 +7025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &742329181
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7103,6 +7115,125 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &774535022
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880443, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344334601708880447, guid: a28a62aed92154b4f8760e097fe4e9bb,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas_Ui
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a28a62aed92154b4f8760e097fe4e9bb, type: 3}
 --- !u!1001 &781390430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7409,7 +7540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &826948174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7447,7 +7578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &826965324
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7647,7 +7778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &851264600
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7805,7 +7936,7 @@ PrefabInstance:
     - target: {fileID: 1357329368190913638, guid: 5157968ccdb367147b45b9149723ee53,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1357329368190913638, guid: 5157968ccdb367147b45b9149723ee53,
         type: 3}
@@ -7985,7 +8116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &909919804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8439,7 +8570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &940045487
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8648,6 +8779,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3120219963439737769, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: fadeOutPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120219963439737769, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: angleLimit
@@ -8667,8 +8808,23 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpEffect
       value: 
-      objectReference: {fileID: 1036319122809482, guid: b52193ca195f0754f82a9f114c6585a7,
+      objectReference: {fileID: 1111314733818414085, guid: 5827816b82b65a2409f57ad13b01f7d9,
         type: 3}
+    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 1618484406}
+    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: levelText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: comboText
+      value: 
+      objectReference: {fileID: 398608091}
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8844,7 +9000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &997593081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9914,7 +10070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1171491889
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9990,7 +10146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1198866451
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10724,7 +10880,7 @@ Transform:
   - {fileID: 1574877827}
   - {fileID: 559816101}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1277825079 stripped
 GameObject:
@@ -10750,7 +10906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1277825082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11128,7 +11284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1338609138
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11420,7 +11576,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 27.332, y: 1.2370001, z: 17.946001}
 --- !u!1 &1370937756 stripped
 GameObject:
@@ -11446,7 +11602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1370937759
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11484,7 +11640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1375305742
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11522,7 +11678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1393509623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12148,7 +12304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1454995141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12994,7 +13150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1541592730
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13126,7 +13282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1574877829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13296,7 +13452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1594717647
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13428,7 +13584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1611049918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13480,6 +13636,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1618484406 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8344334602351396512, guid: a28a62aed92154b4f8760e097fe4e9bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 774535022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1629551089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13730,7 +13898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1648685980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13768,7 +13936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1654867244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13844,7 +14012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1694868392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14652,7 +14820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1775918747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14784,7 +14952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1778995035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14916,7 +15084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1790518158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14954,7 +15122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1795884402
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14992,7 +15160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1800403627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15030,7 +15198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1809017203
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15106,7 +15274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1833632861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15876,7 +16044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1918216160
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15914,7 +16082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1920396987
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15952,7 +16120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1935806909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15990,7 +16158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1936170598
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16216,7 +16384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1941955411
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16254,7 +16422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1945251026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16292,7 +16460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1956449024
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16424,7 +16592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &1958104397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17592,7 +17760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &2087684609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17630,7 +17798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &2091247617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17894,7 +18062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &2127510166
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18120,7 +18288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68b51c50558283449df8411136e5add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 2
+  abilityNumber: 0
 --- !u!65 &2143618729
 BoxCollider:
   m_ObjectHideFlags: 0

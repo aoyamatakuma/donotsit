@@ -1,0 +1,566 @@
+fileFormatVersion: 2
+guid: 6249581e778c3304a92824519549839c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8049350892618884883
+    second: Ex2_0
+  - first:
+      213: 4239424061746163841
+    second: Ex2_1
+  - first:
+      213: 437996446879079936
+    second: Ex2_2
+  - first:
+      213: 4780965204340061631
+    second: Ex2_3
+  - first:
+      213: 8563413590336346692
+    second: Ex2_4
+  - first:
+      213: -7592726531834547982
+    second: Ex2_5
+  - first:
+      213: 4040671940723473978
+    second: Ex2_6
+  - first:
+      213: -8580868156558100812
+    second: Ex2_7
+  - first:
+      213: -5528601194113322893
+    second: Ex2_8
+  - first:
+      213: 2694896125431166886
+    second: Ex2_9
+  - first:
+      213: -7750091686738310309
+    second: Ex2_10
+  - first:
+      213: -2827999804400365423
+    second: Ex2_11
+  - first:
+      213: -9036821462440533068
+    second: Ex2_12
+  - first:
+      213: 936903135609058361
+    second: Ex2_13
+  - first:
+      213: 5511996492060012848
+    second: Ex2_14
+  - first:
+      213: -5513657853412904048
+    second: Ex2_15
+  - first:
+      213: -1439175071502815565
+    second: Ex2_16
+  - first:
+      213: 3120854138710937622
+    second: Ex2_17
+  - first:
+      213: 6467910160578430829
+    second: Ex2_18
+  - first:
+      213: 1163965769294635286
+    second: Ex2_19
+  - first:
+      213: -1488878668186947376
+    second: Ex2_20
+  - first:
+      213: 3140791684726365154
+    second: Ex2_21
+  - first:
+      213: 303911054570106220
+    second: Ex2_22
+  - first:
+      213: -1752296770107239927
+    second: Ex2_23
+  - first:
+      213: 744809175859566625
+    second: Ex2_24
+  - first:
+      213: -5824322891988007050
+    second: Ex2_25
+  - first:
+      213: -8754097877449917785
+    second: Ex2_26
+  - first:
+      213: 616853443431148362
+    second: Ex2_27
+  - first:
+      213: -3523269656654313386
+    second: Ex2_28
+  - first:
+      213: 5926562748014746926
+    second: Ex2_29
+  - first:
+      213: 8883832321087038508
+    second: Ex2_30
+  - first:
+      213: 6498306605163289616
+    second: Ex2_31
+  - first:
+      213: -1587613227219766734
+    second: Ex2_32
+  - first:
+      213: -8120484878848700794
+    second: Ex2_33
+  - first:
+      213: 8750565096928592545
+    second: Ex2_34
+  - first:
+      213: 1403973709091273752
+    second: Ex2_35
+  - first:
+      213: 3049514162626734848
+    second: Ex2_36
+  - first:
+      213: 7632166487479919931
+    second: Ex2_37
+  - first:
+      213: 889892071338746144
+    second: Ex2_38
+  - first:
+      213: 8261074916340828904
+    second: Ex2_39
+  - first:
+      213: 2008458766919934686
+    second: Ex2_40
+  - first:
+      213: -604907769371106765
+    second: Ex2_41
+  - first:
+      213: -117990289960591415
+    second: Ex2_42
+  - first:
+      213: -8595563943145126548
+    second: Ex2_43
+  - first:
+      213: 4533229769139791668
+    second: Ex2_44
+  - first:
+      213: 6376174247246777838
+    second: Ex2_45
+  - first:
+      213: 3466447725106282696
+    second: Ex2_46
+  - first:
+      213: 6037310597938480666
+    second: Ex2_47
+  - first:
+      213: -3042713761336370393
+    second: Ex2_48
+  - first:
+      213: 4882457750088444973
+    second: Ex2_49
+  - first:
+      213: -1179457844607131506
+    second: Ex2_0
+  - first:
+      213: 5314230362576096716
+    second: Ex2_1
+  - first:
+      213: 4187936977224182629
+    second: Ex2_2
+  - first:
+      213: -8713214962870730905
+    second: Ex2_3
+  - first:
+      213: -7612694433856779975
+    second: Ex2_4
+  - first:
+      213: -5859911194021591998
+    second: Ex2_5
+  - first:
+      213: -1535263932867968074
+    second: Ex2_6
+  - first:
+      213: 7278817513228119243
+    second: Ex2_7
+  - first:
+      213: 3017732807379577136
+    second: Ex2_8
+  - first:
+      213: 5311839520559077854
+    second: Ex2_9
+  - first:
+      213: -4081706904010864787
+    second: Ex2_10
+  - first:
+      213: -6053570920640471453
+    second: Ex2_11
+  - first:
+      213: 7152705721639498182
+    second: Ex2_12
+  - first:
+      213: 7949772102193801972
+    second: Ex2_13
+  - first:
+      213: -8290861589956757037
+    second: Ex2_14
+  - first:
+      213: 450928813430849097
+    second: Ex2_15
+  - first:
+      213: 8265220424145079906
+    second: Ex2_16
+  - first:
+      213: -4078370856507788160
+    second: Ex2_17
+  - first:
+      213: 2906392857222380373
+    second: Ex2_18
+  - first:
+      213: 4321056633030887571
+    second: Ex2_19
+  - first:
+      213: -5807858342304158851
+    second: Ex2_20
+  - first:
+      213: -5766129577978996069
+    second: Ex2_21
+  - first:
+      213: 7487811098725116284
+    second: Ex2_22
+  - first:
+      213: 7499016629544501013
+    second: Ex2_23
+  - first:
+      213: 2083757207878939365
+    second: Ex2_24
+  - first:
+      213: 8996262918565653628
+    second: Ex2_25
+  - first:
+      213: 7867473722237078931
+    second: Ex2_26
+  - first:
+      213: -555760286359272196
+    second: Ex2_27
+  - first:
+      213: -8957786494404426226
+    second: Ex2_28
+  - first:
+      213: -8030391084265374265
+    second: Ex2_29
+  - first:
+      213: 7171361120342294956
+    second: Ex2_30
+  - first:
+      213: 68077633413099202
+    second: Ex2_31
+  - first:
+      213: -455652811794412816
+    second: Ex2_32
+  - first:
+      213: -7004474195315054044
+    second: Ex2_33
+  - first:
+      213: 6454524750081993095
+    second: Ex2_34
+  - first:
+      213: 4198994715337138368
+    second: Ex2_35
+  - first:
+      213: 2549583860132512665
+    second: Ex2_36
+  - first:
+      213: -214732327354508842
+    second: Ex2_37
+  - first:
+      213: 7685399400103571863
+    second: Ex2_38
+  - first:
+      213: -5221491085016497223
+    second: Ex2_39
+  - first:
+      213: 2240204936092628717
+    second: Ex2_40
+  - first:
+      213: -6924602322047935551
+    second: Ex2_41
+  - first:
+      213: -7094153475479692064
+    second: Ex2_42
+  - first:
+      213: 8290438494832975150
+    second: Ex2_43
+  - first:
+      213: 4287459707032924233
+    second: Ex2_44
+  - first:
+      213: -4258454120860409315
+    second: Ex2_45
+  - first:
+      213: -2021704234269588701
+    second: Ex2_46
+  - first:
+      213: 4592080877154114516
+    second: Ex2_50
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ex2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e80e4a0e659b1afe0800000000000000
+      internalID: -1179457844607131506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ex2_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccd81f7db50ffb940800000000000000
+      internalID: 5314230362576096716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ex2_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56bab2dfd7a8e1a30800000000000000
+      internalID: 4187936977224182629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ex2_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76fb876e721741780800000000000000
+      internalID: -8713214962870730905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ex2_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9398f560fb64a5690800000000000000
+      internalID: -7612694433856779975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ex2_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2440201f0d96daea0800000000000000
+      internalID: -5859911194021591998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ex2_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b38fe45695a1bae0800000000000000
+      internalID: -1535263932867968074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ex2_7
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bccaad4a6fd830560800000000000000
+      internalID: 7278817513228119243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
