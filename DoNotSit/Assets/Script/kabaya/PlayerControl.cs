@@ -129,22 +129,29 @@ public class PlayerControl : MonoBehaviour
         //左スティック
         float turn = Input.GetAxis("Horizontal");
         float up = Input.GetAxis("Vertical");
-        float radian = Mathf.Atan2(up, turn) * Mathf.Rad2Deg - 90;
+        float radian = Mathf.Atan2(turn,up) * -Mathf.Rad2Deg;
+        if (radian < 0)
+        {
+            radian += 360;
+        }
+
+        Debug.Log(radian);
         if (revFlag == false)
         {
             if(turn != 0 || up !=0)
             {
-                Vector3 angle = transform.localEulerAngles;
-                angle.z = radian;
-                transform.localEulerAngles = angle;
+              
+                    Vector3 angle = transform.localEulerAngles;
+                    angle.z = radian;
+                    transform.localEulerAngles = angle;
             }
-           
+
             ////角度調整
-            if (transform.localEulerAngles.z > maxAngleSet && transform.eulerAngles.z <= maxAngleSet + 180.0f)
+            if (transform.localEulerAngles.z > maxAngleSet && transform.localEulerAngles.z < maxAngleSet + 180.0f)
             {
                 transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, maxAngleSet);
             }
-            else if (transform.localEulerAngles.z < minAngleSet && transform.eulerAngles.z >= minAngleSet - 180.0f)
+            else if (transform.localEulerAngles.z < minAngleSet && transform.localEulerAngles.z > minAngleSet - 180.0f)
             {
                 transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, minAngleSet);
             }
@@ -169,16 +176,18 @@ public class PlayerControl : MonoBehaviour
         {
             if (turn != 0 || up != 0)
             {
-                Vector3 angle = transform.localEulerAngles;
-                angle.z = radian;
-                transform.localEulerAngles = angle;
+               
+                    Vector3 angle = transform.localEulerAngles;
+                    angle.z = radian;
+                    transform.localEulerAngles = angle;
+                
             }
             ////角度調整
-            if (transform.localEulerAngles.z > maxAngleSet)
+            if (transform.localEulerAngles.z > maxAngleSet && transform.localEulerAngles.z < maxAngleSet + 180.0f)
             {
                 transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, maxAngleSet);
             }
-            else if (transform.localEulerAngles.z < minAngleSet)
+            else if (transform.localEulerAngles.z < minAngleSet && transform.localEulerAngles.z > minAngleSet - 180.0f)
             {
                 transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, minAngleSet);
             }
