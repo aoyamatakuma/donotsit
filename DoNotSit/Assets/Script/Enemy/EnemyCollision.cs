@@ -32,7 +32,7 @@ public class EnemyCollision : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Bomb")
+        if (col.gameObject.tag == "Bomb" || col.gameObject.tag =="BlowAway")
         {
             Death();
         }
