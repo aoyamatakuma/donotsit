@@ -652,6 +652,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadeOut
       objectReference: {fileID: 0}
+    - target: {fileID: 985631437893514359, guid: b1acbd4931931ca49aaf2004eee088ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 985631437893514379, guid: b1acbd4931931ca49aaf2004eee088ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -967,6 +972,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FadeIn
+      objectReference: {fileID: 0}
+    - target: {fileID: 770964606592112835, guid: 33a41c8c3cbe97743a30e8dee3811c30,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33a41c8c3cbe97743a30e8dee3811c30, type: 3}
