@@ -234,8 +234,6 @@ public class PlayerControl : MonoBehaviour
             maxAngleSet = playerAngle + angleLimit;
             minAngleSet = playerAngle - angleLimit;
         }
-        Debug.Log("最大" + maxAngleSet);
-        Debug.Log("最小" + minAngleSet);
     }
     void Jump()//ジャンプ系
     {
@@ -249,6 +247,9 @@ public class PlayerControl : MonoBehaviour
             currentPlayerState = PlayerState.Attack;
             playerRig.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);//ジャンプする
             playerVec = transform.up * jumpSpeed;
+            //親になる
+            gameObject.transform.parent = null;
+            gameObject.transform.localScale = Scale;
         }
     }
     void ReverseMove()
@@ -293,8 +294,6 @@ public class PlayerControl : MonoBehaviour
                         //オブジェクトを取得
                         hitObject = hit.collider.gameObject;
                     }
-                    //Debug.Log("令の当たる位置" + hitPoint);
-                    //Debug.Log("令の当たってるもの" + hitObject);
                     Debug.DrawRay(transform.position + Vector3.right * (i - 1) / 2, transform.up * rayline, Color.red, 0, true);
 
                 }
@@ -346,7 +345,9 @@ public class PlayerControl : MonoBehaviour
                         currentPlayerState = PlayerState.Normal;
                         SkewBlockRight(col.gameObject);
                         break;
-                    case 8:
+                    case 8://動く床
+                        gameObject.transform.parent = col.gameObject.transform;
+                        coltest();
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         gameObject.transform.Rotate(playerRot);
                         SetAngle();
@@ -624,6 +625,46 @@ public class PlayerControl : MonoBehaviour
                 playerRot = Vector3.forward * 270;
             }
             else if (hitPoint.x <= wa.Width(false).x)
+            {
+                playerRot = Vector3.forward * 90;
+            }
+            else
+            {
+                playerRot = Vector3.forward * 0;
+            }
+        }
+        wallNum = wa.abilityNumber;
+    }
+    private void coltest()
+    {
+        //コンポーネント取得
+        wa = hitObject.GetComponent<WallAbility>();
+        //どの位置にあたったか判定し回転する
+        if (wa.Height(true).y > gameObject.transform.position.y)
+        {
+            if (wa.Height(false).y < gameObject.transform.position.y)
+            {
+                if (gameObject.transform.position.x >= wa.Width(true).x)
+                {
+                    playerRot = Vector3.forward * 270;
+                }
+                else if (gameObject.transform.position.x <= wa.Width(false).x)
+                {
+                    playerRot = Vector3.forward * 90;
+                }
+            }
+            else
+            {
+                playerRot = Vector3.forward * 180;
+            }
+        }
+        else
+        {
+            if (gameObject.transform.position.x >= wa.Width(true).x)
+            {
+                playerRot = Vector3.forward * 270;
+            }
+            else if (gameObject.transform.position.x <= wa.Width(false).x)
             {
                 playerRot = Vector3.forward * 90;
             }
