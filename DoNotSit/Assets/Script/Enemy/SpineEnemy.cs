@@ -26,7 +26,7 @@ public class SpineEnemy : NormalEnemyAI
 
     void OnCollisionEnter(Collision col)
     {
-        base.ReturnBool(col);
+        base.ReturnBoolCollision(col);
 
         if(col.gameObject.CompareTag("Player") && player.currentPlayerState == PlayerState.Attack)
         {

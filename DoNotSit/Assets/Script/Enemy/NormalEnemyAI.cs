@@ -24,12 +24,20 @@ public class NormalEnemyAI : MonoBehaviour
         {
             pos.x -= speed * Time.deltaTime;
         }
-        pos.z = 0;
+   
         transform.position = pos;
     }
 
 
-    public void ReturnBool(Collision col)
+    public void ReturnBoolCollision(Collision col)
+    {
+        if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy"))
+        {
+            isReturn = !isReturn;
+        }
+    }
+
+    public void ReturnBoolTrigger(Collider col)
     {
         if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy"))
         {
