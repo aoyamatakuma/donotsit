@@ -83,6 +83,7 @@ public class PlayerControl : MonoBehaviour
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();
         SetAngle();
+        
     }
 
     // Update is called once per frame
@@ -602,14 +603,11 @@ public class PlayerControl : MonoBehaviour
                 {
                     playerRot = Vector3.forward * 90;
                 }
-
             }
             else
             {
                 playerRot = Vector3.forward * 180;
             }
-
-
         }
         else
         {
