@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2406344737240106391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1639b36f1457b34391cd1ae08683e6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0afc07bb05532ca4d8654ac35dbf7b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pauseUIPrefab: {fileID: 4750909208181677003, guid: 532c6a342364fe040922b6f091f01db6,
