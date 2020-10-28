@@ -6,6 +6,8 @@ public class MoveWall : MonoBehaviour
 {
     public float speed;
     public bool isReturn;
+    public float timer;//タイマー
+    public float returntimer;
     void Start()
     {
         isReturn = false;
@@ -15,27 +17,36 @@ public class MoveWall : MonoBehaviour
     void Update()
     {
         Move(speed);
+        timer += 1.0f * Time.deltaTime;
+        Timer();
     }
 
 
     public void Move(float speed)
     {
         Vector3 pos = transform.position;
-        if (!isReturn)
+        if (isReturn == false)
         {
             pos.x += speed * Time.deltaTime;
         }
-        else
+        else if(isReturn==true)
         {
             pos.x -= speed * Time.deltaTime;
         }
         transform.position = pos;
+       
     }
-    void OnCollisionEnter(Collision col)
+    void Timer()
     {
-        if (col.gameObject.CompareTag("Wall"))
+        if (timer >= returntimer && isReturn == false)
         {
-            isReturn = !isReturn;
+            timer = 0;
+            isReturn = true;
+        }
+        if (timer >= returntimer && isReturn == true)
+        {
+            timer = 0;
+            isReturn = false;
         }
     }
 }
