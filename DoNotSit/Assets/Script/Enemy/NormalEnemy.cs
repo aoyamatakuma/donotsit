@@ -42,7 +42,7 @@ public class NormalEnemy : NormalEnemyAI
     void OnTriggerEnter(Collider col)
     {
         base.ReturnBoolTrigger(col);
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && !isDead)
         {
             PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
             if (player.currentPlayerState == PlayerState.Attack)

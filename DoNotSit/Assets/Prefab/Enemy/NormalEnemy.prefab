@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5838153197173379590}
   - component: {fileID: 5838153197173379645}
   - component: {fileID: 5838153197173379644}
+  - component: {fileID: 1056557925}
   m_Layer: 0
   m_Name: NormalEnemy
   m_TagString: Enemy
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 5838153197173379591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,7 +93,7 @@ BoxCollider:
   m_GameObject: {fileID: 5838153197173379591}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -109,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  damage: 0
+  effect: {fileID: 1172176970729668, guid: 84e6123941d161146a57e90bdcac67cd, type: 3}
 --- !u!54 &5838153197173379645
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,5 +139,23 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Size: {x: 1.1, y: 1.1, z: 1.1}
   m_Center: {x: 0, y: 0.05, z: 0}
+--- !u!114 &1056557925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838153197173379591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c25d48d1cf5f0a345afa1d19a9ec7f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRight: 1
+  burstSpeed: 80
+  effects:
+  - {fileID: 1943103879558080, guid: 8d277c0bf1ac86248b897b30036ab895, type: 3}
+  - {fileID: 1827235202747734, guid: 2ca619e9040ef274fbc38909f408a3bd, type: 3}
+  - {fileID: 1546879662442704, guid: f08fd0a4af98f7941bc18b7ede81cd29, type: 3}

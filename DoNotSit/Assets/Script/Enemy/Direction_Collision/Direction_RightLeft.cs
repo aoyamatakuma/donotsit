@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Direction_RightLeft : MonoBehaviour
 {
+    public bool isRight;
     bool isBurst;
     public float burstSpeed;
     private CameraShakeScript camera;
     public List<GameObject> effects;
-
+    Vector3 dir;
     GameObject playerObj;
     void Start()
     {
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
+        RandomDirection();
     }
 
     void Update()
@@ -28,7 +30,15 @@ public class Direction_RightLeft : MonoBehaviour
             return;
         }
 
-        transform.position += transform.right * burstSpeed * Time.deltaTime;
+        if (isRight)
+        {
+            transform.position += (transform.right + dir) * burstSpeed * Time.deltaTime;
+        }
+        else
+        {
+            transform.position += (-transform.right + dir) * burstSpeed * Time.deltaTime;
+        }
+       
     }
 
     void OnTriggerEnter(Collider col)
@@ -69,5 +79,12 @@ public class Direction_RightLeft : MonoBehaviour
         Instantiate(effects[num], transform.position, transform.rotation);
         effects[num].GetComponent<AudioSource>().Play();
         Destroy(gameObject);
+    }
+
+    void RandomDirection()
+    {
+        float num = Random.Range(0f, 1f);
+        dir = new Vector3(0f, num, 0f);
+        Debug.Log(dir);
     }
 }
