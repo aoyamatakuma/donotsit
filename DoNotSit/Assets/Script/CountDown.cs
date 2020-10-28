@@ -6,7 +6,7 @@ public class CountDown : MonoBehaviour
 {
     public List<GameObject> count;
     public PlayerControl player;
-    public GameObject timerObj;
+    public GameObject hpObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,7 @@ public class CountDown : MonoBehaviour
     IEnumerator CountCoroutine()
     {
         player.enabled = false;
-        timerObj.SetActive(false);
+        hpObj.SetActive(false);
         for (int i = 0; i < count.Count; i++) 
         {
             count[i].SetActive(true);
@@ -30,6 +30,6 @@ public class CountDown : MonoBehaviour
             count[i].SetActive(false);
         }
         player.enabled = true;
-        timerObj.SetActive(true);
+        hpObj.SetActive(true);
     }
 }
