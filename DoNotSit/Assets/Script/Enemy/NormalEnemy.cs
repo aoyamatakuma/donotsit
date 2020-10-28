@@ -47,7 +47,7 @@ public class NormalEnemy : NormalEnemyAI
             PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
             if (player.currentPlayerState == PlayerState.Attack)
             {
-               
+                gameObject.tag = "BlowAway";
                 Hit();
                 isDead = true;
             }
@@ -60,6 +60,7 @@ public class NormalEnemy : NormalEnemyAI
 
         if(col.gameObject.tag == "Bomb")
         {
+            gameObject.tag = "BlowAway";
             Hit();
             isDead = true;
         }
