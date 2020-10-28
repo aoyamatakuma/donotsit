@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
-    public float damage;
+    public int damage;
     private CameraShakeScript camera;
     public List<GameObject> effects;
 

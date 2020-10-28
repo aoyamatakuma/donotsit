@@ -6,7 +6,7 @@ public class NormalEnemy : NormalEnemyAI
 {
     public float speed;
     bool isDead;
-    public float damage;
+    public int damage;
     public GameObject effect;
     void Start()
     {
