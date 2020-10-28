@@ -6,12 +6,15 @@ public class Direction_Forward : MonoBehaviour
 {
     bool isBurst;
     public float burstSpeed;
+    public float lifeTime;
     private CameraShakeScript camera;
     public List<GameObject> effects;
+    float cnt;
     Renderer render;
 
     void Start()
     {
+        cnt = 0;
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         render = GetComponent<Renderer>();
@@ -20,7 +23,7 @@ public class Direction_Forward : MonoBehaviour
     void Update()
     {
         Move();
-        if (!render.isVisible && isBurst)
+        if(cnt > lifeTime)
         {
             Death();
         }
@@ -32,6 +35,7 @@ public class Direction_Forward : MonoBehaviour
         {
             return;
         }
+        cnt += Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(camera.transform.position.x,
             camera.transform.position.y,
             camera.transform.position.z), burstSpeed);
