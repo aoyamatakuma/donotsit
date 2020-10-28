@@ -353,6 +353,9 @@ public class PlayerControl : MonoBehaviour
                         SetAngle();
                         currentPlayerState = PlayerState.Normal;
                         break;
+                    case 9://デスエリア
+                        fade.StartFadeIn("GameOver", false);
+                        break;
                     default:
                         break;
                 }
