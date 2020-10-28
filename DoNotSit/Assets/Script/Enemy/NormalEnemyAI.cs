@@ -33,14 +33,16 @@ public class NormalEnemyAI : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy"))
         {
+            transform.Rotate(0, 180, 0);
             isReturn = !isReturn;
         }
     }
 
     public void ReturnBoolTrigger(Collider col)
     {
-        if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy") )
         {
+            transform.Rotate(0, 180, 0);
             isReturn = !isReturn;
         }
     }
