@@ -39,9 +39,11 @@ public class PlayerControl : MonoBehaviour
     public int level = 1;//レベル
                          //  public int speedCount;//連続用
     public int exp;//経験値
+    public int hp;
     public Text comboText;
     public Text levelText;//レベルテキスト
     public Text expText;
+    public Text hpText;
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
@@ -108,15 +110,16 @@ public class PlayerControl : MonoBehaviour
         //タイマー
         timer -= 1.0f * Time.deltaTime;
         comboText.text = combo.ToString();//コンボ
+        hpText.text = "HP:" + hp.ToString();
         //if (SceneManager.GetActiveScene().name == "Stage2")
         //{ 
-            //levelText.text = "Level:" + level.ToString();
-            //expText.text = "Exp:" + exp.ToString();
+        //levelText.text = "Level:" + level.ToString();
+        //expText.text = "Exp:" + exp.ToString();
         //}
         Combo();//コンボ関連
         ReverseMove();//反転スティック
 
-        if (timer <= 0)
+        if (hp <= 0)
         {
             fade.StartFadeIn("GameOver", false);
         }
@@ -379,7 +382,6 @@ public class PlayerControl : MonoBehaviour
                 case 4://とげ
                     restratFlag = true;
                     StartCoroutine("ThornTime");
-                    Debug.Log("togeHit");
                     break;
                 case 5://斜めの反射
                     SkewRefrect(col.gameObject);
@@ -435,7 +437,7 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         if (restratFlag == true)
         {
-            timer -= 5.0f;
+           hp--;
         }
         restratFlag = false;
         currentPlayerState = PlayerState.Stop;
