@@ -2,16 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCollision : MonoBehaviour
+public class Direction_RightLeft : MonoBehaviour
 {
-    public float damage;
+    bool isBurst;
+    public float burstSpeed;
     private CameraShakeScript camera;
     public List<GameObject> effects;
 
+    GameObject playerObj;
     void Start()
     {
+        isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
-      
+    }
+
+    void Update()
+    {
+        Move();
+    }
+
+    void Move()
+    {
+        if (!isBurst)
+        {
+            return;
+        }
+
+        transform.position += transform.right * burstSpeed * Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider col)
@@ -21,18 +38,26 @@ public class EnemyCollision : MonoBehaviour
             PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
             if (player.currentPlayerState == PlayerState.Attack)
             {
-                Death();
-            }
-            else
-            {
-                player.Damage(damage);
+                //playerObj = col.gameObject;
+                isBurst = true;
+                camera.Shake(camera.durations, camera.magnitudes);
             }
         }
-    }
 
-    void OnTriggerStay(Collider col)
-    {
         if (col.gameObject.tag == "Bomb")
+        {
+            isBurst = true;
+            camera.Shake(camera.durations, camera.magnitudes);
+        }
+
+        if ((col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy") && isBurst)
+        {
+            Death();
+        }
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "BackObj" && isBurst)
         {
             Death();
         }
@@ -41,11 +66,8 @@ public class EnemyCollision : MonoBehaviour
     void Death()
     {
         int num = Random.Range(0, effects.Count);
-        camera.Shake(camera.durations, camera.magnitudes);
         Instantiate(effects[num], transform.position, transform.rotation);
         effects[num].GetComponent<AudioSource>().Play();
         Destroy(gameObject);
     }
-
-
 }
