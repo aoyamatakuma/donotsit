@@ -29,7 +29,6 @@ public class MoveWall : MonoBehaviour
         {
             pos.x -= speed * Time.deltaTime;
         }
-        pos.z = 0;
         transform.position = pos;
     }
     void OnCollisionEnter(Collision col)
