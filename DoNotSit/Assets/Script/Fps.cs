@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fps : MonoBehaviour
+public class Fps : MonoBehaviour
 {
+    static int targetFrameRate;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Application.targetFrameRate = 60; //60FPSで固定する
+        Application.targetFrameRate = 60; //FPSを60に設定 
     }
 
     // Update is called once per frame
