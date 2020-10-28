@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3135584694750805339}
   - component: {fileID: 3135584694750805338}
   m_Layer: 0
-  m_Name: WallBlock
+  m_Name: MoveBlock
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,6 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   isReturn: 0
+  timer: 0
+  returntimer: 5
 --- !u!54 &3135584694750805338
 Rigidbody:
   m_ObjectHideFlags: 0
