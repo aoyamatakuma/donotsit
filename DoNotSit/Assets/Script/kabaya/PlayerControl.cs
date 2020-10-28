@@ -345,6 +345,12 @@ public class PlayerControl : MonoBehaviour
                         currentPlayerState = PlayerState.Normal;
                         SkewBlockRight(col.gameObject);
                         break;
+                    case 8:
+                        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                        gameObject.transform.Rotate(playerRot);
+                        SetAngle();
+                        currentPlayerState = PlayerState.Normal;
+                        break;
                     default:
                         break;
                 }
@@ -428,9 +434,9 @@ public class PlayerControl : MonoBehaviour
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, -90);
         gameObject.transform.Rotate(Vector3.forward * (-45 - a));
     }
-    public void Damage(float damage)
+    public void Damage(int damage)
     {
-        timer -= damage;
+        hp -= damage;
     }
     IEnumerator ThornTime()
     {
