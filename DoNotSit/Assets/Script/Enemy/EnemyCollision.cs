@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
-    public float damage;
+    public int damage;
     private CameraShakeScript camera;
     public List<GameObject> effects;
 
@@ -32,7 +32,7 @@ public class EnemyCollision : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Bomb")
+        if (col.gameObject.tag == "Bomb" || col.gameObject.tag =="BlowAway")
         {
             Death();
         }
@@ -41,7 +41,6 @@ public class EnemyCollision : MonoBehaviour
     void Death()
     {
         int num = Random.Range(0, effects.Count);
-        Debug.Log(num);
         camera.Shake(camera.durations, camera.magnitudes);
         Instantiate(effects[num], transform.position, transform.rotation);
         effects[num].GetComponent<AudioSource>().Play();
