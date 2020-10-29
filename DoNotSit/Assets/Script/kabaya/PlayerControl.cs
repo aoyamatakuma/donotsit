@@ -301,7 +301,7 @@ public class PlayerControl : MonoBehaviour
         float a = 1000;
         for (int i = 0; i < 3; i++)
         {
-            ray = new Ray(transform.position + Vector3.right * (i - 1) / 2, transform.up);
+            ray = new Ray(transform.position +Vector3.right*(i - 1)*1.6f, transform.up);
             //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
             if (Physics.Raycast(ray, out hit, rayline)) //壁がある時
             {
@@ -319,8 +319,9 @@ public class PlayerControl : MonoBehaviour
                         hitPoint = hit.point;
                         //オブジェクトを取得
                         hitObject = hit.collider.gameObject;
+                        vecTest();
                     }
-                    Debug.DrawRay(transform.position + Vector3.right * (i - 1) / 2, transform.up * rayline, Color.red, 0, true);                   
+                    Debug.DrawRay(transform.position +(transform.up+ Vector3.right) * 1.6f * (i - 1), transform.up * rayline, Color.red, 0, true);                   
                 }
             }
             else //壁がない時
@@ -631,21 +632,27 @@ public class PlayerControl : MonoBehaviour
         //どの位置にあたったか判定し回転する
         if (wa.Height(true).y > hitPoint.y)
         {
-            if (wa.Height(false).y < hitPoint.y)
+            if (hitPoint.x > wa.Width(true).x)
             {
-                if (hitPoint.x > wa.Width(true).x)
-                {
-                    playerRot = Vector3.forward * 270;
-                }
-                else if (hitPoint.x < wa.Width(false).x)
-                {
-                    playerRot = Vector3.forward * 90;
-                }
+                playerRot = Vector3.forward * 270;
+            }
+            else if (hitPoint.x < wa.Width(false).x)
+            {
+                playerRot = Vector3.forward * 90;
             }
             else
             {
                 playerRot = Vector3.forward * 180;
             }
+
+            //if ((int)wa.Height(false).y<(int)hitPoint.y)
+            //{
+               
+            //}
+            //else
+            //{
+            //    playerRot = Vector3.forward * 180;
+            //}
         }
         else
         {
@@ -671,7 +678,7 @@ public class PlayerControl : MonoBehaviour
         //どの位置にあたったか判定し回転する
         if (wa.Height(true).y > gameObject.transform.position.y)
         {
-            if (wa.Height(false).y < gameObject.transform.position.y)
+            if ((int)wa.Height(false).y <= (int)gameObject.transform.position.y)
             {
                 if (gameObject.transform.position.x > wa.Width(true).x)
                 {
@@ -680,6 +687,10 @@ public class PlayerControl : MonoBehaviour
                 else if (gameObject.transform.position.x < wa.Width(false).x)
                 {
                     playerRot = Vector3.forward * 90;
+                }
+                else
+                {
+                    playerRot = Vector3.forward * 180;
                 }
             }
             else
@@ -705,12 +716,52 @@ public class PlayerControl : MonoBehaviour
         wallNum = wa.abilityNumber;
     }
 
+    private void vecTest()
+    {
+        wa = hitObject.GetComponent<WallAbility>();
+        //どの位置にあたったか判定し回転する
+        if (wa.Height(true).y > hitPoint.y)
+        {
+            if (hitPoint.x > wa.Width(true).x)
+            {
+                Debug.Log("Right");
+            }
+            else if (hitPoint.x < wa.Width(false).x)
+            {
+                Debug.Log("Left");
+            }
+            else
+            {
+                Debug.Log("Down");
+            }
+        }
+        else
+        {
+            if (hitPoint.x > wa.Width(true).x)
+            {
+                Debug.Log("みぎ");
+            }
+            else if (hitPoint.x < wa.Width(false).x)
+            {
+                Debug.Log("ひだり");
+            }
+            else
+            {
+                Debug.Log("Up");
+            }
+        }
+    }
+
     private void PlayerWallMove()
     {
         if(moveWall!=null)
         {
             MoveWall mw = moveWall.GetComponent<MoveWall>();
             mw.Move(gameObject,mw.speed);
+        }
+        else
+        {
+
         }
     }
     private void Carsolmove()
