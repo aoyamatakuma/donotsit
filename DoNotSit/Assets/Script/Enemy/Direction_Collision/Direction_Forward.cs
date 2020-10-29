@@ -5,18 +5,24 @@ using UnityEngine;
 public class Direction_Forward : MonoBehaviour
 {
     bool isBurst;
-    public float burstSpeed;
+    public float maxBurstSpeed;
+    public float minBurstSpeed;
+    private float burstSpeed;
     public float lifeTime;
-    private CameraShakeScript camera;
+    private GameObject camera;
     public List<GameObject> effects;
     float cnt;
     Renderer render;
+    PlayerControl player;
+    public int score;
 
     void Start()
     {
         cnt = 0;
         isBurst = false;
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
+        burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         render = GetComponent<Renderer>();
     }
 
@@ -35,7 +41,9 @@ public class Direction_Forward : MonoBehaviour
         {
             return;
         }
+       
         cnt += Time.deltaTime;
+
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(camera.transform.position.x,
             camera.transform.position.y,
             camera.transform.position.z), burstSpeed);
@@ -43,20 +51,22 @@ public class Direction_Forward : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
+        CameraShakeScript cam = camera.GetComponent<CameraShakeScript>();
         if (col.gameObject.tag == "Player")
         {
-            PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
             if (player.currentPlayerState == PlayerState.Attack)
             {
+                player.Score(score);
                 isBurst = true;
-                camera.Shake(camera.durations, camera.magnitudes);
+                cam.Shake(cam.durations, cam.magnitudes);
             }
         }
 
-        if (col.gameObject.tag == "Bomb")
+        if (col.gameObject.tag == "Bomb" || col.gameObject.tag == "BlowAway")
         {
+            player.Score(score);
             isBurst = true;
-            camera.Shake(camera.durations, camera.magnitudes);
+            cam.Shake(cam.durations, cam.magnitudes);
         }
 
     }

@@ -37,6 +37,7 @@ public class PlayerControl : MonoBehaviour
     public float combo;//コンボ
     public float rayline;//レイ長さ
     public int level = 1;//レベル
+    public static int scoreNumber;
                          //  public int speedCount;//連続用
     public int exp;//経験値
     public int hp;
@@ -44,6 +45,7 @@ public class PlayerControl : MonoBehaviour
     public Text levelText;//レベルテキスト
     public Text expText;
     public Text hpText;
+    public Text scoreText;
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
@@ -88,6 +90,7 @@ public class PlayerControl : MonoBehaviour
         currentPlayerState = PlayerState.Normal;
         Scale = gameObject.transform.lossyScale;
         timer = starttimer;
+        scoreNumber = 0;
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();            
         SetAngle();
@@ -118,9 +121,10 @@ public class PlayerControl : MonoBehaviour
             playerRig.velocity = Vector3.zero;
         }
         //タイマー
-        timer -= 1.0f * Time.deltaTime;
+        timer += 1.0f * Time.deltaTime;
         comboText.text = combo.ToString();//コンボ
         hpText.text = "HP:" + hp.ToString();
+        scoreText.text =  scoreNumber.ToString();
         //if (SceneManager.GetActiveScene().name == "Stage2")
         //{ 
         //levelText.text = "Level:" + level.ToString();
@@ -292,6 +296,10 @@ public class PlayerControl : MonoBehaviour
     public static float TimeScore()
     {
         return timer;
+    }
+    public static int ClearScore()
+    {
+        return scoreNumber;
     }
     //壁があるない
     void RayObject()
@@ -469,6 +477,10 @@ public class PlayerControl : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
+    }
+    public void Score(int score)
+    {
+        scoreNumber += score;
     }
     IEnumerator ThornTime()
     {
