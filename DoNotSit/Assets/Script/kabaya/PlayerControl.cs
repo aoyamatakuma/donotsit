@@ -97,7 +97,8 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
+        
         //ノーマルステート
         if (currentPlayerState == PlayerState.Normal)//ノーマル
         {
@@ -149,7 +150,7 @@ public class PlayerControl : MonoBehaviour
                 select = true;
             }
         }
-
+        Carsolmove();
     }
     void Move()//移動系
     {
@@ -714,8 +715,6 @@ public class PlayerControl : MonoBehaviour
     }
     private void Carsolmove()
     {
-        carsol.transform.position = gameObject.transform.position;
-        carsol.transform.rotation = gameObject.transform.rotation;
-        Vector3 dis = hitPoint - carsol.transform.position;
+        carsol.transform.position = hitPoint;
     }
 }
