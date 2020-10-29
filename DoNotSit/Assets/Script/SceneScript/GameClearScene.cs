@@ -27,7 +27,7 @@ public class GameClearScene : MonoBehaviour
         goaltimer = PlayerControl.TimeScore();
         goalscore = PlayerControl.ClearScore();
         goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
-        goalScoreText.text = "Score:" + goaltimer.ToString() ;//ゴールスコア
+        goalScoreText.text = "Score:" + goalscore.ToString() ;//ゴールスコア
         fade = GetComponent<Fade>();
     }
 
