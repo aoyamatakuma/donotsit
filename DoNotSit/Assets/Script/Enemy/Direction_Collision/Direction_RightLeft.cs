@@ -6,7 +6,9 @@ public class Direction_RightLeft : MonoBehaviour
 {
     public bool isRight;
     bool isBurst;
-    public float burstSpeed;
+    public float maxBurstSpeed;
+    public float minBurstSpeed;
+    private float burstSpeed;
     private CameraShakeScript camera;
     public List<GameObject> effects;
     Vector3 dir;
@@ -15,6 +17,7 @@ public class Direction_RightLeft : MonoBehaviour
     {
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
+        burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
         RandomDirection();
     }
 
