@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5811225546889869072}
   - component: {fileID: 8593265637270963162}
   - component: {fileID: 6563571967898774700}
-  - component: {fileID: 6563571967898774699}
   - component: {fileID: 6563571967898774698}
   - component: {fileID: 5696727231918616108}
+  - component: {fileID: 6198558541781621039}
   m_Layer: 0
   m_Name: DirectionRightLeftEnemy
   m_TagString: Enemy
@@ -32,7 +32,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 5, y: 5, z: 5}
-  m_Children: []
+  m_Children:
+  - {fileID: 964768530303956172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -101,20 +102,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &6563571967898774699
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7800680824737948175}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.6
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0.01010412, y: 0.18340492, z: -0.021878436}
 --- !u!114 &6563571967898774698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  rayPos: {fileID: 8162986243600103952}
   damage: 1
   effect: {fileID: 1172176970729668, guid: 84e6123941d161146a57e90bdcac67cd, type: 3}
 --- !u!114 &5696727231918616108
@@ -149,3 +137,46 @@ MonoBehaviour:
   - {fileID: 1943103879558080, guid: 8d277c0bf1ac86248b897b30036ab895, type: 3}
   - {fileID: 1827235202747734, guid: 2ca619e9040ef274fbc38909f408a3bd, type: 3}
   - {fileID: 1546879662442704, guid: f08fd0a4af98f7941bc18b7ede81cd29, type: 3}
+--- !u!65 &6198558541781621039
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7800680824737948175}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2708888, y: 0.75597274, z: 0.7476672}
+  m_Center: {x: 0.01010412, y: 0.3, z: -0.021878436}
+--- !u!1 &8162986243600103952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 964768530303956172}
+  m_Layer: 0
+  m_Name: RayPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &964768530303956172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8162986243600103952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7424823136010680501}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

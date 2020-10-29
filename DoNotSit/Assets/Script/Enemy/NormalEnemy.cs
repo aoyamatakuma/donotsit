@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalEnemy : NormalEnemyAI
 {
     public float speed;
+    public GameObject rayPos;
     bool isDead;
     public int damage;
     public GameObject effect;
@@ -13,29 +14,26 @@ public class NormalEnemy : NormalEnemyAI
         isDead = false;
         enemyState = EnemyState.Move;
         isReturn = false;
+        isTouch = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("触っているか" + isTouch);
         if (!isDead)
         {
             base.Move(speed);
+            base.TouchGround(rayPos.transform);
+            base.Return_Ground();
         }
 
     }
 
 
-    void OnCollisionEnter(Collision col)
-    {
-        // base.ReturnBoolCollision(col);
-
-      
-    }
-
+  
     void Hit()
-    {
-      
+    { 
         Instantiate(effect, transform.position, transform.rotation);
     }
 
@@ -58,13 +56,29 @@ public class NormalEnemy : NormalEnemyAI
 
         }
 
-        if(col.gameObject.tag == "Bomb")
+        if(col.gameObject.tag == "Bomb" || col.gameObject.tag=="BlowAway")
         {
             gameObject.tag = "BlowAway";
             Hit();
             isDead = true;
         }
     }
+
+    //void OnTriggerStay(Collision col)
+    //{
+    //    if(col.gameObject.tag == "Wall")
+    //    {
+    //        isTouch = true;
+    //    }
+    //}
+
+    //void OnTriggerExit(Collision col)
+    //{
+    //    if (col.gameObject.tag == "Wall")
+    //    {
+    //        isTouch = false;
+    //    }
+    //}
 
 
 }
