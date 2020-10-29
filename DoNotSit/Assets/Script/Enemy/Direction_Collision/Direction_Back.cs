@@ -10,13 +10,15 @@ public class Direction_Back: MonoBehaviour
     float burstSpeed;
     private CameraShakeScript camera;
     public List<GameObject> effects;
-
+    PlayerControl player;
+    public int score;
 
     void Start()
     {
         burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
 
     void Update()
@@ -41,8 +43,7 @@ public class Direction_Back: MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         if(col.gameObject.tag == "Player" )
-        {
-            PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
+        {        
             if(player.currentPlayerState == PlayerState.Attack)
             {
                 isBurst = true;
@@ -58,6 +59,7 @@ public class Direction_Back: MonoBehaviour
 
         if(col.gameObject.tag == "BackObj" && isBurst)
         {
+           
             Death();
         }
     }
@@ -71,6 +73,7 @@ public class Direction_Back: MonoBehaviour
 
     void Death()
     {
+        player.Score(score);
         int num = Random.Range(0, effects.Count);
         Instantiate(effects[num], transform.position, transform.rotation);
         effects[num].GetComponent<AudioSource>().Play();

@@ -166,6 +166,7 @@ MonoBehaviour:
   - {fileID: 1943103879558080, guid: 8d277c0bf1ac86248b897b30036ab895, type: 3}
   - {fileID: 1827235202747734, guid: 2ca619e9040ef274fbc38909f408a3bd, type: 3}
   - {fileID: 1546879662442704, guid: f08fd0a4af98f7941bc18b7ede81cd29, type: 3}
+  score: 200
 --- !u!65 &619625693012897184
 BoxCollider:
   m_ObjectHideFlags: 0

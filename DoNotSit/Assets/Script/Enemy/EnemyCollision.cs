@@ -7,18 +7,20 @@ public class EnemyCollision : MonoBehaviour
     public int damage;
     private CameraShakeScript camera;
     public List<GameObject> effects;
+    public int score;
+    PlayerControl player;
 
     void Start()
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
-      
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
+           
             if (player.currentPlayerState == PlayerState.Attack)
             {
                 Death();
@@ -40,6 +42,7 @@ public class EnemyCollision : MonoBehaviour
 
     void Death()
     {
+        player.Score(score);
         int num = Random.Range(0, effects.Count);
         camera.Shake(camera.durations, camera.magnitudes);
         Instantiate(effects[num], transform.position, transform.rotation);

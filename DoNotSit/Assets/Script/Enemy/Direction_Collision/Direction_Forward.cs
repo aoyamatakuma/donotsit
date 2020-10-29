@@ -13,6 +13,8 @@ public class Direction_Forward : MonoBehaviour
     public List<GameObject> effects;
     float cnt;
     Renderer render;
+    PlayerControl player;
+    public int score;
 
     void Start()
     {
@@ -20,6 +22,7 @@ public class Direction_Forward : MonoBehaviour
         isBurst = false;
         burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         render = GetComponent<Renderer>();
     }
 
@@ -51,9 +54,9 @@ public class Direction_Forward : MonoBehaviour
         CameraShakeScript cam = camera.GetComponent<CameraShakeScript>();
         if (col.gameObject.tag == "Player")
         {
-            PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
             if (player.currentPlayerState == PlayerState.Attack)
             {
+                player.Score(score);
                 isBurst = true;
                 cam.Shake(cam.durations, cam.magnitudes);
             }
@@ -61,6 +64,7 @@ public class Direction_Forward : MonoBehaviour
 
         if (col.gameObject.tag == "Bomb" || col.gameObject.tag == "BlowAway")
         {
+            player.Score(score);
             isBurst = true;
             cam.Shake(cam.durations, cam.magnitudes);
         }

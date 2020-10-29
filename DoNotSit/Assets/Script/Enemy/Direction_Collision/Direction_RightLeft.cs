@@ -13,10 +13,13 @@ public class Direction_RightLeft : MonoBehaviour
     public List<GameObject> effects;
     Vector3 dir;
     GameObject playerObj;
+    PlayerControl player;
+    public int score;
     void Start()
     {
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
         RandomDirection();
     }
@@ -48,10 +51,8 @@ public class Direction_RightLeft : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
             if (player.currentPlayerState == PlayerState.Attack)
             {
-                //playerObj = col.gameObject;
                 isBurst = true;
                 camera.Shake(camera.durations, camera.magnitudes);
             }
@@ -78,6 +79,7 @@ public class Direction_RightLeft : MonoBehaviour
 
     void Death()
     {
+        player.Score(score);
         int num = Random.Range(0, effects.Count);
         Instantiate(effects[num], transform.position, transform.rotation);
         effects[num].GetComponent<AudioSource>().Play();
