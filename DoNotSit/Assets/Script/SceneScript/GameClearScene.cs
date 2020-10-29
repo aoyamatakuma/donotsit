@@ -13,7 +13,9 @@ public class GameClearScene : MonoBehaviour
     public AudioClip selectSE;
     public AudioClip moveSE;
     public Text goalTimeText;
+    public Text goalScoreText;
     float goaltimer;
+    int goalscore;
     bool isPush;
     Fade fade;
     // Start is called before the first frame update
@@ -23,7 +25,9 @@ public class GameClearScene : MonoBehaviour
         audio = GetComponent<AudioSource>();
         select = true;
         goaltimer = PlayerControl.TimeScore();
+        goalscore = PlayerControl.ClearScore();
         goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
+        goalScoreText.text = "Score:" + goaltimer.ToString() ;//ゴールスコア
         fade = GetComponent<Fade>();
     }
 

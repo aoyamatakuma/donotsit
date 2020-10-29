@@ -45,6 +45,7 @@ public class PlayerControl : MonoBehaviour
     public Text levelText;//レベルテキスト
     public Text expText;
     public Text hpText;
+    public Text scoreText;
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
@@ -123,6 +124,7 @@ public class PlayerControl : MonoBehaviour
         timer += 1.0f * Time.deltaTime;
         comboText.text = combo.ToString();//コンボ
         hpText.text = "HP:" + hp.ToString();
+        scoreText.text =  scoreNumber.ToString();
         //if (SceneManager.GetActiveScene().name == "Stage2")
         //{ 
         //levelText.text = "Level:" + level.ToString();

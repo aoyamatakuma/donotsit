@@ -8000,6 +8000,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1767692402}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &212679341 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 212679341, guid: a28a62aed92154b4f8760e097fe4e9bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 774535022}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &214749951
 GameObject:
   m_ObjectHideFlags: 0
@@ -44010,6 +44016,11 @@ PrefabInstance:
       propertyPath: carsol
       value: 
       objectReference: {fileID: 1198491102}
+    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -82594,6 +82605,11 @@ PrefabInstance:
       propertyPath: hpObj
       value: 
       objectReference: {fileID: 1222805301}
+    - target: {fileID: 8562626750496865542, guid: d9bc91f2626f38442b201b7d12056071,
+        type: 3}
+      propertyPath: scObj
+      value: 
+      objectReference: {fileID: 212679341}
     - target: {fileID: 8562626750496865543, guid: d9bc91f2626f38442b201b7d12056071,
         type: 3}
       propertyPath: m_Name

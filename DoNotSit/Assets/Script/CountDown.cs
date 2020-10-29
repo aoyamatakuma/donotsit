@@ -7,6 +7,7 @@ public class CountDown : MonoBehaviour
     public List<GameObject> count;
     public PlayerControl player;
     public GameObject hpObj;
+    public GameObject scObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class CountDown : MonoBehaviour
     {
         player.enabled = false;
         hpObj.SetActive(false);
+        scObj.SetActive(false);
         for (int i = 0; i < count.Count; i++) 
         {
             count[i].SetActive(true);
@@ -31,5 +33,6 @@ public class CountDown : MonoBehaviour
         }
         player.enabled = true;
         hpObj.SetActive(true);
+        scObj.SetActive(true);
     }
 }
