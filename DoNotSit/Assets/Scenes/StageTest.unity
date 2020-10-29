@@ -43976,6 +43976,11 @@ PrefabInstance:
       propertyPath: carsol
       value: 
       objectReference: {fileID: 1198491102}
+    - target: {fileID: 5840411550740238893, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: m_LocalPosition.x
