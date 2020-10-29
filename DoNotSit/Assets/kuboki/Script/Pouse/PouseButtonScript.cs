@@ -36,6 +36,7 @@ public class PouseButtonScript : MonoBehaviour
             else
             {
                 SceneManager.LoadScene("Title");
+                Time.timeScale = 1;
                // fade.StartFadeIn("Title", true);
             }
         }
