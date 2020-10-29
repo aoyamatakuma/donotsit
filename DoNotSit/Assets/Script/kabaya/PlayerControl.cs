@@ -37,7 +37,7 @@ public class PlayerControl : MonoBehaviour
     public float combo;//コンボ
     public float rayline;//レイ長さ
     public int level = 1;//レベル
-    public static int score;
+    public static int scoreNumber;
                          //  public int speedCount;//連続用
     public int exp;//経験値
     public int hp;
@@ -89,7 +89,7 @@ public class PlayerControl : MonoBehaviour
         currentPlayerState = PlayerState.Normal;
         Scale = gameObject.transform.lossyScale;
         timer = starttimer;
-        score = 0;
+        scoreNumber = 0;
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();            
         SetAngle();
@@ -295,6 +295,10 @@ public class PlayerControl : MonoBehaviour
     {
         return timer;
     }
+    public static int ClearScore()
+    {
+        return scoreNumber;
+    }
     //壁があるない
     void RayObject()
     {
@@ -470,6 +474,10 @@ public class PlayerControl : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
+    }
+    public void Score(int score)
+    {
+        scoreNumber += score;
     }
     IEnumerator ThornTime()
     {
