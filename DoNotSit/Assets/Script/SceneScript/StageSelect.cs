@@ -15,10 +15,12 @@ public class StageSelect : MonoBehaviour
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
+    bool isPush;
     Fade fade;
     // Start is called before the first frame update
     void Start()
     {
+        isPush = false;
         selectNum = 0;
         Select();
         audio = GetComponent<AudioSource>();
@@ -30,8 +32,9 @@ public class StageSelect : MonoBehaviour
     {
 
         SelectMove();
-        if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
+        if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
+            isPush = true;
             audio.PlayOneShot(selectSE);
             // SceneManager.LoadScene("Stage" + selectNum + 1);
             if (selectNum == 0)

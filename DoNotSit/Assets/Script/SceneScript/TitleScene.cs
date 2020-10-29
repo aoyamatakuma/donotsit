@@ -12,11 +12,13 @@ public class TitleScene : MonoBehaviour
     public AudioClip moveSE;
     public AudioClip selectSE;
     AudioSource audio;
+    bool isPush;
 
     Fade fade;
     // Start is called before the first frame update
     void Start()
     {
+        isPush = false;
         Time.timeScale = 1.0f;
         select = true;
         audio = GetComponent<AudioSource>();
@@ -27,8 +29,9 @@ public class TitleScene : MonoBehaviour
     void Update()
     {
         Select();
-        if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
+        if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump") )&& !isPush)
         {
+            isPush = true;
             audio.PlayOneShot(selectSE);
             if (select)
             {
@@ -38,7 +41,7 @@ public class TitleScene : MonoBehaviour
             {
                 Quit();
             }
-
+           
         }
     }
 

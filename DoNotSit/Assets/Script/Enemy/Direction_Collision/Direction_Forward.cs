@@ -59,7 +59,7 @@ public class Direction_Forward : MonoBehaviour
             }
         }
 
-        if (col.gameObject.tag == "Bomb")
+        if (col.gameObject.tag == "Bomb" || col.gameObject.tag == "BlowAway")
         {
             isBurst = true;
             cam.Shake(cam.durations, cam.magnitudes);
