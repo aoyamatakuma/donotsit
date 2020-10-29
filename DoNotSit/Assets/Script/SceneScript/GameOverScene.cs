@@ -12,10 +12,12 @@ public class GameOverScene : MonoBehaviour
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
+    bool isPush;
     Fade fade;
     // Start is called before the first frame update
     void Start()
     {
+        isPush = false;
         select = true;
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
@@ -25,8 +27,9 @@ public class GameOverScene : MonoBehaviour
     void Update()
     {
         Select();
-        if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
+        if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
+            isPush = true;
             audio.PlayOneShot(selectSE);
             if (select)
             {
