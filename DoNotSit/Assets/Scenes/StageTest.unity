@@ -44005,6 +44005,11 @@ PrefabInstance:
       propertyPath: hpText
       value: 
       objectReference: {fileID: 1222805303}
+    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: angleSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: m_LocalPosition.x
