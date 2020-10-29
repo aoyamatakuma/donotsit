@@ -5,13 +5,16 @@ using UnityEngine;
 public class Direction_Back: MonoBehaviour
 {
     bool isBurst;
-    public float burstSpeed;
+    public float maxBurstSpeed;
+    public float minBurstSpeed;
+    float burstSpeed;
     private CameraShakeScript camera;
     public List<GameObject> effects;
 
 
     void Start()
     {
+        burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
     }

@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156dc5621098dcc43ae992181a4c4080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burstSpeed: 80
+  maxBurstSpeed: 60
+  minBurstSpeed: 80
   effects:
   - {fileID: 1943103879558080, guid: 8d277c0bf1ac86248b897b30036ab895, type: 3}
   - {fileID: 1827235202747734, guid: 2ca619e9040ef274fbc38909f408a3bd, type: 3}
