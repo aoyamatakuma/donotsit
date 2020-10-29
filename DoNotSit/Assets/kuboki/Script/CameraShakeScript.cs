@@ -6,6 +6,7 @@ public class CameraShakeScript : MonoBehaviour
 {
     public float durations;
     public float magnitudes;
+    Vector3 posi;
 
     public void Shake(float duration, float magnitude)
     {
@@ -30,9 +31,12 @@ public class CameraShakeScript : MonoBehaviour
             yield return null;
         }
 
-        transform.localPosition = pos;
+        transform.localPosition = new Vector3(pos.x,posi.y,posi.z);
     }
-
+    private void Start()
+    {
+        posi = gameObject.transform.position;
+    }
     void Update()
     {
         if(Input.GetKeyUp(KeyCode.K))
