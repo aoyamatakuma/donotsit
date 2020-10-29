@@ -694,6 +694,7 @@ MonoBehaviour:
   levelText: {fileID: 0}
   expText: {fileID: 0}
   hpText: {fileID: 0}
+  scoreText: {fileID: 0}
   ob: {fileID: 7747556278060116243}
   basePosition: {fileID: 892862368}
   currentPlayerState: 0

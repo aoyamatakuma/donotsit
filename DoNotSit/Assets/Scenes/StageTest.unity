@@ -8006,6 +8006,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 774535022}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &212679342 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 212679343, guid: a28a62aed92154b4f8760e097fe4e9bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 774535022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212679341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &214749951
 GameObject:
   m_ObjectHideFlags: 0
@@ -43944,48 +43956,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3120219963439737769, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: fadeOutPrefab
-      value: 
-      objectReference: {fileID: 985631437893514359, guid: b1acbd4931931ca49aaf2004eee088ea,
-        type: 3}
-    - target: {fileID: 3120219963439737769, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: angleLimit
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: jumpSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: rayline
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: jumpEffect
-      value: 
-      objectReference: {fileID: 1111314733818414085, guid: 5827816b82b65a2409f57ad13b01f7d9,
-        type: 3}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: timerText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: levelText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: comboText
@@ -43993,34 +43963,19 @@ PrefabInstance:
       objectReference: {fileID: 398608091}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
-      propertyPath: jumpDefalut
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: hp
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
       propertyPath: hpText
       value: 
       objectReference: {fileID: 1222805303}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
-      propertyPath: angleSpeed
-      value: 2
-      objectReference: {fileID: 0}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 212679342}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: carsol
       value: 
       objectReference: {fileID: 1198491102}
-    - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: scoreText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44075,21 +44030,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 7959630063671580638, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
