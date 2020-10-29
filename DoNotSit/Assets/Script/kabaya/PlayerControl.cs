@@ -380,8 +380,8 @@ public class PlayerControl : MonoBehaviour
                         SkewBlockRight(col.gameObject);
                         break;
                     case 8://動く床
-                        //gameObject.transform.parent = col.gameObject.transform;
                         moveWall = col.gameObject;
+                        Debug.Log(moveWall);
                         coltest();
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         gameObject.transform.Rotate(playerRot);
@@ -408,6 +408,7 @@ public class PlayerControl : MonoBehaviour
     }
     void OnCollisionExit(Collision col)
     {
+        
         if (colFlag)
         {
             colFlag = false;
@@ -768,12 +769,18 @@ public class PlayerControl : MonoBehaviour
     {
         if(moveWall!=null)
         {
-            MoveWall mw = moveWall.GetComponent<MoveWall>();
-            mw.Move(gameObject,mw.speed);
-        }
-        else
-        {
-
+            WallAbility wa = moveWall.GetComponent<WallAbility>();
+            if (wa.abilityNumber == 8)
+            {
+                MoveWall mw = moveWall.GetComponent<MoveWall>();
+                mw.Move(gameObject, mw.speed);
+            }
+            else if (wa.abilityNumber == 9)
+            {
+                fade.StartFadeIn("GameOver", false);
+            }
+            else
+            { }
         }
     }
     private void Carsolmove()
