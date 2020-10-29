@@ -37,6 +37,7 @@ public class PlayerControl : MonoBehaviour
     public float combo;//コンボ
     public float rayline;//レイ長さ
     public int level = 1;//レベル
+    public static int score;
                          //  public int speedCount;//連続用
     public int exp;//経験値
     public int hp;
@@ -88,6 +89,7 @@ public class PlayerControl : MonoBehaviour
         currentPlayerState = PlayerState.Normal;
         Scale = gameObject.transform.lossyScale;
         timer = starttimer;
+        score = 0;
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();            
         SetAngle();
@@ -118,7 +120,7 @@ public class PlayerControl : MonoBehaviour
             playerRig.velocity = Vector3.zero;
         }
         //タイマー
-        timer -= 1.0f * Time.deltaTime;
+        timer += 1.0f * Time.deltaTime;
         comboText.text = combo.ToString();//コンボ
         hpText.text = "HP:" + hp.ToString();
         //if (SceneManager.GetActiveScene().name == "Stage2")
