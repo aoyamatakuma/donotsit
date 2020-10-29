@@ -71,6 +71,7 @@ public class PlayerControl : MonoBehaviour
     float playerAngle = 0;
     public bool select = false;
     GameObject moveWall;
+    public GameObject carsol;
    
 
     // Start is called before the first frame update
@@ -88,8 +89,7 @@ public class PlayerControl : MonoBehaviour
         Scale = gameObject.transform.lossyScale;
         timer = starttimer;
         fade = GetComponent<Fade>();
-        audio = GetComponent<AudioSource>();
-       
+        audio = GetComponent<AudioSource>();            
         SetAngle();
         
     }
@@ -630,13 +630,13 @@ public class PlayerControl : MonoBehaviour
         //どの位置にあたったか判定し回転する
         if (wa.Height(true).y > hitPoint.y)
         {
-            if (wa.Height(false).y <= hitPoint.y)
+            if (wa.Height(false).y < hitPoint.y)
             {
-                if (hitPoint.x >= wa.Width(true).x)
+                if (hitPoint.x > wa.Width(true).x)
                 {
                     playerRot = Vector3.forward * 270;
                 }
-                else if (hitPoint.x <= wa.Width(false).x)
+                else if (hitPoint.x < wa.Width(false).x)
                 {
                     playerRot = Vector3.forward * 90;
                 }
@@ -648,11 +648,11 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (hitPoint.x >= wa.Width(true).x)
+            if (hitPoint.x > wa.Width(true).x)
             {
                 playerRot = Vector3.forward * 270;
             }
-            else if (hitPoint.x <= wa.Width(false).x)
+            else if (hitPoint.x < wa.Width(false).x)
             {
                 playerRot = Vector3.forward * 90;
             }
@@ -668,15 +668,15 @@ public class PlayerControl : MonoBehaviour
         //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
         //どの位置にあたったか判定し回転する
-        if (wa.Height(true).y >= gameObject.transform.position.y)
+        if (wa.Height(true).y > gameObject.transform.position.y)
         {
-            if (wa.Height(false).y <= gameObject.transform.position.y)
+            if (wa.Height(false).y < gameObject.transform.position.y)
             {
-                if (gameObject.transform.position.x >= wa.Width(true).x)
+                if (gameObject.transform.position.x > wa.Width(true).x)
                 {
                     playerRot = Vector3.forward * 270;
                 }
-                else if (gameObject.transform.position.x <= wa.Width(false).x)
+                else if (gameObject.transform.position.x < wa.Width(false).x)
                 {
                     playerRot = Vector3.forward * 90;
                 }
@@ -688,11 +688,11 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (gameObject.transform.position.x >= wa.Width(true).x)
+            if (gameObject.transform.position.x > wa.Width(true).x)
             {
                 playerRot = Vector3.forward * 270;
             }
-            else if (gameObject.transform.position.x <= wa.Width(false).x)
+            else if (gameObject.transform.position.x < wa.Width(false).x)
             {
                 playerRot = Vector3.forward * 90;
             }
@@ -711,5 +711,11 @@ public class PlayerControl : MonoBehaviour
             MoveWall mw = moveWall.GetComponent<MoveWall>();
             mw.Move(gameObject,mw.speed);
         }
+    }
+    private void Carsolmove()
+    {
+        carsol.transform.position = gameObject.transform.position;
+        carsol.transform.rotation = gameObject.transform.rotation;
+        Vector3 dis = hitPoint - carsol.transform.position;
     }
 }
