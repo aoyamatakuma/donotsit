@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveHeight : MonoBehaviour
 {
-    public float speed;
+     public float speed;
     public bool isReturn;
     public float timer;//タイマー
     public float returntimer;
@@ -16,25 +16,25 @@ public class MoveHeight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move(speed);
+        Move(gameObject,speed);
         timer += 1.0f * Time.deltaTime;
         Timer();
     }
 
 
-    public void Move(float speed)
+    public void Move(GameObject obj,float speed)
     {
-        Vector3 pos = transform.position;
+        Vector3 pos = obj.transform.position;
         if (isReturn == false)
         {
             pos.y += speed * Time.deltaTime;
         }
-        else if (isReturn == true)
+        else if(isReturn==true)
         {
             pos.y -= speed * Time.deltaTime;
         }
-        transform.position = pos;
-
+        obj.transform.position = pos;
+       
     }
     void Timer()
     {
