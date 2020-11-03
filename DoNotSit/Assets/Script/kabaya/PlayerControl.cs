@@ -388,9 +388,6 @@ public class PlayerControl : MonoBehaviour
                         SetAngle();
                         currentPlayerState = PlayerState.Normal;
                         break;
-                    case 9://デスエリア
-                        fade.StartFadeIn("GameOver", false);
-                        break;
                     default:
                         break;
                 }
@@ -405,7 +402,19 @@ public class PlayerControl : MonoBehaviour
                     // timer += combo;//コンボ時間に反映
                     //  Destroy(col.gameObject);
         }
-    }
+        if (col.gameObject.CompareTag("Wall"))
+        {
+            wa = col.gameObject.GetComponent<WallAbility>();
+            switch (wa.abilityNumber)
+            {
+                case 9://デスエリア
+                    fade.StartFadeIn("GameOver", false);
+                    break;
+                default:
+                    break;
+            }
+        }
+        }
     void OnCollisionExit(Collision col)
     {
         
