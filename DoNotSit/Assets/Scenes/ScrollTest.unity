@@ -43345,6 +43345,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2825f85e7e8210439324b76f041408a, type: 3}
 --- !u!4 &950919604 stripped
@@ -62785,6 +62790,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2825f85e7e8210439324b76f041408a, type: 3}

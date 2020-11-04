@@ -92,38 +92,55 @@ public class CameraSample : MonoBehaviour
         //経験値UP
         exp += 1.0f * Time.deltaTime;
         // レベル系
-        if (level == 1 && exp >= 5.0f)//レベル2
-        {
-            level += 1;
-            speed *= 1.2f;
-        }
-        if (level == 2 && exp >= 10.0f)//レベル3
-        {
-            level += 1;
-            speed = speedDefalut;
-            if (speed == speedDefalut)
-            {
-                speed *= 1.6f;
-            }
-        }
-        if (level == 3 && exp >= 15.0f)//レベル4
-        {
-            level += 1;
-            speed = speedDefalut;
-            if (speed == speedDefalut)
-            {
-                speed *= 2.0f;
-            }
-        }
-        if (level == 4 && exp >= 20.0f)//レベル5
-        {
-            level += 1;
-            speed = speedDefalut;
-            if (speed == speedDefalut)
-            {
-                speed *= 2.4f;
-            }
-        }
+      
+                if (level == 1 && exp >= 5.0f)//レベル2
+                {
+                    level += 1;
+                    speed *= 1.2f;
+                }
+            
+                if (level == 2 && exp >= 10.0f)//レベル3
+                {
+                    level += 1;
+                    speed = speedDefalut;
+                    if (speed == speedDefalut)
+                    {
+                        speed *= 1.6f;
+                    }
+                }
+           
+                if (level == 3 && exp >= 15.0f)//レベル4
+                {
+                    level += 1;
+                    speed = speedDefalut;
+                    if (speed == speedDefalut)
+                    {
+                        speed *= 2.0f;
+                    }
+                }
+              
+                if (level == 4 && exp >= 20.0f)//レベル5
+                {
+                    level += 1;
+                    speed = speedDefalut;
+                    if (speed == speedDefalut)
+                    {
+                        speed *= 2.4f;
+                    }
+                }
+               
+            //case 5:
+            //    if (level == 5 && exp >= 25.0f)
+            //    {
+            //        speed = speedDefalut;
+            //        if (speed == speedDefalut)
+            //        {
+            //            level = 2;
+            //            exp = 10.0f;
+            //        }
+            //    }
+            //    break;
 
+        
     }
 }
