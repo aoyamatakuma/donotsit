@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ScrollState
 {
@@ -24,6 +25,7 @@ public class CameraSample : MonoBehaviour
     //レベル系
     public int level = 1;//レベル
     public float exp;//経験値
+    public Text levelText;//レベルテキスト
     // Start is called before the first frame update
     void Start()
     {
@@ -92,8 +94,8 @@ public class CameraSample : MonoBehaviour
         //経験値UP
         exp += 1.0f * Time.deltaTime;
         // レベル系
-      
-                if (level == 1 && exp >= 5.0f)//レベル2
+        levelText.text = "SPEEDLEVRL:" + level.ToString();
+        if (level == 1 && exp >= 5.0f)//レベル2
                 {
                     level += 1;
                     speed *= 1.2f;
