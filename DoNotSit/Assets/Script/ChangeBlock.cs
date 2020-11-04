@@ -9,9 +9,12 @@ public class ChangeBlock : MonoBehaviour
     public int BPM = 120;
     private float totalTime;
     bool isChange;
+    AudioSource audio;
+    public AudioClip tempoSE;
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         totalTime = 60f / (float)BPM;
         isChange = false;
     }
@@ -28,6 +31,7 @@ public class ChangeBlock : MonoBehaviour
     IEnumerator ChangeCoroutine()
     {
         isChange = true;
+        audio.PlayOneShot(tempoSE);
         for(int i = 0; i < blocks.Count; i++)
         {
             if(blocks[i].elementNum == 0)
@@ -43,6 +47,7 @@ public class ChangeBlock : MonoBehaviour
 
         yield return new WaitForSeconds(totalTime);
 
+        audio.PlayOneShot(tempoSE);
         for (int i = 0; i < blocks.Count; i++)
         {
             if (blocks[i].elementNum == 1)
