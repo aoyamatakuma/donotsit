@@ -74,6 +74,9 @@ public class PlayerControl : MonoBehaviour
     public bool select = false;
     GameObject moveWall;
     public GameObject carsol;
+
+    public int ReflectCount;
+    private int refCount = 0;
    
 
     // Start is called before the first frame update
@@ -94,6 +97,7 @@ public class PlayerControl : MonoBehaviour
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();            
         SetAngle();
+        refCount = ReflectCount;
         
     }
 
@@ -388,6 +392,9 @@ public class PlayerControl : MonoBehaviour
                         SetAngle();
                         currentPlayerState = PlayerState.Normal;
                         break;
+                    case 10:
+                        ReflectActionCount();
+                        break;
                     default:
                         break;
                 }
@@ -586,6 +593,35 @@ public class PlayerControl : MonoBehaviour
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
         transform.rotation = Quaternion.FromToRotation(gameObject.transform.up, r);
         RayObject();
+    }
+    private void ReflectActionCount()
+    {
+        if(refCount<1)
+        {
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            gameObject.transform.Rotate(playerRot);
+            SetAngle();
+            currentPlayerState = PlayerState.Normal;
+            refCount = ReflectCount;
+        }
+        else
+        {
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            gameObject.transform.Rotate(playerRot);
+            //当たったオブジェの向き取得
+            Vector3 n = gameObject.transform.up;
+            //内積
+            float h = Mathf.Abs(Vector3.Dot(playerVec, n));
+            //反射ベクトル
+            Vector3 r = playerVec + 2 * n * h;
+            //代入
+            playerRig.velocity = r;
+            playerVec = playerRig.velocity;
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.FromToRotation(gameObject.transform.up, r);
+            RayObject();
+            refCount--;
+        }
     }
     private void SkewRefrect(GameObject col)
     {
