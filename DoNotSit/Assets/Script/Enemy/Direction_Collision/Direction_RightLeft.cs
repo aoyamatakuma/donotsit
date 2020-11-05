@@ -35,16 +35,7 @@ public class Direction_RightLeft : MonoBehaviour
         {
             return;
         }
-
-        if (isRight)
-        {
-            transform.position += (transform.right + dir) * burstSpeed * Time.deltaTime;
-        }
-        else
-        {
-            transform.position += (-transform.right + dir) * burstSpeed * Time.deltaTime;
-        }
-       
+        transform.position += (transform.right + dir) * burstSpeed * Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider col)
@@ -64,7 +55,7 @@ public class Direction_RightLeft : MonoBehaviour
             camera.Shake(camera.durations, camera.magnitudes);
         }
 
-        if ((col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy") && isBurst)
+        if ((col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy" || col.gameObject.tag == "ChaseEnemy") && isBurst)
         {
             Death();
         }
