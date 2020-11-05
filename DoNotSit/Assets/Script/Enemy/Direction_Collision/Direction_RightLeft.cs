@@ -14,12 +14,15 @@ public class Direction_RightLeft : MonoBehaviour
     Vector3 dir;
     GameObject playerObj;
     PlayerControl player;
+    CameraSample level;
+    public int enemycount;
     public int score;
     void Start()
     {
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        level = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSample>();
         burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
         RandomDirection();
     }
@@ -71,6 +74,7 @@ public class Direction_RightLeft : MonoBehaviour
     void Death()
     {
         player.Score(score);
+        level.Damage(enemycount);
         int num = Random.Range(0, effects.Count);
         Instantiate(effects[num], transform.position, transform.rotation);
         effects[num].GetComponent<AudioSource>().Play();

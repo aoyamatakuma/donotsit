@@ -26,6 +26,8 @@ public class CameraSample : MonoBehaviour
     public int level = 1;//レベル
     public float exp;//経験値
     public Text levelText;//レベルテキスト
+    public int enemyCount;
+    public int levelDownCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,8 +42,8 @@ public class CameraSample : MonoBehaviour
         cnt += Time.deltaTime;
         if (cnt > delay)
         {
-            ScrollState scrollState=ScrollState.Right;
-            switch(scrollState)
+            ScrollState scrollState = ScrollState.Right;
+            switch (scrollState)
             {
                 case ScrollState.Right:
                     Right();
@@ -57,6 +59,10 @@ public class CameraSample : MonoBehaviour
                     break;
             }
             LevelUp();
+            if (enemyCount >= levelDownCount)
+            {
+                LevelDown();
+            }
         }
 
     }
@@ -88,6 +94,10 @@ public class CameraSample : MonoBehaviour
         move.y -= speed * Time.deltaTime;//下
         transform.position = move;
     }
+    public void Damage(int enemycount)
+    {
+        enemyCount += enemycount;
+    }
     //レベルアップ
     public void LevelUp()
     {
@@ -95,54 +105,68 @@ public class CameraSample : MonoBehaviour
         exp += 1.0f * Time.deltaTime;
         // レベル系
         levelText.text = "SPEEDLEVRL:" + level.ToString();
-        if (level == 1 && exp >= 5.0f)//レベル2
+        if (level==0)//レベル1
+        {
+            level = 1;
+        }
+        if ( exp >= 5.0f)//レベル2
+        {
+            level = 2;
+            if (level == 2)
+            {
+                speed = speedDefalut;
+                if (speed == speedDefalut)
                 {
-                    level += 1;
                     speed *= 1.2f;
                 }
-            
-                if (level == 2 && exp >= 10.0f)//レベル3
-                {
-                    level += 1;
-                    speed = speedDefalut;
-                    if (speed == speedDefalut)
-                    {
-                        speed *= 1.6f;
-                    }
-                }
-           
-                if (level == 3 && exp >= 15.0f)//レベル4
-                {
-                    level += 1;
-                    speed = speedDefalut;
-                    if (speed == speedDefalut)
-                    {
-                        speed *= 2.0f;
-                    }
-                }
-              
-                if (level == 4 && exp >= 20.0f)//レベル5
-                {
-                    level += 1;
-                    speed = speedDefalut;
-                    if (speed == speedDefalut)
-                    {
-                        speed *= 2.4f;
-                    }
-                }
-               
-            //case 5:
-            //    if (level == 5 && exp >= 25.0f)
-            //    {
-            //        speed = speedDefalut;
-            //        if (speed == speedDefalut)
-            //        {
-            //            level = 2;
-            //            exp = 10.0f;
-            //        }
-            //    }
-            //    break;
+            }
+        }
 
-        
+        if ( exp >= 10.0f)//レベル3
+        {
+            level = 3;
+            if (level == 3)
+            {
+                speed = speedDefalut;
+                if (speed == speedDefalut)
+                {
+                    speed *= 1.6f;
+                }
+            }
+        }
+
+        if (exp >= 15.0f)//レベル4
+        {
+            level = 4;
+            if (level == 4)
+            {
+                speed = speedDefalut;
+                if (speed == speedDefalut)
+                {
+                    speed *= 2.0f;
+                }
+            }
+        }
+
+        if ( exp >= 20.0f)//レベル5
+        {
+            level = 5;
+            if (level == 5)
+            {
+                speed = speedDefalut;
+                if (speed == speedDefalut)
+                {
+                    speed *= 2.4f;
+                }
+            }
+        }
+    }
+    //レベルダウン
+    public void LevelDown()
+    {  
+        exp -= 7.0f;
+        level -= 1;
+        speed = speedDefalut;
+        enemyCount = 0;
     }
 }
