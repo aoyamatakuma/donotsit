@@ -24911,14 +24911,15 @@ PrefabInstance:
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: ChaseEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4013203930852427167, guid: f2825f85e7e8210439324b76f041408a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2825f85e7e8210439324b76f041408a, type: 3}
 --- !u!1 &563309675 stripped
 GameObject:
@@ -62822,14 +62823,15 @@ PrefabInstance:
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: ChaseEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4013203930852427167, guid: f2825f85e7e8210439324b76f041408a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2825f85e7e8210439324b76f041408a, type: 3}
 --- !u!1001 &1351691201
 PrefabInstance:
@@ -83511,14 +83513,15 @@ PrefabInstance:
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: ChaseEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4013203930852427167, guid: f2825f85e7e8210439324b76f041408a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2825f85e7e8210439324b76f041408a, type: 3}
 --- !u!1 &1723151779 stripped
 GameObject:
@@ -87396,14 +87399,15 @@ PrefabInstance:
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: ChaseEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4013203930852427167, guid: f2825f85e7e8210439324b76f041408a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2825f85e7e8210439324b76f041408a, type: 3}
 --- !u!1 &1795092208 stripped
 GameObject:

@@ -414,7 +414,11 @@ public class PlayerControl : MonoBehaviour
                     break;
             }
         }
+        if (col.gameObject.CompareTag("ChaseEnemy"))
+        {
+          fade.StartFadeIn("GameOver", false);
         }
+    }
     void OnCollisionExit(Collision col)
     {
         
