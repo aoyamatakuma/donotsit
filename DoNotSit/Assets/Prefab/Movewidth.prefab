@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3135584694750805341}
   - component: {fileID: 3135584694750805340}
   - component: {fileID: 3135584694750805339}
+  - component: {fileID: 8079543116576414729}
   m_Layer: 0
   m_Name: Movewidth
   m_TagString: Wall
@@ -124,3 +125,16 @@ MonoBehaviour:
   isReturn: 0
   timer: 0
   returntimer: 5
+--- !u!114 &8079543116576414729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3135584694750805337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6c4f7c92fc5b4eac6bf3fc8cc3943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 194062, guid: 8c27aeead6d968e4ba986702d6b84335, type: 3}

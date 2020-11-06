@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7688873954299033789}
   - component: {fileID: 6459025225003691876}
   - component: {fileID: 1921449283239910236}
+  - component: {fileID: 6267058893614677009}
   m_Layer: 0
   m_Name: DefaultBlock
   m_TagString: Wall
@@ -107,3 +108,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityNumber: 0
+--- !u!114 &6267058893614677009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435600310806394720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6c4f7c92fc5b4eac6bf3fc8cc3943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 194062, guid: 8c27aeead6d968e4ba986702d6b84335, type: 3}
