@@ -358,10 +358,11 @@ public class PlayerControl : MonoBehaviour
                 switch (wallNum)
                 {
                     case 0://着地
-                        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        gameObject.transform.Rotate(playerRot);
-                        SetAngle();
-                        currentPlayerState = PlayerState.Normal;
+                        ReflectActionCount();
+                        //gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                        //gameObject.transform.Rotate(playerRot);
+                        //SetAngle();
+                        //currentPlayerState = PlayerState.Normal;
                         //NormalBlock(col.gameObject);
                         break;
                     case 1://沼の床
