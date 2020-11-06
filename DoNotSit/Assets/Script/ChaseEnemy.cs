@@ -46,7 +46,7 @@ public class ChaseEnemy : MonoBehaviour
             {
                 case 1://右
                     Right();
-                    Attack();
+                 //   Attack();
                     break;
                 case 2://左
                     Left();
@@ -102,7 +102,7 @@ public class ChaseEnemy : MonoBehaviour
     {
         if (player.currentPlayerState == PlayerState.Normal)
         {
-           attackCount+=1.0f*Time.deltaTime;
+            attackCount +=1.0f*Time.deltaTime;
         }
     }
     //レベルアップ

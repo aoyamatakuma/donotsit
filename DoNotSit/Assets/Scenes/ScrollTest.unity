@@ -15346,6 +15346,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathBlock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8410623485008245159, guid: f2825f85e7e8210439324b76f041408a,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2825f85e7e8210439324b76f041408a, type: 3}
 --- !u!4 &344780214 stripped
@@ -43285,6 +43290,11 @@ PrefabInstance:
     - target: {fileID: 7382730095423039907, guid: f2825f85e7e8210439324b76f041408a,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410623485008245159, guid: f2825f85e7e8210439324b76f041408a,
+        type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -77133,10 +77143,6 @@ MonoBehaviour:
   player: {fileID: 1264218198}
   currentScrollState: 0
   delay: 3
-  speedDefalut: 15
-  level: 1
-  exp: 0
-  levelText: {fileID: 173429005}
 --- !u!4 &1599588118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1468899156925889086, guid: 5219769a578d55743bd6da80900b9623,
@@ -103525,7 +103531,12 @@ PrefabInstance:
     - target: {fileID: 3151063698029000053, guid: d468500fca7e61e45b53a1de62f538a7,
         type: 3}
       propertyPath: m_Name
-      value: OverBlock_Right
+      value: ChaseEnemy_Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173812336900844672, guid: d468500fca7e61e45b53a1de62f538a7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 7382730096773317687, guid: d468500fca7e61e45b53a1de62f538a7,
         type: 3}
@@ -103547,6 +103558,11 @@ PrefabInstance:
       propertyPath: levelText
       value: 
       objectReference: {fileID: 173429005}
+    - target: {fileID: 7382730096773317687, guid: d468500fca7e61e45b53a1de62f538a7,
+        type: 3}
+      propertyPath: ChaseType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8410303057309186091, guid: d468500fca7e61e45b53a1de62f538a7,
         type: 3}
       propertyPath: m_LocalPosition.x

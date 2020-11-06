@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7382730096773317687}
   - component: {fileID: 3173812336900844672}
   m_Layer: 0
-  m_Name: OverBlock_Right
+  m_Name: ChaseEnemy_Right
   m_TagString: ChaseEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,6 +116,9 @@ MonoBehaviour:
   level: 1
   exp: 0
   levelText: {fileID: 0}
+  ChaseType: 1
+  bello: {fileID: 0}
+  attackCount: 0
 --- !u!54 &3173812336900844672
 Rigidbody:
   m_ObjectHideFlags: 0
