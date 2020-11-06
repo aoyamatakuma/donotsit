@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8788201504760502208}
   - component: {fileID: 748068188235020968}
   - component: {fileID: 4140746679099485553}
+  - component: {fileID: 7382730096773317687}
   m_Layer: 0
   m_Name: OverBlock_Right
   m_TagString: ChaseEnemy
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3151063698029000053}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -60, y: 0.5999985, z: 62.699997}
   m_LocalScale: {x: 4, y: 100, z: 4}
   m_Children: []
@@ -93,3 +94,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7382730096773317687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151063698029000053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d7a4a1883f0c734193dea8041e032e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHitLimit: 2
+  hitCnt: 0
