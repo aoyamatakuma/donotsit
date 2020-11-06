@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-    public enum ScrollEnemy
-{
-    Right,
-    Left,
-    Up,
-    Down
-}
 public class ChaseEnemy : MonoBehaviour
 {
     public int enemyHitLimit;
@@ -23,14 +16,17 @@ public class ChaseEnemy : MonoBehaviour
     public int level = 1;//レベル
     public float exp;//経験値
     public Text levelText;//レベルテキスト
+    public int ChaseType;
+    PlayerControl player;
+    public GameObject bello;
+    public float attackCount;
     // Start is called before the first frame update
     void Start()
-    {
-        // camera = transform.parent.GetComponent<CameraSample>();
-        // camera = GameObject.FindGameObjectWithTag("ChaseEnemy").GetComponent<CameraSample>();
+    { 
         transform.position = new Vector3(transform.position.x,
              transform.position.y,
              transform.position.z);
+     player = gameObject.GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
@@ -39,22 +35,6 @@ public class ChaseEnemy : MonoBehaviour
         cnt += Time.deltaTime;
         if (cnt > delay)
         {
-            ScrollEnemy scrollState = ScrollEnemy.Right;
-            switch (scrollState)
-            {
-                case ScrollEnemy.Right:
-                    Right();
-                    break;
-                case ScrollEnemy.Left:
-                    Left();
-                    break;
-                case ScrollEnemy.Up:
-                    Up();
-                    break;
-                case ScrollEnemy.Down:
-                    Down();
-                    break;
-            }
             LevelUp();
             if (hitCnt >= enemyHitLimit)
             {
@@ -62,6 +42,23 @@ public class ChaseEnemy : MonoBehaviour
                 LevelDown();
                 hitCnt = 0;
             }
+            switch (ChaseType)
+            {
+                case 1://右
+                    Right();
+                    Attack();
+                    break;
+                case 2://左
+                    Left();
+                    break;
+                case 3://上
+                    Up();
+                    break;
+                case 4://下
+                    Down();
+                    break;
+            }
+         
         }
     }
 
@@ -99,6 +96,14 @@ public class ChaseEnemy : MonoBehaviour
         Vector3 move = transform.position;
         move.y -= speed * Time.deltaTime;//下
         transform.position = move;
+    }
+    //ベロ攻撃
+     void Attack()
+    {
+        if (player.currentPlayerState == PlayerState.Normal)
+        {
+           attackCount+=1.0f*Time.deltaTime;
+        }
     }
     //レベルアップ
     public void LevelUp()
