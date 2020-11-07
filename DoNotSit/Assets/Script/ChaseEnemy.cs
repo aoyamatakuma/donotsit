@@ -19,14 +19,17 @@ public class ChaseEnemy : MonoBehaviour
     public int ChaseType;
     PlayerControl player;
     public GameObject bello;
-    public float attackCount;
+    public int attackCount;//カウント
+    public int attackLimit;//限界
+    public Transform point;
+    public bool belooFlag;
     // Start is called before the first frame update
     void Start()
     { 
         transform.position = new Vector3(transform.position.x,
              transform.position.y,
              transform.position.z);
-     player = gameObject.GetComponent<PlayerControl>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
@@ -46,7 +49,7 @@ public class ChaseEnemy : MonoBehaviour
             {
                 case 1://右
                     Right();
-                 //   Attack();
+                    Attack();
                     break;
                 case 2://左
                     Left();
@@ -102,7 +105,20 @@ public class ChaseEnemy : MonoBehaviour
     {
         if (player.currentPlayerState == PlayerState.Normal)
         {
-            attackCount +=1.0f*Time.deltaTime;
+            attackCount++;
+            if (attackCount >=attackLimit)
+            {
+                belooFlag = true;
+                if (belooFlag == true)
+                {
+                   // Instantiate(bello, point.transform.position, Quaternion.identity);
+                }
+            }
+        }
+        else
+        {
+            attackCount = 0;
+            belooFlag = false;
         }
     }
     //レベルアップ

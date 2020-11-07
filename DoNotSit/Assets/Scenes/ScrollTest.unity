@@ -103533,36 +103533,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChaseEnemy_Right
       objectReference: {fileID: 0}
-    - target: {fileID: 3173812336900844672, guid: d468500fca7e61e45b53a1de62f538a7,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 116
-      objectReference: {fileID: 0}
-    - target: {fileID: 7382730096773317687, guid: d468500fca7e61e45b53a1de62f538a7,
-        type: 3}
-      propertyPath: speed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7382730096773317687, guid: d468500fca7e61e45b53a1de62f538a7,
-        type: 3}
-      propertyPath: delay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7382730096773317687, guid: d468500fca7e61e45b53a1de62f538a7,
-        type: 3}
-      propertyPath: speedDefalut
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 7382730096773317687, guid: d468500fca7e61e45b53a1de62f538a7,
         type: 3}
       propertyPath: levelText
       value: 
       objectReference: {fileID: 173429005}
-    - target: {fileID: 7382730096773317687, guid: d468500fca7e61e45b53a1de62f538a7,
-        type: 3}
-      propertyPath: ChaseType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8410303057309186091, guid: d468500fca7e61e45b53a1de62f538a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103617,11 +103592,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8410303057309186091, guid: d468500fca7e61e45b53a1de62f538a7,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 106.20749
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d468500fca7e61e45b53a1de62f538a7, type: 3}

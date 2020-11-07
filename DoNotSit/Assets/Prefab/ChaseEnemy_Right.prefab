@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1417273468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1417273469}
+  m_Layer: 0
+  m_Name: BelloPint
+  m_TagString: ChaseEnemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1417273469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417273468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.511, y: 0.248, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8410303057309186091}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3151063698029000053
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,7 +61,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -60, y: 0.5999985, z: 62.699997}
   m_LocalScale: {x: 106.20749, y: 100, z: 4}
-  m_Children: []
+  m_Children:
+  - {fileID: 1417273469}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,8 +148,11 @@ MonoBehaviour:
   exp: 0
   levelText: {fileID: 0}
   ChaseType: 1
-  bello: {fileID: 0}
+  bello: {fileID: 3444062615959265132, guid: 52cdb0963e9b852429655a7a3858a9b4, type: 3}
   attackCount: 0
+  attackLimit: 0
+  point: {fileID: 1417273469}
+  belooFlag: 0
 --- !u!54 &3173812336900844672
 Rigidbody:
   m_ObjectHideFlags: 0
