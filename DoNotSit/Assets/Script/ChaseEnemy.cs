@@ -104,7 +104,7 @@ public class ChaseEnemy : MonoBehaviour
     //ベロ攻撃
      void Attack()
     {
-        if (player.currentPlayerState == PlayerState.Normal)
+        if (player.currentPlayerState == PlayerState.Normal)//ノーマルの時
         {      
             attackCount+=Time.deltaTime;
             if (attackCount >= attackLimit)
@@ -117,14 +117,13 @@ public class ChaseEnemy : MonoBehaviour
             attackCount = 0;           
         }
 
-        if (attackCount >= attackLimit)
+        if (attackCount >= attackLimit)//アタックする
         {
             if (!belooFlag)
             {
                 belooFlag = true;
                 Instantiate(bello, point.transform.position, bello.transform.rotation);
                 attackCount = 0;
-
             }
         }
     }

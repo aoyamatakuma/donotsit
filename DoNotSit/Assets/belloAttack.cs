@@ -7,7 +7,6 @@ public class belloAttack : MonoBehaviour
     //Rigidbodyを入れる変数
     public Transform target;//追いかける対象-オブジェクトをインスペクタから登録できるように
     public float speed = 0.1f;//移動スピード
-    private Vector3 vec;
     Vector3 playerPos;
     public float lifeCnt;
     float cnt;
