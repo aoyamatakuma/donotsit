@@ -103528,6 +103528,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1417273469, guid: d468500fca7e61e45b53a1de62f538a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.452
+      objectReference: {fileID: 0}
     - target: {fileID: 3151063698029000053, guid: d468500fca7e61e45b53a1de62f538a7,
         type: 3}
       propertyPath: m_Name
@@ -103538,6 +103542,11 @@ PrefabInstance:
       propertyPath: levelText
       value: 
       objectReference: {fileID: 173429005}
+    - target: {fileID: 7382730096773317687, guid: d468500fca7e61e45b53a1de62f538a7,
+        type: 3}
+      propertyPath: attackLimit
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8410303057309186091, guid: d468500fca7e61e45b53a1de62f538a7,
         type: 3}
       propertyPath: m_LocalPosition.x
