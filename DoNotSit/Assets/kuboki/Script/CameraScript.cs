@@ -37,7 +37,7 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
-        testButton();
+       
     }
 
     //カメラの視点移動処理()あとでまとめる

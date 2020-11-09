@@ -53,6 +53,8 @@ public class MovetestScript : MonoBehaviour
 
     bool reflect = false;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +63,7 @@ public class MovetestScript : MonoBehaviour
         isPlayer = Player.Ground;
         playerRig = gameObject.GetComponent<Rigidbody>();
         Scale = gameObject.transform.localScale;
+
     }
     // Update is called once per frame
     void Update()
@@ -95,7 +98,6 @@ public class MovetestScript : MonoBehaviour
                 ClickPos = Camera.main.ScreenToWorldPoint(mousePos);//クリックした場所を保存
                 playerVec = a * jumpForce;//飛ぶベクトルを保存
                 jump = true;
-                Debug.Log("←押した");
             }
             //右クリック
             if (Input.GetMouseButtonUp(1))
@@ -159,6 +161,14 @@ public class MovetestScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
+        Vector3 hitpoint;
+        foreach(ContactPoint point in col.contacts)
+        {
+            hitpoint = point.point;
+            Vector3 hei = col.gameObject.transform.position - hitpoint;
+            Debug.Log(hitpoint);
+            Debug.Log(gameObject.transform.position);
+        }
         //はじめに触れたオブジェクトをとる
         if(ColObject == null)
         {

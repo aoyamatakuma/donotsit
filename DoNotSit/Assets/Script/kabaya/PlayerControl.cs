@@ -707,15 +707,6 @@ public class PlayerControl : MonoBehaviour
             {
                 playerRot = Vector3.forward * 180;
             }
-
-            //if ((int)wa.Height(false).y<(int)hitPoint.y)
-            //{
-               
-            //}
-            //else
-            //{
-            //    playerRot = Vector3.forward * 180;
-            //}
         }
         else
         {
