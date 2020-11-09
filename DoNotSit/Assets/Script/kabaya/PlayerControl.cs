@@ -454,6 +454,9 @@ public class PlayerControl : MonoBehaviour
                 case 5://斜めの反射
                     SkewRefrect(col.gameObject);
                     break;
+                case 9://デスエリア
+                    fade.StartFadeIn("GameOver", false);
+                    break;
                 default:
                     break;
             }
@@ -512,9 +515,6 @@ public class PlayerControl : MonoBehaviour
            hp--;
         }
         restratFlag = false;
-        currentPlayerState = PlayerState.Stop;
-        yield return new WaitForSeconds(2.0f);
-        currentPlayerState = PlayerState.Normal;
         yield break;
     }
     //コンボ系
