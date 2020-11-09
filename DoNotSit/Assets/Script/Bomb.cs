@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour
     public GameObject effect;
     public float bombRange;
     private CameraShakeScript camera;
+    bool isChaseHit;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +24,20 @@ public class Bomb : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Player" || col.gameObject.tag == "Bomb")
+        if(col.gameObject.tag == "Player" || col.gameObject.tag == "Bomb" )
         {
+            camera.Shake(camera.durations, camera.magnitudes);
+            Instantiate(effect, transform.position, transform.rotation);
+            effect.GetComponent<AudioSource>().Play();
+            Destroy(gameObject);
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag == "ChaseEnemy")
+        {
+            effect.GetComponent<Effect>().isChaseHit = true;
             camera.Shake(camera.durations, camera.magnitudes);
             Instantiate(effect, transform.position, transform.rotation);
             effect.GetComponent<AudioSource>().Play();

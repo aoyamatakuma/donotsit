@@ -14,20 +14,10 @@ public class CameraSample : MonoBehaviour
 {
     public float speed;
     public GameObject player;
-    public GameObject block_Right;
-    public GameObject block_Left;
-    public GameObject block_Up;
-    public GameObject block_Down;
     public ScrollState currentScrollState; //現在の状態
     public float delay;
-    public float speedDefalut;
     float cnt;
-    //レベル系
-    public int level = 1;//レベル
-    public float exp;//経験値
-    public Text levelText;//レベルテキスト
-    public int enemyCount;
-    public int levelDownCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,11 +48,8 @@ public class CameraSample : MonoBehaviour
                     Down();
                     break;
             }
-            LevelUp();
-            if (enemyCount >= levelDownCount)
-            {
-                LevelDown();
-            }
+           
+           
         }
 
     }
@@ -94,79 +81,6 @@ public class CameraSample : MonoBehaviour
         move.y -= speed * Time.deltaTime;//下
         transform.position = move;
     }
-    public void Damage(int enemycount)
-    {
-        enemyCount += enemycount;
-    }
-    //レベルアップ
-    public void LevelUp()
-    {
-        //経験値UP
-        exp += 1.0f * Time.deltaTime;
-        // レベル系
-        levelText.text = "SPEEDLEVRL:" + level.ToString();
-        if (level==0)//レベル1
-        {
-            level = 1;
-        }
-        if ( exp >= 5.0f)//レベル2
-        {
-            level = 2;
-            if (level == 2)
-            {
-                speed = speedDefalut;
-                if (speed == speedDefalut)
-                {
-                    speed *= 1.2f;
-                }
-            }
-        }
-
-        if ( exp >= 10.0f)//レベル3
-        {
-            level = 3;
-            if (level == 3)
-            {
-                speed = speedDefalut;
-                if (speed == speedDefalut)
-                {
-                    speed *= 1.6f;
-                }
-            }
-        }
-
-        if (exp >= 15.0f)//レベル4
-        {
-            level = 4;
-            if (level == 4)
-            {
-                speed = speedDefalut;
-                if (speed == speedDefalut)
-                {
-                    speed *= 2.0f;
-                }
-            }
-        }
-
-        if ( exp >= 20.0f)//レベル5
-        {
-            level = 5;
-            if (level == 5)
-            {
-                speed = speedDefalut;
-                if (speed == speedDefalut)
-                {
-                    speed *= 2.4f;
-                }
-            }
-        }
-    }
-    //レベルダウン
-    public void LevelDown()
-    {  
-        exp -= 7.0f;
-        level -= 1;
-        speed = speedDefalut;
-        enemyCount = 0;
-    }
+ 
+    
 }

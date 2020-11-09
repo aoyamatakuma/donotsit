@@ -6,6 +6,7 @@ public class Effect : MonoBehaviour
 {
     public float lifeTime;
     private float cnt;
+    public bool isChaseHit;
     // Start is called before the first frame update
     void Start()
     {

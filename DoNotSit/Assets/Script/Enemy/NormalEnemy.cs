@@ -56,11 +56,22 @@ public class NormalEnemy : NormalEnemyAI
 
         }
 
-        if(col.gameObject.tag == "Bomb" || col.gameObject.tag=="BlowAway")
-        {
+        if( col.gameObject.tag=="BlowAway")
+        { 
             gameObject.tag = "BlowAway";
             Hit();
             isDead = true;
+        }
+
+        if(col.gameObject.tag == "Bomb")
+        {
+            Effect effect = col.GetComponent<Effect>();
+            if (!effect.isChaseHit)
+            {
+                gameObject.tag = "BlowAway";
+                Hit();
+                isDead = true;
+            }
         }
     }
 
