@@ -51,7 +51,7 @@ public class NormalEnemy : NormalEnemyAI
             }
             else
             {
-                player.Damage(damage); ;
+                player.Damage(damage); 
             }
 
         }

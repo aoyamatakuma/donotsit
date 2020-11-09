@@ -10,9 +10,15 @@ public class belloAttack : MonoBehaviour
     Vector3 playerPos;
     public float lifeCnt;
     float cnt;
+    public int damage;
+    //予測
+    public float rayline;//レイ長さ
+    GameObject hitObject;
+    public GameObject carsol;
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        carsol = GameObject.Find("BelloP");
         playerPos = new Vector3(target.position.x, target.position.y, target.position.z);
         gameObject.transform.LookAt(playerPos);
     }
@@ -20,23 +26,35 @@ public class belloAttack : MonoBehaviour
     void Update()
     {
         Death();
-       
+        RayObject();
         transform.position = Vector3.MoveTowards(transform.position, playerPos, speed);
     }
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
+            player.Damage(damage);
             Destroy(this.gameObject);
+            carsol.SetActive(false);
         }
     }
-
+    void RayObject()
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            carsol.transform.position = hit.point;
+        }
+    }
     void Death()
     {
         cnt += Time.deltaTime;
-        if(cnt > lifeCnt)
+        if (cnt > lifeCnt)
         {
             Destroy(gameObject);
+            carsol.SetActive(false);
         }
     }
 }

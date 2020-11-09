@@ -23,6 +23,7 @@ public class ChaseEnemy : MonoBehaviour
     public float attackLimit;//限界
     public Transform point;
     public bool belooFlag;
+    public GameObject carsol;
     // Start is called before the first frame update
     void Start()
     {
@@ -122,7 +123,9 @@ public class ChaseEnemy : MonoBehaviour
             if (!belooFlag)
             {
                 belooFlag = true;
-                Instantiate(bello, point.transform.position, bello.transform.rotation);
+                carsol.SetActive(true);
+                var parent = this.transform;
+                Instantiate(bello, point.transform.position, bello.transform.rotation,parent);
                 attackCount = 0;
             }
         }
