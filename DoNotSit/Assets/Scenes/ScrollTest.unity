@@ -45027,7 +45027,7 @@ PrefabInstance:
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: ReflectCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5840411550740238893, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
@@ -105604,25 +105604,5 @@ PrefabInstance:
       propertyPath: carsol
       value: 
       objectReference: {fileID: 1538033488}
-    - target: {fileID: 9013064125040454059, guid: d836190c11952c04d8104320ed690b1b,
-        type: 3}
-      propertyPath: speedDefalut
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 9013064125040454059, guid: d836190c11952c04d8104320ed690b1b,
-        type: 3}
-      propertyPath: speed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 9013064125040454059, guid: d836190c11952c04d8104320ed690b1b,
-        type: 3}
-      propertyPath: attackLimit
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9013064125040454059, guid: d836190c11952c04d8104320ed690b1b,
-        type: 3}
-      propertyPath: delay
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d836190c11952c04d8104320ed690b1b, type: 3}
