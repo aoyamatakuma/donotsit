@@ -960,6 +960,8 @@ MonoBehaviour:
   point: {fileID: 6956377138031353435}
   belooFlag: 0
   carsol: {fileID: 0}
+  currentChaseState: 0
+  wait: 1
 --- !u!1 &8533911342297874411
 GameObject:
   m_ObjectHideFlags: 0
