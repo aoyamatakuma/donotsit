@@ -8,6 +8,10 @@ public class GameClearScene : MonoBehaviour
 {
     public GameObject stageSelect;
     public GameObject title;
+    public GameObject rankS;
+    public GameObject rankA;
+    public GameObject rankB;
+    public GameObject rankC;
     private bool select;
     private AudioSource audio;
     public AudioClip selectSE;
@@ -17,7 +21,10 @@ public class GameClearScene : MonoBehaviour
     public Text rankText;
     float goaltimer;
     float goalscore;
-    string rank;
+    public float SA;
+    public float B;
+    public float C;
+    public  string rank;
     bool isPush;
     Fade fade;
     // Start is called before the first frame update
@@ -28,7 +35,6 @@ public class GameClearScene : MonoBehaviour
         select = true;
         goaltimer = PlayerControl.TimeScore();
         goalscore = PlayerControl.ClearScore();
-       // rankText.text = "Rank:" + rank.ToString();
         //goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
         goalScoreText.text = "Score:" + goalscore.ToString();//ゴールスコア
         fade = GetComponent<Fade>();
@@ -93,9 +99,49 @@ public class GameClearScene : MonoBehaviour
     }
     void Rank()
     {
-        if(goalscore>=0)
+        if(goalscore> SA)//Sランク
         {
             rank = "S";
+            if (rank == "S")
+            {
+                rankS.SetActive(true);
+                rankA.SetActive(false);
+                rankB.SetActive(false);
+                rankC.SetActive(false);
+            }
+        }
+        if (goalscore <= SA)//Aランク
+        {
+            rank = "A";
+            if (rank == "A")
+            {
+                rankS.SetActive(false);
+                rankA.SetActive(true);
+                rankB.SetActive(false);
+                rankC.SetActive(false);
+            }
+        }
+        if (goalscore <= B)//Bランク
+        {
+            rank = "B";
+            if (rank == "B")
+            {
+                rankS.SetActive(false);
+                rankA.SetActive(false);
+                rankB.SetActive(true);
+                rankC.SetActive(false);
+            }
+        }
+        if (goalscore <= C)//Cランク
+        {
+            rank = "C";
+            if (rank == "C")
+            {
+                rankS.SetActive(false);
+                rankA.SetActive(false);
+                rankB.SetActive(false);
+                rankC.SetActive(true);
+            }
         }
     }
 
