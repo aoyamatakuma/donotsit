@@ -33,8 +33,13 @@ public class PlayerControl : MonoBehaviour
     public float angleZ;//こいつ大事回転制御
     public static float timer;//タイマー
     public float starttimer = 60f;
-    //  public float comboTimer = 0f;//コンボタイマー
-    public float combo;//コンボ
+    //コンボ
+    public float comboTimer = 0f;//コンボタイマー
+    public float comboTimerAdd;//コンボタイマー
+    public float comboTimerMax;//コンボタイマーマックス
+    public int combo;//コンボ
+    public int comboBonus;
+    public bool comboFlag;//コンボフラグ
     public float rayline;//レイ長さ
     public int level = 1;//レベル
     public static int scoreNumber;
@@ -126,14 +131,9 @@ public class PlayerControl : MonoBehaviour
         }
         //タイマー
         timer += 1.0f * Time.deltaTime;
-        comboText.text = combo.ToString();//コンボ
+        comboText.text = combo.ToString()+ "COMOBO!";//コンボ
         hpText.text = "HP:" + hp.ToString();
         scoreText.text =  scoreNumber.ToString();
-        //if (SceneManager.GetActiveScene().name == "Stage2")
-        //{ 
-        //levelText.text = "Level:" + level.ToString();
-        //expText.text = "Exp:" + exp.ToString();
-        //}
         Combo();//コンボ関連
         ReverseMove();//反転スティック
 
@@ -354,7 +354,6 @@ public class PlayerControl : MonoBehaviour
             {
                 jumpFlag = false;
                 playerRig.velocity = Vector3.zero;
-                combo = 0;
                 switch (wallNum)
                 {
                     case 0://着地
@@ -404,11 +403,9 @@ public class PlayerControl : MonoBehaviour
         }
         //EnemyCollision場合
         //アタック(移動中に当たると)タイマー増加
-        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
+        if (col.gameObject.CompareTag("Enemy"))
         {
-            combo++;//コンボ増加
-                    // timer += combo;//コンボ時間に反映
-                    //  Destroy(col.gameObject);
+        //   ComboStart();
         }
         if (col.gameObject.CompareTag("Wall"))
         {
@@ -463,16 +460,9 @@ public class PlayerControl : MonoBehaviour
         }
         //EnemyTrigger場合
         //アタック(移動中に当たると)タイマー増加
-        if (col.gameObject.CompareTag("Enemy") && currentPlayerState == PlayerState.Attack)
+        if (col.gameObject.CompareTag("Enemy"))
         {
-            combo++;
-            //コンボ増加        
-            //timer += combo;//コンボ時間に反映
-            //④パターン
-            //if (SceneManager.GetActiveScene().name == "Stage2")
-            //{
-            //    LevelUp();
-            //}
+           // ComboStart();
         }
     }
     //垂直くっつく
@@ -506,6 +496,11 @@ public class PlayerControl : MonoBehaviour
     public void Score(int score)
     {
         scoreNumber += score;
+        if (comboFlag == true)
+        {
+            scoreNumber += score*comboBonus;//ボーナス
+        }
+        ComboStart();
     }
     IEnumerator ThornTime()
     {
@@ -520,13 +515,54 @@ public class PlayerControl : MonoBehaviour
     //コンボ系
     public void Combo()
     {
-        if (combo >= 1)
+        if (comboFlag == true)
         {
             comboText.enabled = true;
+            comboTimer -= 1.0f * Time.deltaTime;
+            if (comboTimer <= 0)
+            {
+                comboFlag = false;
+            }
+            ComboBonus();
         }
-        else
+        else if (comboFlag == false)
         {
+            combo = 0;
+            comboBonus = 0;
             comboText.enabled = false;
+        }
+    }
+    public void ComboStart()
+    {
+        combo++;
+        comboTimer += comboTimerAdd;
+        if(comboTimer>=comboTimerMax)
+        {
+            comboTimer = comboTimerMax;
+        }
+        comboFlag = true;
+    }
+    public void ComboBonus()
+    {
+        if (combo >= 2)
+        {
+            comboBonus = (int)1.2f;
+        }
+        if (combo >= 4)
+        {
+            comboBonus = (int)1.4f;
+        }
+        if (combo >= 6)
+        {
+            comboBonus = (int)1.6f;
+        }
+        if (combo >= 8)
+        {
+            comboBonus = (int)1.8f;
+        }
+        if (combo >= 10)
+        {
+            comboBonus = (int)2.0f;
         }
     }
     //レベルアップパターン　②

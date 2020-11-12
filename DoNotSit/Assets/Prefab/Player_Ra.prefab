@@ -685,7 +685,11 @@ MonoBehaviour:
   roateSpeed: 1
   angleZ: 0
   starttimer: 0
+  comboTimer: 0
+  comboTimerAdd: 3
+  comboTimerMax: 5
   combo: 0
+  comboFlag: 0
   rayline: 100
   level: 1
   exp: 0
@@ -706,6 +710,7 @@ MonoBehaviour:
   angleLimit: 40
   select: 0
   carsol: {fileID: 0}
+  ReflectCount: 2
 --- !u!114 &3120219963439737769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +740,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

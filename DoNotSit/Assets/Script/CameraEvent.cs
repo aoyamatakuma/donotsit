@@ -9,6 +9,8 @@ public class CameraEvent : MonoBehaviour
     public PlayerControl player;
     public GameObject scObj;
     public GameObject hpObj;
+    public GameObject coObj;
+    public GameObject spObj;
     FollowCamera camera;
     public float waitTime;
     public float moveTime;
@@ -73,6 +75,8 @@ public class CameraEvent : MonoBehaviour
         player.enabled = false;
         hpObj.SetActive(false);
         scObj.SetActive(false);
+        coObj.SetActive(false);
+        spObj.SetActive(false);
         isEvent = true;
         yield return new WaitForSeconds(moveTime);
         isMove = true;
@@ -89,6 +93,8 @@ public class CameraEvent : MonoBehaviour
         player.enabled = true;
         hpObj.SetActive(true);
         scObj.SetActive(true);
+        coObj.SetActive(true);
+        spObj.SetActive(true);
         enemy.enabled = true;
     }
 }
