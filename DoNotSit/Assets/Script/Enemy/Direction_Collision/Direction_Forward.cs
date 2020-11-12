@@ -14,7 +14,7 @@ public class Direction_Forward : MonoBehaviour
     float cnt;
     Renderer render;
     PlayerControl player;
-    public int score;
+    public float score;
 
     void Start()
     {

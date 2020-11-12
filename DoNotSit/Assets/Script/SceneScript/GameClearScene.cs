@@ -15,7 +15,7 @@ public class GameClearScene : MonoBehaviour
     public Text goalTimeText;
     public Text goalScoreText;
     float goaltimer;
-    int goalscore;
+    float goalscore;
     bool isPush;
     Fade fade;
     // Start is called before the first frame update

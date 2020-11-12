@@ -7,7 +7,7 @@ public class EnemyCollision : MonoBehaviour
     public int damage;
     private CameraShakeScript camera;
     public List<GameObject> effects;
-    public int score;
+    public float score;
     PlayerControl player;
 
     void Start()

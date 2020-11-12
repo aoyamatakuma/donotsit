@@ -37,12 +37,12 @@ public class PlayerControl : MonoBehaviour
     public float comboTimer = 0f;//コンボタイマー
     public float comboTimerAdd;//コンボタイマー
     public float comboTimerMax;//コンボタイマーマックス
-    public int combo;//コンボ
-    public int comboBonus;
+    public float combo;//コンボ
+    public float comboBonus;
     public bool comboFlag;//コンボフラグ
     public float rayline;//レイ長さ
     public int level = 1;//レベル
-    public static int scoreNumber;
+    public static float scoreNumber;
                          //  public int speedCount;//連続用
     public int exp;//経験値
     public int hp;
@@ -301,7 +301,7 @@ public class PlayerControl : MonoBehaviour
     {
         return timer;
     }
-    public static int ClearScore()
+    public static float ClearScore()
     {
         return scoreNumber;
     }
@@ -493,7 +493,7 @@ public class PlayerControl : MonoBehaviour
     {
         hp -= damage;
     }
-    public void Score(int score)
+    public void Score(float score)
     {
         scoreNumber += score;
         if (comboFlag == true)
@@ -546,23 +546,23 @@ public class PlayerControl : MonoBehaviour
     {
         if (combo >= 2)
         {
-            comboBonus = (int)1.2f;
+            comboBonus = 1.2f;
         }
         if (combo >= 4)
         {
-            comboBonus = (int)1.4f;
+            comboBonus = 1.4f;
         }
         if (combo >= 6)
         {
-            comboBonus = (int)1.6f;
+            comboBonus = 1.6f;
         }
         if (combo >= 8)
         {
-            comboBonus = (int)1.8f;
+            comboBonus = 1.8f;
         }
         if (combo >= 10)
         {
-            comboBonus = (int)2.0f;
+            comboBonus = 2.0f;
         }
     }
     //レベルアップパターン　②

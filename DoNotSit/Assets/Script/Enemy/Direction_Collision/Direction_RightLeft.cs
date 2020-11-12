@@ -14,7 +14,7 @@ public class Direction_RightLeft : MonoBehaviour
     Vector3 dir;
     GameObject playerObj;
     PlayerControl player;
-    public int score;
+    public float score;
     void Start()
     {
         isBurst = false;
