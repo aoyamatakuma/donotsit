@@ -14,8 +14,10 @@ public class GameClearScene : MonoBehaviour
     public AudioClip moveSE;
     public Text goalTimeText;
     public Text goalScoreText;
+    public Text rankText;
     float goaltimer;
     float goalscore;
+    string rank;
     bool isPush;
     Fade fade;
     // Start is called before the first frame update
@@ -26,14 +28,16 @@ public class GameClearScene : MonoBehaviour
         select = true;
         goaltimer = PlayerControl.TimeScore();
         goalscore = PlayerControl.ClearScore();
-        goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
-        goalScoreText.text = "Score:" + goalscore.ToString() ;//ゴールスコア
+       // rankText.text = "Rank:" + rank.ToString();
+        //goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
+        goalScoreText.text = "Score:" + goalscore.ToString();//ゴールスコア
         fade = GetComponent<Fade>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Rank();
         Select();
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
@@ -86,6 +90,13 @@ public class GameClearScene : MonoBehaviour
             select = false;
         }
 
+    }
+    void Rank()
+    {
+        if(goalscore>=0)
+        {
+            rank = "S";
+        }
     }
 
 }
