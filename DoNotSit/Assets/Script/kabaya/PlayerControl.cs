@@ -110,13 +110,13 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
 
-        
+        RayObject();
         //ノーマルステート
         if (currentPlayerState == PlayerState.Normal)//ノーマル
         {
             Invoke("Move", 0.0001f);//プレイに支障はないはず
             Jump();
-            RayObject();
+           
             PlayerWallMove();
             playerRig.velocity = Vector3.zero;
         }
@@ -331,7 +331,7 @@ public class PlayerControl : MonoBehaviour
                         hitPoint = hit.point;
                         //オブジェクトを取得
                         hitObject = hit.collider.gameObject;
-                        vecTest();
+                        test();
                     }
                     Debug.DrawRay(transform.position +(transform.up+ Vector3.right) * 1.6f * (i - 1), transform.up * rayline, Color.red, 0, true);                   
                 }
@@ -342,7 +342,7 @@ public class PlayerControl : MonoBehaviour
                 ob.SetActive(false);
             }
         }        
-        test();
+        
     }
 
     //壁との当たり判定
@@ -685,9 +685,9 @@ public class PlayerControl : MonoBehaviour
     //滑る床
     private void SripAction(GameObject col)
     {
-        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+        if (wa.Height(true) - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
         {
-            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+            if (wa.Height(false) + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
@@ -708,7 +708,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
+            if (wa.Width(true) - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false) + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
@@ -733,37 +733,41 @@ public class PlayerControl : MonoBehaviour
     {
         //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
+        float x = hitPoint.x;
+        float y = hitPoint.y;
+
+        x *= 10;
+        y *= 10;
+
+        x = Mathf.Floor(x) / 10;
+        y = Mathf.Floor(y) / 10;
+
         //どの位置にあたったか判定し回転する
-        if (wa.Height(true).y > hitPoint.y)
+        if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
         {
-            if (hitPoint.x > wa.Width(true).x)
-            {
-                playerRot = Vector3.forward * 270;
-            }
-            else if (hitPoint.x < wa.Width(false).x)
-            {
-                playerRot = Vector3.forward * 90;
-            }
-            else
-            {
-                playerRot = Vector3.forward * 180;
-            }
+            Debug.Log("Up");
+            playerRot = Vector3.forward * 0;
         }
-        else
+        else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
         {
-            if (hitPoint.x > wa.Width(true).x)
-            {
-                playerRot = Vector3.forward * 270;
-            }
-            else if (hitPoint.x < wa.Width(false).x)
-            {
-                playerRot = Vector3.forward * 90;
-            }
-            else
-            {
-                playerRot = Vector3.forward * 0;
-            }
+            Debug.Log("Down");
+            playerRot = Vector3.forward * 180;
         }
+        else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
+        {
+            Debug.Log("Right");
+            playerRot = Vector3.forward * 270;
+        }
+        else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
+        {
+            Debug.Log("Left");
+            playerRot = Vector3.forward * 90;
+        }
+        Debug.Log(wa.Width(true));
+        Debug.Log(wa.Width(false));
+        Debug.Log(wa.Height(true));
+        Debug.Log(wa.Height(false));
+        Debug.Log(x + "to" + y);
         wallNum = wa.abilityNumber;
     }
     private void coltest()
@@ -771,15 +775,15 @@ public class PlayerControl : MonoBehaviour
         //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
         //どの位置にあたったか判定し回転する
-        if (wa.Height(true).y > gameObject.transform.position.y)
+        if (wa.Height(true) > gameObject.transform.position.y)
         {
-            if ((int)wa.Height(false).y <= (int)gameObject.transform.position.y)
+            if ((int)wa.Height(false) <= (int)gameObject.transform.position.y)
             {
-                if (gameObject.transform.position.x > wa.Width(true).x)
+                if (gameObject.transform.position.x > wa.Width(true))
                 {
                     playerRot = Vector3.forward * 270;
                 }
-                else if (gameObject.transform.position.x < wa.Width(false).x)
+                else if (gameObject.transform.position.x < wa.Width(false))
                 {
                     playerRot = Vector3.forward * 90;
                 }
@@ -795,11 +799,11 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (gameObject.transform.position.x > wa.Width(true).x)
+            if (gameObject.transform.position.x > wa.Width(true))
             {
                 playerRot = Vector3.forward * 270;
             }
-            else if (gameObject.transform.position.x < wa.Width(false).x)
+            else if (gameObject.transform.position.x < wa.Width(false))
             {
                 playerRot = Vector3.forward * 90;
             }
@@ -814,37 +818,27 @@ public class PlayerControl : MonoBehaviour
     private void vecTest()
     {
         wa = hitObject.GetComponent<WallAbility>();
-        //どの位置にあたったか判定し回転する
-        if (wa.Height(true).y > hitPoint.y)
+        if (hitPoint.y == wa.Height(true))
         {
-            if (hitPoint.x > wa.Width(true).x)
-            {
-                Debug.Log("Right");
-            }
-            else if (hitPoint.x < wa.Width(false).x)
-            {
-                Debug.Log("Left");
-            }
-            else
-            {
-                Debug.Log("Down");
-            }
+            Debug.Log("Up");
         }
-        else
+        else if (hitPoint.y == wa.Height(false))
         {
-            if (hitPoint.x > wa.Width(true).x)
-            {
-                Debug.Log("みぎ");
-            }
-            else if (hitPoint.x < wa.Width(false).x)
-            {
-                Debug.Log("ひだり");
-            }
-            else
-            {
-                Debug.Log("Up");
-            }
+            Debug.Log("Down");
         }
+        else if (hitPoint.x == wa.Width(true))
+        {
+            Debug.Log("Right");
+        }
+        else if (hitPoint.x == wa.Width(false))
+        {
+            Debug.Log("Left");
+        }
+        Debug.Log(wa.Width(true));
+        Debug.Log(wa.Width(false));
+        Debug.Log(wa.Height(true));
+        Debug.Log(wa.Height(false));
+        Debug.Log(hitPoint);
     }
 
     private void PlayerWallMove()
