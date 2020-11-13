@@ -12,7 +12,7 @@ public class ExplanationText : MonoBehaviour
     [Header("追ってくる敵との判定か")]
     public bool isChaseEnemy;
     bool isActive;
-    float activeCnt;
+    public float activeCnt;
     float cnt;
     // Start is called before the first frame update
     void Start()

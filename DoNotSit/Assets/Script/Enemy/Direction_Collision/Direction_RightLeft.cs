@@ -88,7 +88,6 @@ public class Direction_RightLeft : MonoBehaviour
     {
         float num = Random.Range(0f, 1f);
         dir = new Vector3(0f, num, 0f);
-        Debug.Log(dir);
     }
 
     void Damage(Collider col)
