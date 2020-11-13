@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Direction_RightLeft : MonoBehaviour
 {
+    public GameObject damageUI;
     public bool isRight;
     bool isBurst;
     public float maxBurstSpeed;
@@ -17,11 +18,15 @@ public class Direction_RightLeft : MonoBehaviour
     public float score;
     void Start()
     {
+        //damageUI.GetComponent<ScoreAddUI>().SetScore(score);
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
         RandomDirection();
+        damageUI.GetComponent<ScoreAddUI>().SetScore(score);
+        damageUI.SetActive(false);
+      
     }
 
     void Update()
@@ -45,6 +50,7 @@ public class Direction_RightLeft : MonoBehaviour
             if (player.currentPlayerState == PlayerState.Attack)
             {
                 isBurst = true;
+                Damage(col);
                 camera.Shake(camera.durations, camera.magnitudes);
             }
         }
@@ -52,25 +58,19 @@ public class Direction_RightLeft : MonoBehaviour
         if (col.gameObject.tag == "Bomb" || col.gameObject.tag == "BlowAway")
         {
             isBurst = true;
+            Damage(col);
             camera.Shake(camera.durations, camera.magnitudes);
         }
 
         if ((col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy" || col.gameObject.tag == "ChaseEnemy") && isBurst)
         {
             player.Score(score);
+           // Damage(col);
             Death();
         }
 
         if(col.gameObject.tag == "ChaseEnemy")
         {
-            Death();
-        }
-    }
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "BackObj" && isBurst)
-        {
-            player.Score(score);
             Death();
         }
     }
@@ -90,4 +90,16 @@ public class Direction_RightLeft : MonoBehaviour
         dir = new Vector3(0f, num, 0f);
         Debug.Log(dir);
     }
+
+    void Damage(Collider col)
+    {
+        damageUI.SetActive(true);
+        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
+        damageUI.transform.position = col.bounds.center - Camera.main.transform.forward * 1f;
+        damageUI.transform.SetParent(null);
+        //var obj = Instantiate<GameObject>(damageUI, col.bounds.center - Camera.main.transform.forward * 0.2f, Quaternion.identity);
+        //obj.GetComponent<ScoreAddUI>().SetScore(score);
+    }
+
+
 }
