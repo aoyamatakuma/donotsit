@@ -32,8 +32,10 @@ public class Direction_RightLeft : MonoBehaviour
     void Update()
     {
         Move();
+       // damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
     }
 
+ 
     void Move()
     {
         if (!isBurst)
@@ -93,7 +95,7 @@ public class Direction_RightLeft : MonoBehaviour
     void Damage(Collider col)
     {
         damageUI.SetActive(true);
-        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
+        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo +1);
         damageUI.transform.position = col.bounds.center - Camera.main.transform.forward * 1f;
         damageUI.transform.SetParent(null);
         //var obj = Instantiate<GameObject>(damageUI, col.bounds.center - Camera.main.transform.forward * 0.2f, Quaternion.identity);
