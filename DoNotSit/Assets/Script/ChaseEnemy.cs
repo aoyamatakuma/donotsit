@@ -221,10 +221,10 @@ public class ChaseEnemy : MonoBehaviour
     //レベルダウン
     public void LevelDown()
     {
-        exp -= 7.0f;
-        level -= 1;
-        speed = speedDefalut;
-      //  StartCoroutine("SutanTime");
+        //exp -= 7.0f;
+        //level -= 1;
+        //speed = speedDefalut;
+       StartCoroutine("SutanTime");
     }
     IEnumerator SutanTime()
     {
