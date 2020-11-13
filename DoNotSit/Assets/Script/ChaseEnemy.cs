@@ -11,7 +11,8 @@ public enum ChaseState
     LEVLE2,
     LEVLE3,
     LEVLE4,
-    LEVLE5
+    LEVLE5,
+    Clear
 };
 public class ChaseEnemy : MonoBehaviour
 {
