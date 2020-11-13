@@ -41,14 +41,18 @@ public class CameraEvent : MonoBehaviour
             enemy.transform.position = pos;
         }
 
-        if (isMove)
+        if (isEvent)
         {
-            CameraMove(enemy.transform);
+            if (isMove)
+            {
+                CameraMove(enemy.transform);
+            }
+            else
+            {
+                CameraMove(player.transform);
+            }
         }
-        else
-        {
-            CameraMove(player.transform);
-        }
+       
     }
 
     //カメラの回転

@@ -9,8 +9,10 @@ public class ExplanationText : MonoBehaviour
     Text text;
     [Multiline]
     public string explanationText;
+    [Header("追ってくる敵との判定か")]
+    public bool isChaseEnemy;
     bool isActive;
-    public float activeCnt;
+    float activeCnt;
     float cnt;
     // Start is called before the first frame update
     void Start()
@@ -30,16 +32,29 @@ public class ExplanationText : MonoBehaviour
             if(cnt >= activeCnt)
             {
                 explanationObj.SetActive(false);
+                Destroy(gameObject);
             }
         }
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Player" && !isActive)
+        if (!isChaseEnemy)
         {
-            explanationObj.SetActive(true);
-            isActive = true;
+            if (col.gameObject.tag == "Player" && !isActive)
+            {
+                explanationObj.SetActive(true);
+                isActive = true;
+            }
         }
+        else
+        {
+            if(col.gameObject.tag == "ChaseEnemy" && !isActive)
+            {
+                explanationObj.SetActive(true);
+                isActive = true;
+            }
+        }
+      
     }
 }
