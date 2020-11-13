@@ -717,8 +717,8 @@ MonoBehaviour:
   goalScoreText: {fileID: 1369032750}
   rankText: {fileID: 1761893961}
   SA: 10000
-  B: 4000
-  C: 400
+  B: 5000
+  C: 500
   rank: 
 --- !u!82 &970608958
 AudioSource:
