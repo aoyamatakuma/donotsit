@@ -375,6 +375,11 @@ public class PlayerControl : MonoBehaviour
                     case 2://反射
                         ReflectAction();
                         break;
+                    case 4://とげ
+                        restratFlag = true;
+                        ReflectActionCount();
+                        StartCoroutine("ThornTime");
+                        break;
                     case 6://斜め着地左
                         currentPlayerState = PlayerState.Normal;
                         SkewBlockLeft(col.gameObject);
