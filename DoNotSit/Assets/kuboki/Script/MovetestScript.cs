@@ -273,9 +273,9 @@ public class MovetestScript : MonoBehaviour
         if(!reflect)
         {
             //どこにあたったかで角度を決める
-            if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+            if (wa.Height(true) - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
             {
-                if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+                if (wa.Height(false) + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
                 {
                     if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                     {
@@ -296,7 +296,7 @@ public class MovetestScript : MonoBehaviour
             }
             else
             {
-                if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
+                if (wa.Width(true) - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false) + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
                 {
                     if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                     {
@@ -351,9 +351,9 @@ public class MovetestScript : MonoBehaviour
     //滑る床
     private void SripAction(GameObject col)
     {
-        if (wa.Height(true).y - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+        if (wa.Height(true) - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
         {
-            if (wa.Height(false).y + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+            if (wa.Height(false)+ (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
@@ -374,7 +374,7 @@ public class MovetestScript : MonoBehaviour
         }
         else
         {
-            if (wa.Width(true).x - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false).x + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
+            if (wa.Width(true) - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false) + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
