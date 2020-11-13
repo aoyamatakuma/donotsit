@@ -18,8 +18,7 @@ public class ExplanationText : MonoBehaviour
     void Start()
     {
         cnt = 0;
-        text = explanationObj.transform.GetChild(0).GetComponent<Text>();
-        text.text = explanationText;
+        text = explanationObj.transform.GetChild(0).GetComponent<Text>();    
         explanationObj.SetActive(false);
     }
 
@@ -37,22 +36,27 @@ public class ExplanationText : MonoBehaviour
         }
     }
 
+    void ActiveText()
+    {
+        explanationObj.SetActive(true);
+        text.text = explanationText;
+        isActive = true;
+    }
+
     void OnTriggerEnter(Collider col)
     {
         if (!isChaseEnemy)
         {
             if (col.gameObject.tag == "Player" && !isActive)
             {
-                explanationObj.SetActive(true);
-                isActive = true;
+                ActiveText();
             }
         }
         else
         {
             if(col.gameObject.tag == "ChaseEnemy" && !isActive)
             {
-                explanationObj.SetActive(true);
-                isActive = true;
+                ActiveText();
             }
         }
       
