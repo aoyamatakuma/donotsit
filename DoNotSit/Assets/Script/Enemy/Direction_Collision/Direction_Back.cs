@@ -11,7 +11,7 @@ public class Direction_Back: MonoBehaviour
     private CameraShakeScript camera;
     public List<GameObject> effects;
     PlayerControl player;
-    public int score;
+    public float score;
 
     void Start()
     {

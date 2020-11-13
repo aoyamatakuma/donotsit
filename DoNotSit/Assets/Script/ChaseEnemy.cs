@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ChaseState
+{
+    Normal,
+    Stop,
+    LEVLE1,
+    LEVLE2,
+    LEVLE3,
+    LEVLE4,
+    LEVLE5,
+    Clear
+};
 public class ChaseEnemy : MonoBehaviour
 {
     public int enemyHitLimit;
@@ -23,6 +34,9 @@ public class ChaseEnemy : MonoBehaviour
     public float attackLimit;//限界
     public Transform point;
     public bool belooFlag;
+    public GameObject carsol;
+  public ChaseState currentChaseState;
+    public float wait;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +45,7 @@ public class ChaseEnemy : MonoBehaviour
              transform.position.y,
              transform.position.z);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        currentChaseState = ChaseState.LEVLE1;
     }
 
     // Update is called once per frame
@@ -39,30 +54,33 @@ public class ChaseEnemy : MonoBehaviour
         cnt += Time.deltaTime;
         if (cnt > delay)
         {
-            LevelUp();
-            if (hitCnt >= enemyHitLimit)
+            if (currentChaseState != ChaseState.Stop)
             {
-                //下がる処理ここに
-                LevelDown();
-                hitCnt = 0;
+                LevelUp();
+                if (hitCnt >= enemyHitLimit)
+                {
+                    //下がる処理ここに
+                    LevelDown();
+                    hitCnt = 0;
+                }
+                switch (ChaseType)
+                {
+                    case 1://右
+                        Right();
+                        Attack();
+                        break;
+                    case 2://左
+                        Left();
+                        break;
+                    case 3://上
+                        Up();
+                        break;
+                    case 4://下
+                        Down();
+                        break;
+                }
+
             }
-            switch (ChaseType)
-            {
-                case 1://右
-                    Right();
-                    Attack();
-                    break;
-                case 2://左
-                    Left();
-                    break;
-                case 3://上
-                    Up();
-                    break;
-                case 4://下
-                    Down();
-                    break;
-            }
-         
         }
     }
 
@@ -122,7 +140,9 @@ public class ChaseEnemy : MonoBehaviour
             if (!belooFlag)
             {
                 belooFlag = true;
-                Instantiate(bello, point.transform.position, bello.transform.rotation);
+                carsol.SetActive(true);
+                var parent = this.transform;
+                Instantiate(bello, point.transform.position, bello.transform.rotation,parent);
                 attackCount = 0;
             }
         }
@@ -137,12 +157,17 @@ public class ChaseEnemy : MonoBehaviour
         if (level == 0)//レベル1
         {
             level = 1;
+            if(level==1)
+            {
+                currentChaseState = ChaseState.LEVLE1;
+            }
         }
         if (exp >= 5.0f)//レベル2
         {
             level = 2;
             if (level == 2)
             {
+                currentChaseState = ChaseState.LEVLE2;
                 speed = speedDefalut;
                 if (speed == speedDefalut)
                 {
@@ -156,6 +181,7 @@ public class ChaseEnemy : MonoBehaviour
             level = 3;
             if (level == 3)
             {
+                currentChaseState = ChaseState.LEVLE3;
                 speed = speedDefalut;
                 if (speed == speedDefalut)
                 {
@@ -169,6 +195,7 @@ public class ChaseEnemy : MonoBehaviour
             level = 4;
             if (level == 4)
             {
+                currentChaseState = ChaseState.LEVLE4;
                 speed = speedDefalut;
                 if (speed == speedDefalut)
                 {
@@ -182,6 +209,7 @@ public class ChaseEnemy : MonoBehaviour
             level = 5;
             if (level == 5)
             {
+                currentChaseState = ChaseState.LEVLE5;
                 speed = speedDefalut;
                 if (speed == speedDefalut)
                 {
@@ -193,8 +221,16 @@ public class ChaseEnemy : MonoBehaviour
     //レベルダウン
     public void LevelDown()
     {
-        exp -= 7.0f;
-        level -= 1;
-        speed = speedDefalut;
+        //exp -= 7.0f;
+        //level -= 1;
+        //speed = speedDefalut;
+       StartCoroutine("SutanTime");
+    }
+    IEnumerator SutanTime()
+    {
+        currentChaseState = ChaseState.Stop;
+        yield return new WaitForSeconds(wait);
+        currentChaseState = ChaseState.Normal;
+        yield break;
     }
 }

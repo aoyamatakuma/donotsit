@@ -20,7 +20,6 @@ public class NormalEnemy : NormalEnemyAI
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("触っているか" + isTouch);
         if (!isDead)
         {
             base.Move(speed);
@@ -51,7 +50,7 @@ public class NormalEnemy : NormalEnemyAI
             }
             else
             {
-                player.Damage(damage); ;
+                player.Damage(damage); 
             }
 
         }

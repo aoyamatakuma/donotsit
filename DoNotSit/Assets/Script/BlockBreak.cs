@@ -9,8 +9,7 @@ public class BlockBreak : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "ChaseEnemy")
-        {
-            Debug.Log("当たったあ");
+        { 
             Death();
         }
     }
