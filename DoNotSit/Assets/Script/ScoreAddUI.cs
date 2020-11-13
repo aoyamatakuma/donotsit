@@ -23,6 +23,7 @@ public class ScoreAddUI : MonoBehaviour
         transform.position += Vector3.up * moveSpeed * Time.deltaTime;
 
         scoreText.color = Color.Lerp(scoreText.color, new Color(1f, 0f, 0f, 0f), fadeOutSpeed * Time.deltaTime);
+        comboText.color = Color.Lerp(comboText.color, new Color(1f, 0f, 0f, 0f), fadeOutSpeed * Time.deltaTime);
 
         if (scoreText.color.a <= 0.1f)
         {
@@ -32,7 +33,7 @@ public class ScoreAddUI : MonoBehaviour
 
     public void SetScore(float score)
     {
-        scoreText.text = score.ToString();
+        scoreText.text = "+"+score.ToString();
     }
 
     public void SetCombo(float combo)

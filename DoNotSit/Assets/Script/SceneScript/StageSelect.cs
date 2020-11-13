@@ -39,7 +39,7 @@ public class StageSelect : MonoBehaviour
             // SceneManager.LoadScene("Stage" + selectNum + 1);
             if (selectNum == 0)
             {
-                fade.StartFadeIn("StageTest",true);
+                fade.StartFadeIn("Stage1-1", true);
             }
         }
     }
