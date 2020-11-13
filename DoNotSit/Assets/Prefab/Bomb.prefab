@@ -107,5 +107,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f39e432c063594b9625cd1c7a1be0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 1827235202747734, guid: ae496843c5d4f104c9c4f45ec05c6c46, type: 3}
+  effect: {fileID: 1827235202747734, guid: 8ee1ad6dd64423c468ca78a4169a1810, type: 3}
   bombRange: 2
