@@ -26,10 +26,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/StageTest.unity
-    guid: 48226ebf178a3e349bb30cc61619963d
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Stage1-1.unity
     guid: 744be0d9bd7c2274194831f663bd43d9
+  - enabled: 1
+    path: Assets/Scenes/RankingTest.unity
+    guid: fc2fc500a3068cb419b46d60f21e38d4
   m_configObjects: {}

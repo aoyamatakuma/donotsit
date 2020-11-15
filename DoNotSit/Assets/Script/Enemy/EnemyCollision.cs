@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
-    public GameObject damageUI;
+    //public GameObject damageUI;
     public int damage;
     private CameraShakeScript camera;
     public List<GameObject> effects;
@@ -15,8 +15,8 @@ public class EnemyCollision : MonoBehaviour
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
-        damageUI.GetComponent<ScoreAddUI>().SetScore(score);
-        damageUI.SetActive(false);
+        //damageUI.GetComponent<ScoreAddUI>().SetScore(score);
+        //damageUI.SetActive(false);
     }
 
     void OnTriggerEnter(Collider col)
@@ -26,7 +26,7 @@ public class EnemyCollision : MonoBehaviour
            
             if (player.currentPlayerState == PlayerState.Attack)
             {
-                Damage(col);
+              //  Damage(col);
                 Death();
             }
             else
@@ -40,7 +40,7 @@ public class EnemyCollision : MonoBehaviour
     {
         if (col.gameObject.tag == "Bomb" || col.gameObject.tag =="BlowAway")
         {
-            Damage(col);
+           // Damage(col);
             Death();
         }
     }
@@ -55,14 +55,14 @@ public class EnemyCollision : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void Damage(Collider col)
-    {
-        damageUI.SetActive(true);
-        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo + 1);
-        damageUI.transform.position = col.bounds.center - Camera.main.transform.forward * 1f;
-        damageUI.transform.SetParent(null);
+    //void Damage(Collider col)
+    //{
+    //    damageUI.SetActive(true);
+    //    damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo + 1);
+    //    damageUI.transform.position = col.bounds.center - Camera.main.transform.forward * 1f;
+    //    damageUI.transform.SetParent(null);
         
-    }
+    //}
 
 
 }

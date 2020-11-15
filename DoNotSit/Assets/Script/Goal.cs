@@ -16,6 +16,7 @@ public class Goal : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
+            StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
             fade.StartFadeIn("GameClear",false);
         }
     }
