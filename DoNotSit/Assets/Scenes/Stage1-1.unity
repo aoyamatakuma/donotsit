@@ -6572,6 +6572,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3541657882059365162, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: comboText
@@ -6597,10 +6602,20 @@ PrefabInstance:
       propertyPath: ReflectCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5360018980928837898, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 5840411550740238893, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: m_Volume
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891687978368922209, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7295156237717097828, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
@@ -6676,6 +6691,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player_Ra
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438041356520067481, guid: 35838777adc215345b12d8de9cb1f842,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35838777adc215345b12d8de9cb1f842, type: 3}
