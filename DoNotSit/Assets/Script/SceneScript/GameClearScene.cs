@@ -38,6 +38,8 @@ public class GameClearScene : MonoBehaviour
         //goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
         goalScoreText.text = "Score:" + goalscore.ToString();//ゴールスコア
         fade = GetComponent<Fade>();
+        // Type == Number の場合
+        QuickRanking.Instance.SaveRanking("hoge",(int)goalscore);
     }
 
     // Update is called once per frame
@@ -51,8 +53,7 @@ public class GameClearScene : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (select)
             {
-
-                fade.StartFadeIn("StageSelect", true);
+                fade.StartFadeIn("RankingTest", true);
             }
             else
             {
