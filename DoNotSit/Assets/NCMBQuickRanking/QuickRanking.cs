@@ -66,7 +66,7 @@ public class QuickRanking : MonoBehaviour
                     rankingDataList.Add(new RankingData(
                          num++,
                          name: obj["Name"] as string,
-                         stageNum: obj["StageNumber"] as string,
+                         stageNumber: obj["StageNumber"] as string,
                          score: Convert.ToInt32(obj["Score"]),
                          objectid: obj.ObjectId
 
@@ -79,7 +79,7 @@ public class QuickRanking : MonoBehaviour
         });
     }
 
-    public void SaveRanking(string name,String stageNum, int score, UnityAction callback = null)
+    public void SaveRanking(string name,string stageNumber, int score, UnityAction callback = null)
     {
         //スコアがゼロなら登録しない//
         if (CheckNCMBValid() == false || score <= 0)
@@ -96,7 +96,7 @@ public class QuickRanking : MonoBehaviour
 
         // オブジェクトに値を設定
         ncmbObject["Name"] = name;
-        ncmbObject["StageNumber"] = stageNum;
+        ncmbObject["StageNumber"] = stageNumber;
         ncmbObject["Score"] = score;
 
         // データストアへの登録
@@ -141,17 +141,17 @@ public class QuickRanking : MonoBehaviour
             {
                 string rankNum = string.Format("{0, 2}", rankingData.rankNum);
                 string name = string.Format("{0, -10}", rankingData.name);
-                string stageNum = string.Format("{0, -10}", rankingData.name);
+                string stageNumber = string.Format("{0, -10}", rankingData.stageNumber);
                 string score = string.Format("{0, -10}", rankingData.score.ToString());
 
                 //さっき保存したスコアがあった場合は赤に着色する//
                 if (rankingData.objectid == currentObjectid)
                 {
-                    text += "<color=red>" + rankNum + ": \t" + name + ": \t" + stageNum + ": \t" + score + "</color> \n";
+                    text += "<color=red>" + "\t" + rankNum + ": \t" + name + ": \t" + stageNumber + ": \t" + score + "</color> \n";
                 }
                 else
                 {
-                    text += rankNum + ": \t" + name + ": \t" + stageNum + ": \t" + score + "\n";
+                    text += rankNum + ": \t" + name + ": \t" + stageNumber + ": \t" + score + "\n";
                 }
             }
 
@@ -209,15 +209,15 @@ public class RankingData
 {
     public readonly int rankNum;//順位（本クラス内でつける）//
     public readonly string name;//プレイヤー名//
-    public readonly string stageNum;
+    public readonly string stageNumber;
     public readonly int score;//点数//
     public readonly string objectid;//NCMBのオブジェクトID//
 
-    public RankingData(int rankNum, string name,string stageNum, int score, string objectid)
+    public RankingData(int rankNum, string name,string stageNumber, int score, string objectid)
     {
         this.rankNum = rankNum;
         this.name = name;
-        this.stageNum = stageNum;
+        this.stageNumber = stageNumber;
         this.score = score;
         this.objectid = objectid;
     }

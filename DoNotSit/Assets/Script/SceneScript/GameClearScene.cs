@@ -12,6 +12,8 @@ public class GameClearScene : MonoBehaviour
     public GameObject rankA;
     public GameObject rankB;
     public GameObject rankC;
+    public InputField inputField;
+    public Text nameText;
     private bool select;
     private AudioSource audio;
     public AudioClip selectSE;
@@ -41,7 +43,7 @@ public class GameClearScene : MonoBehaviour
         fade = GetComponent<Fade>();
         stageName = StageDate.Instance.referer;
         // Type == Number の場合
-        QuickRanking.Instance.SaveRanking("hoge",stageName,(int)goalscore);
+  
     }
 
     // Update is called once per frame
@@ -55,6 +57,7 @@ public class GameClearScene : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (select)
             {
+                QuickRanking.Instance.SaveRanking(nameText.text, stageName, (int)goalscore);
                 fade.StartFadeIn("RankingTest", true);
             }
             else
@@ -147,5 +150,9 @@ public class GameClearScene : MonoBehaviour
             }
         }
     }
+
+
+
+
 
 }

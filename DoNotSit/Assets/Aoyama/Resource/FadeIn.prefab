@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 770964606592112832}
   - component: {fileID: 770964606592112833}
   - component: {fileID: 770964606592112834}
+  - component: {fileID: -3273291450530758949}
   m_Layer: 5
   m_Name: FadeIn
   m_TagString: Untagged
@@ -99,6 +100,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-3273291450530758949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770964606592112835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9054034028fee9341900438873dee560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 1.5
+  isChaseHit: 0
 --- !u!1 &770964606805053476
 GameObject:
   m_ObjectHideFlags: 0
