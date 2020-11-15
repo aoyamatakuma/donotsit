@@ -10,7 +10,7 @@ public class MoveWall : MonoBehaviour
     public float returntimer;
     void Start()
     {
-        isReturn = false;
+        
     }
 
     // Update is called once per frame
