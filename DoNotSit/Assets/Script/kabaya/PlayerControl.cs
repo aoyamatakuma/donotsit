@@ -72,7 +72,7 @@ public class PlayerControl : MonoBehaviour
     int wallNum;
     bool colFlag;
     Fade fade;
-
+    int damage = 1;
     //
     public float angleSpeed = 1;
     public float angleLimit=40;
@@ -83,7 +83,8 @@ public class PlayerControl : MonoBehaviour
 
     public int ReflectCount;
     private int refCount = 0;
-   
+    [SerializeField]
+    private LifeGauge life;
 
     // Start is called before the first frame update
     void Start()
@@ -101,10 +102,11 @@ public class PlayerControl : MonoBehaviour
         timer = starttimer;
         scoreNumber = 0;
         fade = GetComponent<Fade>();
-        audio = GetComponent<AudioSource>();            
+        audio = GetComponent<AudioSource>();
+        life = GameObject.Find("HPpanel").GetComponent<LifeGauge>();
         SetAngle();
         refCount = ReflectCount;
-        
+        life.SetLifeGauge(hp);
     }
 
     // Update is called once per frame
@@ -133,7 +135,7 @@ public class PlayerControl : MonoBehaviour
         //タイマー
         timer += 1.0f * Time.deltaTime;
         comboText.text = combo.ToString()+ "COMOBO!";//コンボ
-        hpText.text = "HP:" + hp.ToString();
+        hpText.text = "HP:";
         scoreText.text =  scoreNumber.ToString();
         Combo();//コンボ関連
         ReverseMove();//反転スティック
@@ -498,6 +500,10 @@ public class PlayerControl : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
+        if (damage > 0)
+        {
+            life.SetLifeGauge2(damage);
+        }
     }
     public void Score(float score)
     {
@@ -513,7 +519,7 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         if (restratFlag == true)
         {
-           hp--;
+            Damage(damage);
            var parent = this.transform;
            Instantiate(sperkEffect, transform.position, transform.rotation,parent);
         }
