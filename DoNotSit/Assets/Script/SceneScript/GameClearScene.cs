@@ -21,6 +21,7 @@ public class GameClearScene : MonoBehaviour
     public Text rankText;
     float goaltimer;
     float goalscore;
+    string stageName;
     public float SA;
     public float B;
     public float C;
@@ -38,8 +39,9 @@ public class GameClearScene : MonoBehaviour
         //goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
         goalScoreText.text = "Score:" + goalscore.ToString();//ゴールスコア
         fade = GetComponent<Fade>();
+        stageName = StageDate.Instance.referer;
         // Type == Number の場合
-        QuickRanking.Instance.SaveRanking("hoge",(int)goalscore);
+        QuickRanking.Instance.SaveRanking("hoge",stageName,(int)goalscore);
     }
 
     // Update is called once per frame
