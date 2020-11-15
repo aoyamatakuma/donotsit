@@ -37,6 +37,7 @@ public class ChaseEnemy : MonoBehaviour
     public GameObject carsol;
   public ChaseState currentChaseState;
     public float wait;
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +46,7 @@ public class ChaseEnemy : MonoBehaviour
              transform.position.y,
              transform.position.z);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        animator = GetComponent<Animator>();
         currentChaseState = ChaseState.LEVLE1;
     }
 
@@ -54,6 +56,7 @@ public class ChaseEnemy : MonoBehaviour
         cnt += Time.deltaTime;
         if (cnt > delay)
         {
+            Animation();
             if (currentChaseState != ChaseState.Stop)
             {
                 LevelUp();
@@ -89,6 +92,17 @@ public class ChaseEnemy : MonoBehaviour
         if(col.gameObject.tag == "BlowAway")
         {
             hitCnt++;
+        }
+    }
+    void Animation()
+    {
+        if (currentChaseState == ChaseState.Stop)
+        {
+            animator.SetBool("Sutan", true);   
+        }
+        else
+        {
+            animator.SetBool("Sutan", false);
         }
     }
     //右
