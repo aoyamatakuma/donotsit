@@ -61,6 +61,8 @@ public class PlayerControl : MonoBehaviour
     AudioSource audio;
     public AudioClip jumpSE;
     public GameObject effectPos;
+    public GameObject attackEffect;
+    public GameObject sperkEffect;
     private float maxAngleSet;
     private float minAngleSet;
 
@@ -119,10 +121,12 @@ public class PlayerControl : MonoBehaviour
            
             PlayerWallMove();
             playerRig.velocity = Vector3.zero;
+            attackEffect.SetActive(false);
         }
         if (currentPlayerState == PlayerState.Attack)//アタック中
         {
             ob.SetActive(false);
+            attackEffect.SetActive(true);
         }
         if (currentPlayerState == PlayerState.Stop)//ストップ中
         {
@@ -513,6 +517,8 @@ public class PlayerControl : MonoBehaviour
         if (restratFlag == true)
         {
            hp--;
+           var parent = this.transform;
+           Instantiate(sperkEffect, transform.position, transform.rotation,parent);
         }
         restratFlag = false;
         yield break;
