@@ -1367,6 +1367,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectObjects:
   - {fileID: 184387845}
+  - {fileID: 879455023}
+  - {fileID: 1453917976}
+  - {fileID: 837353396}
   rightObj: {fileID: 1254312700}
   leftObj: {fileID: 1864477274}
   selectSE: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}

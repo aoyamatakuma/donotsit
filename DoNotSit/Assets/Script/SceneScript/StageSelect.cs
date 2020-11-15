@@ -39,7 +39,19 @@ public class StageSelect : MonoBehaviour
             // SceneManager.LoadScene("Stage" + selectNum + 1);
             if (selectNum == 0)
             {
-                fade.StartFadeIn("Stage1-1", true);
+                fade.StartFadeIn("StageEasy", true);
+            }
+            else if(selectNum == 1)
+            {
+               // fade.StartFadeIn("StageEasy", true);
+            }
+            else if (selectNum == 2)
+            {
+                // fade.StartFadeIn("StageEasy", true);
+            }
+            else 
+            {
+                // fade.StartFadeIn("StageEasy", true);
             }
         }
     }
