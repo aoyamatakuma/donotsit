@@ -6,12 +6,11 @@ using UnityEngine.UI;
 
 public class StageSelect : MonoBehaviour
 {
-    public List<GameObject> selectObjects;
-    public GameObject rightObj;
-    public GameObject leftObj;
+    public List<Image> selectObjects;
     private int selectNum;
     private bool isSelect;
     private bool isMove;
+    public Color selectColor;
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
@@ -64,9 +63,9 @@ public class StageSelect : MonoBehaviour
         }
         for (int i = 0; i < selectObjects.Count; i++)
         {
-            selectObjects[i].SetActive(false);
+            selectObjects[i].color = selectColor;
         }
-        selectObjects[selectNum].SetActive(true);
+        selectObjects[selectNum].color = new Color(1f, 1f, 1f);
         isSelect = true;
     }
 
@@ -76,7 +75,7 @@ public class StageSelect : MonoBehaviour
         if (hol < -0.5f && !isMove)
         {
             selectNum--;
-            StartCoroutine(ChangeCoroutine(false));
+            StartCoroutine(ChangeCoroutine());
             if (selectNum < 0)
             {
                 selectNum = 0;
@@ -87,7 +86,7 @@ public class StageSelect : MonoBehaviour
         if (hol > 0.5f && !isMove)
         {
             selectNum++;
-            StartCoroutine(ChangeCoroutine(true));
+            StartCoroutine(ChangeCoroutine());
             if (selectNum > selectObjects.Count - 1)
             {
                 selectNum = selectObjects.Count - 1;
@@ -98,31 +97,14 @@ public class StageSelect : MonoBehaviour
         Select();
     }
 
-    IEnumerator ChangeCoroutine(bool isRight)
+    IEnumerator ChangeCoroutine()
     {
         isMove = true;
         if (selectNum >= 0 && selectNum < selectObjects.Count)
         {
-            audio.PlayOneShot(moveSE);
-
-
-            if (isRight)
-            {
-                rightObj.GetComponent<Outline>().enabled = true;
-            }
-            else
-            {
-                leftObj.GetComponent<Outline>().enabled = true;
-            }
+            audio.PlayOneShot(moveSE);     
             yield return new WaitForSeconds(0.4f);
-            if (isRight)
-            {
-                rightObj.GetComponent<Outline>().enabled = false;
-            }
-            else
-            {
-                leftObj.GetComponent<Outline>().enabled = false;
-            }
+           
         }
         isMove = false;
     }
