@@ -500,6 +500,12 @@ public class PlayerControl : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
+        if (hp < 0)
+        {
+            //　ダメージ調整
+            damage = Mathf.Abs(hp + damage);
+            hp = 0;
+        }
         if (damage > 0)
         {
             life.SetLifeGauge2(damage);
