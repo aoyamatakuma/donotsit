@@ -585,7 +585,7 @@ MonoBehaviour:
   - {fileID: 2011640992}
   - {fileID: 1669614871}
   moveSE: {fileID: 8300000, guid: c80a176bba4a1b84e84995183772665b, type: 3}
-  selectSE: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  selectSE: {fileID: 8300000, guid: 206f263c04bf72c45a89066ac4f8e445, type: 3}
 --- !u!82 &970608958
 AudioSource:
   m_ObjectHideFlags: 0

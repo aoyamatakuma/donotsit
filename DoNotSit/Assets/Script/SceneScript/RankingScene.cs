@@ -11,9 +11,9 @@ public class RankingScene : MonoBehaviour
     public GameObject title;
 
     private bool select;
-    //private AudioSource audio;
-    //public AudioClip selectSE;
-    //public AudioClip moveSE;
+    private AudioSource audio;
+    public AudioClip selectSE;
+    public AudioClip moveSE;
     bool isPush;
     Fade fade;
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class RankingScene : MonoBehaviour
     {
         isPush = false;
         select = true;
-       // audio = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
         QuickRanking.Instance.FetchRanking();
         rankingText.text = QuickRanking.Instance.GetRankingByText();
@@ -34,7 +34,7 @@ public class RankingScene : MonoBehaviour
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
             isPush = true;
-           // audio.PlayOneShot(selectSE);
+            audio.PlayOneShot(selectSE);
             if (select)
             {
                 fade.StartFadeIn("StageSelect", true);
@@ -65,7 +65,7 @@ public class RankingScene : MonoBehaviour
         {
             if (!select)
             {
-                //audio.PlayOneShot(moveSE);
+                audio.PlayOneShot(moveSE);
             }
             select = true;
 
@@ -74,7 +74,7 @@ public class RankingScene : MonoBehaviour
         {
             if (select)
             {
-               // audio.PlayOneShot(moveSE);
+                audio.PlayOneShot(moveSE);
             }
             select = false;
         }

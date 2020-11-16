@@ -313,6 +313,8 @@ MonoBehaviour:
   rankingText: {fileID: 1522135220}
   stageSelect: {fileID: 2790970878882793852}
   title: {fileID: 2790970878829656125}
+  selectSE: {fileID: 8300000, guid: 09cab73b6442bb345b287b72325e4065, type: 3}
+  moveSE: {fileID: 8300000, guid: c80a176bba4a1b84e84995183772665b, type: 3}
 --- !u!4 &611434991
 Transform:
   m_ObjectHideFlags: 0
