@@ -85,7 +85,7 @@ public class PlayerControl : MonoBehaviour
     private int refCount = 0;
     [SerializeField]
     private LifeGauge life;
-
+  public  Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -119,13 +119,14 @@ public class PlayerControl : MonoBehaviour
         {
             Invoke("Move", 0.0001f);//プレイに支障はないはず
             Jump();
-           
             PlayerWallMove();
             playerRig.velocity = Vector3.zero;
+            animator.SetBool("Jump", false);
         }
         if (currentPlayerState == PlayerState.Attack)//アタック中
         {
             ob.SetActive(false);
+            animator.SetBool("Jump", true);
         }
         if (currentPlayerState == PlayerState.Stop)//ストップ中
         {
@@ -316,7 +317,7 @@ public class PlayerControl : MonoBehaviour
         float a = 1000;
         for (int i = 0; i < 3; i++)
         {
-            ray = new Ray(transform.position +Vector3.right*(i - 1)*1.6f, transform.up);
+            ray = new Ray(transform.position +Vector3.right*(i - 1)*2.0f, transform.up);
             //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
             if (Physics.Raycast(ray, out hit, rayline)) //壁がある時
             {
@@ -336,7 +337,7 @@ public class PlayerControl : MonoBehaviour
                         hitObject = hit.collider.gameObject;
                         test();
                     }
-                    Debug.DrawRay(transform.position +(transform.up+ Vector3.right) * 1.6f * (i - 1), transform.up * rayline, Color.red, 0, true);                   
+                    Debug.DrawRay(transform.position +(transform.up+ Vector3.right) * 2.0f * (i - 1), transform.up * rayline, Color.red, 0, true);                   
                 }
             }
             else //壁がない時
