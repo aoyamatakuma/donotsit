@@ -6,21 +6,24 @@ using UnityEngine.UI;
 
 public class TitleScene : MonoBehaviour
 {
-    public GameObject startImage;
-    public GameObject exitImage;
-    private bool select;
+    public List<Image> images;
     public AudioClip moveSE;
     public AudioClip selectSE;
     AudioSource audio;
     bool isPush;
+    private int selectNum;
+    private bool isSelect;
+    private bool isMove;
+
 
     Fade fade;
     // Start is called before the first frame update
     void Start()
     {
+        selectNum = images.Count -1;
+        Select();
         isPush = false;
         Time.timeScale = 1.0f;
-        select = true;
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
     }
@@ -28,20 +31,30 @@ public class TitleScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Select();
+        SelectMove();
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump") )&& !isPush)
         {
             isPush = true;
             audio.PlayOneShot(selectSE);
-            if (select)
-            {
-                fade.StartFadeIn("StageSelect",true);
-            }
-            else
+            if (selectNum == 0)
             {
                 Quit();
+               
             }
-           
+            else if(selectNum ==1)
+            {
+                // fade.StartFadeIn("StageSelect", true);
+                isPush = false;
+            }
+            else if (selectNum == 2)
+            {
+                fade.StartFadeIn("RankingTest", true);
+            }
+            else 
+            {
+                fade.StartFadeIn("StageSelect", true);
+            }
+
         }
     }
 
@@ -56,37 +69,57 @@ public class TitleScene : MonoBehaviour
 
     void Select()
     {
-        float ver = Input.GetAxis("Vertical");
-
-        if(select)
+        if (isSelect)
         {
-            startImage.GetComponent<Outline>().enabled = true;
-            exitImage.GetComponent<Outline>().enabled = false;
+            return;
         }
-        else
+        for (int i = 0; i < images.Count; i++)
         {
-            startImage.GetComponent<Outline>().enabled = false;
-            exitImage.GetComponent<Outline>().enabled = true;
+            images[i].SetNativeSize();
         }
-
-        if(ver > 0.5f)
-        {
-            if (!select)
-            {
-                audio.PlayOneShot(moveSE);
-            }
-            select = true;
-           
-        }
-        else if(ver < -0.5f)
-        {
-            if (select)
-            {
-                audio.PlayOneShot(moveSE);
-            }
-            select = false;
-        }
+        images[selectNum].rectTransform.sizeDelta *= 1.2f;
+        isSelect = true;
 
     }
 
+    void SelectMove()
+    {
+        float hol = Input.GetAxis("SelectMove");
+        if (hol < -0.5f && !isMove)
+        {
+            selectNum--;
+            StartCoroutine(ChangeCoroutine());
+            if (selectNum < 0)
+            {
+                selectNum = 0;
+            }
+            isSelect = false;
+        }
+
+        if (hol > 0.5f && !isMove)
+        {
+            selectNum++;
+            StartCoroutine(ChangeCoroutine());
+            if (selectNum > images.Count - 1)
+            {
+                selectNum = images.Count - 1;
+            }
+            isSelect = false;
+        }
+
+        Select();
+    }
+
+
+    IEnumerator ChangeCoroutine()
+    {
+        isMove = true;
+        if (selectNum >= 0 && selectNum < images.Count)
+        {
+            audio.PlayOneShot(moveSE);
+            yield return new WaitForSeconds(0.4f);
+         
+        }
+        isMove = false;
+    }
 }
