@@ -42,15 +42,15 @@ public class StageSelect : MonoBehaviour
             }
             else if(selectNum == 1)
             {
-               // fade.StartFadeIn("StageEasy", true);
+               fade.StartFadeIn("StageNormal", true);
             }
             else if (selectNum == 2)
             {
-                // fade.StartFadeIn("StageEasy", true);
+                fade.StartFadeIn("StageHard", true);
             }
             else 
             {
-                // fade.StartFadeIn("StageEasy", true);
+                fade.StartFadeIn("StageExtra", true);
             }
         }
     }
