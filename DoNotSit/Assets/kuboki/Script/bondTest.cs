@@ -13,8 +13,8 @@ public class bondTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerRig = GetComponent<Rigidbody>();
-        SetVecPos();
+        //playerRig = GetComponent<Rigidbody>();
+        //SetVecPos();
     }
 
     // Update is called once per frame
@@ -34,10 +34,10 @@ public class bondTest : MonoBehaviour
         {
             playerRot--;
         }
-        gameObject.transform.Rotate(0, 0, playerRot);
-        playerRot = 0;
-        test();
-        Debug.Log(PosAction[0].position);
+        //gameObject.transform.Rotate(0, 0, playerRot);
+        //playerRot = 0;
+        //test();
+        //Debug.Log(PosAction[0].position);
     }
     private void OnCollisionEnter(Collision col)
     {
