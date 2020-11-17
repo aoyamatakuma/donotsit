@@ -55,6 +55,10 @@ public class Direction_RightLeft : MonoBehaviour
              //   Damage(col);
                 camera.Shake(camera.durations, camera.magnitudes);
             }
+            else
+            {
+                Death();
+            }
         }
 
         if (col.gameObject.tag == "Bomb" || col.gameObject.tag == "BlowAway")

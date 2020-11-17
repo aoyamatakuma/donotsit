@@ -14,7 +14,6 @@ public class SpineEnemy : NormalEnemyAI
     void Start()
     {
         enemyState = EnemyState.Move;
-        isReturn = false;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
 

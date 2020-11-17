@@ -6,17 +6,42 @@ public class NormalEnemyAI : MonoBehaviour
 {
 
     protected EnemyState enemyState;
-    protected bool isReturn;
     protected bool isTouch;
+
+    public void StartState(float rotateY,float rotateZ)
+    {
+        if(rotateZ == 0)
+        {
+            if(rotateY == 0)
+            {
+                enemyState = EnemyState.Left;
+            }
+            else
+            {
+                enemyState = EnemyState.Right;
+            }
+        }
+        else
+        {
+            if (rotateY == 0)
+            {
+                enemyState = EnemyState.Right;
+            }
+            else
+            {
+                enemyState = EnemyState.Left;
+            }
+        }
+    }
  
     public void Move(float speed)
     {
-        if(enemyState != EnemyState.Move)
+        if(enemyState != EnemyState.Left && enemyState != EnemyState.Right)
         {
             return;
         }
         Vector3 pos = transform.position;
-        if (!isReturn)
+        if (enemyState == EnemyState.Right)
         {
             pos.x += speed * Time.deltaTime;
         }
@@ -62,7 +87,14 @@ public class NormalEnemyAI : MonoBehaviour
     void Return()
     {
         transform.Rotate(0, 180, 0);
-        isReturn = !isReturn;
+        if(enemyState == EnemyState.Right)
+        {
+            enemyState = EnemyState.Left;
+        }
+        else
+        {
+            enemyState = EnemyState.Right;
+        }
     }
 
 

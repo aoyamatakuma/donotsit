@@ -11,9 +11,8 @@ public class NormalEnemy : NormalEnemyAI
     public GameObject effect;
     void Start()
     {
+        base.StartState(transform.rotation.y, transform.rotation.z);
         isDead = false;
-        enemyState = EnemyState.Move;
-        isReturn = false;
         isTouch = true;
     }
 
