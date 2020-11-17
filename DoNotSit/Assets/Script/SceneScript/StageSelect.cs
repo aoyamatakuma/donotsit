@@ -53,6 +53,13 @@ public class StageSelect : MonoBehaviour
                 fade.StartFadeIn("StageExtra", true);
             }
         }
+
+        if((Input.GetKey(KeyCode.Escape)||Input.GetButtonDown("Attack")) && !isPush)
+        {
+            isPush = true;
+            audio.PlayOneShot(selectSE);
+            fade.StartFadeIn("Title", true);
+        }
     }
 
     void Select()
@@ -71,6 +78,10 @@ public class StageSelect : MonoBehaviour
 
     void SelectMove()
     {
+        if (isPush)
+        {
+            return;
+        }
         float hol = Input.GetAxis("SelectMove");
         if (hol < -0.5f && !isMove)
         {

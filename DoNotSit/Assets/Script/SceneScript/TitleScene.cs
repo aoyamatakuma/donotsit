@@ -84,6 +84,10 @@ public class TitleScene : MonoBehaviour
 
     void SelectMove()
     {
+        if (isPush)
+        {
+            return;
+        }
         float hol = Input.GetAxis("SelectMove");
         if (hol < -0.5f && !isMove)
         {
