@@ -329,7 +329,7 @@ public class PlayerControl : MonoBehaviour
                     rayFlag = true;
                     ob.SetActive(true);
                     //令の長さを取得
-                    float dis = Vector3.Distance(hit.point, transform.position + Vector3.right * (i - 1));
+                    float dis = Vector3.Distance(hit.point, transform.position + Vector3.right *2.0f* (i - 1));
                     if (a > dis)
                     {
                         a = dis;
