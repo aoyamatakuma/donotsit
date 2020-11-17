@@ -17,20 +17,20 @@ public enum ChaseState
 public class ChaseEnemy : MonoBehaviour
 {
     public int enemyHitLimit;
-    public int hitCnt;
+    int hitCnt;
     public float speed;
     public ScrollState currentScrollState; //現在の状態
     public float delay;
     public float speedDefalut;
     float cnt;
     //レベル系
-    public int level = 1;//レベル
-    public float exp;//経験値
+    int level = 1;//レベル
+     float exp;//経験値
     public Text levelText;//レベルテキスト
     public int ChaseType;
     PlayerControl player;
     public GameObject bello;
-    public float attackCount;//カウント
+    float attackCount;//カウント
     public float attackLimit;//限界
     public Transform point;
     public bool belooFlag;
@@ -38,6 +38,10 @@ public class ChaseEnemy : MonoBehaviour
   public ChaseState currentChaseState;
     public float wait;
     Animator animator;
+    public float MagnificationLev2;
+    public float MagnificationLev3;
+    public float MagnificationLev4;
+    public float MagnificationLev5;
     // Start is called before the first frame update
     void Start()
     {
@@ -185,7 +189,7 @@ public class ChaseEnemy : MonoBehaviour
                 speed = speedDefalut;
                 if (speed == speedDefalut)
                 {
-                    speed *= 1.2f;
+                    speed *= MagnificationLev2;
                 }
             }
         }
@@ -199,7 +203,7 @@ public class ChaseEnemy : MonoBehaviour
                 speed = speedDefalut;
                 if (speed == speedDefalut)
                 {
-                    speed *= 1.6f;
+                    speed *= MagnificationLev3;
                 }
             }
         }
@@ -213,7 +217,7 @@ public class ChaseEnemy : MonoBehaviour
                 speed = speedDefalut;
                 if (speed == speedDefalut)
                 {
-                    speed *= 2.0f;
+                    speed *= MagnificationLev4;
                 }
             }
         }
@@ -227,7 +231,7 @@ public class ChaseEnemy : MonoBehaviour
                 speed = speedDefalut;
                 if (speed == speedDefalut)
                 {
-                    speed *= 2.4f;
+                    speed *= MagnificationLev5;
                 }
             }
         }

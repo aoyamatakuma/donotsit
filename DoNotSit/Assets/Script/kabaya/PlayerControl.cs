@@ -18,11 +18,11 @@ public enum PlayerState
 public class PlayerControl : MonoBehaviour
 {
     Rigidbody playerRig;
-    public bool jumpFlag;//ジャンプフラグ
-    public bool restratFlag;//障害物の当たり判定のフラグ
-    public bool rayFlag;//壁云々
-    public bool matFlag;//沼フラグ
-    public bool revFlag;//スティック反転フラグ
+    private bool jumpFlag;//ジャンプフラグ
+    private bool restratFlag;//障害物の当たり判定のフラグ
+    private bool rayFlag;//壁云々
+     bool matFlag;//沼フラグ
+     bool revFlag;//スティック反転フラグ
     public float jumpSpeed = 20.0f;//ジャンプの力
     public float jumpSpeedUp = 1.2f;//ジャンプアップの力
     public float jumpDefalut;//※ジャンプデフォルト
@@ -61,6 +61,7 @@ public class PlayerControl : MonoBehaviour
     AudioSource audio;
     public AudioClip jumpSE;
     public GameObject effectPos;
+    public GameObject effectPos2;
     public GameObject sperkEffect;
     private float maxAngleSet;
     private float minAngleSet;
@@ -88,6 +89,8 @@ public class PlayerControl : MonoBehaviour
   public  Animator animator;
     [SerializeField]
     private Renderer[] renderer;
+    int timeRender;
+    bool ren;
     // Start is called before the first frame update
     void Start()
     {
@@ -114,8 +117,8 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         RayObject();
+        Tenmetu();
         //ノーマルステート
         if (currentPlayerState == PlayerState.Normal)//ノーマル
         {
@@ -383,6 +386,7 @@ public class PlayerControl : MonoBehaviour
                         break;
                     case 4://とげ
                         restratFlag = true;
+                        Instantiate(sperkEffect,effectPos2.transform.position, transform.rotation);
                         ReflectActionCount();
                         StartCoroutine("ThornTime");
                         break;
@@ -503,6 +507,7 @@ public class PlayerControl : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
+        ren = true;
         if (hp < 0)
         {
             //　ダメージ調整
@@ -513,11 +518,7 @@ public class PlayerControl : MonoBehaviour
         {
             life.SetLifeGauge2(damage);
         }
-
-        foreach (Renderer childRender in renderer)
-        {
-            //childRender.enabled = false;
-        }
+      
     }
     public void Score(float score)
     {
@@ -528,14 +529,33 @@ public class PlayerControl : MonoBehaviour
         }
         ComboStart();
     }
+    void Tenmetu()
+    {
+        foreach (Renderer childRender in renderer)
+        {
+            if (ren == true)
+            {
+                timeRender++;
+                bool oddeven = Mathf.FloorToInt(Time.time * 5) % 2 == 0;
+                childRender.enabled = oddeven;
+                if (timeRender >= 250)
+                {
+                    ren = false;
+                }
+            }
+            else
+            {
+                timeRender = 0;
+                childRender.enabled = true;
+            }
+        }
+    }
     IEnumerator ThornTime()
     {
         yield return new WaitForSeconds(0.1f);
         if (restratFlag == true)
         {
             Damage(damage);
-           var parent = this.transform;
-           Instantiate(sperkEffect, transform.position, transform.rotation,parent);
         }
         restratFlag = false;
         yield break;
