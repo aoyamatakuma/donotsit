@@ -21,8 +21,8 @@ public class PlayerControl : MonoBehaviour
     private bool jumpFlag;//ジャンプフラグ
     private bool restratFlag;//障害物の当たり判定のフラグ
     private bool rayFlag;//壁云々
-     bool matFlag;//沼フラグ
-     bool revFlag;//スティック反転フラグ
+    private bool matFlag;//沼フラグ
+    private bool revFlag;//スティック反転フラグ
     public float jumpSpeed = 20.0f;//ジャンプの力
     public float jumpSpeedUp = 1.2f;//ジャンプアップの力
     public float jumpDefalut;//※ジャンプデフォルト
@@ -30,25 +30,25 @@ public class PlayerControl : MonoBehaviour
     public float maxAngle = 44.0f; // 最大回転角度
     public float minAngle = -44.0f; // 最小回転角度
     public float roateSpeed = 1.0f;//回るスピード
-    public float angleZ;//こいつ大事回転制御
+    private float angleZ;//こいつ大事回転制御
     public static float timer;//タイマー
     public float starttimer = 60f;
     //コンボ
-    public float comboTimer = 0f;//コンボタイマー
+    private float comboTimer = 0f;//コンボタイマー
     public float comboTimerAdd;//コンボタイマー
     public float comboTimerMax;//コンボタイマーマックス
     public float combo;//コンボ
     public float comboBonus;
-    public bool comboFlag;//コンボフラグ
+    private bool comboFlag;//コンボフラグ
     public float rayline;//レイ長さ
     public int level = 1;//レベル
     public static float scoreNumber;
                          //  public int speedCount;//連続用
-    public int exp;//経験値
+    private int exp;//経験値
     public int hp;
     public Text comboText;
-    public Text levelText;//レベルテキスト
-    public Text expText;
+    private Text levelText;//レベルテキスト
+    private Text expText;
     public Text hpText;
     public Text scoreText;
     public GameObject ob;//矢印
