@@ -7,10 +7,7 @@ public class CameraEvent : MonoBehaviour
 
     public ChaseEnemy enemy;
     public PlayerControl player;
-    public GameObject scObj;
-    public GameObject hpObj;
-    public GameObject coObj;
-    public GameObject spObj;
+    public List<GameObject> uiObjects;
     FollowCamera camera;
     public float waitTime;
     public float moveTime;
@@ -77,10 +74,10 @@ public class CameraEvent : MonoBehaviour
         camera.enabled = false;
         enemy.enabled = false;
         player.enabled = false;
-        hpObj.SetActive(false);
-        scObj.SetActive(false);
-        coObj.SetActive(false);
-        spObj.SetActive(false);
+        for(int i = 0; i < uiObjects.Count; i++)
+        {
+            uiObjects[i].SetActive(false);
+        }
         isEvent = true;
         yield return new WaitForSeconds(moveTime);
         isMove = true;
@@ -95,10 +92,10 @@ public class CameraEvent : MonoBehaviour
         startImage.SetActive(false);
         camera.enabled = true;
         player.enabled = true;
-        hpObj.SetActive(true);
-        scObj.SetActive(true);
-        coObj.SetActive(true);
-        spObj.SetActive(true);
+        for (int i = 0; i < uiObjects.Count; i++)
+        {
+            uiObjects[i].SetActive(true);
+        }
         enemy.enabled = true;
     }
 }
