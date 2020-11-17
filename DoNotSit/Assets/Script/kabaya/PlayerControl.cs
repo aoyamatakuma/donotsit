@@ -86,6 +86,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private LifeGauge life;
   public  Animator animator;
+    [SerializeField]
+    private Renderer[] renderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -107,7 +109,7 @@ public class PlayerControl : MonoBehaviour
         SetAngle();
         refCount = ReflectCount;
         life.SetLifeGauge(hp);
-    }
+        }
 
     // Update is called once per frame
     void Update()
@@ -510,6 +512,11 @@ public class PlayerControl : MonoBehaviour
         if (damage > 0)
         {
             life.SetLifeGauge2(damage);
+        }
+
+        foreach (Renderer childRender in renderer)
+        {
+            //childRender.enabled = false;
         }
     }
     public void Score(float score)
