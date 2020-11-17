@@ -140,8 +140,8 @@ public class QuickRanking : MonoBehaviour
             foreach (RankingData rankingData in rankingDataList)
             {
                 string rankNum = string.Format("{0, 2}", rankingData.rankNum);
-                string name = string.Format("{0, -10}", rankingData.name);
-                string stageNumber = string.Format("{0, -10}", rankingData.stageNumber);
+                string name = string.Format("{0, -6}", rankingData.name);
+                string stageNumber = string.Format("{0, -6}", rankingData.stageNumber);
                 string score = string.Format("{0, -10}", rankingData.score.ToString());
 
                 //さっき保存したスコアがあった場合は赤に着色する//

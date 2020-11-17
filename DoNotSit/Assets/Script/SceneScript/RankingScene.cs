@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class RankingScene : MonoBehaviour
 {
     public Text rankingText;
+    public Text nameText;
+    public Text scoreText;
 
     public GameObject stageSelect;
     public GameObject title;
@@ -24,7 +26,12 @@ public class RankingScene : MonoBehaviour
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
         QuickRanking.Instance.FetchRanking();
-        rankingText.text = QuickRanking.Instance.GetRankingByText();
+        foreach(var list in QuickRanking.Instance.GetRanking())
+        {
+            rankingText.text = list.rankNum.ToString();
+            nameText.text = list.name;
+            scoreText.text = list.score.ToString();
+        }
     }
 
     // Update is called once per frame
