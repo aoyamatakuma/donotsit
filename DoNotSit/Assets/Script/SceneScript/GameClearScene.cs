@@ -24,10 +24,7 @@ public class GameClearScene : MonoBehaviour
     float goaltimer;
     float goalscore;
     string stageName;
-    public float SA;
-    public float B;
-    public float C;
-    public  string rank;
+    public string rank;
     bool isPush;
     Fade fade;
     // Start is called before the first frame update
@@ -38,12 +35,13 @@ public class GameClearScene : MonoBehaviour
         select = true;
         goaltimer = PlayerControl.TimeScore();
         goalscore = PlayerControl.ClearScore();
+        rank = RankManger.ClearRank();
         //goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
         goalScoreText.text = "Score:" + goalscore.ToString();//ゴールスコア
         fade = GetComponent<Fade>();
         stageName = StageDate.Instance.referer;
         // Type == Number の場合
-  
+
     }
 
     // Update is called once per frame
@@ -73,13 +71,13 @@ public class GameClearScene : MonoBehaviour
 
         if (select)
         {
-           
+
             stageSelect.GetComponent<Outline>().enabled = true;
             title.GetComponent<Outline>().enabled = false;
         }
         else
         {
-          
+
             stageSelect.GetComponent<Outline>().enabled = false;
             title.GetComponent<Outline>().enabled = true;
         }
@@ -105,50 +103,42 @@ public class GameClearScene : MonoBehaviour
     }
     void Rank()
     {
-        if(goalscore> SA)//Sランク
+        if (rank == "S")
         {
             rank = "S";
-            if (rank == "S")
-            {
-                rankS.SetActive(true);
-                rankA.SetActive(false);
-                rankB.SetActive(false);
-                rankC.SetActive(false);
-            }
+            rankS.SetActive(true);
+            rankA.SetActive(false);
+            rankB.SetActive(false);
+            rankC.SetActive(false);
         }
-        if (goalscore <= SA)//Aランク
+        if (rank == "A")
         {
             rank = "A";
-            if (rank == "A")
-            {
-                rankS.SetActive(false);
-                rankA.SetActive(true);
-                rankB.SetActive(false);
-                rankC.SetActive(false);
-            }
+            rankS.SetActive(false);
+            rankA.SetActive(true);
+            rankB.SetActive(false);
+            rankC.SetActive(false);
         }
-        if (goalscore <= B)//Bランク
+
+        if (rank == "B")
         {
             rank = "B";
-            if (rank == "B")
-            {
-                rankS.SetActive(false);
-                rankA.SetActive(false);
-                rankB.SetActive(true);
-                rankC.SetActive(false);
-            }
+            rankS.SetActive(false);
+            rankA.SetActive(false);
+            rankB.SetActive(true);
+            rankC.SetActive(false);
         }
-        if (goalscore <= C)//Cランク
+
+
+        if (rank == "C")
         {
             rank = "C";
-            if (rank == "C")
-            {
-                rankS.SetActive(false);
-                rankA.SetActive(false);
-                rankB.SetActive(false);
-                rankC.SetActive(true);
-            }
+            rankS.SetActive(false);
+            rankA.SetActive(false);
+            rankB.SetActive(false);
+            rankC.SetActive(true);
         }
+
     }
 
 
