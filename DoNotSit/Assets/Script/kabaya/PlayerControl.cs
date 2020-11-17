@@ -18,11 +18,11 @@ public enum PlayerState
 public class PlayerControl : MonoBehaviour
 {
     Rigidbody playerRig;
-    private bool jumpFlag;//ジャンプフラグ
-    private bool restratFlag;//障害物の当たり判定のフラグ
-    private bool rayFlag;//壁云々
-    private bool matFlag;//沼フラグ
-    private bool revFlag;//スティック反転フラグ
+    public bool jumpFlag;//ジャンプフラグ
+    public bool restratFlag;//障害物の当たり判定のフラグ
+    public bool rayFlag;//壁云々
+    public bool matFlag;//沼フラグ
+    public bool revFlag;//スティック反転フラグ
     public float jumpSpeed = 20.0f;//ジャンプの力
     public float jumpSpeedUp = 1.2f;//ジャンプアップの力
     public float jumpDefalut;//※ジャンプデフォルト
@@ -30,25 +30,25 @@ public class PlayerControl : MonoBehaviour
     public float maxAngle = 44.0f; // 最大回転角度
     public float minAngle = -44.0f; // 最小回転角度
     public float roateSpeed = 1.0f;//回るスピード
-    private float angleZ;//こいつ大事回転制御
+    public float angleZ;//こいつ大事回転制御
     public static float timer;//タイマー
     public float starttimer = 60f;
     //コンボ
-    private float comboTimer = 0f;//コンボタイマー
+    public float comboTimer = 0f;//コンボタイマー
     public float comboTimerAdd;//コンボタイマー
     public float comboTimerMax;//コンボタイマーマックス
     public float combo;//コンボ
     public float comboBonus;
-    private bool comboFlag;//コンボフラグ
+    public bool comboFlag;//コンボフラグ
     public float rayline;//レイ長さ
     public int level = 1;//レベル
     public static float scoreNumber;
                          //  public int speedCount;//連続用
-    private int exp;//経験値
+    public int exp;//経験値
     public int hp;
     public Text comboText;
-    private Text levelText;//レベルテキスト
-    private Text expText;
+    public Text levelText;//レベルテキスト
+    public Text expText;
     public Text hpText;
     public Text scoreText;
     public GameObject ob;//矢印
@@ -61,7 +61,6 @@ public class PlayerControl : MonoBehaviour
     AudioSource audio;
     public AudioClip jumpSE;
     public GameObject effectPos;
-    public GameObject effectPos2;
     public GameObject sperkEffect;
     private float maxAngleSet;
     private float minAngleSet;
@@ -89,8 +88,6 @@ public class PlayerControl : MonoBehaviour
   public  Animator animator;
     [SerializeField]
     private Renderer[] renderer;
-    int timeRender;
-    bool ren;
     // Start is called before the first frame update
     void Start()
     {
@@ -117,8 +114,8 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         RayObject();
-        Tenmetu();
         //ノーマルステート
         if (currentPlayerState == PlayerState.Normal)//ノーマル
         {
@@ -175,89 +172,36 @@ public class PlayerControl : MonoBehaviour
         float turn = Input.GetAxis("Horizontal");
         float up = Input.GetAxis("Vertical");
         Vector3 Rot = transform.localEulerAngles;
-        if(!select)
+        Debug.Log(maxAngleSet+"aaa"+minAngleSet);
+        Debug.Log(turn);
+        if (!select)
         {
             switch (playerAngle)
             {
                 case 0:
-                    if (Rot.z <= maxAngleSet || Rot.z >= minAngleSet)
-                    {
-                        if (turn > 0)
-                        { transform.Rotate(Vector3.back * angleSpeed); }
-                        else if (turn < 0)
-                        { transform.Rotate(Vector3.forward * angleSpeed); }
-                    }
-                    else
-                    {
-                        if (maxAngleSet <= Rot.z && 90 >= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
-                        }
-                        if (Rot.z <= minAngleSet && 270 <= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
-                        }
-                    }
+                    if (turn > 0 && Rot.z > minAngleSet || turn > 0 && Rot.z < maxAngleSet+angleSpeed*2)
+                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    else if (turn < 0 && Rot.z > minAngleSet-angleSpeed*2 || turn < 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed); }
                     break;
                 case 90:
-                    if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
-                    {
-                        if (up > 0)
-                        { transform.Rotate(Vector3.back * angleSpeed); }
-                        else if (up < 0)
-                        { transform.Rotate(Vector3.forward * angleSpeed); }
-                    }
-                    else
-                    {
-                        if (maxAngleSet <= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
-                        }
-                        if (minAngleSet >= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
-                        }
-                    }
+                    if (up > 0 && Rot.z > minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    else if (up < 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed); }
+
                     break;
                 case 180:
-                    if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
-                    {
-                        if (turn > 0)
-                        { transform.Rotate(Vector3.forward * angleSpeed); }
-                        else if (turn < 0)
-                        { transform.Rotate(Vector3.back * angleSpeed); }
-                    }
-                    else
-                    {
-                        if (maxAngleSet <= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
-                        }
-                        if (minAngleSet >= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
-                        }
-                    }
+                    if (turn > 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    else if (turn < 0 && Rot.z > minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed); }
                     break;
                 case 270:
-                    if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
-                    {
-                        if (up > 0)
-                        { transform.Rotate(Vector3.forward * angleSpeed); }
-                        else if (up < 0)
-                        { transform.Rotate(Vector3.back * angleSpeed); }
-                    }
-                    else
-                    {
-                        if (maxAngleSet < Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
-                        }
-                        if (minAngleSet > Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
-                        }
-                    }
+                    if (up > 0&&Rot.z<maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    else if (up < 0&&Rot.z>minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed); }
                     break;
             }
         }
@@ -386,7 +330,6 @@ public class PlayerControl : MonoBehaviour
                         break;
                     case 4://とげ
                         restratFlag = true;
-                        Instantiate(sperkEffect,effectPos2.transform.position, transform.rotation);
                         ReflectActionCount();
                         StartCoroutine("ThornTime");
                         break;
@@ -507,7 +450,6 @@ public class PlayerControl : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
-        ren = true;
         if (hp < 0)
         {
             //　ダメージ調整
@@ -518,7 +460,11 @@ public class PlayerControl : MonoBehaviour
         {
             life.SetLifeGauge2(damage);
         }
-      
+
+        foreach (Renderer childRender in renderer)
+        {
+            //childRender.enabled = false;
+        }
     }
     public void Score(float score)
     {
@@ -529,33 +475,14 @@ public class PlayerControl : MonoBehaviour
         }
         ComboStart();
     }
-    void Tenmetu()
-    {
-        foreach (Renderer childRender in renderer)
-        {
-            if (ren == true)
-            {
-                timeRender++;
-                bool oddeven = Mathf.FloorToInt(Time.time * 5) % 2 == 0;
-                childRender.enabled = oddeven;
-                if (timeRender >= 250)
-                {
-                    ren = false;
-                }
-            }
-            else
-            {
-                timeRender = 0;
-                childRender.enabled = true;
-            }
-        }
-    }
     IEnumerator ThornTime()
     {
         yield return new WaitForSeconds(0.1f);
         if (restratFlag == true)
         {
-            Damage(damage);
+           Damage(damage);
+           var parent = this.transform;
+           Instantiate(sperkEffect, transform.position, transform.rotation,parent);
         }
         restratFlag = false;
         yield break;
@@ -788,29 +715,20 @@ public class PlayerControl : MonoBehaviour
         //どの位置にあたったか判定し回転する
         if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
         {
-            Debug.Log("Up");
             playerRot = Vector3.forward * 0;
         }
         else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
         {
-            Debug.Log("Down");
             playerRot = Vector3.forward * 180;
         }
         else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
         {
-            Debug.Log("Right");
             playerRot = Vector3.forward * 270;
         }
         else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
         {
-            Debug.Log("Left");
             playerRot = Vector3.forward * 90;
         }
-        Debug.Log(wa.Width(true));
-        Debug.Log(wa.Width(false));
-        Debug.Log(wa.Height(true));
-        Debug.Log(wa.Height(false));
-        Debug.Log(x + "to" + y);
         wallNum = wa.abilityNumber;
     }
     private void coltest()

@@ -28,7 +28,7 @@ public class GoalPersentCS : MonoBehaviour
     {
         nowPlayPos = player.transform.position;
         PtoG = Vector3.Distance(nowPlayPos, goalPos);
-        float ag =(GtoS - PtoG) / GtoS*100;
+        float ag =(GtoS - PtoG) / GtoS*sli.maxValue;
         sli.value = ag;
     }
 
