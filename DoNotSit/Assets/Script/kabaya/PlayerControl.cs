@@ -172,89 +172,36 @@ public class PlayerControl : MonoBehaviour
         float turn = Input.GetAxis("Horizontal");
         float up = Input.GetAxis("Vertical");
         Vector3 Rot = transform.localEulerAngles;
-        if(!select)
+        Debug.Log(maxAngleSet+"aaa"+minAngleSet);
+        Debug.Log(turn);
+        if (!select)
         {
             switch (playerAngle)
             {
                 case 0:
-                    if (Rot.z <= maxAngleSet || Rot.z >= minAngleSet)
-                    {
-                        if (turn > 0)
-                        { transform.Rotate(Vector3.back * angleSpeed); }
-                        else if (turn < 0)
-                        { transform.Rotate(Vector3.forward * angleSpeed); }
-                    }
-                    else
-                    {
-                        if (maxAngleSet <= Rot.z && 90 >= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
-                        }
-                        if (Rot.z <= minAngleSet && 270 <= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
-                        }
-                    }
+                    if (turn > 0 && Rot.z > minAngleSet || turn > 0 && Rot.z < maxAngleSet+angleSpeed*2)
+                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    else if (turn < 0 && Rot.z > minAngleSet-angleSpeed*2 || turn < 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed); }
                     break;
                 case 90:
-                    if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
-                    {
-                        if (up > 0)
-                        { transform.Rotate(Vector3.back * angleSpeed); }
-                        else if (up < 0)
-                        { transform.Rotate(Vector3.forward * angleSpeed); }
-                    }
-                    else
-                    {
-                        if (maxAngleSet <= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
-                        }
-                        if (minAngleSet >= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
-                        }
-                    }
+                    if (up > 0 && Rot.z > minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    else if (up < 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed); }
+
                     break;
                 case 180:
-                    if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
-                    {
-                        if (turn > 0)
-                        { transform.Rotate(Vector3.forward * angleSpeed); }
-                        else if (turn < 0)
-                        { transform.Rotate(Vector3.back * angleSpeed); }
-                    }
-                    else
-                    {
-                        if (maxAngleSet <= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
-                        }
-                        if (minAngleSet >= Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
-                        }
-                    }
+                    if (turn > 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    else if (turn < 0 && Rot.z > minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed); }
                     break;
                 case 270:
-                    if (Rot.z <= maxAngleSet && Rot.z >= minAngleSet)
-                    {
-                        if (up > 0)
-                        { transform.Rotate(Vector3.forward * angleSpeed); }
-                        else if (up < 0)
-                        { transform.Rotate(Vector3.back * angleSpeed); }
-                    }
-                    else
-                    {
-                        if (maxAngleSet < Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, maxAngleSet - 1);
-                        }
-                        if (minAngleSet > Rot.z)
-                        {
-                            transform.localEulerAngles = new Vector3(0, 0, minAngleSet + 1);
-                        }
-                    }
+                    if (up > 0&&Rot.z<maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    else if (up < 0&&Rot.z>minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed); }
                     break;
             }
         }
@@ -533,7 +480,7 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         if (restratFlag == true)
         {
-            Damage(damage);
+           Damage(damage);
            var parent = this.transform;
            Instantiate(sperkEffect, transform.position, transform.rotation,parent);
         }
@@ -768,29 +715,20 @@ public class PlayerControl : MonoBehaviour
         //どの位置にあたったか判定し回転する
         if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
         {
-            Debug.Log("Up");
             playerRot = Vector3.forward * 0;
         }
         else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
         {
-            Debug.Log("Down");
             playerRot = Vector3.forward * 180;
         }
         else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
         {
-            Debug.Log("Right");
             playerRot = Vector3.forward * 270;
         }
         else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
         {
-            Debug.Log("Left");
             playerRot = Vector3.forward * 90;
         }
-        Debug.Log(wa.Width(true));
-        Debug.Log(wa.Width(false));
-        Debug.Log(wa.Height(true));
-        Debug.Log(wa.Height(false));
-        Debug.Log(x + "to" + y);
         wallNum = wa.abilityNumber;
     }
     private void coltest()
