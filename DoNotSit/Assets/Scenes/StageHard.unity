@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4421c6d07fd72484db8e5c617ce72169, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -121,19 +121,13 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &11000530 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 433762261, guid: a28a62aed92154b4f8760e097fe4e9bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4784846646631131641}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &11000532 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 433762263, guid: a28a62aed92154b4f8760e097fe4e9bb,
     type: 3}
   m_PrefabInstance: {fileID: 4784846646631131641}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11000530}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -1592,19 +1586,13 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4784846648680372258}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1969640362 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1684288304, guid: a28a62aed92154b4f8760e097fe4e9bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4784846646631131641}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1969640364 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1684288306, guid: a28a62aed92154b4f8760e097fe4e9bb,
     type: 3}
   m_PrefabInstance: {fileID: 4784846646631131641}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969640362}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -1634,19 +1622,13 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4784846648082972216}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1995768333 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8344334602034976464, guid: a28a62aed92154b4f8760e097fe4e9bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4784846646631131641}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1995768335 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8344334602034976466, guid: a28a62aed92154b4f8760e097fe4e9bb,
     type: 3}
   m_PrefabInstance: {fileID: 4784846646631131641}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995768333}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -1718,19 +1700,13 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4784846648108444344}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2098525219 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 212679341, guid: a28a62aed92154b4f8760e097fe4e9bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4784846646631131641}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2098525221 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 212679343, guid: a28a62aed92154b4f8760e097fe4e9bb,
     type: 3}
   m_PrefabInstance: {fileID: 4784846646631131641}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2098525219}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -28243,10 +28219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 396778435}
   player: {fileID: 885221102}
-  scObj: {fileID: 2098525219}
-  hpObj: {fileID: 1969640362}
-  coObj: {fileID: 1995768333}
-  spObj: {fileID: 11000530}
+  uiObjects: []
   waitTime: 3
   moveTime: 2
   startImage: {fileID: 1364728150}

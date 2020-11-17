@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4421c6d07fd72484db8e5c617ce72169, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -28243,10 +28243,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 396778435}
   player: {fileID: 885221102}
-  scObj: {fileID: 2098525219}
-  hpObj: {fileID: 1969640362}
-  coObj: {fileID: 1995768333}
-  spObj: {fileID: 11000530}
+  uiObjects:
+  - {fileID: 11000530}
+  - {fileID: 1995768333}
+  - {fileID: 1969640362}
+  - {fileID: 2098525219}
   waitTime: 3
   moveTime: 2
   startImage: {fileID: 1364728150}
