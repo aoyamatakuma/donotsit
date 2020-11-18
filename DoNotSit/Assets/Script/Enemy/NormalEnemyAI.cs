@@ -14,22 +14,22 @@ public class NormalEnemyAI : MonoBehaviour
         {
             if(rotateY == 0)
             {
-                enemyState = EnemyState.Left;
+                enemyState = EnemyState.Right;
             }
             else
             {
-                enemyState = EnemyState.Right;
+                enemyState = EnemyState.Left;
             }
         }
         else
         {
             if (rotateY == 0)
             {
-                enemyState = EnemyState.Right;
+                enemyState = EnemyState.Left;
             }
             else
             {
-                enemyState = EnemyState.Left;
+                enemyState = EnemyState.Right;
             }
         }
     }
@@ -61,7 +61,7 @@ public class NormalEnemyAI : MonoBehaviour
                     rayPos.position,
                     -transform.up,
                     out hit,
-                    2f))
+                    5f))
         {
             if (hit.collider.CompareTag("Wall"))
             {
