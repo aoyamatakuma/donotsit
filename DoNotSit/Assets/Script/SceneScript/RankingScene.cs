@@ -28,9 +28,30 @@ public class RankingScene : MonoBehaviour
         QuickRanking.Instance.FetchRanking();
         foreach(var list in QuickRanking.Instance.GetRanking())
         {
-            rankingText.text = list.rankNum.ToString();
-            nameText.text = list.name;
-            scoreText.text = list.score.ToString();
+            if(list.name != null)
+            {
+                nameText.text += "\t"+list.name + "\n";
+            }
+            else
+            {
+                nameText.text += "\tNoData\n";
+            }
+            if (list.rankNum.ToString() != null)
+            {
+                rankingText.text += "\t" + list.rankNum + "\n";
+            }
+            else
+            {
+                rankingText.text += "\tNoData\n";
+            }
+            if (list.score.ToString() != null)
+            {
+                scoreText.text += "\t" + list.score.ToString() + "\n";
+            }
+            else
+            {
+                scoreText.text += "\tNoData\n";
+            }
         }
     }
 
