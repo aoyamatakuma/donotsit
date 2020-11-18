@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RankingScene : MonoBehaviour
 {
@@ -18,40 +19,47 @@ public class RankingScene : MonoBehaviour
     public AudioClip moveSE;
     bool isPush;
     Fade fade;
+    int rank;
     // Start is called before the first frame update
     void Start()
     {
+        rank = 1;
         isPush = false;
         select = true;
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
         QuickRanking.Instance.FetchRanking();
-        foreach(var list in QuickRanking.Instance.GetRanking())
+        foreach (var list in QuickRanking.Instance.GetRanking())
         {
-            if(list.name != null)
+            if (list.stageNumber == StageDate.Instance.rankingSceneName)
             {
-                nameText.text += "\t"+list.name + "\n";
+                if (list.name != null)
+                {
+                    nameText.text += "\t" + list.name + "\n";
+                }
+                else
+                {
+                    nameText.text += "\tNoData\n";
+                }
+                if (list.rankNum.ToString() != null)
+                {
+                    rankingText.text += "\t" + rank + "\n";
+                    rank += 1;
+                }
+                else
+                {
+                    rankingText.text += "\tNoData\n";
+                }
+                if (list.score.ToString() != null)
+                {
+                    scoreText.text += "\t" + list.score.ToString() + "\n";
+                }
+                else
+                {
+                    scoreText.text += "\tNoData\n";
+                }
             }
-            else
-            {
-                nameText.text += "\tNoData\n";
-            }
-            if (list.rankNum.ToString() != null)
-            {
-                rankingText.text += "\t" + list.rankNum + "\n";
-            }
-            else
-            {
-                rankingText.text += "\tNoData\n";
-            }
-            if (list.score.ToString() != null)
-            {
-                scoreText.text += "\t" + list.score.ToString() + "\n";
-            }
-            else
-            {
-                scoreText.text += "\tNoData\n";
-            }
+
         }
     }
 
