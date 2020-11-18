@@ -4771,7 +4771,7 @@ GameObject:
   - component: {fileID: 3837380001886260696}
   - component: {fileID: 3837380001886260697}
   m_Layer: 0
-  m_Name: DefaultBlock 1
+  m_Name: LightningBlock 1
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4864,7 +4864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad51de1bfce23e244a810f0a02f01b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityNumber: 0
+  abilityNumber: 4
 --- !u!114 &7185506518388361208
 MonoBehaviour:
   m_ObjectHideFlags: 0
