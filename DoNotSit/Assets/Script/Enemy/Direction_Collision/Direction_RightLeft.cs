@@ -5,7 +5,6 @@ using UnityEngine;
 public class Direction_RightLeft : MonoBehaviour
 {
    // public GameObject damageUI;
-    public bool isRight;
     bool isBurst;
     public float maxBurstSpeed;
     public float minBurstSpeed;
