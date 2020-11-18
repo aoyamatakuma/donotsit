@@ -711,9 +711,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 5
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 1.4, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4850341239745552395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,14 +740,10 @@ MonoBehaviour:
   comboTimerMax: 5
   combo: 0
   comboBonus: 0
-  comboFlag: 0
   rayline: 100
   level: 1
-  exp: 0
   hp: 3
   comboText: {fileID: 0}
-  levelText: {fileID: 0}
-  expText: {fileID: 0}
   hpText: {fileID: 0}
   scoreText: {fileID: 0}
   ob: {fileID: 7747556278060116243}
