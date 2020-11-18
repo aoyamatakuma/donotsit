@@ -10,7 +10,7 @@ public class PouseButtonScript : MonoBehaviour
     public GameObject end;
     public GameObject title;
     private AudioSource audio;
-    private bool select;
+    private bool select,push;
     public AudioClip selectSE;
     public AudioClip moveSE;
     // Start is called before the first frame update
@@ -19,6 +19,7 @@ public class PouseButtonScript : MonoBehaviour
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();
         select = false;
+        push = false;
     }
 
     // Update is called once per frame
@@ -30,7 +31,6 @@ public class PouseButtonScript : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (select)
             {
-
                 endClick();
             }
             else
@@ -49,30 +49,33 @@ public class PouseButtonScript : MonoBehaviour
         {
             end.GetComponent<Outline>().enabled = false;
             title.GetComponent<Outline>().enabled = true;
-
         }
         else
         {
             end.GetComponent<Outline>().enabled = true;
             title.GetComponent<Outline>().enabled = false;
         }
-
-        if (ver > 0.5f)
+        if(!push)
         {
-            if (!select)
+            if (ver > 0.5f || ver < -0.5f)
             {
+                push = true;
                 audio.PlayOneShot(moveSE);
+                if (select)
+                {
+                    select = false;
+                }
+                else
+                {
+                    select = true;
+                }
             }
-            select = false;
-
         }
-        else if (ver < -0.5f)
+
+
+        if(ver == 0)
         {
-            if (select)
-            {
-                audio.PlayOneShot(moveSE);
-            }
-            select = true;
+            push = false;
         }
 
     }
