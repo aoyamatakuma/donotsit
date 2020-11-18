@@ -25,9 +25,11 @@ public class GameClearScene : MonoBehaviour
     float goaltimer;
     float goalscore;
     string stageName;
+    string rankingName;
     public string rank;
     bool isPush;
     Fade fade;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,7 @@ public class GameClearScene : MonoBehaviour
         fade = GetComponent<Fade>();
         stageName = StageDate.Instance.referer;
         stageText.text =   stageName.ToString();
+       
         // Type == Number の場合
 
     }
@@ -57,8 +60,10 @@ public class GameClearScene : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (select)
             {
+                StageDate.SetBool(StageDate.clearKey, true);
+                StageClearBool();
                 QuickRanking.Instance.SaveRanking(nameText.text, stageName, (int)goalscore);
-                fade.StartFadeIn("RankingTest", true);
+                fade.StartFadeIn(rankingName, true);
             }
             else
             {
@@ -141,6 +146,34 @@ public class GameClearScene : MonoBehaviour
             rankC.SetActive(true);
         }
 
+    }
+
+ 
+
+    void StageClearBool()
+    {
+        StageDate.Instance.SetSceneName(stageName);
+        if (stageName == "StageEasy")
+        {
+            StageDate.SetBool(StageDate.easyKey, true);
+            rankingName = "RankingEasy";
+            
+        }
+        else if(stageName == "StageNormal")
+        {
+            StageDate.SetBool(StageDate.normalKey, true);
+            rankingName = "RankingNormal";
+        }
+        else if(stageName == "StageHard")
+        {
+            StageDate.SetBool(StageDate.hardKey, true);
+            rankingName = "RankingHard";
+        }
+        else
+        {
+            StageDate.SetBool(StageDate.extraKey, true);
+            rankingName = "RankingExtra";
+        }
     }
 
 

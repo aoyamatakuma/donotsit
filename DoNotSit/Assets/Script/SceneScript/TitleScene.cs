@@ -15,7 +15,7 @@ public class TitleScene : MonoBehaviour
     private bool isSelect;
     private bool isMove;
 
-
+    bool status;
     Fade fade;
     // Start is called before the first frame update
     void Start()
@@ -26,11 +26,14 @@ public class TitleScene : MonoBehaviour
         Time.timeScale = 1.0f;
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        status = StageDate.GetBool(StageDate.clearKey, false);
+        FreezImage();
         SelectMove();
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump") )&& !isPush)
         {
@@ -48,13 +51,33 @@ public class TitleScene : MonoBehaviour
             }
             else if (selectNum == 2)
             {
-                fade.StartFadeIn("RankingTest", true);
+                if (status)
+                {
+                    fade.StartFadeIn("RankingSelect", true);
+                }
+                else
+                {
+                    isPush = false;
+                }
+              
             }
             else 
             {
                 fade.StartFadeIn("StageSelect", true);
             }
 
+        }
+    }
+
+    void FreezImage()
+    {
+        if (!status)
+        {
+            images[2].color = new Color(0,0,0);
+        }
+        else
+        {
+            images[2].color = new Color(1, 1, 1);
         }
     }
 
