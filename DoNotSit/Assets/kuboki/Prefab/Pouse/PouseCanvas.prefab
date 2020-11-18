@@ -338,8 +338,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   end: {fileID: 3921778859372271669}
   title: {fileID: 5281028848016424149}
-  selectSE: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
-  moveSE: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  selectSE: {fileID: 8300000, guid: 09cab73b6442bb345b287b72325e4065, type: 3}
+  moveSE: {fileID: 8300000, guid: c80a176bba4a1b84e84995183772665b, type: 3}
 --- !u!82 &-3604874158084848924
 AudioSource:
   m_ObjectHideFlags: 0
@@ -352,7 +352,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.07
   m_Pitch: 1
   Loop: 0
   Mute: 0
