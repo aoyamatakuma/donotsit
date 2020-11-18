@@ -13,7 +13,6 @@ public class Bomb : MonoBehaviour
     {
         effect.GetComponent<SphereCollider>().radius = bombRange;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
-
     }
 
     // Update is called once per frame
@@ -29,6 +28,7 @@ public class Bomb : MonoBehaviour
             camera.Shake(camera.durations, camera.magnitudes);
             Instantiate(effect, transform.position, transform.rotation);
             effect.GetComponent<AudioSource>().Play();
+            Time.timeScale = 0.3f; 
             Destroy(gameObject);
         }
     }

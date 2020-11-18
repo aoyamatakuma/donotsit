@@ -21,6 +21,7 @@ public class GameClearScene : MonoBehaviour
     public Text goalTimeText;
     public Text goalScoreText;
     public Text rankText;
+    public Text stageText;
     float goaltimer;
     float goalscore;
     string stageName;
@@ -40,6 +41,7 @@ public class GameClearScene : MonoBehaviour
         goalScoreText.text = "Score:" + goalscore.ToString();//ゴールスコア
         fade = GetComponent<Fade>();
         stageName = StageDate.Instance.referer;
+        stageText.text =   stageName.ToString();
         // Type == Number の場合
 
     }

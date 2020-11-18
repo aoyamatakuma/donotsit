@@ -42,6 +42,7 @@ public class ChaseEnemy : MonoBehaviour
     public float MagnificationLev3;
     public float MagnificationLev4;
     public float MagnificationLev5;
+    SlowTime slow;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +52,7 @@ public class ChaseEnemy : MonoBehaviour
              transform.position.z);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         animator = GetComponent<Animator>();
+        slow = GetComponent<SlowTime>();
         currentChaseState = ChaseState.LEVLE1;
     }
 
@@ -104,7 +106,11 @@ public class ChaseEnemy : MonoBehaviour
         {
             animator.SetBool("Sutan", true);   
         }
-        else
+        else if (Time.timeScale == 0.3f)
+        {
+            animator.SetBool("Sutan", true);
+        }
+        else if (currentChaseState != ChaseState.Stop)
         {
             animator.SetBool("Sutan", false);
         }
