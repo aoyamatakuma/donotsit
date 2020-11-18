@@ -41,7 +41,8 @@ public class Direction_RightLeft : MonoBehaviour
         {
             return;
         }
-        transform.position += (transform.right + dir) * burstSpeed * Time.deltaTime;
+        //transform.position += (transform.right+dir)*burstSpeed * Time.deltaTime;
+        transform.position += new Vector3(-burstSpeed * Time.deltaTime,1,0);
     }
 
     void OnTriggerEnter(Collider col)

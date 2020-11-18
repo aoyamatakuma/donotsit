@@ -1088,7 +1088,7 @@ MonoBehaviour:
   belooFlag: 0
   carsol: {fileID: 3382986514586744148}
   currentChaseState: 0
-  wait: 1
+  wait: 2
   MagnificationLev2: 1.2
   MagnificationLev3: 1.6
   MagnificationLev4: 2
