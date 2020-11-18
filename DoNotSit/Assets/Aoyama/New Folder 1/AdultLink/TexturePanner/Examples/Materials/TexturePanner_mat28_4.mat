@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: TexturePanner_mat28_4
   m_Shader: {fileID: 4800000, guid: 7f678362d077aea47a543329ff703ee7, type: 3}
   m_ShaderKeywords: _COLORMODE_MULTIPLY _EMISSION _NOTRANSPARENCY_ON _OFFSETSCROLL_SCROLL
@@ -58,7 +59,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex:
-        m_Texture: {fileID: 2800000, guid: e1b5c9ac6d54e4b4780baa898d7ce92f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 03e8340a84c07ff44abd84f498e59f89, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
@@ -154,7 +155,7 @@ Material:
     - __dirty: 0
     - _s: 0
     m_Colors:
-    - _Color: {r: 1.1549999, g: 0.6454411, b: 1.0566021, a: 1}
+    - _Color: {r: 0, g: 0.32583335, b: 1.3238058, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Scanlinespeed: {r: 0, g: -0.1, b: 0, a: 0}
