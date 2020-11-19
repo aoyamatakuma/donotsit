@@ -1025,6 +1025,7 @@ MonoBehaviour:
   goalScoreText: {fileID: 1369032750}
   rankText: {fileID: 1761893961}
   stageText: {fileID: 1484101180}
+  maxValue: 6
   rank: 
 --- !u!82 &970608958
 AudioSource:

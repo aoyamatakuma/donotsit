@@ -130,7 +130,7 @@ public class RankingSelect : MonoBehaviour
         {
             return;
         }
-        float hol = Input.GetAxis("SelectMove");
+        float hol = Input.GetAxis("SelectVerMove");
         if (hol < -0.5f && !isMove)
         {
             selectNum--;

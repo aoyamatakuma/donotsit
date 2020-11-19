@@ -15,6 +15,7 @@ public class Direction_RightLeft : MonoBehaviour
     GameObject playerObj;
     PlayerControl player;
     public float score;
+    bool isTouch;
     void Start()
     {
         //damageUI.GetComponent<ScoreAddUI>().SetScore(score);
@@ -68,11 +69,12 @@ public class Direction_RightLeft : MonoBehaviour
             camera.Shake(camera.durations, camera.magnitudes);
         }
 
-        if ((col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy" || col.gameObject.tag == "ChaseEnemy") && isBurst)
+        if ((col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy" || col.gameObject.tag == "ChaseEnemy") && isBurst && !isTouch)
         {
             player.Score(score);
            // Damage(col);
             Death();
+            isTouch = true;
         }
 
         if(col.gameObject.tag == "ChaseEnemy")

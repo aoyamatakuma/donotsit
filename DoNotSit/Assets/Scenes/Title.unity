@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rankingClassName: Ranking
-  count: 10
+  count: 60
 --- !u!4 &925564575
 Transform:
   m_ObjectHideFlags: 0

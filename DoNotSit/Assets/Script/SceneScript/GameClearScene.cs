@@ -22,12 +22,14 @@ public class GameClearScene : MonoBehaviour
     public Text goalScoreText;
     public Text rankText;
     public Text stageText;
+    public float maxValue;
     float goaltimer;
     float goalscore;
     string stageName;
     string rankingName;
     public string rank;
     bool isPush;
+    float preValue;
     Fade fade;
 
     // Start is called before the first frame update
@@ -52,6 +54,18 @@ public class GameClearScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float value;
+        if(float.TryParse(inputField.text,out value))
+        {
+            if(value > maxValue)
+            {
+                inputField.text = preValue + "";
+            }
+            else
+            {
+                preValue = value;
+            }
+        }
         Rank();
         Select();
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
@@ -174,6 +188,8 @@ public class GameClearScene : MonoBehaviour
             StageDate.SetBool(StageDate.extraKey, true);
             rankingName = "RankingExtra";
         }
+
+      
     }
 
 
