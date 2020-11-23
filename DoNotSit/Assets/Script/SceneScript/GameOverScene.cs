@@ -6,21 +6,29 @@ using UnityEngine.UI;
 
 public class GameOverScene : MonoBehaviour
 {
-    public GameObject stageSelect;
-    public GameObject title;
+    public Image stageSelect;
+    public Image title;
+    Image titleFont;
     private bool select;
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
     bool isPush;
     Fade fade;
+    Vector2 titleBaseSize;
+    Vector2 stageSelectBaseSize;
+    Vector2 titleFontBasesize;
     // Start is called before the first frame update
     void Start()
     {
+        titleFont = title.transform.GetChild(0).GetComponent<Image>();
         isPush = false;
         select = true;
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
+        titleBaseSize = title.rectTransform.sizeDelta;
+        stageSelectBaseSize = stageSelect.rectTransform.sizeDelta;
+        titleFontBasesize = titleFont.rectTransform.sizeDelta;
     }
 
     // Update is called once per frame
@@ -48,13 +56,19 @@ public class GameOverScene : MonoBehaviour
 
         if (select)
         {
-            stageSelect.GetComponent<Outline>().enabled = true;
-            title.GetComponent<Outline>().enabled = false;
+            stageSelect.rectTransform.sizeDelta = new Vector2(stageSelectBaseSize.x * 1.2f,stageSelectBaseSize.y * 1.2f);
+            title.rectTransform.sizeDelta = titleBaseSize;
+            titleFont.rectTransform.sizeDelta = titleFontBasesize;
+            //stageSelect.GetComponent<Outline>().enabled = true;
+            //title.GetComponent<Outline>().enabled = false;
         }
         else
         {
-            stageSelect.GetComponent<Outline>().enabled = false;
-            title.GetComponent<Outline>().enabled = true;
+            stageSelect.rectTransform.sizeDelta = stageSelectBaseSize;
+            title.rectTransform.sizeDelta = new Vector2(titleBaseSize.x * 1.2f,titleBaseSize.y * 1.2f);
+            titleFont.rectTransform.sizeDelta = new Vector2(titleFontBasesize.x * 1.2f, titleFontBasesize.y * 1.2f);
+            //stageSelect.GetComponent<Outline>().enabled = false;
+            //title.GetComponent<Outline>().enabled = true;
         }
 
         if (ver > 0.5f)
@@ -78,3 +92,4 @@ public class GameOverScene : MonoBehaviour
     }
 
 }
+
