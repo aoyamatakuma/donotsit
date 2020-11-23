@@ -311,7 +311,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SPEEDLEVRL:0
+  m_Text: SPEEDLEVEL:0
 --- !u!1 &545646487
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 8344334601708880441}
   - component: {fileID: 8344334601708880446}
   m_Layer: 5
-  m_Name: Canvas_Ui
+  m_Name: GameSceneUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -949,7 +949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130.3, y: -12.8}
+  m_AnchoredPosition: {x: 130.29999, y: -12.799988}
   m_SizeDelta: {x: 774, y: 291}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3507000610601818792
