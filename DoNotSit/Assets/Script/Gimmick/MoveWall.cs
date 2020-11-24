@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MoveWall : MonoBehaviour
 {
-    public float speed;
+    public float speedX;
+    public float speedY;
     public bool isReturn;
     public float timer;//タイマー
     public float returntimer;
@@ -16,22 +17,23 @@ public class MoveWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move(gameObject,speed);
+        Move(gameObject,speedX,speedY);
         timer += 1.0f * Time.deltaTime;
         Timer();
     }
 
-
-    public void Move(GameObject obj,float speed)
+    public void Move(GameObject obj,float speedX,float speedY)
     {
         Vector3 pos = obj.transform.position;
         if (isReturn == false)
         {
-            pos.x += speed * Time.deltaTime;
+            pos.x += speedX * Time.deltaTime;
+            pos.y += speedY * Time.deltaTime;
         }
         else if(isReturn==true)
         {
-            pos.x -= speed * Time.deltaTime;
+            pos.x -= speedX * Time.deltaTime;
+            pos.y -= speedY * Time.deltaTime;
         }
         obj.transform.position = pos;
        
