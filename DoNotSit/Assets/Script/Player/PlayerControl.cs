@@ -193,7 +193,6 @@ public class PlayerControl : MonoBehaviour
                     { transform.Rotate(Vector3.back * angleSpeed); }
                     else if (up < 0 && Rot.z < maxAngleSet)
                     { transform.Rotate(Vector3.forward * angleSpeed); }
-
                     break;
                 case 180:
                     if (turn > 0 && Rot.z < maxAngleSet)
@@ -208,8 +207,7 @@ public class PlayerControl : MonoBehaviour
                     { transform.Rotate(Vector3.back * angleSpeed); }
                     break;
             }
-        }
-        
+        }        
     }
 
     void SetAngle()
@@ -315,11 +313,6 @@ public class PlayerControl : MonoBehaviour
                 {
                     case 0://着地
                         ReflectActionCount();
-                        //gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        //gameObject.transform.Rotate(playerRot);
-                        //SetAngle();
-                        //currentPlayerState = PlayerState.Normal;
-                        //NormalBlock(col.gameObject);
                         break;
                     case 1://沼の床
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -327,7 +320,6 @@ public class PlayerControl : MonoBehaviour
                         jumpSpeed = jumpDefalut;
                         SetAngle();
                         currentPlayerState = PlayerState.Normal;
-                        // NormalBlock(col.gameObject);
                         break;
                     case 2://反射
                         ReflectAction();
@@ -348,7 +340,6 @@ public class PlayerControl : MonoBehaviour
                         break;
                     case 8://動く床
                         moveWall = col.gameObject;
-                        Debug.Log(moveWall);
                         coltest();
                         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         gameObject.transform.Rotate(playerRot);
@@ -389,7 +380,7 @@ public class PlayerControl : MonoBehaviour
     }
     void OnCollisionExit(Collision col)
     {
-        
+     
         if (colFlag)
         {
             colFlag = false;
@@ -681,18 +672,15 @@ public class PlayerControl : MonoBehaviour
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
-                    // Debug.Log("right");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
                 else
                 {
-                    // Debug.Log("left");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
             }
             else
             {
-                // Debug.Log("Down");
                 playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
             }
         }
@@ -702,23 +690,20 @@ public class PlayerControl : MonoBehaviour
             {
                 if (gameObject.transform.position.x > col.gameObject.transform.position.x)
                 {
-                    // Debug.Log("right");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
                 else
                 {
-                    //  Debug.Log("left");
                     playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
                 }
             }
             else
             {
-                //  Debug.Log("UP");
                 playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
             }
         }
     }
-    //
+    //回転の判定
     private void test()
     {
         //コンポーネント取得
@@ -751,51 +736,42 @@ public class PlayerControl : MonoBehaviour
         }
         wallNum = wa.abilityNumber;
     }
+    //動く床の判定
     private void coltest()
     {
         //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
+        //コンポーネント取得
+        wa = hitObject.GetComponent<WallAbility>();
+        float x = hitPoint.x;
+        float y = hitPoint.y;
+
+        x *= 10;
+        y *= 10;
+
+        x = Mathf.Floor(x) / 10;
+        y = Mathf.Floor(y) / 10;
+
         //どの位置にあたったか判定し回転する
-        if (wa.Height(true) > gameObject.transform.position.y)
+        if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
         {
-            if ((int)wa.Height(false) <= (int)gameObject.transform.position.y)
-            {
-                if (gameObject.transform.position.x > wa.Width(true))
-                {
-                    playerRot = Vector3.forward * 270;
-                }
-                else if (gameObject.transform.position.x < wa.Width(false))
-                {
-                    playerRot = Vector3.forward * 90;
-                }
-                else
-                {
-                    playerRot = Vector3.forward * 180;
-                }
-            }
-            else
-            {
-                playerRot = Vector3.forward * 180;
-            }
+            playerRot = Vector3.forward * 0;
         }
-        else
+        else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
         {
-            if (gameObject.transform.position.x > wa.Width(true))
-            {
-                playerRot = Vector3.forward * 270;
-            }
-            else if (gameObject.transform.position.x < wa.Width(false))
-            {
-                playerRot = Vector3.forward * 90;
-            }
-            else
-            {
-                playerRot = Vector3.forward * 0;
-            }
+            playerRot = Vector3.forward * 180;
+        }
+        else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
+        {
+            playerRot = Vector3.forward * 270;
+        }
+        else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
+        {
+            playerRot = Vector3.forward * 90;
         }
         wallNum = wa.abilityNumber;
     }
-
+    //判定を見るよう
     private void vecTest()
     {
         wa = hitObject.GetComponent<WallAbility>();
@@ -830,7 +806,7 @@ public class PlayerControl : MonoBehaviour
             if (wa.abilityNumber == 8)
             {
                 MoveWall mw = moveWall.GetComponent<MoveWall>();
-                mw.Move(gameObject, mw.speed);
+                mw.Move(gameObject, mw.speedX,mw.speedY);
             }
             else if (wa.abilityNumber == 9)
             {
