@@ -46,8 +46,8 @@ public class TitleScene : MonoBehaviour
             }
             else if(selectNum ==1)
             {
-                // fade.StartFadeIn("StageSelect", true);
-                isPush = false;
+                fade.StartFadeIn("Option", true);
+              
             }
             else if (selectNum == 2)
             {

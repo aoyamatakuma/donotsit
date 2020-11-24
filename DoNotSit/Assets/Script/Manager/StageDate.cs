@@ -16,6 +16,8 @@ public class StageDate:SingletonMonoBehaviour<StageDate>
     public static string hardKey = "hard";
     public static string extraKey = "extra";
 
+  
+
     public void SetData(string stageName)
     {
         referer = stageName;
@@ -45,5 +47,19 @@ public class StageDate:SingletonMonoBehaviour<StageDate>
     {
         PlayerPrefs.SetInt(key, value ? 1 : 0);
     }
+
+    public static void SetAudio(float BGM,float SE)
+    {
+        PlayerPrefs.SetFloat("BGM", BGM);
+        PlayerPrefs.SetFloat("SE", SE);
+    }
+
+    public static float GetAudio(string key)
+    {
+        var value = PlayerPrefs.GetFloat(key);
+
+        return value;
+    }
+ 
 
 }
