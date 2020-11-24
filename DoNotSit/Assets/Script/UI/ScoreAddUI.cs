@@ -5,39 +5,47 @@ using UnityEngine.UI;
 
 public class ScoreAddUI : MonoBehaviour
 {
-    public Text scoreText;
+    private Transform targetObject;
+    public Text damageText;
     public Text comboText;
-    public float fadeOutSpeed = 1f;
-    public float moveSpeed=0.4f;
-    
-    // Start is called before the first frame update
+    public bool isActive;
+    [SerializeField]
+    private float lifeTime;
+    float cnt;
+
+   
     void Start()
     {
- 
+        targetObject = transform.parent;
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-        transform.rotation = Camera.main.transform.rotation;
-        transform.position += Vector3.up * moveSpeed * Time.deltaTime;
-
-        scoreText.color = Color.Lerp(scoreText.color, new Color(1f, 0f, 0f, 0f), fadeOutSpeed * Time.deltaTime);
-        comboText.color = Color.Lerp(comboText.color, new Color(1f, 0f, 0f, 0f), fadeOutSpeed * Time.deltaTime);
-
-        if (scoreText.color.a <= 0.1f)
+        if (isActive)
         {
-            Destroy(gameObject);
+            cnt+=Time.deltaTime;
+            if(lifeTime < cnt)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
-    public void SetScore(float score)
+    public void SetPosition(Vector3 point)
     {
-        scoreText.text = "+"+score.ToString();
+        damageText.rectTransform.position
+           = RectTransformUtility.WorldToScreenPoint(Camera.main, point);
+        comboText.rectTransform.position
+           = RectTransformUtility.WorldToScreenPoint(Camera.main, point+ new Vector3(0,5,0));
+    }
+
+    public void SetDamage(float damage)
+    {
+        damageText.text ="+"+ damage.ToString();
     }
 
     public void SetCombo(float combo)
     {
-        comboText.text = "Combo:" + combo;
+        comboText.text = combo.ToString() + "コンボ!";
     }
 }

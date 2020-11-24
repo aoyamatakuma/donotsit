@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
-    //public GameObject damageUI;
+    public GameObject damageUI;
     public int damage;
     private CameraShakeScript camera;
     public List<GameObject> effects;
@@ -15,18 +15,22 @@ public class EnemyCollision : MonoBehaviour
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
-        //damageUI.GetComponent<ScoreAddUI>().SetScore(score);
-        //damageUI.SetActive(false);
+        damageUI.GetComponent<ScoreAddUI>().SetDamage(score);
+        damageUI.SetActive(false);
+    }
+    
+    void Update()
+    {
+        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
-        {
-           
+        {     
             if (player.currentPlayerState == PlayerState.Attack)
             {
-              //  Damage(col);
+                Damage(col.ClosestPointOnBounds(transform.position));
                 Death();
             }
             else
@@ -55,14 +59,14 @@ public class EnemyCollision : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //void Damage(Collider col)
-    //{
-    //    damageUI.SetActive(true);
-    //    damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo + 1);
-    //    damageUI.transform.position = col.bounds.center - Camera.main.transform.forward * 1f;
-    //    damageUI.transform.SetParent(null);
-        
-    //}
+    void Damage(Vector3 point)
+    {
+        damageUI.SetActive(true);
+        damageUI.GetComponent<ScoreAddUI>().isActive = true;
+        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
+        damageUI.GetComponent<ScoreAddUI>().SetPosition(point);
+        damageUI.transform.SetParent(null);
+    }
 
 
 }
