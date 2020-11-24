@@ -7,6 +7,7 @@ public class CameraShakeScript : MonoBehaviour
     public float durations;
     public float magnitudes;
     Vector3 posi;
+    public bool slowFlag;
 
     public void Shake(float duration, float magnitude)
     {
@@ -15,6 +16,7 @@ public class CameraShakeScript : MonoBehaviour
 
     private IEnumerator DoShake(float duration, float magnitude)
     {
+
         var pos = transform.localPosition;
 
         var elapsed = 0f;
@@ -29,9 +31,14 @@ public class CameraShakeScript : MonoBehaviour
             elapsed += Time.deltaTime;
 
             yield return null;
+            if (slowFlag == true)
+            {
+                break;
+            }
         }
 
-        transform.localPosition = new Vector3(pos.x,posi.y,posi.z);
+        transform.localPosition = new Vector3(pos.x, posi.y, posi.z);
+
     }
     private void Start()
     {
@@ -39,10 +46,10 @@ public class CameraShakeScript : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.K))
+        if (Input.GetKeyUp(KeyCode.K))
         {
             Shake(durations, magnitudes);
         }
-        
+
     }
 }

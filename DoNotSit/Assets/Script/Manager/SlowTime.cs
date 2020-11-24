@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlowTime : MonoBehaviour
 {
-    private bool slowMotion;
+    public bool slowMotion;
     float slowTime;
     public float slowEnd;
     private CameraShakeScript camera;
@@ -18,13 +18,13 @@ public class SlowTime : MonoBehaviour
         {
             slowTime++;
             slowMotion = true;
+            camera.slowFlag = true;
             if (slowTime >= slowEnd)
             {
                 Time.timeScale = 1f;
                 slowTime = 0;
                 slowMotion = false;
-                camera.durations = 0.5f;
-                camera.magnitudes = 0.5f;
+                camera.slowFlag = false;
             }
         }
     }
