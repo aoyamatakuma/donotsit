@@ -19,7 +19,6 @@ public class OptionManger : MonoBehaviour
     {
         BGM = bgm.value;
         SE = se.value;
-        StageDate.SetAudio(BGM, SE);
         fade = GetComponent<Fade>();
         bgm.value = StageDate.GetAudio("BGM");
         se.value = StageDate.GetAudio("SE");
