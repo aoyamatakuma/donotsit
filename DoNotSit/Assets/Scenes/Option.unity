@@ -439,7 +439,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 5
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -452,7 +452,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 529191841}
   m_FillRect: {fileID: 379082287}
   m_HandleRect: {fileID: 529191840}
@@ -911,16 +911,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387960806}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.18272567, y: 0.18272567, z: 0.18272567}
+  m_LocalScale: {x: 0.1827257, y: 0.1827257, z: 0.1827257}
   m_Children: []
   m_Father: {fileID: 276155670}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -179.65, y: 16.415}
+  m_AnchoredPosition: {x: -179.64998, y: 16.41501}
   m_SizeDelta: {x: 509, y: 242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387960808
@@ -1138,6 +1138,91 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8407dff17be884148914d7ac416ce1ec, type: 3}
+--- !u!1001 &491496538
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3630338174958237044, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_Name
+      value: BGM
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237044, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237045, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 3405546817392860433, guid: 4144fa23b9eccc6409192db89e8c6a4c,
+        type: 2}
+    - target: {fileID: 3630338174958237045, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8bb585296ce37004cb6dec76911ab15e, type: 3}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630338174958237046, guid: 0eb290bc04104374e82764afbc7de020,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0eb290bc04104374e82764afbc7de020, type: 3}
 --- !u!1 &529191839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1793,11 @@ MonoBehaviour:
   bgm: {fileID: 2059430457}
   se: {fileID: 145155881}
   mixer: {fileID: 24100000, guid: 4144fa23b9eccc6409192db89e8c6a4c, type: 2}
+  moveSE: {fileID: 8300000, guid: c80a176bba4a1b84e84995183772665b, type: 3}
+  selectAudio:
+  - {fileID: 387960808}
+  - {fileID: 1394180589}
+  wait: 0.05
 --- !u!1 &1219276887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,16 +1906,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394180587}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1978182, y: 0.1978182, z: 0.1978182}
+  m_LocalScale: {x: 0.19781825, y: 0.19781825, z: 0.19781825}
   m_Children: []
   m_Father: {fileID: 276155670}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -187.04, y: -71.56}
+  m_AnchoredPosition: {x: -187.04, y: -71.55999}
   m_SizeDelta: {x: 290, y: 237}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1394180589
@@ -2304,7 +2394,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 5
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -2317,7 +2407,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1575624860}
   m_FillRect: {fileID: 354778783}
   m_HandleRect: {fileID: 1575624859}
