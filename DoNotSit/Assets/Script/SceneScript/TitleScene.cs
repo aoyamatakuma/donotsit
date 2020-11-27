@@ -108,7 +108,7 @@ public class TitleScene : MonoBehaviour
         {
             images[i].SetNativeSize();
         }
-        images[selectNum].rectTransform.sizeDelta *= 1.2f;
+        images[selectNum].rectTransform.sizeDelta *= 1.1f;
         isSelect = true;
 
     }
