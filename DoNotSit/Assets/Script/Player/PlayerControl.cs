@@ -145,7 +145,7 @@ public class PlayerControl : MonoBehaviour
         }
         //タイマー
         timer += 1.0f * Time.deltaTime;
-        comboText.text = combo.ToString()+ "COMOBO!";//コンボ
+        //comboText.text = combo.ToString()+ "COMOBO!";//コンボ
         hpText.text = "HP:";
         scoreText.text =  scoreNumber.ToString();
         Combo();//コンボ関連
@@ -314,12 +314,6 @@ public class PlayerControl : MonoBehaviour
                 switch (wallNum)
                 {
                     case 0://着地
-                        hitObject = col.gameObject;
-                        foreach (ContactPoint point in col.contacts)
-                        {
-                            hitPoint = point.point;
-                        }
-                        coltest();
                         ReflectActionCount();
                         break;
                     case 1://沼の床
@@ -330,12 +324,6 @@ public class PlayerControl : MonoBehaviour
                         currentPlayerState = PlayerState.Normal;
                         break;
                     case 2://反射
-                        hitObject = col.gameObject;
-                        foreach (ContactPoint point in col.contacts)
-                        {
-                            hitPoint = point.point;
-                        }
-                        coltest();
                         ReflectAction();
                         break;
                     case 4://とげ
@@ -522,7 +510,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (comboFlag == true)
         {
-            comboText.enabled = true;
+           // comboText.enabled = true;
             comboTimer -= 1.0f * Time.deltaTime;
             if (comboTimer <= 0)
             {
@@ -534,7 +522,7 @@ public class PlayerControl : MonoBehaviour
         {
             combo = 0;
             comboBonus = 0;
-            comboText.enabled = false;
+           // comboText.enabled = false;
         }
     }
     public void ComboStart()
