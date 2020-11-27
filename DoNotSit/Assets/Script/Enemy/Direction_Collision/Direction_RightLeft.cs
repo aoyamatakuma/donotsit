@@ -32,7 +32,6 @@ public class Direction_RightLeft : MonoBehaviour
     void Update()
     {
         Move();
-        //damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo +1);
     }
 
  
@@ -53,6 +52,7 @@ public class Direction_RightLeft : MonoBehaviour
             if (player.currentPlayerState == PlayerState.Attack)
             {
                 isBurst = true;
+                player.Score(score);
                 Damage(col.ClosestPointOnBounds(transform.position));
                 camera.Shake(camera.durations, camera.magnitudes);
             }
@@ -65,13 +65,12 @@ public class Direction_RightLeft : MonoBehaviour
         if (col.gameObject.tag == "Bomb" || col.gameObject.tag == "BlowAway")
         {
             isBurst = true;
-           // Damage(col);
+            Damage(col.ClosestPointOnBounds(transform.position));
             camera.Shake(camera.durations, camera.magnitudes);
         }
 
         if ((col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy" || col.gameObject.tag == "ChaseEnemy") && isBurst && !isTouch)
-        {
-            player.Score(score);
+        {   
             Death();
             isTouch = true;
         }
@@ -101,10 +100,10 @@ public class Direction_RightLeft : MonoBehaviour
     {
         damageUI.SetActive(true);
         damageUI.GetComponent<ScoreAddUI>().isActive = true;
-        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo + 1);
-        damageUI.GetComponent<ScoreAddUI>().SetPosition(point);
+        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
         damageUI.transform.SetParent(null);
-
+        damageUI.transform.position = point + new Vector3(0,0,-6);
+        damageUI.transform.localEulerAngles = Vector3.zero;
     }
 
 

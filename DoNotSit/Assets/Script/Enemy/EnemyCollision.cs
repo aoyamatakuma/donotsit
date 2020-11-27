@@ -19,17 +19,13 @@ public class EnemyCollision : MonoBehaviour
         damageUI.SetActive(false);
     }
     
-    void Update()
-    {
-        //damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo +1);
-    }
-
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {     
             if (player.currentPlayerState == PlayerState.Attack)
             {
+                player.Score(score);
                 Damage(col.ClosestPointOnBounds(transform.position));
                 Death();
             }
@@ -44,14 +40,14 @@ public class EnemyCollision : MonoBehaviour
     {
         if (col.gameObject.tag == "Bomb" || col.gameObject.tag =="BlowAway")
         {
-           // Damage(col);
+            player.Score(score);
+             Damage(col.ClosestPointOnBounds(transform.position));
             Death();
         }
     }
 
     void Death()
     {
-        player.Score(score);
         int num = Random.Range(0, effects.Count);
         camera.Shake(camera.durations, camera.magnitudes);
         Instantiate(effects[num], transform.position, transform.rotation);
@@ -63,9 +59,9 @@ public class EnemyCollision : MonoBehaviour
     {
         damageUI.SetActive(true);
         damageUI.GetComponent<ScoreAddUI>().isActive = true;
-        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo +1);
-        damageUI.GetComponent<ScoreAddUI>().SetPosition(point);
+        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
         damageUI.transform.SetParent(null);
+        damageUI.transform.position = point + new Vector3(0,0,-6);   
     }
 
 
