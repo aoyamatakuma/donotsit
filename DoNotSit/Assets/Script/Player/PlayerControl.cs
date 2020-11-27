@@ -176,8 +176,6 @@ public class PlayerControl : MonoBehaviour
         float turn = Input.GetAxis("Horizontal");
         float up = Input.GetAxis("Vertical");
         Vector3 Rot = transform.localEulerAngles;
-        Debug.Log(maxAngleSet+"aaa"+minAngleSet);
-        Debug.Log(turn);
         if (!select)
         {
             switch (playerAngle)
