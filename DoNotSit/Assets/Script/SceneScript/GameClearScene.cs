@@ -8,10 +8,10 @@ public class GameClearScene : MonoBehaviour
 {
     public GameObject stageSelect;
     public GameObject title;
-    public GameObject rankS;
-    public GameObject rankA;
-    public GameObject rankB;
-    public GameObject rankC;
+    public GameObject easy;
+    public GameObject normal;
+    public GameObject hard;
+    public GameObject ex;
     public InputField inputField;
     public Text nameText;
     private bool select;
@@ -45,7 +45,7 @@ public class GameClearScene : MonoBehaviour
         goalScoreText.text = "Score:" + goalscore.ToString();//ゴールスコア
         fade = GetComponent<Fade>();
         stageName = StageDate.Instance.referer;
-        stageText.text =   stageName.ToString();
+       // stageText.text =   stageName.ToString();
        
         // Type == Number の場合
 
@@ -66,7 +66,7 @@ public class GameClearScene : MonoBehaviour
                 preValue = value;
             }
         }
-        Rank();
+        Name();
         Select();
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
@@ -122,48 +122,37 @@ public class GameClearScene : MonoBehaviour
         }
 
     }
-    void Rank()
+    void Name()
     {
-        if (rank == "S")
+        if (stageName == "StageEasy")
         {
-            rank = "S";
-            rankS.SetActive(true);
-            rankA.SetActive(false);
-            rankB.SetActive(false);
-            rankC.SetActive(false);
+            easy.SetActive(true);
+            normal.SetActive(false);
+            hard.SetActive(false);
+            ex.SetActive(false);
         }
-        if (rank == "A")
+        else if (stageName == "StageNormal")
         {
-            rank = "A";
-            rankS.SetActive(false);
-            rankA.SetActive(true);
-            rankB.SetActive(false);
-            rankC.SetActive(false);
+            easy.SetActive(false);
+            normal.SetActive(true);
+            hard.SetActive(false);
+            ex.SetActive(false);
         }
-
-        if (rank == "B")
+        else if (stageName == "StageHard")
         {
-            rank = "B";
-            rankS.SetActive(false);
-            rankA.SetActive(false);
-            rankB.SetActive(true);
-            rankC.SetActive(false);
+            easy.SetActive(false);
+            normal.SetActive(false);
+            hard.SetActive(true);
+            ex.SetActive(false);
         }
-
-
-        if (rank == "C")
+        else
         {
-            rank = "C";
-            rankS.SetActive(false);
-            rankA.SetActive(false);
-            rankB.SetActive(false);
-            rankC.SetActive(true);
+            easy.SetActive(false);
+            normal.SetActive(false);
+            hard.SetActive(false);
+            ex.SetActive(true);
         }
-
     }
-
- 
-
     void StageClearBool()
     {
         StageDate.Instance.SetSceneName(stageName);

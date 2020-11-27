@@ -176,7 +176,7 @@ public class ChaseEnemy : MonoBehaviour
         //経験値UP
         exp += 1.0f * Time.deltaTime;
         // レベル系
-        levelText.text = "SPEEDLEVEL:" + level.ToString();
+        levelText.text = "SPEED LEVEL:" + level.ToString();
         if (level == 0)//レベル1
         {
             level = 1;
