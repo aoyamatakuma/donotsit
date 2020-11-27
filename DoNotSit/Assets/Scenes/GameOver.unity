@@ -738,20 +738,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1309755266, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_Name
-      value: RetryImage
-      objectReference: {fileID: 0}
-    - target: {fileID: 987275979429720826, guid: d380138422c73dc49b65b7ac33ad504c,
-        type: 3}
-      propertyPath: m_Name
-      value: TitleImage
-      objectReference: {fileID: 0}
-    - target: {fileID: 1052442868875414696, guid: d380138422c73dc49b65b7ac33ad504c,
-        type: 3}
-      propertyPath: m_Name
-      value: StageSelectImage
-      objectReference: {fileID: 0}
     - target: {fileID: 8713319415986054330, guid: d380138422c73dc49b65b7ac33ad504c,
         type: 3}
       propertyPath: m_Name
