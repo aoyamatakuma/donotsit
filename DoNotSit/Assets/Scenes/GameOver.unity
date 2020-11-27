@@ -738,48 +738,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1309755268, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1309755268, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_EffectDistance.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1309755268, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_EffectDistance.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 420282788137070010, guid: d380138422c73dc49b65b7ac33ad504c,
-        type: 3}
-      propertyPath: m_EffectDistance.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 420282788137070010, guid: d380138422c73dc49b65b7ac33ad504c,
-        type: 3}
-      propertyPath: m_EffectDistance.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 420282788137070010, guid: d380138422c73dc49b65b7ac33ad504c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8385450096158423556, guid: d380138422c73dc49b65b7ac33ad504c,
-        type: 3}
-      propertyPath: m_EffectDistance.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8385450096158423556, guid: d380138422c73dc49b65b7ac33ad504c,
-        type: 3}
-      propertyPath: m_EffectDistance.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8385450096158423556, guid: d380138422c73dc49b65b7ac33ad504c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8713319415986054330, guid: d380138422c73dc49b65b7ac33ad504c,
         type: 3}
       propertyPath: m_Name
