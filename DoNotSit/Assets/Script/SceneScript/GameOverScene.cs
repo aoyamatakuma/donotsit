@@ -38,7 +38,7 @@ public class GameOverScene : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (selectNum == 0)
             {
-                fade.StartCoroutine(stageName, true);
+                fade.StartFadeIn(stageName, true);
             }
             else if(selectNum ==1)
             {
