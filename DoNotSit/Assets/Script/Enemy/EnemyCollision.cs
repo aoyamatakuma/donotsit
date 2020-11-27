@@ -21,7 +21,7 @@ public class EnemyCollision : MonoBehaviour
     
     void Update()
     {
-        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
+        //damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo +1);
     }
 
     void OnTriggerEnter(Collider col)
@@ -63,7 +63,7 @@ public class EnemyCollision : MonoBehaviour
     {
         damageUI.SetActive(true);
         damageUI.GetComponent<ScoreAddUI>().isActive = true;
-        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
+        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo +1);
         damageUI.GetComponent<ScoreAddUI>().SetPosition(point);
         damageUI.transform.SetParent(null);
     }

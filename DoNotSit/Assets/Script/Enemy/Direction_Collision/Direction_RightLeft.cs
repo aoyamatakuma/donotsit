@@ -32,7 +32,7 @@ public class Direction_RightLeft : MonoBehaviour
     void Update()
     {
         Move();
-        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo);
+        //damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo +1);
     }
 
  
@@ -101,7 +101,7 @@ public class Direction_RightLeft : MonoBehaviour
     {
         damageUI.SetActive(true);
         damageUI.GetComponent<ScoreAddUI>().isActive = true;
-       // damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo + 1);
+        damageUI.GetComponent<ScoreAddUI>().SetCombo(player.combo + 1);
         damageUI.GetComponent<ScoreAddUI>().SetPosition(point);
         damageUI.transform.SetParent(null);
 
