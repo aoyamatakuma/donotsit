@@ -153,6 +153,7 @@ public class PlayerControl : MonoBehaviour
 
         if (hp <= 0)
         {
+            StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
             fade.StartFadeIn("GameOver", false);
         }
         //最大スピード
@@ -372,8 +373,8 @@ public class PlayerControl : MonoBehaviour
             switch (wa.abilityNumber)
             {
                 case 9://デスエリア
-                    fade.StartFadeIn("GameOver", false);
                     StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
+                    fade.StartFadeIn("GameOver", false);
                     break;
                 default:
                     break;
@@ -381,8 +382,8 @@ public class PlayerControl : MonoBehaviour
         }
         if (col.gameObject.CompareTag("ChaseEnemy"))
         {
-            fade.StartFadeIn("GameOver", false);
             StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
+            fade.StartFadeIn("GameOver", false);
         }
     }
     void OnCollisionExit(Collision col)
@@ -412,8 +413,8 @@ public class PlayerControl : MonoBehaviour
                     SkewRefrect(col.gameObject);
                     break;
                 case 9://デスエリア
-                    fade.StartFadeIn("GameOver", false);
                     StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
+                    fade.StartFadeIn("GameOver", false);
                     break;
                 default:
                     break;
@@ -859,8 +860,8 @@ public class PlayerControl : MonoBehaviour
             }
             else if (wa.abilityNumber == 9)
             {
-                fade.StartFadeIn("GameOver", false);
                 StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
+                fade.StartFadeIn("GameOver", false);
             }
             else
             { }
