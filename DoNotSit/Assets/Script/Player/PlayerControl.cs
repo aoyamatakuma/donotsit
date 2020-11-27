@@ -314,6 +314,12 @@ public class PlayerControl : MonoBehaviour
                 switch (wallNum)
                 {
                     case 0://着地
+                        hitObject = col.gameObject;
+                        foreach (ContactPoint point in col.contacts)
+                        {
+                            hitPoint = point.point;
+                        }
+                        coltest();
                         ReflectActionCount();
                         break;
                     case 1://沼の床
@@ -324,6 +330,12 @@ public class PlayerControl : MonoBehaviour
                         currentPlayerState = PlayerState.Normal;
                         break;
                     case 2://反射
+                        hitObject = col.gameObject;
+                        foreach (ContactPoint point in col.contacts)
+                        {
+                            hitPoint = point.point;
+                        }
+                        coltest();
                         ReflectAction();
                         break;
                     case 4://とげ
@@ -370,8 +382,8 @@ public class PlayerControl : MonoBehaviour
             switch (wa.abilityNumber)
             {
                 case 9://デスエリア
-                    fade.StartFadeIn("GameOver", false);
                     StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
+                    fade.StartFadeIn("GameOver", false);
                     break;
                 default:
                     break;
@@ -379,8 +391,8 @@ public class PlayerControl : MonoBehaviour
         }
         if (col.gameObject.CompareTag("ChaseEnemy"))
         {
-            fade.StartFadeIn("GameOver", false);
             StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
+            fade.StartFadeIn("GameOver", false);
         }
     }
     void OnCollisionExit(Collision col)
@@ -409,9 +421,9 @@ public class PlayerControl : MonoBehaviour
                 case 5://斜めの反射
                     SkewRefrect(col.gameObject);
                     break;
-                case 9://デスエリア
-                    fade.StartFadeIn("GameOver", false);
+                case 9://デスエリア                   
                     StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
+                    fade.StartFadeIn("GameOver", false);
                     break;
                 default:
                     break;
@@ -857,8 +869,8 @@ public class PlayerControl : MonoBehaviour
             }
             else if (wa.abilityNumber == 9)
             {
-                fade.StartFadeIn("GameOver", false);
                 StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
+                fade.StartFadeIn("GameOver", false);
             }
             else
             { }
