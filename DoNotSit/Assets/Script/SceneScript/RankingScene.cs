@@ -52,15 +52,18 @@ public class RankingScene : MonoBehaviour
                 }
                 if (list.rankNum.ToString() != null)
                 {
-                    if (list.objectid == QuickRanking.Instance.GetCurrentID())
+                    if(rank < 10)
                     {
-                        rankingText.text += "<color=red>" + "\t" + rank + "</color> \n";
+                        if (list.objectid == QuickRanking.Instance.GetCurrentID())
+                        {
+                            rankingText.text += "<color=red>" + "\t" + rank + "</color> \n";
+                        }
+                        else
+                        {
+                            rankingText.text += "\t" + rank + "\n";
+                        }
+                        rank += 1;
                     }
-                    else
-                    {
-                        rankingText.text += "\t" + rank + "\n";
-                    }            
-                    rank += 1;
                 }
                 else
                 {

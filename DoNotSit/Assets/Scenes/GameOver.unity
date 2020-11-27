@@ -447,6 +447,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &858132052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8328574607964423699, guid: d380138422c73dc49b65b7ac33ad504c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8713319414779854962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &970608955
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,10 +601,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d681b01af09cb7d4abc57c3c00b9819c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageSelect: {fileID: 1746978371}
-  title: {fileID: 1309755269}
   selectSE: {fileID: 8300000, guid: 206f263c04bf72c45a89066ac4f8e445, type: 3}
   moveSE: {fileID: 8300000, guid: c80a176bba4a1b84e84995183772665b, type: 3}
+  images:
+  - {fileID: 1309755269}
+  - {fileID: 858132052}
+  - {fileID: 2099638653}
 --- !u!114 &970608959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,9 +719,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1746978371 stripped
+--- !u!114 &2099638653 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8713319415448798768, guid: d380138422c73dc49b65b7ac33ad504c,
+  m_CorrespondingSourceObject: {fileID: 7278455206567838632, guid: d380138422c73dc49b65b7ac33ad504c,
     type: 3}
   m_PrefabInstance: {fileID: 8713319414779854962}
   m_PrefabAsset: {fileID: 0}
@@ -724,33 +738,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 584214527, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
+    - target: {fileID: 1309755266, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
+      propertyPath: m_Name
+      value: RetryImage
       objectReference: {fileID: 0}
-    - target: {fileID: 584214529, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
+    - target: {fileID: 987275979429720826, guid: d380138422c73dc49b65b7ac33ad504c,
+        type: 3}
+      propertyPath: m_Name
+      value: TitleImage
       objectReference: {fileID: 0}
-    - target: {fileID: 584214529, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 584214529, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_Color.b
-      value: 0.9113383
-      objectReference: {fileID: 0}
-    - target: {fileID: 1309755267, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1309755267, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1309755267, guid: d380138422c73dc49b65b7ac33ad504c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
+    - target: {fileID: 1052442868875414696, guid: d380138422c73dc49b65b7ac33ad504c,
+        type: 3}
+      propertyPath: m_Name
+      value: StageSelectImage
       objectReference: {fileID: 0}
     - target: {fileID: 8713319415986054330, guid: d380138422c73dc49b65b7ac33ad504c,
         type: 3}
