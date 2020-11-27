@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class GameOverScene : MonoBehaviour
 {
-    public Image stageSelect;
-    public Image title;
-    Image titleFont;
     private bool isSelect;
     bool isMove;
     private int selectNum;
@@ -17,30 +14,24 @@ public class GameOverScene : MonoBehaviour
     public AudioClip moveSE;
     bool isPush;
     Fade fade;
-    Vector2 titleBaseSize;
-    Vector2 stageSelectBaseSize;
-    Vector2 titleFontBasesize;
     public List<Image> images;
     string stageName;
     // Start is called before the first frame update
     void Start()
     {
-        titleFont = title.transform.GetChild(0).GetComponent<Image>();
         selectNum = 0;
         isPush = false;
         isSelect = true;
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
-        titleBaseSize = title.rectTransform.sizeDelta;
-        stageSelectBaseSize = stageSelect.rectTransform.sizeDelta;
-        titleFontBasesize = titleFont.rectTransform.sizeDelta;
         stageName = StageDate.Instance.referer;
+        images[selectNum].GetComponent<Outline>().enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Select();
+        SelectMove();
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
             isPush = true;
@@ -69,9 +60,9 @@ public class GameOverScene : MonoBehaviour
         }
         for (int i = 0; i < images.Count; i++)
         {
-            images[i].SetNativeSize();
+            images[i].GetComponent<Outline>().enabled = false;
         }
-        images[selectNum].rectTransform.sizeDelta *= 1.2f;
+        images[selectNum].GetComponent<Outline>().enabled = true;
         isSelect = true;
 
     }
@@ -84,7 +75,7 @@ public class GameOverScene : MonoBehaviour
         {
             return;
         }
-        float hol = Input.GetAxis("SelectMove");
+        float hol = Input.GetAxis("SelectVerMove");
         if (hol < -0.5f && !isMove)
         {
             selectNum--;
