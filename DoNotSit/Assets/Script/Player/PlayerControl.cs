@@ -288,7 +288,7 @@ public class PlayerControl : MonoBehaviour
                         hitObject = hit.collider.gameObject;
                         test();
                     }
-                    Debug.DrawRay(transform.position +(transform.up+ Vector3.right) * 2.0f * (i - 1), transform.up * rayline, Color.red, 0, true);                   
+                    Debug.DrawRay(transform.position +Vector3.right * 2.0f * (i - 1), transform.up * rayline, Color.red, 0, true);                   
                 }
             }
             else //壁がない時
@@ -339,12 +339,13 @@ public class PlayerControl : MonoBehaviour
                         SkewBlockRight(col.gameObject);
                         break;
                     case 8://動く床
-                        moveWall = col.gameObject;
+                        hitObject = col.gameObject;
+                        foreach(ContactPoint point in col.contacts)
+                        {
+                            hitPoint = point.point;
+                        }
                         coltest();
-                        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        gameObject.transform.Rotate(playerRot);
-                        SetAngle();
-                        currentPlayerState = PlayerState.Normal;
+                        ReflectMoveActionCount(col.gameObject);
                         break;
                     case 10:
                         ReflectActionCount();
@@ -368,6 +369,7 @@ public class PlayerControl : MonoBehaviour
             {
                 case 9://デスエリア
                     fade.StartFadeIn("GameOver", false);
+                    StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
                     break;
                 default:
                     break;
@@ -375,12 +377,12 @@ public class PlayerControl : MonoBehaviour
         }
         if (col.gameObject.CompareTag("ChaseEnemy"))
         {
-          fade.StartFadeIn("GameOver", false);
+            fade.StartFadeIn("GameOver", false);
+            StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
         }
     }
     void OnCollisionExit(Collision col)
-    {
-     
+    {  
         if (colFlag)
         {
             colFlag = false;
@@ -407,6 +409,7 @@ public class PlayerControl : MonoBehaviour
                     break;
                 case 9://デスエリア
                     fade.StartFadeIn("GameOver", false);
+                    StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
                     break;
                 default:
                     break;
@@ -419,6 +422,7 @@ public class PlayerControl : MonoBehaviour
            // ComboStart();
         }
     }
+    #region 使ってない
     //垂直くっつく
     private void NormalBlock(GameObject col)
     {
@@ -443,6 +447,7 @@ public class PlayerControl : MonoBehaviour
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, -90);
         gameObject.transform.Rotate(Vector3.forward * (-45 - a));
     }
+    #endregion
     public void Damage(int damage)
     {
         hp -= damage;
@@ -619,13 +624,17 @@ public class PlayerControl : MonoBehaviour
     }
     private void ReflectActionCount()
     {
-        if(refCount<1)
-        {
+        CapsuleCollider col = GetComponent<CapsuleCollider>();
+        col.isTrigger = true;
+        if (refCount<1)
+        {           
+           
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             gameObject.transform.Rotate(playerRot);
             SetAngle();
             currentPlayerState = PlayerState.Normal;
             refCount = ReflectCount;
+            
         }
         else
         {
@@ -645,6 +654,41 @@ public class PlayerControl : MonoBehaviour
             RayObject();
             refCount--;
         }
+        col.isTrigger = false;
+    }
+    private void ReflectMoveActionCount(GameObject colObj)
+    {
+        CapsuleCollider col = GetComponent<CapsuleCollider>();
+        col.isTrigger = true;
+        if (refCount < 1)
+        {
+            moveWall = colObj;
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            gameObject.transform.Rotate(playerRot);
+            SetAngle();
+            currentPlayerState = PlayerState.Normal;
+            refCount = ReflectCount;
+
+        }
+        else
+        {
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            gameObject.transform.Rotate(playerRot);
+            //当たったオブジェの向き取得
+            Vector3 n = gameObject.transform.up;
+            //内積
+            float h = Mathf.Abs(Vector3.Dot(playerVec, n));
+            //反射ベクトル
+            Vector3 r = playerVec + 2 * n * h;
+            //代入
+            playerRig.velocity = r;
+            playerVec = playerRig.velocity;
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.FromToRotation(gameObject.transform.up, r);
+            RayObject();
+            refCount--;
+        }
+        col.isTrigger = false;
     }
     private void SkewRefrect(GameObject col)
     {
@@ -798,6 +842,7 @@ public class PlayerControl : MonoBehaviour
         Debug.Log(hitPoint);
     }
 
+    //動く床のプレイヤーの動き
     private void PlayerWallMove()
     {
         if(moveWall!=null)
@@ -811,6 +856,7 @@ public class PlayerControl : MonoBehaviour
             else if (wa.abilityNumber == 9)
             {
                 fade.StartFadeIn("GameOver", false);
+                StageDate.Instance.SetData(SceneManager.GetActiveScene().name);
             }
             else
             { }
