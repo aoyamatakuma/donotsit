@@ -9,7 +9,9 @@ public class GameOverScene : MonoBehaviour
     public Image stageSelect;
     public Image title;
     Image titleFont;
-    private bool select;
+    private bool isSelect;
+    bool isMove;
+    private int selectNum;
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
@@ -18,17 +20,21 @@ public class GameOverScene : MonoBehaviour
     Vector2 titleBaseSize;
     Vector2 stageSelectBaseSize;
     Vector2 titleFontBasesize;
+    public List<Image> images;
+    string stageName;
     // Start is called before the first frame update
     void Start()
     {
         titleFont = title.transform.GetChild(0).GetComponent<Image>();
+        selectNum = 0;
         isPush = false;
-        select = true;
+        isSelect = true;
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
         titleBaseSize = title.rectTransform.sizeDelta;
         stageSelectBaseSize = stageSelect.rectTransform.sizeDelta;
         titleFontBasesize = titleFont.rectTransform.sizeDelta;
+        stageName = StageDate.Instance.referer;
     }
 
     // Update is called once per frame
@@ -39,7 +45,11 @@ public class GameOverScene : MonoBehaviour
         {
             isPush = true;
             audio.PlayOneShot(selectSE);
-            if (select)
+            if (selectNum == 0)
+            {
+                fade.StartCoroutine(stageName, true);
+            }
+            else if(selectNum ==1)
             {
                 fade.StartFadeIn("StageSelect", true);
             }
@@ -50,45 +60,67 @@ public class GameOverScene : MonoBehaviour
         }
     }
 
+
     void Select()
     {
-        float ver = Input.GetAxis("Vertical");
-
-        if (select)
+        if (isSelect)
         {
-            stageSelect.rectTransform.sizeDelta = new Vector2(stageSelectBaseSize.x * 1.2f,stageSelectBaseSize.y * 1.2f);
-            title.rectTransform.sizeDelta = titleBaseSize;
-            titleFont.rectTransform.sizeDelta = titleFontBasesize;
-            //stageSelect.GetComponent<Outline>().enabled = true;
-            //title.GetComponent<Outline>().enabled = false;
+            return;
         }
-        else
+        for (int i = 0; i < images.Count; i++)
         {
-            stageSelect.rectTransform.sizeDelta = stageSelectBaseSize;
-            title.rectTransform.sizeDelta = new Vector2(titleBaseSize.x * 1.2f,titleBaseSize.y * 1.2f);
-            titleFont.rectTransform.sizeDelta = new Vector2(titleFontBasesize.x * 1.2f, titleFontBasesize.y * 1.2f);
-            //stageSelect.GetComponent<Outline>().enabled = false;
-            //title.GetComponent<Outline>().enabled = true;
+            images[i].SetNativeSize();
         }
+        images[selectNum].rectTransform.sizeDelta *= 1.2f;
+        isSelect = true;
 
-        if (ver > 0.5f)
+    }
+
+
+
+    void SelectMove()
+    {
+        if (isPush)
         {
-            if (!select)
+            return;
+        }
+        float hol = Input.GetAxis("SelectMove");
+        if (hol < -0.5f && !isMove)
+        {
+            selectNum--;
+            StartCoroutine(ChangeCoroutine());
+            if (selectNum < 0)
             {
-                audio.PlayOneShot(moveSE);
+                selectNum = 0;
             }
-            select = true;
-
+            isSelect = false;
         }
-        else if (ver < -0.5f)
+
+        if (hol > 0.5f && !isMove)
         {
-            if (select)
+            selectNum++;
+            StartCoroutine(ChangeCoroutine());
+            if (selectNum > images.Count - 1)
             {
-                audio.PlayOneShot(moveSE);
+                selectNum = images.Count - 1;
             }
-            select = false;
+            isSelect = false;
         }
 
+        Select();
+    }
+
+
+    IEnumerator ChangeCoroutine()
+    {
+        isMove = true;
+        if (selectNum >= 0 && selectNum < images.Count)
+        {
+            audio.PlayOneShot(moveSE);
+            yield return new WaitForSeconds(0.4f);
+
+        }
+        isMove = false;
     }
 
 }
