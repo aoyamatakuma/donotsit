@@ -31,13 +31,13 @@ public class ScoreAddUI : MonoBehaviour
         }
     }
 
-    public void SetPosition(Vector3 point)
-    {
-        damageText.rectTransform.position
-           = RectTransformUtility.WorldToScreenPoint(Camera.main, point);
-        comboText.rectTransform.position
-           = RectTransformUtility.WorldToScreenPoint(Camera.main, point+ new Vector3(0,5,0));
-    }
+    //public void SetPosition(Vector3 point)
+    //{
+    //    damageText.rectTransform.localPosition
+    //       = RectTransformUtility.WorldToScreenPoint(Camera.main, point);
+    //    comboText.rectTransform.localPosition
+    //       = RectTransformUtility.WorldToScreenPoint(Camera.main, point+ new Vector3(0,5,0));
+    //}
 
     public void SetDamage(float damage)
     {
