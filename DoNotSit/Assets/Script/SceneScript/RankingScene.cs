@@ -9,6 +9,7 @@ public class RankingScene : MonoBehaviour
     public Text rankingText;
     public Text nameText;
     public Text scoreText;
+    public Text myRankText;
 
     public GameObject stageSelect;
     public GameObject title;
@@ -35,31 +36,61 @@ public class RankingScene : MonoBehaviour
             {
                 if (list.name != null)
                 {
-                    nameText.text += "\t" + list.name + "\n";
+                    if(list.objectid == QuickRanking.Instance.GetCurrentID())
+                    {
+                        nameText.text += "<color=red>" + "\t" + list.name + "</color> \n";
+                    }
+                    else
+                    {
+                        nameText.text += "\t" + list.name + "\n";
+                    }
+                   
                 }
                 else
                 {
-                    nameText.text += "\tNoData\n";
+                    nameText.text += "\t"+"NoData"+"\n";
                 }
                 if (list.rankNum.ToString() != null)
                 {
-                    rankingText.text += "\t" + rank + "\n";
-                    rank += 1;
+                    if(rank < 10)
+                    {
+                        if (list.objectid == QuickRanking.Instance.GetCurrentID())
+                        {
+                            rankingText.text += "<color=red>" + "\t" + rank + "</color> \n";
+                        }
+                        else
+                        {
+                            rankingText.text += "\t" + rank + "\n";
+                        }
+                        rank += 1;
+                    }
                 }
                 else
                 {
-                    rankingText.text += "\tNoData\n";
+                    rankingText.text += "\t" + "NoData" + "\n";
                 }
                 if (list.score.ToString() != null)
                 {
-                    scoreText.text += "\t" + list.score.ToString() + "\n";
+                    if (list.objectid == QuickRanking.Instance.GetCurrentID())
+                    {
+                        scoreText.text += "<color=red>" + "\t" + list.score.ToString() + "</color> \n";
+                    }
+                    else
+                    {
+                        scoreText.text += "\t" + list.score.ToString() + "\n";
+                    }                   
                 }
                 else
                 {
-                    scoreText.text += "\tNoData\n";
+                    scoreText.text += "\t" + "NoData" + "\n";
                 }
             }
 
+            if (list.objectid == QuickRanking.Instance.GetCurrentID())
+            {
+               myRankText.text =  list.name  + ": \t" + list.score.ToString();
+            }
+          
         }
     }
 

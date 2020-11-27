@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class TitleScene : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class TitleScene : MonoBehaviour
 
     bool status;
     Fade fade;
+    float BGM;
+    float SE;
+    public AudioMixer mixer;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,8 @@ public class TitleScene : MonoBehaviour
         Select();
         isPush = false;
         Time.timeScale = 1.0f;
+        BGM= StageDate.GetAudio("BGM");
+        SE = StageDate.GetAudio("SE");
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
        
@@ -35,6 +41,8 @@ public class TitleScene : MonoBehaviour
         status = StageDate.GetBool(StageDate.clearKey, false);
         FreezImage();
         SelectMove();
+        mixer.SetFloat("SE", SE);
+        mixer.SetFloat("BGM", BGM);
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump") )&& !isPush)
         {
             isPush = true;
@@ -46,8 +54,8 @@ public class TitleScene : MonoBehaviour
             }
             else if(selectNum ==1)
             {
-                // fade.StartFadeIn("StageSelect", true);
-                isPush = false;
+                fade.StartFadeIn("Option", true);
+              
             }
             else if (selectNum == 2)
             {

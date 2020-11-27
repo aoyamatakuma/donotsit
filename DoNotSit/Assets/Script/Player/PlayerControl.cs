@@ -86,7 +86,9 @@ public class PlayerControl : MonoBehaviour
     private int refCount = 0;
     [SerializeField]
     private LifeGauge life;
-  public  Animator animator;
+    [SerializeField]
+    private LifeGauge lifeback;
+    public  Animator animator;
     [SerializeField]
     private Renderer[] renderer;
     int timeRender;
@@ -109,9 +111,11 @@ public class PlayerControl : MonoBehaviour
         fade = GetComponent<Fade>();
         audio = GetComponent<AudioSource>();
         life = GameObject.Find("HPpanel").GetComponent<LifeGauge>();
+        lifeback= GameObject.Find("HPpanelBack").GetComponent<LifeGauge>();
         SetAngle();
         refCount = ReflectCount;
         life.SetLifeGauge(hp);
+        lifeback.SetLifeGauge(hp);
         }
 
     // Update is called once per frame

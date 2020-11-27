@@ -79,7 +79,7 @@ public class QuickRanking : MonoBehaviour
         });
     }
 
-    public void SaveRanking(string name,string stageNumber, int score, UnityAction callback = null)
+    public void SaveRanking(string name, string stageNumber, int score, UnityAction callback = null)
     {
         //スコアがゼロなら登録しない//
         if (CheckNCMBValid() == false || score <= 0)
@@ -114,10 +114,11 @@ public class QuickRanking : MonoBehaviour
             }
 
             //ランキングの更新//
-            if(callback != null)
+            if (callback != null)
             {
                 FetchRanking(callback);
-            }else
+            }
+            else
             {
                 FetchRanking();
             }
@@ -163,6 +164,12 @@ public class QuickRanking : MonoBehaviour
         }
     }
 
+   
+    public string GetCurrentID()
+    {
+        return currentObjectid;
+    }
+    
     public void FetchPlayerCount(UnityAction callback = null)
     {
         if (CheckNCMBValid() == false)
@@ -172,7 +179,8 @@ public class QuickRanking : MonoBehaviour
         }
 
         NCMBQuery<NCMBObject> query = new NCMBQuery<NCMBObject>(rankingClassName);
-        query.CountAsync((int count, NCMBException e) => {
+        query.CountAsync((int count, NCMBException e) =>
+        {
             if (e != null)
             {
                 //接続失敗//
@@ -213,7 +221,7 @@ public class RankingData
     public readonly int score;//点数//
     public readonly string objectid;//NCMBのオブジェクトID//
 
-    public RankingData(int rankNum, string name,string stageNumber, int score, string objectid)
+    public RankingData(int rankNum, string name, string stageNumber, int score, string objectid)
     {
         this.rankNum = rankNum;
         this.name = name;

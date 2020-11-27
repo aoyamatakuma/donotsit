@@ -9,10 +9,12 @@ public class PouseButtonScript : MonoBehaviour
     Fade fade;
     public GameObject end;
     public GameObject title;
+    public GameObject retry;
     private AudioSource audio;
     private bool select,push;
     public AudioClip selectSE;
     public AudioClip moveSE;
+    private int selectNum;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class PouseButtonScript : MonoBehaviour
         audio = GetComponent<AudioSource>();
         select = false;
         push = false;
+        selectNum = 0;
     }
 
     // Update is called once per frame
@@ -29,15 +32,20 @@ public class PouseButtonScript : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump"))
         {
             audio.PlayOneShot(selectSE);
-            if (select)
-            {
-                endClick();
-            }
-            else
+            if (selectNum == 0)
             {
                 SceneManager.LoadScene("Title");
                 Time.timeScale = 1;
-               // fade.StartFadeIn("Title", true);
+                // fade.StartFadeIn("Title", true);
+            }
+            else if(selectNum == 1)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Time.timeScale = 1;
+            }
+            else if (selectNum == 2)
+            {
+                endClick(); 
             }
         }
     }
@@ -45,29 +53,44 @@ public class PouseButtonScript : MonoBehaviour
     {
         float ver = Input.GetAxis("Vertical");
 
-        if (!select)
+        if(selectNum == 0)
         {
             end.GetComponent<Outline>().enabled = false;
             title.GetComponent<Outline>().enabled = true;
+            retry.GetComponent<Outline>().enabled = false;
         }
-        else
+        else if (selectNum == 1)
+        {
+            end.GetComponent<Outline>().enabled = false;
+            title.GetComponent<Outline>().enabled = false;
+            retry.GetComponent<Outline>().enabled = true;
+        }
+        else if (selectNum == 2)
         {
             end.GetComponent<Outline>().enabled = true;
             title.GetComponent<Outline>().enabled = false;
+            retry.GetComponent<Outline>().enabled = false;
         }
-        if(!push)
+        if (!push)
         {
-            if (ver > 0.5f || ver < -0.5f)
+            if ( ver < -0.5f)
             {
                 push = true;
                 audio.PlayOneShot(moveSE);
-                if (select)
+                selectNum++;
+                if (selectNum >= 3)
                 {
-                    select = false;
+                    selectNum = 2;
                 }
-                else
+            }
+            if (ver > 0.5f )
+            {
+                push = true;
+                audio.PlayOneShot(moveSE);
+                selectNum--;
+                if (selectNum < 0)
                 {
-                    select = true;
+                    selectNum = 0;
                 }
             }
         }
