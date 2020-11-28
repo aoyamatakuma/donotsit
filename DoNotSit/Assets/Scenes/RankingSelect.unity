@@ -2324,7 +2324,8 @@ MonoBehaviour:
   exLockImage: {fileID: 1147891715}
   selectColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   selectSE: {fileID: 8300000, guid: 09cab73b6442bb345b287b72325e4065, type: 3}
-  moveSE: {fileID: 8300000, guid: c80a176bba4a1b84e84995183772665b, type: 3}
+  moveSE: {fileID: 8300000, guid: 98487767f307a0a4bbf67418509550e5, type: 3}
+  lockPushSE: {fileID: 0}
 --- !u!82 &1747768312
 AudioSource:
   m_ObjectHideFlags: 0

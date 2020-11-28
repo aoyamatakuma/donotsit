@@ -1045,7 +1045,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.15
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2557,7 +2557,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f554eb0c656c95458fb1d3fb3cc7842, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4218498d363ce1a46adb2fd12398ff9c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
