@@ -11,9 +11,11 @@ public class StageSelect : MonoBehaviour
     public Image exImage;
     public Image hardLockImage;
     public Image exLockImage;
+    public GameObject backButtonImage;
     private int selectNum;
     private bool isSelect;
     private bool isMove;
+    private bool isAnim;
     public Color selectColor;
     private AudioSource audio;
     public AudioClip selectSE;
@@ -32,7 +34,7 @@ public class StageSelect : MonoBehaviour
         DrawChange();
         isPush = false;
         selectNum = 0;
-        Select();
+        StartCoroutine(AnimCroutine(1.6f));
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
         if (isNormal)
@@ -49,6 +51,10 @@ public class StageSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isAnim)
+        {
+            return;
+        }
 
         SelectMove();
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
@@ -193,4 +199,15 @@ public class StageSelect : MonoBehaviour
         }
         isMove = false;
     }
+
+    IEnumerator AnimCroutine(float waitTime)
+    {
+        isAnim = false;
+        backButtonImage.SetActive(false);
+        yield return new WaitForSeconds(waitTime);
+        backButtonImage.SetActive(true);
+        Select();
+        isAnim = true;
+    }
+
 }
