@@ -750,7 +750,7 @@ MonoBehaviour:
   currentPlayerState: 0
   jumpEffect: {fileID: 1111314733818414085, guid: 5827816b82b65a2409f57ad13b01f7d9,
     type: 3}
-  jumpSE: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  jumpSE: {fileID: 8300000, guid: 95690a7cf6082fa4f8beec3c31ca8b36, type: 3}
   damegeSE: {fileID: 8300000, guid: e94b1f68ec678354dbb6d788eb97cbf1, type: 3}
   effectPos: {fileID: 892862367}
   effectPos2: {fileID: 1138470487}
