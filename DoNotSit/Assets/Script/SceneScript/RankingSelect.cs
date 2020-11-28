@@ -10,73 +10,78 @@ public class RankingSelect : MonoBehaviour
     private int selectNum;
     private bool isSelect;
     private bool isMove;
+    public Image hardImage;
+    public Image exImage;
+    public Image hardLockImage;
+    public Image exLockImage;
     public Color selectColor;
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
+    public AudioClip lockPushSE;
     bool isPush;
     Fade fade;
     bool isEasy;
     bool isNormal;
     bool isHard;
     bool isExtra;
-   
+
     // Start is called before the first frame update
     void Start()
     {
+        SetBool();
+        DrawChange();
         isPush = false;
         selectNum = 0;
         Select();
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
+
+        if (isNormal)
+        {
+            selectObjects[2] = hardImage;
+        }
+
+        if (isHard)
+        {
+            selectObjects[3] = exImage;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetBool();
-       // FreezImage();
+        //  SetBool();
+        // FreezImage();
         SelectMove();
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
             isPush = true;
-            audio.PlayOneShot(selectSE);
+
             // SceneManager.LoadScene("Stage" + selectNum + 1);
             if (selectNum == 0)
             {
-                if (isEasy)
-                {
-                    StageDate.Instance.SetSceneName("StageEasy");
-                    fade.StartFadeIn("RankingEasy", true);
-                }
-                else
-                {
-                    isPush = false;
-                }
-               
+                audio.PlayOneShot(selectSE);
+                StageDate.Instance.SetSceneName("StageEasy");
+                fade.StartFadeIn("RankingEasy", true);
             }
             else if (selectNum == 1)
             {
-                if (isNormal)
-                {
-                    StageDate.Instance.SetSceneName("StageNormal");
-                    fade.StartFadeIn("RankingNormal", true);
-                }
-                else
-                {
-                    isPush = false;
-                }
-                 
+                audio.PlayOneShot(selectSE);
+                StageDate.Instance.SetSceneName("StageNormal");
+                fade.StartFadeIn("RankingNormal", true);
             }
             else if (selectNum == 2)
             {
                 if (isHard)
                 {
+                    audio.PlayOneShot(selectSE);
                     StageDate.Instance.SetSceneName("StageHard");
                     fade.StartFadeIn("RankingHard", true);
                 }
                 else
                 {
+                    audio.PlayOneShot(lockPushSE);
                     isPush = false;
                 }
             }
@@ -84,11 +89,13 @@ public class RankingSelect : MonoBehaviour
             {
                 if (isExtra)
                 {
+                    audio.PlayOneShot(selectSE);
                     StageDate.Instance.SetSceneName("StageExtra");
                     fade.StartFadeIn("RankingExtra", true);
                 }
                 else
                 {
+                    audio.PlayOneShot(lockPushSE);
                     isPush = false;
                 }
             }
@@ -99,6 +106,31 @@ public class RankingSelect : MonoBehaviour
             isPush = true;
             audio.PlayOneShot(selectSE);
             fade.StartFadeIn("Title", true);
+        }
+    }
+
+    void DrawChange()
+    {
+        if (isNormal)
+        {
+            hardImage.gameObject.SetActive(true);
+            hardLockImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            hardImage.gameObject.SetActive(false);
+            hardLockImage.gameObject.SetActive(true);
+        }
+
+        if (isHard)
+        {
+            exImage.gameObject.SetActive(true);
+            exLockImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            exImage.gameObject.SetActive(false);
+            exLockImage.gameObject.SetActive(true);
         }
     }
 
