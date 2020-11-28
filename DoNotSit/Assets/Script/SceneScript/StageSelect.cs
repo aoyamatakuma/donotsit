@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class StageSelect : MonoBehaviour
 {
     public List<Image> selectObjects;
+    public Image hardImage;
+    public Image exImage;
+    public Image hardLockImage;
+    public Image exLockImage;
     private int selectNum;
     private bool isSelect;
     private bool isMove;
@@ -14,16 +18,32 @@ public class StageSelect : MonoBehaviour
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
+    public AudioClip lockPushSE;
     bool isPush;
     Fade fade;
+    bool isEasy;
+    bool isNormal;
+    bool isHard;
+    bool isExtra;
     // Start is called before the first frame update
     void Start()
     {
+        SetBool();
+        DrawChange();
         isPush = false;
         selectNum = 0;
         Select();
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
+        if (isNormal)
+        {
+            selectObjects[2] = hardImage;
+        }
+
+        if (isHard)
+        {
+            selectObjects[3] = exImage;
+        }
     }
 
     // Update is called once per frame
@@ -34,23 +54,44 @@ public class StageSelect : MonoBehaviour
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
             isPush = true;
-            audio.PlayOneShot(selectSE);
+          
             // SceneManager.LoadScene("Stage" + selectNum + 1);
             if (selectNum == 0)
             {
+                audio.PlayOneShot(selectSE);
                 fade.StartFadeIn("StageEasy", true);
             }
             else if(selectNum == 1)
             {
-               fade.StartFadeIn("StageNormal", true);
+                audio.PlayOneShot(selectSE);
+                fade.StartFadeIn("StageNormal", true);
             }
             else if (selectNum == 2)
             {
-                fade.StartFadeIn("StageHard", true);
+                if (isNormal)
+                {
+                    audio.PlayOneShot(selectSE);
+                    fade.StartFadeIn("StageHard", true);
+                }
+                else
+                {
+                    audio.PlayOneShot(lockPushSE);
+                    isPush = false;
+                }
             }
             else 
             {
-                fade.StartFadeIn("StageExtra", true);
+                if (isHard)
+                {
+                    audio.PlayOneShot(selectSE);
+                    fade.StartFadeIn("StageExtra", true);
+                }
+                else
+                {
+                    audio.PlayOneShot(lockPushSE);
+                    isPush = false;
+                }
+              
             }
         }
 
@@ -60,6 +101,39 @@ public class StageSelect : MonoBehaviour
             audio.PlayOneShot(selectSE);
             fade.StartFadeIn("Title", true);
         }
+    }
+
+    void DrawChange()
+    {
+        if (isNormal)
+        {
+            hardImage.gameObject.SetActive(true);
+            hardLockImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            hardImage.gameObject.SetActive(false);
+            hardLockImage.gameObject.SetActive(true);
+        }
+
+        if (isHard)
+        {
+            exImage.gameObject.SetActive(true);
+            exLockImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            exImage.gameObject.SetActive(false);
+            exLockImage.gameObject.SetActive(true);
+        }
+    }
+
+    void SetBool()
+    {
+        isEasy = StageDate.GetBool(StageDate.easyKey, false);
+        isNormal = StageDate.GetBool(StageDate.normalKey, false);
+        isHard = StageDate.GetBool(StageDate.hardKey, false);
+        isExtra = StageDate.GetBool(StageDate.extraKey, false);
     }
 
     void Select()
