@@ -1024,8 +1024,8 @@ MonoBehaviour:
   ex: {fileID: 1649089093}
   inputField: {fileID: 1638919142}
   nameText: {fileID: 1327470922}
-  selectSE: {fileID: 8300000, guid: c80a176bba4a1b84e84995183772665b, type: 3}
-  moveSE: {fileID: 8300000, guid: 206f263c04bf72c45a89066ac4f8e445, type: 3}
+  selectSE: {fileID: 8300000, guid: 98487767f307a0a4bbf67418509550e5, type: 3}
+  moveSE: {fileID: 8300000, guid: 09cab73b6442bb345b287b72325e4065, type: 3}
   goalTimeText: {fileID: 1119304579}
   goalScoreText: {fileID: 1369032750}
   rankText: {fileID: 1761893961}
