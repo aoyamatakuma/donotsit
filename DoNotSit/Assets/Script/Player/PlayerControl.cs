@@ -60,6 +60,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject jumpEffect;
     AudioSource audio;
     public AudioClip jumpSE;
+    public AudioClip damegeSE;
     public GameObject effectPos;
     public GameObject effectPos2;
     public GameObject sperkEffect;
@@ -454,6 +455,7 @@ public class PlayerControl : MonoBehaviour
     {
         hp -= damage;
         ren = true;
+        audio.PlayOneShot(damegeSE);
         if (hp < 0)
         {
             //　ダメージ調整
