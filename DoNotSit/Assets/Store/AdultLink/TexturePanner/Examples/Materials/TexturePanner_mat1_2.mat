@@ -63,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
@@ -95,14 +95,14 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Horizontalmovement: 0
-    - _Horizontalmovementamplitude: 0.5
-    - _Horizontalmovementfreq: 1
-    - _Horizontalmovementoffset: 0
+    - _Horizontalmovementamplitude: 0.08
+    - _Horizontalmovementfreq: 3.4
+    - _Horizontalmovementoffset: 1.81
     - _Horizontalstretch: 0
-    - _Horizontalstretchamplitude: 0.5
+    - _Horizontalstretchamplitude: 0.584
     - _Horizontalstretchfreq: 0.5
     - _Horizontalstretchoffset: 0
-    - _Horizontalstretchpivotpoint: 0
+    - _Horizontalstretchpivotpoint: 0.42
     - _Masktexturerotationspeed: 0
     - _Metallic: 0
     - _Mode: 0
@@ -119,8 +119,8 @@ Material:
     - _ScanlinesYThreshold: 0.7
     - _ScanlinesZ: 0
     - _Scanlinesscale: 100
-    - _ScanlinesscaleX: 40
-    - _ScanlinesscaleY: 12
+    - _ScanlinesscaleX: 202.7
+    - _ScanlinesscaleY: -340.6
     - _ScanlinesscaleZ: 10
     - _Scanlinessmoothing: 19.1
     - _Scanlinesspeed: -5
@@ -147,9 +147,9 @@ Material:
     - _Verticalamplitude: 0.026
     - _Verticalfreq: 10
     - _Verticalmovement: 0
-    - _Verticalmovementamplitude: 0.5
-    - _Verticalmovementfreq: 1
-    - _Verticalmovementoffset: 0
+    - _Verticalmovementamplitude: 1.57
+    - _Verticalmovementfreq: 0.09
+    - _Verticalmovementoffset: 2.47
     - _Verticaloffset: 0
     - _Verticalphase: 88888
     - _Verticalstretch: 0
@@ -165,7 +165,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Masktextureoffset: {r: -0.85, g: 0, b: 0, a: 0}
     - _Masktexturetiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Offset: {r: 19.54, g: 0, b: 0, a: 0}
     - _Scanlinespeed: {r: 0, g: -0.1, b: 0, a: 0}
     - _Scanlinestiling: {r: 1, g: 2, b: 0, a: 0}
     - _Scrollingspeed: {r: 0, g: 0, b: 0, a: 0}
