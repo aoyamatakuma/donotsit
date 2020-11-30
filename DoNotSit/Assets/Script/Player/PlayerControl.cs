@@ -485,7 +485,7 @@ public class PlayerControl : MonoBehaviour
                 timeRender++;
                 bool oddeven = Mathf.FloorToInt(Time.time * 5) % 2 == 0;
                 childRender.enabled = oddeven;
-                if(timeRender>=250)
+                if(timeRender>=200)
                 {
                     ren = false;
                 }
