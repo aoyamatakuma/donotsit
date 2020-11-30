@@ -3721,6 +3721,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4784846646826930907}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &729213989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3777087606279060879, guid: d9bc91f2626f38442b201b7d12056071,
+    type: 3}
+  m_PrefabInstance: {fileID: 4784846647869832564}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &731140255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7038,12 +7044,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b4fa9d50ef60fb4fbbc63d0e063adce, type: 3}
---- !u!1 &1364728150 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8562626751417606608, guid: d9bc91f2626f38442b201b7d12056071,
-    type: 3}
-  m_PrefabInstance: {fileID: 4784846647869832564}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1379240578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18125,7 +18125,7 @@ PrefabInstance:
         type: 3}
       propertyPath: startImage
       value: 
-      objectReference: {fileID: 1364728150}
+      objectReference: {fileID: 729213989}
     - target: {fileID: 8389217311155329735, guid: e6c618e8ec6083d4ea14b50aa7dcd244,
         type: 3}
       propertyPath: uiObjects.Array.data[0]
@@ -27561,6 +27561,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4784846647460225003}
     m_Modifications:
+    - target: {fileID: 3777087606279060879, guid: d9bc91f2626f38442b201b7d12056071,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8562626750187180944, guid: d9bc91f2626f38442b201b7d12056071,
         type: 3}
       propertyPath: m_Enabled
