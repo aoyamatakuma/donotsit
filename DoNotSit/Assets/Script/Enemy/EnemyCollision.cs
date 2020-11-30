@@ -15,7 +15,6 @@ public class EnemyCollision : MonoBehaviour
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
-        damageUI.GetComponent<ScoreAddUI>().SetDamage(score);
         damageUI.SetActive(false);
     }
     

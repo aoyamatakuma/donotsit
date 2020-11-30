@@ -18,7 +18,6 @@ public class Direction_RightLeft : MonoBehaviour
     bool isTouch;
     void Start()
     {
-        damageUI.GetComponent<ScoreAddUI>().SetDamage(score);
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
@@ -47,7 +46,7 @@ public class Direction_RightLeft : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && !isBurst)
         {
             if (player.currentPlayerState == PlayerState.Attack)
             {

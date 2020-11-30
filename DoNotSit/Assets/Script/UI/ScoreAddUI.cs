@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreAddUI : MonoBehaviour
 {
     private Transform targetObject;
-    public Text damageText;
-    public Text comboText;
+    public TextMeshProUGUI comboText;
     public bool isActive;
     [SerializeField]
     private float lifeTime;
@@ -31,21 +31,8 @@ public class ScoreAddUI : MonoBehaviour
         }
     }
 
-    //public void SetPosition(Vector3 point)
-    //{
-    //    damageText.rectTransform.localPosition
-    //       = RectTransformUtility.WorldToScreenPoint(Camera.main, point);
-    //    comboText.rectTransform.localPosition
-    //       = RectTransformUtility.WorldToScreenPoint(Camera.main, point+ new Vector3(0,5,0));
-    //}
-
-    public void SetDamage(float damage)
-    {
-        damageText.text ="+"+ damage.ToString();
-    }
-
     public void SetCombo(float combo)
     {
-        comboText.text = combo.ToString() + "コンボ!";
+        comboText.text = combo.ToString() + "Combo!";
     }
 }
