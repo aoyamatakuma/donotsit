@@ -314,12 +314,6 @@ public class PlayerControl : MonoBehaviour
                 switch (wallNum)
                 {
                     case 0://着地
-                        hitObject = col.gameObject;
-                        foreach (ContactPoint point in col.contacts)
-                        {
-                            hitPoint = point.point;
-                        }
-                        coltest();
                         ReflectActionCount();
                         break;
                     case 1://沼の床
@@ -330,12 +324,6 @@ public class PlayerControl : MonoBehaviour
                         currentPlayerState = PlayerState.Normal;
                         break;
                     case 2://反射
-                        hitObject = col.gameObject;
-                        foreach (ContactPoint point in col.contacts)
-                        {
-                            hitPoint = point.point;
-                        }
-                        coltest();
                         ReflectAction();
                         break;
                     case 4://とげ
