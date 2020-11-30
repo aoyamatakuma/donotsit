@@ -31,7 +31,7 @@ public class StageSelect : MonoBehaviour
     void Start()
     {
         SetBool();
-        DrawChange();
+      
         isPush = false;
         selectNum = 0;
         StartCoroutine(AnimCroutine(1.6f));
@@ -46,6 +46,7 @@ public class StageSelect : MonoBehaviour
         {
             selectObjects[3] = exImage;
         }
+      
     }
 
     // Update is called once per frame
@@ -205,6 +206,25 @@ public class StageSelect : MonoBehaviour
         isAnim = false;
         backButtonImage.SetActive(false);
         yield return new WaitForSeconds(waitTime);
+
+        if (isNormal)
+        {
+            hardLockImage.GetComponent<Animator>().SetBool("isAnim",true);
+           
+            yield return new WaitForSeconds(2.4f);
+            DrawChange();
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        if (isExtra)
+        {
+          //  hardLockImage.GetComponent<Animator>().SetBool("isAnim", true);
+
+           // yield return new WaitForSeconds(2.4f);
+            DrawChange();
+            yield return new WaitForSeconds(0.5f);
+        }
+
         backButtonImage.SetActive(true);
         Select();
         isAnim = true;
