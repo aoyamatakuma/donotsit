@@ -60,6 +60,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject jumpEffect;
     AudioSource audio;
     public AudioClip jumpSE;
+    public AudioClip damegeSE;
     public GameObject effectPos;
     public GameObject effectPos2;
     public GameObject sperkEffect;
@@ -145,7 +146,7 @@ public class PlayerControl : MonoBehaviour
         }
         //タイマー
         timer += 1.0f * Time.deltaTime;
-        comboText.text = combo.ToString()+ "COMOBO!";//コンボ
+        //comboText.text = combo.ToString()+ "COMOBO!";//コンボ
         hpText.text = "HP:";
         scoreText.text =  scoreNumber.ToString();
         Combo();//コンボ関連
@@ -454,6 +455,7 @@ public class PlayerControl : MonoBehaviour
     {
         hp -= damage;
         ren = true;
+        audio.PlayOneShot(damegeSE);
         if (hp < 0)
         {
             //　ダメージ調整
@@ -510,7 +512,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (comboFlag == true)
         {
-            comboText.enabled = true;
+           // comboText.enabled = true;
             comboTimer -= 1.0f * Time.deltaTime;
             if (comboTimer <= 0)
             {
@@ -522,7 +524,7 @@ public class PlayerControl : MonoBehaviour
         {
             combo = 0;
             comboBonus = 0;
-            comboText.enabled = false;
+           // comboText.enabled = false;
         }
     }
     public void ComboStart()

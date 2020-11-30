@@ -4,14 +4,15 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: TexturePanner_mat1_1
   m_Shader: {fileID: 4800000, guid: 4d846dee7d5e44743a993157b1b14b43, type: 3}
   m_ShaderKeywords: _COLORMODE_MULTIPLY _EMISSION _GLOBALEMISSIONFLICKER_ON _NOTRANSPARENCY_ON
     _OFFSETSCROLL_SCROLL _SCANLINESY_ON _SCROLLING_ON _SCROLLOFFSET_OFFSET _SCROLLOFFSET_ON
-    _SHARPX_ON _SHARPY_ON _SHARPZ_ON _S_OFFSET _TINTTEXTURE_DONTTINT _TINTTEXTURE_MULTIPLY
-    _TINTTEXTURE_ON
+    _SCROLLROTATE_SCROLL _SHARPX_ON _SHARPY_ON _SHARPZ_ON _S_OFFSET _TINTTEXTURE_DONTTINT
+    _TINTTEXTURE_MULTIPLY _TINTTEXTURE_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -45,6 +46,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Masktexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -58,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex:
-        m_Texture: {fileID: 2800000, guid: 20f9ca2ad4269214186c950a28f7f60c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
@@ -91,20 +96,21 @@ Material:
     - _GlossyReflections: 1
     - _Horizontalmovement: 0
     - _Horizontalmovementamplitude: 0.5
-    - _Horizontalmovementfreq: 1
-    - _Horizontalmovementoffset: 0
+    - _Horizontalmovementfreq: 2.47
+    - _Horizontalmovementoffset: -1.84
     - _Horizontalstretch: 0
-    - _Horizontalstretchamplitude: 0.5
+    - _Horizontalstretchamplitude: 0
     - _Horizontalstretchfreq: 0.5
-    - _Horizontalstretchoffset: 0
+    - _Horizontalstretchoffset: 0.03
     - _Horizontalstretchpivotpoint: 0
+    - _Masktexturerotationspeed: -2.07
     - _Metallic: 0
     - _Mode: 0
     - _Notransparency: 1
     - _OcclusionStrength: 1
     - _OffsetScroll: 1
     - _Parallax: 0.02
-    - _RotationSpeed: 1
+    - _RotationSpeed: 0
     - _Scale1: 200
     - _Scale2: 200
     - _Scanlines: 0
@@ -113,17 +119,17 @@ Material:
     - _ScanlinesYThreshold: 0.7
     - _ScanlinesZ: 0
     - _Scanlinesscale: 100
-    - _ScanlinesscaleX: 40
-    - _ScanlinesscaleY: 12
-    - _ScanlinesscaleZ: 10
+    - _ScanlinesscaleX: 15.82
+    - _ScanlinesscaleY: 172.4
+    - _ScanlinesscaleZ: 47.3
     - _Scanlinessmoothing: 19.1
     - _Scanlinesspeed: -5
-    - _ScanlinesspeedX: 1
-    - _ScanlinesspeedY: -10
+    - _ScanlinesspeedX: 179.1
+    - _ScanlinesspeedY: -2
     - _ScanlinesspeedZ: -5
     - _ScrollOffset: 1
     - _Scrolling: 1
-    - _ScrollingspeedX: 0.1
+    - _ScrollingspeedX: 18.7
     - _ScrollingspeedY: 0
     - _Scrolloffset: 1
     - _Scrollrotate: 0
@@ -143,24 +149,26 @@ Material:
     - _Verticalmovement: 0
     - _Verticalmovementamplitude: 0.05
     - _Verticalmovementfreq: 1
-    - _Verticalmovementoffset: 0
+    - _Verticalmovementoffset: 0.04
     - _Verticaloffset: 0
     - _Verticalphase: 88888
     - _Verticalstretch: 0
-    - _Verticalstretchamplitude: 0.05
+    - _Verticalstretchamplitude: 0.122
     - _Verticalstretchfreq: 2
-    - _Verticalstretchoffset: 0
+    - _Verticalstretchoffset: -1.65
     - _Verticalstretchpivotpoint: 0
     - _ZWrite: 1
     - __dirty: 1
     - _s: 0
     m_Colors:
-    - _Color: {r: 1.1911765, g: 1.1519135, b: 0.6218642, a: 1}
+    - _Color: {r: 10.362156, g: 12.176996, b: 14.928529, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Masktextureoffset: {r: 0, g: 0, b: 0, a: 0}
+    - _Masktexturetiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: -0.07, a: 0}
     - _Scanlinespeed: {r: 0, g: -0.1, b: 0, a: 0}
     - _Scanlinestiling: {r: 1, g: 2, b: 0, a: 0}
     - _Scrollingspeed: {r: 0, g: 0, b: 0, a: 0}
     - _Scrollspeed: {r: 1, g: 0, b: 0, a: 0}
-    - _Tiling: {r: 6, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 0, g: 0, b: 0, a: 0}
     - _Tintcolor: {r: 1.2940001, g: 0, b: 0, a: 1}
