@@ -81,7 +81,7 @@ public class PlayerControl : MonoBehaviour
     float playerAngle = 0;
     public bool select = false;
     GameObject moveWall;
-    public GameObject carsol;
+    public List<GameObject> carsol;
 
     public int ReflectCount;
     private int refCount = 0;
@@ -868,6 +868,77 @@ public class PlayerControl : MonoBehaviour
     }
     private void Carsolmove()
     {
-        carsol.transform.position = hitPoint;
+        //パターン1
+        carsol[0].transform.position = hitPoint;
+        Vector3 vec = (hitPoint - gameObject.transform.position).normalized;
+        var distance = Vector3.Distance(hitPoint, gameObject.transform.position);
+        Vector3 pos = (hitPoint + gameObject.transform.position) / 2;
+        pos = (carsol[1].transform.position + gameObject.transform.position) / 2;
+        int a = 0;
+        for (int i = 1; i < carsol.Count; i++)
+        {
+            carsol[i].transform.position = pos + new Vector3(vec.x * i * 8, vec.y * i * 8, 0);
+            carsol[i].transform.LookAt(hitPoint, Vector3.up);
+
+            if (gameObject.transform.position.x <= hitPoint.x)//右
+            {
+                if (gameObject.transform.position.y < hitPoint.y)//上
+                {
+                    if (carsol[i].transform.position.y > hitPoint.y)//上すぎたら
+                    {
+                        carsol[i].SetActive(false);
+                        a++;
+                    }
+                    else { carsol[i].SetActive(true); }
+                }
+                else//した
+                {
+                    if (carsol[i].transform.position.y < hitPoint.y)
+                    {
+                        carsol[i].SetActive(false);
+                        a++;
+                    }
+                    else { carsol[i].SetActive(true); }
+                }
+            }
+            else//左
+            {
+                if (gameObject.transform.position.y < hitPoint.y)//上
+                {
+                    if (carsol[i].transform.position.y > hitPoint.y)//上すぎたら
+                    {
+                        carsol[i].SetActive(false);
+                        a++;
+                    }
+                    else { carsol[i].SetActive(true); }
+                }
+                else//した
+                {
+                    if (carsol[i].transform.position.y < hitPoint.y)
+                    {
+                        carsol[i].SetActive(false);
+                        a++;
+                    }
+                    else { carsol[i].SetActive(true); }
+                }
+            }
+        }
+        
+        //飛んだら消える
+        if (currentPlayerState == PlayerState.Attack)
+        {
+            for (int i = 0; i < carsol.Count; i++)
+            {
+                carsol[i].SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < carsol.Count-a; i++)
+            {
+                carsol[i].SetActive(true);
+            }
+        }
+
     }
 }
