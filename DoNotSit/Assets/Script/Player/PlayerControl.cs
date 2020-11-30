@@ -94,6 +94,8 @@ public class PlayerControl : MonoBehaviour
     private Renderer[] renderer;
     int timeRender;
     bool ren;
+
+    bool flag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -631,14 +633,12 @@ public class PlayerControl : MonoBehaviour
         CapsuleCollider col = GetComponent<CapsuleCollider>();
         col.isTrigger = true;
         if (refCount<1)
-        {           
-           
+        {                    
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             gameObject.transform.Rotate(playerRot);
             SetAngle();
             currentPlayerState = PlayerState.Normal;
             refCount = ReflectCount;
-            
         }
         else
         {
@@ -672,7 +672,6 @@ public class PlayerControl : MonoBehaviour
             SetAngle();
             currentPlayerState = PlayerState.Normal;
             refCount = ReflectCount;
-
         }
         else
         {
@@ -925,7 +924,7 @@ public class PlayerControl : MonoBehaviour
         }
         
         //飛んだら消える
-        if (currentPlayerState == PlayerState.Attack)
+        if (currentPlayerState == PlayerState.Attack||!rayFlag)
         {
             for (int i = 0; i < carsol.Count; i++)
             {
