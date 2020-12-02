@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durations: 0.5
   magnitudes: 0.5
+  slowFlag: 0
 --- !u!114 &1143593755967107815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ddd4abc24bd0743abeaa8dd101045b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: 60}
+  zoom: 0
+  shack: 0
 --- !u!114 &8389217311155329735
 MonoBehaviour:
   m_ObjectHideFlags: 0
