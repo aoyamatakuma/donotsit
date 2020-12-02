@@ -20,15 +20,15 @@ public class SlowZoom : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            //camera.zoom = true;
+            camera.zoom = true;
         }
     }
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            //camera.zoom = false;
-            //camera.shack = true;
+            camera.zoom = false;
+            camera.shack = true;
         }
     }
 
