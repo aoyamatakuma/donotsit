@@ -27,10 +27,18 @@ public class StageSelect : MonoBehaviour
     bool isNormal;
     bool isHard;
     bool isExtra;
+    bool isHardUnlock;
+    bool isExtraUnlock;
+
+    void Awake()
+    {
+        SetBool();
+        UnLockUI();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        SetBool();
+        
       
         isPush = false;
         selectNum = 0;
@@ -141,6 +149,8 @@ public class StageSelect : MonoBehaviour
         isNormal = StageDate.GetBool(StageDate.normalKey, false);
         isHard = StageDate.GetBool(StageDate.hardKey, false);
         isExtra = StageDate.GetBool(StageDate.extraKey, false);
+        isExtraUnlock = StageDate.GetBool(StageDate.extraUnlockKey, false);
+        isHardUnlock = StageDate.GetBool(StageDate.hardUnlockKey, false);
     }
 
     void Select()
@@ -201,26 +211,43 @@ public class StageSelect : MonoBehaviour
         isMove = false;
     }
 
+    void UnLockUI()
+    {
+        if (isHardUnlock)
+        {
+            hardImage.gameObject.SetActive(true);
+            hardLockImage.gameObject.SetActive(false);
+        }
+
+        if (isExtraUnlock)
+        {
+            exImage.gameObject.SetActive(true);
+            exLockImage.gameObject.SetActive(false);
+        }
+    }
+
+
     IEnumerator AnimCroutine(float waitTime)
     {
         isAnim = false;
         backButtonImage.SetActive(false);
         yield return new WaitForSeconds(waitTime);
 
-        if (isNormal)
+        if (isNormal && !isHardUnlock)
         {
-            hardLockImage.GetComponent<Animator>().SetBool("isAnim",true);
-           
+            hardLockImage.GetComponent<Animator>().SetBool("isAnim", true);
+            StageDate.SetBool(StageDate.hardUnlockKey, true);
             yield return new WaitForSeconds(2.4f);
             DrawChange();
             yield return new WaitForSeconds(0.5f);
         }
 
-        if (isExtra)
-        {
-          //  hardLockImage.GetComponent<Animator>().SetBool("isAnim", true);
 
-           // yield return new WaitForSeconds(2.4f);
+        if (isExtra && !isExtraUnlock)
+        {
+            exLockImage.GetComponent<Animator>().SetBool("isAnim", true);
+            StageDate.SetBool(StageDate.extraUnlockKey, true);
+            yield return new WaitForSeconds(2.4f);
             DrawChange();
             yield return new WaitForSeconds(0.5f);
         }
