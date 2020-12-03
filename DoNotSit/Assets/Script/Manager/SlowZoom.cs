@@ -28,7 +28,6 @@ public class SlowZoom : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             camera.zoom = false;
-            camera.shack = true;
         }
     }
 

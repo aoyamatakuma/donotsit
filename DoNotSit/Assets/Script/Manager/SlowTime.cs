@@ -21,15 +21,14 @@ public class SlowTime : MonoBehaviour
             slowTime++;
             slowMotion = true;
             camera.slowFlag = true;
-            folcamera.zoom = true;
+            folcamera.zoom = false;
             if (slowTime >= slowEnd)
             {
                 Time.timeScale = 1f;
                 slowTime = 0;
                 slowMotion = false;
                 camera.slowFlag = false;
-                folcamera.zoom = false;
-                folcamera.shack = true;
+                //folcamera.zoom = false;
             }
         }
     }
