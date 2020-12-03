@@ -9,8 +9,10 @@ public class CameraEvent : MonoBehaviour
     public PlayerControl player;
     public List<GameObject> uiObjects;
     FollowCamera camera;
+    public float offsetY = 0.3f;
     public float waitTime;
     public float moveTime;
+    public float rotateSpeed = 0.02f;
     bool isEvent;
     bool isMove;
     Transform previousPos;
@@ -55,17 +57,23 @@ public class CameraEvent : MonoBehaviour
     //カメラの回転
     void CameraMove(Transform target)
     {
-        // 補完スピードを決める
-        float speed = 0.02f;
+
         // ターゲット方向のベクトルを取得
         Vector3 relativePos = target.position - transform.position;
         // 方向を、回転情報に変換
         Quaternion rotation = Quaternion.LookRotation(relativePos);
+      
         //x軸とz軸は回転させないため初期化
         rotation.x = 0;
         rotation.z = 0;
+        if (isMove)
+        {
+            rotation.y += offsetY;
+        }
+    
         // 現在の回転情報と、ターゲット方向の回転情報を補完する
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed);
+     
     }
 
     IEnumerator CameraMove()
