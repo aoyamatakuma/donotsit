@@ -6,9 +6,9 @@ public class FollowCamera : MonoBehaviour
 {
     GameObject player;
     public Vector3 offset;
+    public Vector3 Maxzoom;
     public bool zoom;
     Vector3 posi;
-    public  bool shack;//揺れ判定
     // Start is called before the first frame update
     void Start()
     {
@@ -22,17 +22,27 @@ public class FollowCamera : MonoBehaviour
         transform.position = new Vector3(player.transform.position.x + offset.x,
                transform.position.y,
                transform.position.z);
-        if (zoom == false && shack == true)
+        if(offset.z>=Maxzoom.z)
         {
-            var pos = transform.localPosition;
-            transform.localPosition = new Vector3(pos.x, posi.y, posi.z);
-            shack = false;
+            offset.z = Maxzoom.z;
         }
-        if (zoom == true && shack==false)
+        if (offset.z < 1)
         {
-            transform.position = new Vector3(player.transform.position.x + offset.x,
-                player.transform.position.y,
-                player.transform.position.z - offset.z);
+            offset.z = 1;
+        }
+        if (zoom == false)
+        {
+            offset.z--;
+            //transform.position = new Vector3(player.transform.position.x,
+            //    player.transform.position.y,
+            //    player.transform.position.z + offset.z);
+        }
+        if (zoom == true)//スロー演出させてる奴
+        {
+            offset.z++;
+            //transform.position = new Vector3(player.transform.position.x,
+            //    player.transform.position.y,
+            //    player.transform.position.z + offset.z);
         }
     }
 }
