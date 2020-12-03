@@ -407,6 +407,7 @@ public class PlayerControl : MonoBehaviour
                     break;
                 case 4://とげ
                     restratFlag = true;
+                    Instantiate(sperkEffect, effectPos2.transform.position, transform.rotation);
                     StartCoroutine("ThornTime");
                     break;
                 case 5://斜めの反射
