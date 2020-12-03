@@ -7,6 +7,7 @@ public class NormalEnemyAI : MonoBehaviour
 
     protected EnemyState enemyState;
     protected bool isTouch;
+    protected bool isCol;
 
     public void StartState(float rotateY,float rotateZ)
     {
@@ -84,8 +85,9 @@ public class NormalEnemyAI : MonoBehaviour
         }
     }
 
-    void Return()
+   public void Return()
     {
+        Debug.Log(gameObject.name+"aaaaaaa");
         transform.Rotate(0, 180, 0);
         if(enemyState == EnemyState.Right)
         {
@@ -98,17 +100,15 @@ public class NormalEnemyAI : MonoBehaviour
     }
 
 
-    public void ReturnBoolCollision(Collision col)
-    {
-        if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy"))
-        {
-            Return();
-        }
-    }
-
     public void ReturnBoolTrigger(Collider col)
     {
-        if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy") )
+        if (col.gameObject.CompareTag("Wall") && !isCol)
+        { 
+            Return();
+            isCol = true;
+        }
+
+        if (col.gameObject.CompareTag("Enemy"))
         {
             Return();
         }

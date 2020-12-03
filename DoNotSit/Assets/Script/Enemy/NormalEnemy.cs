@@ -13,7 +13,6 @@ public class NormalEnemy : NormalEnemyAI
     {
         base.StartState(transform.rotation.y, transform.rotation.z);
         isDead = false;
-        isTouch = true;
     }
 
     // Update is called once per frame
@@ -28,16 +27,17 @@ public class NormalEnemy : NormalEnemyAI
 
     }
 
-
-  
     void Hit()
-    { 
+    {
         Instantiate(effect, transform.position, transform.rotation);
     }
 
     void OnTriggerEnter(Collider col)
     {
+
         base.ReturnBoolTrigger(col);
+
+
         if (col.gameObject.tag == "Player" && !isDead)
         {
             PlayerControl player = col.gameObject.GetComponent<PlayerControl>();
@@ -49,19 +49,19 @@ public class NormalEnemy : NormalEnemyAI
             }
             else
             {
-                player.Damage(damage); 
+                player.Damage(damage);
             }
 
         }
 
-        if( col.gameObject.tag=="BlowAway")
-        { 
+        if (col.gameObject.tag == "BlowAway")
+        {
             gameObject.tag = "BlowAway";
             Hit();
             isDead = true;
         }
 
-        if(col.gameObject.tag == "Bomb")
+        if (col.gameObject.tag == "Bomb")
         {
             Effect effect = col.GetComponent<Effect>();
             if (!effect.isChaseHit)
@@ -81,13 +81,13 @@ public class NormalEnemy : NormalEnemyAI
     //    }
     //}
 
-    //void OnTriggerExit(Collision col)
-    //{
-    //    if (col.gameObject.tag == "Wall")
-    //    {
-    //        isTouch = false;
-    //    }
-    //}
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Wall")
+        {
+            isCol = false;
+        }
+    }
 
 
 }
