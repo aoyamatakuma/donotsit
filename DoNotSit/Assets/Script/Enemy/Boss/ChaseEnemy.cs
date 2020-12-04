@@ -41,9 +41,15 @@ public class ChaseEnemy : MonoBehaviour
     public float MagnificationLev3;
     public float MagnificationLev4;
     public float MagnificationLev5;
+    AudioSource audio;
+    void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
     // Start is called before the first frame update
     void Start()
     {
+       
         belooFlag = false;
         transform.position = new Vector3(transform.position.x,
              transform.position.y,
@@ -51,6 +57,7 @@ public class ChaseEnemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         animator = GetComponent<Animator>();
         currentChaseState = ChaseState.LEVLE1;
+     
     }
 
     // Update is called once per frame
@@ -253,5 +260,12 @@ public class ChaseEnemy : MonoBehaviour
         yield return new WaitForSeconds(wait);
         currentChaseState = ChaseState.Normal;
         yield break;
+    }
+
+
+   public  void PlaySE()
+    {
+        Debug.Log("SE再生");
+        audio.Play();
     }
 }
