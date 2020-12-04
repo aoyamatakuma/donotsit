@@ -10,12 +10,11 @@ public class FollowCamera : MonoBehaviour
     public bool zoom;
     Vector3 posi;
     private float speed=0.1f;
-    private CameraShakeScript camera;
+    private bool trans;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        camera = GetComponent<CameraShakeScript>();
         posi = gameObject.transform.position;
     }
     
@@ -25,33 +24,37 @@ public class FollowCamera : MonoBehaviour
         transform.position = new Vector3(player.transform.position.x + offset.x,
                transform.position.y,
                transform.position.z);
-        //if (zoom == false)
-        //{
-        //    if (offset.z > 0)
-        //    {
-        //        offset.z--;
-        //        transform.position -= offset * speed;
-        //    }
-        //    if (offset.z < 1)
-        //    {
-        //        offset.z = 0;
-        //        var pos = transform.localPosition;
-        //        transform.localPosition = new Vector3(pos.x, posi.y, posi.z);
-        //    }
-        //}
-        //if (zoom == true)//スロー演出させてる奴
-        //{
-        //    if (offset.z < Maxzoom.z)
-        //    {
-        //        offset.z++;
-        //        transform.position += offset * speed;
-        //        camera.slowFlag = true;
-        //    }
-        //    if (offset.z >= Maxzoom.z)
-        //    {
-        //        offset.z = Maxzoom.z;
-        //    }
-        //}
+        if (zoom == false )//元の画面に戻す処理
+        {
+            //if (offset.z > 0)
+            //{
+            //    offset.z--;
+            //    transform.position -= offset * speed;
+            //    trans = true;
+            //}
+            //if (offset.z < 1)
+            //{
+            //    if (trans == true)
+            //    {
+            //        offset.z = 0;
+            //        var pos = transform.localPosition;
+            //        transform.localPosition = new Vector3(pos.x, posi.y, posi.z);
+            //        trans = false;
+            //    }
+            //}
+        }
+        if (zoom == true)//スロー演出させてる処理
+        {
+            //if (offset.z < Maxzoom.z)
+            //{
+            //    offset.z++;
+            //    transform.position += offset * speed;
+            //}
+            //if (offset.z >= Maxzoom.z)
+            //{
+            //    offset.z = Maxzoom.z;
+            //}
+        }
     }
    
 }
