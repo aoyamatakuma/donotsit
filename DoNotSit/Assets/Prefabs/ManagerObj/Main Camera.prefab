@@ -114,9 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  Maxzoom: {x: 0, y: 0, z: 59}
+  Maxzoom: {x: 0, y: 0, z: 29}
   zoom: 0
-  shack: 0
 --- !u!114 &8389217311155329735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +136,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  offsetY: 0.3
   waitTime: 3
   moveTime: 2
+  rotateSpeed: 0.02
   startImage: {fileID: 0}
