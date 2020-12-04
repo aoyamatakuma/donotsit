@@ -22,27 +22,32 @@ public class FollowCamera : MonoBehaviour
         transform.position = new Vector3(player.transform.position.x + offset.x,
                transform.position.y,
                transform.position.z);
-        if(offset.z>=Maxzoom.z)
-        {
-            offset.z = Maxzoom.z;
-        }
-        if (offset.z < 1)
-        {
-            offset.z = 1;
-        }
+        
         if (zoom == false)
         {
             offset.z--;
-            //transform.position = new Vector3(player.transform.position.x,
-            //    player.transform.position.y,
-            //    player.transform.position.z + offset.z);
+            if (offset.z > 1)
+            {
+                transform.position -= offset;
+            }
+            if (offset.z < 1)
+            {
+                offset.z = 1;
+                transform.position = transform.position;
+            }
         }
         if (zoom == true)//スロー演出させてる奴
         {
             offset.z++;
-            //transform.position = new Vector3(player.transform.position.x,
-            //    player.transform.position.y,
-            //    player.transform.position.z + offset.z);
+            if (offset.z < Maxzoom.z)
+            {
+                transform.position += offset;
+            }
+            if (offset.z >= Maxzoom.z)
+            {
+                offset.z = Maxzoom.z;
+                transform.position = transform.position;
+            }
         }
     }
 }
