@@ -274,6 +274,7 @@ public class PlayerControl : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             ray = new Ray(transform.position +Vector3.right*(i - 1)*2.0f, transform.up);
+            Debug.DrawRay(transform.position + Vector3.right * 2.0f * (i - 1), transform.up * rayline, Color.red, 0, true);
             //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
             if (Physics.Raycast(ray, out hit, rayline)) //壁がある時
             {
@@ -292,8 +293,7 @@ public class PlayerControl : MonoBehaviour
                         //オブジェクトを取得
                         hitObject = hit.collider.gameObject;
                         test();
-                    }
-                    Debug.DrawRay(transform.position +Vector3.right * 2.0f * (i - 1), transform.up * rayline, Color.red, 0, true);                   
+                    }                                    
                 }
             }
             else //壁がない時
@@ -312,6 +312,16 @@ public class PlayerControl : MonoBehaviour
         {
             if (!colFlag)
             {
+                if(hitObject!=col.gameObject)
+                {
+                    hitObject = col.gameObject;
+                    foreach (ContactPoint point in col.contacts)
+                    {
+                        hitPoint = point.point;
+                    }
+                    coltest();
+                }
+
                 jumpFlag = false;
                 playerRig.velocity = Vector3.zero;
                 switch (wallNum)
@@ -344,12 +354,7 @@ public class PlayerControl : MonoBehaviour
                         SkewBlockRight(col.gameObject);
                         break;
                     case 8://動く床
-                        hitObject = col.gameObject;
-                        foreach(ContactPoint point in col.contacts)
-                        {
-                            hitPoint = point.point;
-                        }
-                        coltest();
+ 
                         ReflectMoveActionCount(col.gameObject);
                         break;
                     case 10:
