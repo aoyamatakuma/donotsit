@@ -87,7 +87,7 @@ public class NormalEnemyAI : MonoBehaviour
 
    public void Return()
     {
-        Debug.Log(gameObject.name+"aaaaaaa");
+        //Debug.Log(gameObject.name+"aaaaaaa");
         transform.Rotate(0, 180, 0);
         if(enemyState == EnemyState.Right)
         {
