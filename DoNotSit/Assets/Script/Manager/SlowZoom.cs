@@ -24,14 +24,22 @@ public class SlowZoom : MonoBehaviour
         {
             camera.zoom = true;
             shake.slowFlag = true;
+            camera.target = this.gameObject;
         }
     }
+    //IEnumerator Zoom()
+    //{
+    //    yield return new WaitForSeconds(1.0f);
+    //    camera.zoom = false;
+    //    shake.slowFlag = false;
+    //}
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Player")//ボム外した場合
         {
             camera.zoom = false;
             shake.slowFlag = false;
+            camera.target = null;
         }
     }
 
