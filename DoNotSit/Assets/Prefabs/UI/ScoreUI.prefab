@@ -114,7 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboText: {fileID: 8433717807231330788}
   isActive: 0
-  lifeTime: 3
+  lifeTime: 1.5
+  permeateSpeed: 2
 --- !u!1 &6979112869366433214
 GameObject:
   m_ObjectHideFlags: 0

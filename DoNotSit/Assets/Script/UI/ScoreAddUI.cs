@@ -12,11 +12,13 @@ public class ScoreAddUI : MonoBehaviour
     [SerializeField]
     private float lifeTime;
     float cnt;
-
+    float a;
+    public float permeateSpeed;
    
     void Start()
     {
         targetObject = transform.parent;
+        a = comboText.color.a;
     }
 
     void Update()
@@ -26,8 +28,18 @@ public class ScoreAddUI : MonoBehaviour
             cnt+=Time.deltaTime;
             if(lifeTime < cnt)
             {
-                Destroy(gameObject);
+                Permeate();
             }
+        }
+    }
+
+    void Permeate()
+    {
+        comboText.color = new Color(comboText.color.r, comboText.color.g, comboText.color.b, a);
+        a -= Time.deltaTime * permeateSpeed;
+        if (a < 0)
+        {
+             Destroy(gameObject);
         }
     }
 

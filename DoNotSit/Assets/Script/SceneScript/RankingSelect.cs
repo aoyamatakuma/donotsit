@@ -10,10 +10,6 @@ public class RankingSelect : MonoBehaviour
     private int selectNum;
     private bool isSelect;
     private bool isMove;
-    public Image hardImage;
-    public Image exImage;
-    public Image hardLockImage;
-    public Image exLockImage;
     public Color selectColor;
     private AudioSource audio;
     public AudioClip selectSE;
@@ -21,31 +17,16 @@ public class RankingSelect : MonoBehaviour
     public AudioClip lockPushSE;
     bool isPush;
     Fade fade;
-    bool isEasy;
-    bool isNormal;
-    bool isHard;
-    bool isExtra;
+  
 
     // Start is called before the first frame update
     void Start()
     {
-        SetBool();
-        DrawChange();
         isPush = false;
         selectNum = 0;
         Select();
         audio = GetComponent<AudioSource>();
         fade = GetComponent<Fade>();
-
-        if (isNormal)
-        {
-            selectObjects[2] = hardImage;
-        }
-
-        if (isHard)
-        {
-            selectObjects[3] = exImage;
-        }
     }
 
     // Update is called once per frame
@@ -73,31 +54,15 @@ public class RankingSelect : MonoBehaviour
             }
             else if (selectNum == 2)
             {
-                if (isHard)
-                {
-                    audio.PlayOneShot(selectSE);
-                    StageDate.Instance.SetSceneName("StageHard");
-                    fade.StartFadeIn("RankingHard", true);
-                }
-                else
-                {
-                    audio.PlayOneShot(lockPushSE);
-                    isPush = false;
-                }
+                audio.PlayOneShot(selectSE);
+                StageDate.Instance.SetSceneName("StageHard");
+                fade.StartFadeIn("RankingHard", true);
             }
             else
             {
-                if (isExtra)
-                {
-                    audio.PlayOneShot(selectSE);
-                    StageDate.Instance.SetSceneName("StageExtra");
-                    fade.StartFadeIn("RankingExtra", true);
-                }
-                else
-                {
-                    audio.PlayOneShot(lockPushSE);
-                    isPush = false;
-                }
+                audio.PlayOneShot(selectSE);
+                StageDate.Instance.SetSceneName("StageExtra");
+                fade.StartFadeIn("RankingExtra", true);
             }
         }
 
@@ -109,38 +74,9 @@ public class RankingSelect : MonoBehaviour
         }
     }
 
-    void DrawChange()
-    {
-        if (isNormal)
-        {
-            hardImage.gameObject.SetActive(true);
-            hardLockImage.gameObject.SetActive(false);
-        }
-        else
-        {
-            hardImage.gameObject.SetActive(false);
-            hardLockImage.gameObject.SetActive(true);
-        }
+   
 
-        if (isHard)
-        {
-            exImage.gameObject.SetActive(true);
-            exLockImage.gameObject.SetActive(false);
-        }
-        else
-        {
-            exImage.gameObject.SetActive(false);
-            exLockImage.gameObject.SetActive(true);
-        }
-    }
-
-    void SetBool()
-    {
-        isEasy = StageDate.GetBool(StageDate.easyKey, false);
-        isNormal = StageDate.GetBool(StageDate.normalKey, false);
-        isHard = StageDate.GetBool(StageDate.hardKey, false);
-        isExtra = StageDate.GetBool(StageDate.extraKey, false);
-    }
+  
 
     void Select()
     {
