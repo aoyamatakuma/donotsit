@@ -5,6 +5,7 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     GameObject player;
+    public GameObject target;
     public Vector3 offset;
     public Vector3 Maxzoom;
     public bool zoom;
@@ -26,34 +27,33 @@ public class FollowCamera : MonoBehaviour
                transform.position.z);
         if (zoom == false )//元の画面に戻す処理
         {
-            //if (offset.z > 0)
-            //{
-            //    offset.z--;
-            //    transform.position -= offset * speed;
-            //    trans = true;
-            //}
-            //if (offset.z < 1)
-            //{
-            //    if (trans == true)
-            //    {
-            //        offset.z = 0;
-            //        var pos = transform.localPosition;
-            //        transform.localPosition = new Vector3(pos.x, posi.y, posi.z);
-            //        trans = false;
-            //    }
-            //}
+            if (offset.z > 0)
+            {
+                offset.z--;
+                transform.position -= offset * speed;
+                trans = true;
+            }
+            if (offset.z < 1)
+            {
+                if (trans == true)
+                {
+                    var pos = transform.localPosition;
+                    transform.localPosition = new Vector3(pos.x, posi.y, posi.z);
+                    trans = false;
+                }
+            }
         }
         if (zoom == true)//スロー演出させてる処理
         {
-            //if (offset.z < Maxzoom.z)
-            //{
-            //    offset.z++;
-            //    transform.position += offset * speed;
-            //}
-            //if (offset.z >= Maxzoom.z)
-            //{
-            //    offset.z = Maxzoom.z;
-            //}
+            if (offset.z < Maxzoom.z)
+            {
+                offset.z++;
+                transform.position += offset * speed;
+            }
+            if (offset.z >= Maxzoom.z)
+            {
+                offset.z = Maxzoom.z;
+            }
         }
     }
    
