@@ -102,10 +102,6 @@ public class ChaseEnemy : MonoBehaviour
         {
             animator.SetBool("Sutan", true);   
         }
-        else if (Time.timeScale == 0.3f)
-        {
-            animator.SetBool("Sutan", true);
-        }
         else if (currentChaseState != ChaseState.Stop)
         {
             animator.SetBool("Sutan", false);

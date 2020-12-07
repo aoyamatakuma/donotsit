@@ -8,7 +8,7 @@ public class Bomb : MonoBehaviour
     public float bombRange;
     private CameraShakeScript camera;
     bool isChaseHit;
-   public SlowTime slow;
+    private SlowTime slow;
     // Start is called before the first frame update
     void Start()
     {
