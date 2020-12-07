@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2809272606360401663}
   - component: {fileID: 1143593755967107815}
   - component: {fileID: 8389217311155329735}
+  - component: {fileID: -9043682295655248622}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -114,8 +115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  Maxzoom: {x: 0, y: 0, z: 29}
-  zoom: 0
 --- !u!114 &8389217311155329735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,3 +140,17 @@ MonoBehaviour:
   moveTime: 2
   rotateSpeed: 0.02
   startImage: {fileID: 0}
+--- !u!114 &-9043682295655248622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2809272606360401635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a654843ae1b60640933662120346ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowMotion: 0
+  slowEnd: 80

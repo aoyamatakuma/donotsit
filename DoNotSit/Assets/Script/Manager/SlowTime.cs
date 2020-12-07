@@ -8,26 +8,31 @@ public class SlowTime : MonoBehaviour
     float slowTime;
     public float slowEnd;
     private CameraShakeScript camera;
-    private FollowCamera folcamera;
     void Start()
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
-        folcamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FollowCamera>();
     }
     void Update()
     {
-        if (Time.timeScale == 0.3f)
+        if (slowMotion == true)
         {
+            Time.timeScale = 0.3f;
             slowTime++;
             slowMotion = true;
             camera.slowFlag = true;
-            if (slowTime >= slowEnd)
-            {
-                Time.timeScale = 1f;
-                slowTime = 0;
-                slowMotion = false;
-                camera.slowFlag = false;
-            }
+            //if (slowTime >= slowEnd)
+            //{
+            //    Time.timeScale = 1f;
+            //    slowTime = 0;
+            //    slowMotion = false;
+            //    camera.slowFlag = false;
+            //}
+        }
+        if (slowMotion == false)
+        {
+            Time.timeScale = 1f;
+            camera.slowFlag = false;
+            
         }
     }
 }
