@@ -189,27 +189,27 @@ public class PlayerControl : MonoBehaviour
             {
                 case 0:
                     if (turn > 0 && Rot.z > minAngleSet || turn > 0 && Rot.z < maxAngleSet+angleSpeed*2)
-                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    { transform.Rotate(Vector3.back * angleSpeed * (turn * turn)); }
                     else if (turn < 0 && Rot.z > minAngleSet-angleSpeed*2 || turn < 0 && Rot.z < maxAngleSet)
-                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    { transform.Rotate(Vector3.forward * angleSpeed * (turn * turn)); }
                     break;
                 case 90:
                     if (up > 0 && Rot.z > minAngleSet)
-                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    { transform.Rotate(Vector3.back * angleSpeed * (up*up)); }
                     else if (up < 0 && Rot.z < maxAngleSet)
-                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
                     break;
                 case 180:
                     if (turn > 0 && Rot.z < maxAngleSet)
-                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    { transform.Rotate(Vector3.forward * angleSpeed *(turn*turn)); }
                     else if (turn < 0 && Rot.z > minAngleSet)
-                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    { transform.Rotate(Vector3.back * angleSpeed * (turn * turn)); }
                     break;
                 case 270:
                     if (up > 0&&Rot.z<maxAngleSet)
-                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
                     else if (up < 0&&Rot.z>minAngleSet)
-                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    { transform.Rotate(Vector3.back * angleSpeed * (up * up)); }
                     break;
             }
         }        
@@ -312,14 +312,16 @@ public class PlayerControl : MonoBehaviour
         {
             if (!colFlag)
             {
-                if(hitObject!=col.gameObject)
+                colFlag = true;
+                if (hitObject!=col.gameObject)
                 {
                     hitObject = col.gameObject;
                     foreach (ContactPoint point in col.contacts)
                     {
                         hitPoint = point.point;
+                        Debug.Log("違うオブジェクト");
                     }
-                    coltest();
+                    test();
                 }
 
                 jumpFlag = false;
@@ -342,7 +344,8 @@ public class PlayerControl : MonoBehaviour
                     case 4://とげ
                         restratFlag = true;
                         Instantiate(sperkEffect,effectPos2.transform.position, transform.rotation);
-                        ReflectActionCount();
+                        //ReflectActionCount();
+                        ReflectAction();
                         StartCoroutine("ThornTime");
                         break;
                     case 6://斜め着地左
@@ -354,7 +357,6 @@ public class PlayerControl : MonoBehaviour
                         SkewBlockRight(col.gameObject);
                         break;
                     case 8://動く床
- 
                         ReflectMoveActionCount(col.gameObject);
                         break;
                     case 10:
@@ -363,7 +365,6 @@ public class PlayerControl : MonoBehaviour
                     default:
                         break;
                 }
-                colFlag = true;
             }
         }
         //EnemyCollision場合
@@ -392,7 +393,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
     void OnCollisionExit(Collision col)
-    {  
+    {
         if (colFlag)
         {
             colFlag = false;
@@ -457,6 +458,63 @@ public class PlayerControl : MonoBehaviour
         float a = col.gameObject.transform.localEulerAngles.z;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, -90);
         gameObject.transform.Rotate(Vector3.forward * (-45 - a));
+    }
+    private void SkewRefrect(GameObject col)
+    {
+        //Z回転軸取得
+        float a = col.gameObject.transform.localEulerAngles.z;
+        gameObject.transform.Rotate(Vector3.forward * (45 + a));
+        //当たったオブジェの向き取得
+        Vector3 n = gameObject.transform.up;
+        //内積
+        float h = Mathf.Abs(Vector3.Dot(playerVec, n));
+        //反射ベクトル
+        Vector3 r = playerVec + 2 * n * h;
+        //代入
+        playerRig.velocity = r;
+        //
+        //    Debug.Log("斜め呼んだ");
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+    //滑る床
+    private void SripAction(GameObject col)
+    {
+        if (wa.Height(true) - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
+        {
+            if (wa.Height(false) + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+                else
+                {
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+            }
+            else
+            {
+                playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
+            }
+        }
+        else
+        {
+            if (wa.Width(true) - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false) + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
+            {
+                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
+                {
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+                else
+                {
+                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
+                }
+            }
+            else
+            {
+                playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
+            }
+        }
     }
     #endregion
     public void Damage(int damage)
@@ -616,7 +674,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
-    //
+    //反射の数をカウントしない
     private void ReflectAction()
     {
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -632,8 +690,9 @@ public class PlayerControl : MonoBehaviour
         playerVec = playerRig.velocity;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
         transform.rotation = Quaternion.FromToRotation(gameObject.transform.up, r);
-        RayObject();
+       // RayObject();
     }
+    //反射の数をカウントする
     private void ReflectActionCount()
     {
         CapsuleCollider col = GetComponent<CapsuleCollider>();
@@ -661,11 +720,12 @@ public class PlayerControl : MonoBehaviour
             playerVec = playerRig.velocity;
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             transform.rotation = Quaternion.FromToRotation(gameObject.transform.up, r);
-            RayObject();
+           // RayObject();
             refCount--;
         }
         col.isTrigger = false;
     }
+    //動く床の反射用
     private void ReflectMoveActionCount(GameObject colObj)
     {
         CapsuleCollider col = GetComponent<CapsuleCollider>();
@@ -694,68 +754,12 @@ public class PlayerControl : MonoBehaviour
             playerVec = playerRig.velocity;
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             transform.rotation = Quaternion.FromToRotation(gameObject.transform.up, r);
-            RayObject();
+           // RayObject();
             refCount--;
         }
         col.isTrigger = false;
     }
-    private void SkewRefrect(GameObject col)
-    {
-        //Z回転軸取得
-        float a = col.gameObject.transform.localEulerAngles.z;
-        gameObject.transform.Rotate(Vector3.forward * (45 + a));
-        //当たったオブジェの向き取得
-        Vector3 n = gameObject.transform.up;
-        //内積
-        float h = Mathf.Abs(Vector3.Dot(playerVec, n));
-        //反射ベクトル
-        Vector3 r = playerVec + 2 * n * h;
-        //代入
-        playerRig.velocity = r;
-        //
-        //    Debug.Log("斜め呼んだ");
-        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-    }
-    //滑る床
-    private void SripAction(GameObject col)
-    {
-        if (wa.Height(true) - (Scale.y / 2) >= gameObject.transform.position.y - (Scale.y / 2))
-        {
-            if (wa.Height(false) + (Scale.y / 2) <= gameObject.transform.position.y + (Scale.y / 2))
-            {
-                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
-                {
-                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
-                }
-                else
-                {
-                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
-                }
-            }
-            else
-            {
-                playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
-            }
-        }
-        else
-        {
-            if (wa.Width(true) - (Scale.x / 2) <= gameObject.transform.position.x - (Scale.x / 2) || wa.Width(false) + (Scale.x / 2) >= gameObject.transform.position.x + (Scale.x / 2))
-            {
-                if (gameObject.transform.position.x > col.gameObject.transform.position.x)
-                {
-                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
-                }
-                else
-                {
-                    playerRig.velocity = new Vector3(0, playerRig.velocity.y, 0);
-                }
-            }
-            else
-            {
-                playerRig.velocity = new Vector3(playerRig.velocity.x, 0, 0);
-            }
-        }
-    }
+   
     //回転の判定
     private void test()
     {
@@ -773,27 +777,41 @@ public class PlayerControl : MonoBehaviour
         //どの位置にあたったか判定し回転する
         if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
         {
-            playerRot = Vector3.forward * 0;
+            if(wa.colObjs[0] ==null)
+            {
+                playerRot = Vector3.forward * 0;
+                Debug.Log("Up");
+            }           
         }
         else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
         {
-            playerRot = Vector3.forward * 180;
+            if (wa.colObjs[1] == null)
+            {
+                playerRot = Vector3.forward * 180;
+                Debug.Log("Down");
+            }
         }
         else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
         {
-            playerRot = Vector3.forward * 270;
+            if (wa.colObjs[2] == null)
+            {
+                playerRot = Vector3.forward * 270;
+                Debug.Log("Right");
+            }
         }
         else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
         {
-            playerRot = Vector3.forward * 90;
+            if (wa.colObjs[3] == null)
+            {
+                playerRot = Vector3.forward * 90;
+                Debug.Log("Left");
+            }
         }
         wallNum = wa.abilityNumber;
     }
     //動く床の判定
     private void coltest()
     {
-        //コンポーネント取得
-        wa = hitObject.GetComponent<WallAbility>();
         //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
         float x = hitPoint.x;
@@ -827,20 +845,31 @@ public class PlayerControl : MonoBehaviour
     //判定を見るよう
     private void vecTest()
     {
+        //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
-        if (hitPoint.y == wa.Height(true))
+        float x = hitPoint.x;
+        float y = hitPoint.y;
+
+        x *= 10;
+        y *= 10;
+
+        x = Mathf.Floor(x) / 10;
+        y = Mathf.Floor(y) / 10;
+
+        //どの位置にあたったか判定し回転する
+        if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
         {
             Debug.Log("Up");
         }
-        else if (hitPoint.y == wa.Height(false))
+        else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
         {
             Debug.Log("Down");
         }
-        else if (hitPoint.x == wa.Width(true))
+        else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
         {
             Debug.Log("Right");
         }
-        else if (hitPoint.x == wa.Width(false))
+        else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
         {
             Debug.Log("Left");
         }
@@ -871,6 +900,8 @@ public class PlayerControl : MonoBehaviour
             { }
         }
     }
+
+    //カーソルの動き
     private void Carsolmove()
     {
         //パターン1

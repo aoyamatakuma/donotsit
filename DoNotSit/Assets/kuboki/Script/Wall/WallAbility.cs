@@ -5,13 +5,34 @@ using UnityEngine;
 public class WallAbility : MonoBehaviour
 {
     public int abilityNumber;
-    
-    
+    public GameObject[] colObjs = new GameObject[4];
+
+
+    private void Start()
+    {
+        ColObjectCheck(transform.up, 0);
+        ColObjectCheck(-transform.up, 1);
+        ColObjectCheck(transform.right, 2);
+        ColObjectCheck(-transform.right, 3);
+    }
     // Update is called once per frame
     void Update()
     {
         
     }
+    void ColObjectCheck(Vector3 objVec,int num)
+    {
+        Ray ray = new Ray(transform.position, objVec);
+        RaycastHit hit;
+        if(Physics.Raycast(ray,out hit,8.0f))
+        {
+            if (hit.collider.tag == "Wall")
+            {
+                colObjs[num] = hit.collider.gameObject;               
+            }
+        }
+    }
+
     //反射の判定用
     public float Height(bool i2)
     {
