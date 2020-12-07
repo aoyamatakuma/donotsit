@@ -8,11 +8,13 @@ public class Bomb : MonoBehaviour
     public float bombRange;
     private CameraShakeScript camera;
     bool isChaseHit;
+   public SlowTime slow;
     // Start is called before the first frame update
     void Start()
     {
         effect.GetComponent<SphereCollider>().radius = bombRange;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
+        slow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SlowTime>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class Bomb : MonoBehaviour
             camera.Shake(camera.durations, camera.magnitudes);
             Instantiate(effect, transform.position, transform.rotation);
             effect.GetComponent<AudioSource>().Play();
-            Time.timeScale = 0.3f; 
+            slow.slowMotion = false;
             Destroy(gameObject);
         }
     }
