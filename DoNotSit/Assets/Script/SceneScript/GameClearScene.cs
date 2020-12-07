@@ -12,6 +12,10 @@ public class GameClearScene : MonoBehaviour
     public GameObject normal;
     public GameObject hard;
     public GameObject ex;
+    public GameObject easyBack;
+    public GameObject normalBack;
+    public GameObject hardBack;
+    public GameObject exBack;
     public InputField inputField;
     public Text nameText;
     private bool select;
@@ -127,30 +131,22 @@ public class GameClearScene : MonoBehaviour
         if (stageName == "StageEasy")
         {
             easy.SetActive(true);
-            normal.SetActive(false);
-            hard.SetActive(false);
-            ex.SetActive(false);
+            easyBack.SetActive(true);
         }
         else if (stageName == "StageNormal")
         {
-            easy.SetActive(false);
             normal.SetActive(true);
-            hard.SetActive(false);
-            ex.SetActive(false);
+            normalBack.SetActive(true);
         }
         else if (stageName == "StageHard")
         {
-            easy.SetActive(false);
-            normal.SetActive(false);
             hard.SetActive(true);
-            ex.SetActive(false);
+            hardBack.SetActive(true);
         }
         else
         {
-            easy.SetActive(false);
-            normal.SetActive(false);
-            hard.SetActive(false);
             ex.SetActive(true);
+            exBack.SetActive(true);
         }
     }
     void StageClearBool()
