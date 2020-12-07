@@ -3394,6 +3394,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1570553432175520805, guid: ff4d1f73fb241af46bc3738a1d734c8a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3829516839565903925, guid: ff4d1f73fb241af46bc3738a1d734c8a,
         type: 3}
       propertyPath: m_Enabled
@@ -3478,6 +3483,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EasyBack (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532373536572461855, guid: ff4d1f73fb241af46bc3738a1d734c8a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff4d1f73fb241af46bc3738a1d734c8a, type: 3}
@@ -4623,6 +4633,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1570553432175520805, guid: ff4d1f73fb241af46bc3738a1d734c8a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3829516839565903925, guid: ff4d1f73fb241af46bc3738a1d734c8a,
         type: 3}
       propertyPath: m_Enabled
@@ -4707,6 +4722,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EasyBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532373536572461855, guid: ff4d1f73fb241af46bc3738a1d734c8a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff4d1f73fb241af46bc3738a1d734c8a, type: 3}
