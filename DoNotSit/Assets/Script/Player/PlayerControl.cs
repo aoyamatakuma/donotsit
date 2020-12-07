@@ -189,27 +189,27 @@ public class PlayerControl : MonoBehaviour
             {
                 case 0:
                     if (turn > 0 && Rot.z > minAngleSet || turn > 0 && Rot.z < maxAngleSet+angleSpeed*2)
-                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    { transform.Rotate(Vector3.back * angleSpeed * (turn * turn)); }
                     else if (turn < 0 && Rot.z > minAngleSet-angleSpeed*2 || turn < 0 && Rot.z < maxAngleSet)
-                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    { transform.Rotate(Vector3.forward * angleSpeed * (turn * turn)); }
                     break;
                 case 90:
                     if (up > 0 && Rot.z > minAngleSet)
-                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    { transform.Rotate(Vector3.back * angleSpeed * (up*up)); }
                     else if (up < 0 && Rot.z < maxAngleSet)
-                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
                     break;
                 case 180:
                     if (turn > 0 && Rot.z < maxAngleSet)
-                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    { transform.Rotate(Vector3.forward * angleSpeed *(turn*turn)); }
                     else if (turn < 0 && Rot.z > minAngleSet)
-                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    { transform.Rotate(Vector3.back * angleSpeed * (turn * turn)); }
                     break;
                 case 270:
                     if (up > 0&&Rot.z<maxAngleSet)
-                    { transform.Rotate(Vector3.forward * angleSpeed); }
+                    { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
                     else if (up < 0&&Rot.z>minAngleSet)
-                    { transform.Rotate(Vector3.back * angleSpeed); }
+                    { transform.Rotate(Vector3.back * angleSpeed * (up * up)); }
                     break;
             }
         }        
@@ -318,6 +318,7 @@ public class PlayerControl : MonoBehaviour
                     foreach (ContactPoint point in col.contacts)
                     {
                         hitPoint = point.point;
+                        Debug.Log("違うオブジェクト");
                     }
                     coltest();
                 }
@@ -354,7 +355,6 @@ public class PlayerControl : MonoBehaviour
                         SkewBlockRight(col.gameObject);
                         break;
                     case 8://動く床
- 
                         ReflectMoveActionCount(col.gameObject);
                         break;
                     case 10:
@@ -794,8 +794,6 @@ public class PlayerControl : MonoBehaviour
     {
         //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
-        //コンポーネント取得
-        wa = hitObject.GetComponent<WallAbility>();
         float x = hitPoint.x;
         float y = hitPoint.y;
 
@@ -827,20 +825,31 @@ public class PlayerControl : MonoBehaviour
     //判定を見るよう
     private void vecTest()
     {
+        //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
-        if (hitPoint.y == wa.Height(true))
+        float x = hitPoint.x;
+        float y = hitPoint.y;
+
+        x *= 10;
+        y *= 10;
+
+        x = Mathf.Floor(x) / 10;
+        y = Mathf.Floor(y) / 10;
+
+        //どの位置にあたったか判定し回転する
+        if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
         {
             Debug.Log("Up");
         }
-        else if (hitPoint.y == wa.Height(false))
+        else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
         {
             Debug.Log("Down");
         }
-        else if (hitPoint.x == wa.Width(true))
+        else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
         {
             Debug.Log("Right");
         }
-        else if (hitPoint.x == wa.Width(false))
+        else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
         {
             Debug.Log("Left");
         }
