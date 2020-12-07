@@ -1741,7 +1741,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
@@ -2341,13 +2341,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1638919140}
   m_TextComponent: {fileID: 1327470922}
   m_Placeholder: {fileID: 546892339}
-  m_ContentType: 0
+  m_ContentType: 4
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
-  m_LineType: 2
+  m_KeyboardType: 1
+  m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 3
   m_CharacterLimit: 6
   m_OnEndEdit:
     m_PersistentCalls:
