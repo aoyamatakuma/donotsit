@@ -28,12 +28,6 @@ public class ChaseEnemy : MonoBehaviour
     public Text levelText;//レベルテキスト
     public int ChaseType;
     PlayerControl player;
-    public GameObject bello;
-    float attackCount;//カウント
-    public float attackLimit;//限界
-    public Transform point;
-    public bool belooFlag;
-    public GameObject carsol;
   public ChaseState currentChaseState;
     public float wait;
     Animator animator;
@@ -50,7 +44,6 @@ public class ChaseEnemy : MonoBehaviour
     void Start()
     {
        
-        belooFlag = false;
         transform.position = new Vector3(transform.position.x,
              transform.position.y,
              transform.position.z);
@@ -80,7 +73,6 @@ public class ChaseEnemy : MonoBehaviour
                 {
                     case 1://右
                         Right();
-                        Attack();
                         break;
                     case 2://左
                         Left();
@@ -146,34 +138,6 @@ public class ChaseEnemy : MonoBehaviour
         Vector3 move = transform.position;
         move.y -= speed * Time.deltaTime;//下
         transform.position = move;
-    }
-    //ベロ攻撃
-     void Attack()
-    {
-        if (player.currentPlayerState == PlayerState.Normal)//ノーマルの時
-        {      
-            attackCount+=Time.deltaTime;
-            if (attackCount >= attackLimit)
-            {
-                belooFlag = false;
-            }
-        }
-        else
-        {
-            attackCount = 0;           
-        }
-
-        if (attackCount >= attackLimit)//アタックする
-        {
-            if (!belooFlag)
-            {
-                belooFlag = true;
-                carsol.SetActive(true);
-                var parent = this.transform;
-                Instantiate(bello, point.transform.position, bello.transform.rotation,parent);
-                attackCount = 0;
-            }
-        }
     }
     //レベルアップ
     public void LevelUp()

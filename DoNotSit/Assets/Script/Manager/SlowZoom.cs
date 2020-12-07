@@ -16,30 +16,22 @@ public class SlowZoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+
     }
-    void OnTriggerStay(Collider col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
             camera.zoom = true;
             shake.slowFlag = true;
-            camera.target = this.gameObject;
         }
     }
-    //IEnumerator Zoom()
-    //{
-    //    yield return new WaitForSeconds(1.0f);
-    //    camera.zoom = false;
-    //    shake.slowFlag = false;
-    //}
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Player")//ボム外した場合
         {
             camera.zoom = false;
             shake.slowFlag = false;
-            camera.target = null;
         }
     }
 
