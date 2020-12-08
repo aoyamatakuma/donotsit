@@ -7,6 +7,7 @@ public enum ChaseState
 {
     Normal,
     Stop,
+    Pouse,
     LEVLE1,
     LEVLE2,
     LEVLE3,
@@ -60,7 +61,7 @@ public class ChaseEnemy : MonoBehaviour
         if (cnt > delay)
         {
             Animation();
-            if (currentChaseState != ChaseState.Stop)
+            if (currentChaseState == ChaseState.Normal)
             {
                 LevelUp();
                 if (hitCnt >= enemyHitLimit)
@@ -100,27 +101,31 @@ public class ChaseEnemy : MonoBehaviour
     {
         if (currentChaseState == ChaseState.Stop)
         {
-            animator.SetBool("Sutan", true);   
-            //if(player.select==true)
-            //{
-            //    animator.SetBool("Pouse", true);
-            //}
-            //else if (player.select == false)
-            //{
-            //    animator.SetBool("Pouse", false);
-            //}
+            animator.SetBool("Sutan", true);
+            if (player.select == true)
+            {
+                currentChaseState = ChaseState.Pouse;//ポーズ中
+                animator.enabled = false;
+            }
+            else if (player.select == false)
+            {
+                currentChaseState = ChaseState.Stop;
+                animator.enabled = true;
+            }
         }
         else if (currentChaseState != ChaseState.Stop)
         {
             animator.SetBool("Sutan", false);
-            //if (player.select == true)
-            //{
-            //    animator.SetBool("Pouse", true);
-            //}
-            //else if (player.select == false)
-            //{
-            //    animator.SetBool("Pouse", false);
-            //}
+            if (player.select == true)
+            {
+                currentChaseState = ChaseState.Pouse;//ポーズ中
+                animator.enabled = false;
+            }
+            else if (player.select == false)
+            {
+                currentChaseState = ChaseState.Normal;
+                animator.enabled = true;
+            }
         }
     }
     //右
