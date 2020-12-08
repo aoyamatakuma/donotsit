@@ -101,10 +101,26 @@ public class ChaseEnemy : MonoBehaviour
         if (currentChaseState == ChaseState.Stop)
         {
             animator.SetBool("Sutan", true);   
+            //if(player.select==true)
+            //{
+            //    animator.SetBool("Pouse", true);
+            //}
+            //else if (player.select == false)
+            //{
+            //    animator.SetBool("Pouse", false);
+            //}
         }
         else if (currentChaseState != ChaseState.Stop)
         {
             animator.SetBool("Sutan", false);
+            //if (player.select == true)
+            //{
+            //    animator.SetBool("Pouse", true);
+            //}
+            //else if (player.select == false)
+            //{
+            //    animator.SetBool("Pouse", false);
+            //}
         }
     }
     //右
