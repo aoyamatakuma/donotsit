@@ -9,6 +9,7 @@ public class CameraEvent : MonoBehaviour
     public PlayerControl player;
     public List<GameObject> uiObjects;
     FollowCamera camera;
+    SlowTime slow;
     public float offsetY = 0.3f;
     public float waitTime;
     public float moveTime;
@@ -27,6 +28,7 @@ public class CameraEvent : MonoBehaviour
         isEvent = false;
         isMove = false;
         camera = GetComponent<FollowCamera>();
+        slow = GetComponent<SlowTime>();
         StartCoroutine(CameraMove());
     }
 
@@ -80,6 +82,7 @@ public class CameraEvent : MonoBehaviour
     {
 
         camera.enabled = false;
+        slow.enabled = false;
         enemy.enabled = false;
         player.enabled = false;
         for(int i = 0; i < uiObjects.Count; i++)
@@ -99,6 +102,7 @@ public class CameraEvent : MonoBehaviour
         transform.rotation = Quaternion.identity;
         startImage.SetActive(false);
         camera.enabled = true;
+        slow.enabled = true;
         player.enabled = true;
         for (int i = 0; i < uiObjects.Count; i++)
         {
