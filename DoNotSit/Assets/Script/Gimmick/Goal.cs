@@ -10,6 +10,7 @@ public class Goal : MonoBehaviour
     public PlayableDirector playableDirector;
     private GameObject player;
     private GameObject chaseEnemy;
+    public List<GameObject> ui;
     private bool isEvent;
     private GameObject camera;
 
@@ -44,6 +45,10 @@ public class Goal : MonoBehaviour
         player.SetActive(false);
         chaseEnemy.SetActive(false);
         camera.SetActive(false);
+        for(int i = 0; i < ui.Count; i++)
+        {
+            ui[0].SetActive(false);
+        }
         playableDirector.Play();
         isEvent = true;
     }
