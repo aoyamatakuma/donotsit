@@ -225,7 +225,6 @@ public class ChaseEnemy : MonoBehaviour
 
    public  void PlaySE()
     {
-        Debug.Log("SE再生");
         audio.Play();
     }
 }
