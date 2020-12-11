@@ -95,7 +95,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1097850880859739370
 MonoBehaviour:
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1697911464244634f8805a3f49f2de1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playableDirector: {fileID: 0}
 --- !u!114 &3878167912251272452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GoalBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373861171633038501, guid: 81d9a79b478506d40a31c6761d03c8ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81d9a79b478506d40a31c6761d03c8ac, type: 3}
