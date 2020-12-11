@@ -54,6 +54,21 @@ public class WallAbility : MonoBehaviour
         y = Mathf.Floor(y) / 10;
         return y;
     }
+    public Vector3 HeightPos(bool i2)
+    {
+        BoxCollider a = GetComponent<BoxCollider>();
+        Vector3 pos;
+
+        if (i2)
+        {
+            pos = gameObject.transform.position + new Vector3(0, a.bounds.size.y / 2, 0);
+        }
+        else
+        {
+            pos = gameObject.transform.position - new Vector3(0, a.bounds.size.y / 2, 0);
+        }
+        return pos;
+    }
     //反射の判定用
     public float Width(bool i2)
     {
@@ -75,5 +90,21 @@ public class WallAbility : MonoBehaviour
         x = Mathf.Floor(x)/10;
 
         return x;
+    }
+    public Vector3 WidthPos(bool i2)
+    {
+        BoxCollider a = GetComponent<BoxCollider>();
+        Vector3 pos;
+
+        if (i2)
+        {
+            pos = gameObject.transform.position + new Vector3(a.bounds.size.x / 2, 0, 0);
+        }
+        else
+        {
+            pos = gameObject.transform.position - new Vector3(a.bounds.size.x / 2, 0, 0);
+        }
+
+        return pos;
     }
 }
