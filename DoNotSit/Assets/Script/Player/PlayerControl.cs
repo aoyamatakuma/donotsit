@@ -854,10 +854,10 @@ public class PlayerControl : MonoBehaviour
         float[] posi = new float[4];
         string[] num = new string[4];
 
-        posi[0] = Vector3.Distance(hitPoint, wa.HeightPos(true));
-        posi[1] = Vector3.Distance(hitPoint, wa.HeightPos(false));
-        posi[2] = Vector3.Distance(hitPoint, wa.WidthPos(true));
-        posi[3] = Vector3.Distance(hitPoint, wa.WidthPos(false));
+        posi[0] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(true))*100)/100;
+        posi[1] = Mathf.Floor( Vector3.Distance(hitPoint, wa.HeightPos(false))*100)/100;
+        posi[2] = Mathf.Floor( Vector3.Distance(hitPoint, wa.WidthPos(true))*100)/100;
+        posi[3] = Mathf.Floor( Vector3.Distance(hitPoint, wa.WidthPos(false))*100)/100;
         var list = new List<float>();
         list.AddRange(posi);
         list.Sort();
@@ -914,7 +914,7 @@ public class PlayerControl : MonoBehaviour
                     
                     if (wa.colObjs[1] == null)
                     {
-                        int a = int.Parse(num[f + 1]);
+                        int a = int.Parse(num[f+1]);
                         if (list[f] == list[f + 1] && wa.colObjs[a] == null)
                         {
                             Debug.Log("したと左右");

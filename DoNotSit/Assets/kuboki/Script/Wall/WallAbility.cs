@@ -18,7 +18,10 @@ public class WallAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ColObjectCheck(transform.up, 0);
+        ColObjectCheck(-transform.up, 1);
+        ColObjectCheck(transform.right, 2);
+        ColObjectCheck(-transform.right, 3);
     }
     void ColObjectCheck(Vector3 objVec,int num)
     {
@@ -30,6 +33,10 @@ public class WallAbility : MonoBehaviour
             {
                 colObjs[num] = hit.collider.gameObject;               
             }
+        }
+        else
+        {
+            colObjs[num] = null;
         }
     }
 
