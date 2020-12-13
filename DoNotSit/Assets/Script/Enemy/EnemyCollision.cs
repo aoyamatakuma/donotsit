@@ -26,6 +26,7 @@ public class EnemyCollision : MonoBehaviour
             {
                 player.Score(score);
                 Damage(col.ClosestPointOnBounds(transform.position));
+                camera.Shake(camera.durations, camera.magnitudes);
                 Death();
             }
             else
@@ -33,7 +34,11 @@ public class EnemyCollision : MonoBehaviour
                 player.Damage(damage);
             }
         }
-    }
+        if (col.gameObject.tag == "ChaseEnemy")
+        {
+            Death();
+        }
+        }
 
     void OnTriggerStay(Collider col)
     {
@@ -41,6 +46,7 @@ public class EnemyCollision : MonoBehaviour
         {
             player.Score(score);
              Damage(col.ClosestPointOnBounds(transform.position));
+            camera.Shake(camera.durations, camera.magnitudes);
             Death();
         }
     }
@@ -48,7 +54,7 @@ public class EnemyCollision : MonoBehaviour
     void Death()
     {
         int num = Random.Range(0, effects.Count);
-        camera.Shake(camera.durations, camera.magnitudes);
+       // camera.Shake(camera.durations, camera.magnitudes);
         Instantiate(effects[num], transform.position, transform.rotation);
         effects[num].GetComponent<AudioSource>().Play();
         Destroy(gameObject);
