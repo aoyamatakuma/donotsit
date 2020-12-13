@@ -792,11 +792,11 @@ public class PlayerControl : MonoBehaviour
             if(wa.colObjs[0] ==null)
             {
                 playerRot = Vector3.forward * 0;
-                Debug.Log("UP");
+
             }           
             else
             {
-                Debug.Log("UPだけど無理");
+
                 coltest();
             }
         }
@@ -805,11 +805,11 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[1] == null)
             {
                 playerRot = Vector3.forward * 180;
-                Debug.Log("DOWN");
+
             }
             else
             {
-                Debug.Log("DOWNだけど無理");
+
                 coltest();
             }
         }
@@ -818,11 +818,11 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[2] == null)
             {
                 playerRot = Vector3.forward * 270;
-                Debug.Log("RIGHT");
+
             }
             else
             {
-                Debug.Log("Rightだけど無理");
+
                 coltest();
             }
         }
@@ -831,19 +831,15 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[3] == null)
             {
                 playerRot = Vector3.forward * 90;
-                Debug.Log("LEFT");
+
             }
             else
             {
-                Debug.Log("Leftだけど無理");
                 coltest();
             }
         }
         else
         {
-            Debug.Log("そもそも無理");
-            Debug.Log(x+";"+y);
-            Debug.Log(wa.Width(true) + "," + wa.Width(false) + "," + wa.Height(true) + "," + wa.Height(false));
             coltest();
         }
         wallNum = wa.abilityNumber;
@@ -889,10 +885,23 @@ public class PlayerControl : MonoBehaviour
             switch (num[f])
             {
                 case "0":
-                    Debug.Log("上");
+                   
                     if (wa.colObjs[0] == null)
                     {
-                        playerRot = Vector3.forward * 0;
+                        int a = int.Parse(num[f + 1]);
+                        if (list[f] == list[f + 1]&&wa.colObjs[a]==null)
+                        {
+                            Debug.Log("上to左右");
+                            if (a==2)
+                            { playerRot = Vector3.forward * 315; }
+                            if (a == 3)
+                            { playerRot = Vector3.forward * 45; }
+                        }
+                        else
+                        {
+                            Debug.Log("上");
+                            playerRot = Vector3.forward * 0;
+                        }
                         go = true;
                     }
                     else
@@ -902,10 +911,23 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
                 case "1":
-                    Debug.Log("した");
+                    
                     if (wa.colObjs[1] == null)
                     {
-                        playerRot = Vector3.forward * 180;
+                        int a = int.Parse(num[f + 1]);
+                        if (list[f] == list[f + 1] && wa.colObjs[a] == null)
+                        {
+                            Debug.Log("したと左右");
+                            if (a == 2)//右
+                            { playerRot = Vector3.forward * 225; }
+                            if (a == 3)//左
+                            { playerRot = Vector3.forward * 135; }
+                        }
+                        else
+                        {
+                            Debug.Log("した");
+                            playerRot = Vector3.forward * 180;
+                        }
                         go = true;
                     }
                     else
@@ -915,10 +937,23 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
                 case "2":
-                    Debug.Log("右");
+                    
                     if (wa.colObjs[2] == null)
                     {
-                        playerRot = Vector3.forward * 270;
+                        int a = int.Parse(num[f + 1]);
+                        if (list[f] == list[f + 1] && wa.colObjs[a] == null)
+                        {
+                            Debug.Log("右to上下");
+                            if (a == 0)//上
+                            { playerRot = Vector3.forward * 315; }
+                            if (a == 1)//下
+                            { playerRot = Vector3.forward * 225; }
+                        }
+                        else
+                        {
+                            Debug.Log("右");
+                            playerRot = Vector3.forward * 270;
+                        }
                         go = true;
                     }
                     else
@@ -928,10 +963,23 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
                 case "3":
-                    Debug.Log("左");
+                   
                     if (wa.colObjs[3] == null)
                     {
-                        playerRot = Vector3.forward * 90;
+                        int a = int.Parse(num[f + 1]);
+                        if (list[f] == list[f + 1] && wa.colObjs[a] == null)
+                        {
+                            Debug.Log("左と上下");
+                            if (a == 0)//上
+                            { playerRot = Vector3.forward * 45; }
+                            if (a == 1)//下
+                            { playerRot = Vector3.forward * 135; }
+                        }
+                        else
+                        {
+                            Debug.Log("左");
+                            playerRot = Vector3.forward * 90;
+                        }
                         go = true;
                     }
                     else
