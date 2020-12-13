@@ -85,6 +85,9 @@ public class GameClearScene : MonoBehaviour
             }
             else
             {
+                StageDate.SetBool(StageDate.clearKey, true);
+                StageClearBool();
+                QuickRanking.Instance.SaveRanking(nameText.text, stageName, (int)goalscore);
                 fade.StartFadeIn("Title", true);
             }
         }

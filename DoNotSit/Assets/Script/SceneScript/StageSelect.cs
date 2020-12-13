@@ -243,7 +243,7 @@ public class StageSelect : MonoBehaviour
         }
 
 
-        if (isExtra && !isExtraUnlock)
+        if (isHard && !isExtraUnlock)
         {
             exLockImage.GetComponent<Animator>().SetBool("isAnim", true);
             StageDate.SetBool(StageDate.extraUnlockKey, true);
