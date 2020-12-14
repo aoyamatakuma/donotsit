@@ -47,7 +47,7 @@ public class Goal : MonoBehaviour
         camera.SetActive(false);
         for(int i = 0; i < ui.Count; i++)
         {
-            ui[0].SetActive(false);
+            ui[i].SetActive(false);
         }
         playableDirector.Play();
         isEvent = true;
