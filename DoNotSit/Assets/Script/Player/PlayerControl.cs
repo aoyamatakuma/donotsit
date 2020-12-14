@@ -852,34 +852,41 @@ public class PlayerControl : MonoBehaviour
         ////どの位置にあたったか判定し回転する
         float[] posi = new float[4];
         string[] num = new string[4];
-
+        //各面の中心点のの距離を格納
         posi[0] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(true)) * 100) / 100;
         posi[1] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(false)) * 100) / 100;
         posi[2] = Mathf.Floor(Vector3.Distance(hitPoint, wa.WidthPos(true)) * 100) / 100;
         posi[3] = Mathf.Floor(Vector3.Distance(hitPoint, wa.WidthPos(false)) * 100) / 100;
+        //格納した値を短い順にする
         var list = new List<float>();
         list.AddRange(posi);
         list.Sort();
 
-
+        //どこの面が短いか順番を決める
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 4; j++)
             {
                 if (list[i] == posi[j])
                 {
-                    if(num[i] == null)
+                    if (i > 0)
                     {
-                        num[i] = j.ToString();
+                        if (num[i - 1] != j.ToString())
+                        {
+                            num[i] = j.ToString();
+                            break;
+                        }
                     }
                     else
                     {
                         num[i] = j.ToString();
+                        break;
                     }
                 }
             }
         }
 
+        //リストに沿って飛ぶ方向を決める
         bool go = false;
         int f = 0;
        
@@ -1008,8 +1015,8 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
-        Debug.Log(list[f] + ":" + posi[0] + "," + posi[1] + "," + posi[2] + "," + posi[3]) ;
-        Debug.Log(num[f] + ":" + num[0] + "," + num[1] + "," + num[2] + "," + num[3]);
+        Debug.Log(list[f] + ":  " + posi[0] + "," + posi[1] + "," + posi[2] + "," + posi[3]) ;
+        Debug.Log(num[f] + ":  " + num[0] + "," + num[1] + "," + num[2] + "," + num[3]);
         wallNum = wa.abilityNumber;
     }
     //判定を見るよう
