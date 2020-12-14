@@ -13,7 +13,7 @@ public class Bomb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        effect.GetComponent<SphereCollider>().radius = bombRange;
+       
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         slow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SlowTime>();
     }
@@ -28,6 +28,7 @@ public class Bomb : MonoBehaviour
     {
         if(col.gameObject.tag == "Player" || col.gameObject.tag == "Bomb" )
         {
+            effect.GetComponent<SphereCollider>().radius = bombRange;
             camera.Shake(camera.durations, camera.magnitudes);
             Instantiate(effect, transform.position, transform.rotation);
             effect.GetComponent<AudioSource>().Play();
