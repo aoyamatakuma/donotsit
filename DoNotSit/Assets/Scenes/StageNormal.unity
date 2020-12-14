@@ -282,7 +282,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 4784846646631131641}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11000530}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -9697,18 +9697,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4784846646631131641}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1969640364 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1684288306, guid: a28a62aed92154b4f8760e097fe4e9bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4784846646631131641}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969640362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1973458809 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7431133221929589445, guid: 4c6136696ced43a4b9ad845191d75e76,
@@ -10430,14 +10418,14 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2098525221 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 212679343, guid: a28a62aed92154b4f8760e097fe4e9bb,
+  m_CorrespondingSourceObject: {fileID: 2052737198, guid: a28a62aed92154b4f8760e097fe4e9bb,
     type: 3}
   m_PrefabInstance: {fileID: 4784846646631131641}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098525219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2107068872 stripped
@@ -10561,12 +10549,12 @@ PrefabInstance:
         type: 3}
       propertyPath: hpText
       value: 
-      objectReference: {fileID: 1969640364}
+      objectReference: {fileID: 0}
     - target: {fileID: 1438079789592389761, guid: 76da3237fad75df45baeb7e854d3ec96,
         type: 3}
       propertyPath: scoreText
       value: 
-      objectReference: {fileID: 2098525221}
+      objectReference: {fileID: 0}
     - target: {fileID: 1721383700434539344, guid: 76da3237fad75df45baeb7e854d3ec96,
         type: 3}
       propertyPath: m_Name
@@ -14461,7 +14449,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hpText
       value: 
-      objectReference: {fileID: 1969640364}
+      objectReference: {fileID: 0}
     - target: {fileID: 4850341239745552395, guid: 35838777adc215345b12d8de9cb1f842,
         type: 3}
       propertyPath: scoreText

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
+using TMPro;
 
 
 public enum PlayerState
@@ -49,8 +50,7 @@ public class PlayerControl : MonoBehaviour
     public Text comboText;
     private Text levelText;//レベルテキスト
     private Text expText;
-    public Text hpText;
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
     public GameObject ob;//矢印
     public Transform basePosition;//支点
     public PlayerState currentPlayerState; //現在の状態
@@ -153,7 +153,7 @@ public class PlayerControl : MonoBehaviour
         //タイマー
         timer += 1.0f * Time.deltaTime;
         //comboText.text = combo.ToString()+ "COMOBO!";//コンボ
-        hpText.text = "HP:";
+      
         scoreText.text =  scoreNumber.ToString();
         Combo();//コンボ関連
         ReverseMove();//反転スティック
@@ -543,6 +543,7 @@ public class PlayerControl : MonoBehaviour
     public void Score(float score)
     {
         scoreNumber += score;
+        scoreText.GetComponent<TextMeshProGeometryAnimator>().Play();
         if (comboFlag == true)
         {
             scoreNumber += score*comboBonus;//ボーナス
