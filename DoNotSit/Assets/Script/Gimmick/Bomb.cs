@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public GameObject effect;
+    public GameObject chaseEffect;
     public float bombRange;
     private CameraShakeScript camera;
     bool isChaseHit;
@@ -33,27 +34,13 @@ public class Bomb : MonoBehaviour
             slow.slowMotion = false;
             Destroy(gameObject);
         }
-        //if (col.gameObject.tag == "ChaseEnemy")
-        //{
-        //    effect.GetComponent<Effect>().isChaseHit = true;
-        //    camera.Shake(camera.durations, camera.magnitudes);
-        //    Instantiate(effect, transform.position, transform.rotation);
-        //    effect.GetComponent<AudioSource>().Play();
-        //    Destroy(gameObject);
-        //}
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
         if (col.gameObject.tag == "ChaseEnemy")
         {
-            effect.GetComponent<Effect>().isChaseHit = true;
-            camera.Shake(camera.durations, camera.magnitudes);
-            Instantiate(effect, transform.position, transform.rotation);
+           // effect.GetComponent<Effect>().isChaseHit = true;
+            //camera.Shake(camera.durations, camera.magnitudes);
+            Instantiate(chaseEffect, transform.position, transform.rotation);
             effect.GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }
     }
-
-
 }
