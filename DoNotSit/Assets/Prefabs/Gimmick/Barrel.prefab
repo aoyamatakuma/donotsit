@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 1827235202747734, guid: 8ee1ad6dd64423c468ca78a4169a1810, type: 3}
+  chaseEffect: {fileID: 1827235202747734, guid: e97b34ce58085024fb6e6e9a82b56c25,
+    type: 3}
   bombRange: 3
 --- !u!1 &5267535395496090305
 GameObject:
