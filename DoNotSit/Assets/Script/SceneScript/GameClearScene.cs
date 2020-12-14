@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class GameClearScene : MonoBehaviour
 {
-    public GameObject stageSelect;
-    public GameObject title;
     public GameObject easy;
     public GameObject normal;
     public GameObject hard;
@@ -18,7 +16,7 @@ public class GameClearScene : MonoBehaviour
     public GameObject exBack;
     public InputField inputField;
     public Text nameText;
-    private bool select;
+    private bool isInput;
     private AudioSource audio;
     public AudioClip selectSE;
     public AudioClip moveSE;
@@ -32,26 +30,38 @@ public class GameClearScene : MonoBehaviour
     string stageName;
     string rankingName;
     public string rank;
+    public float speed;
     bool isPush;
     float preValue;
     Fade fade;
+    string inputName = "Name";
+    private bool isSelect;
+    bool isMove;
+    private int selectNum;
+    public List<GameObject> images;
+    private TouchScreenKeyboard keyboard;
+    public RectTransform icon;
+    string keyText;
+    public List<GameObject> keys;
+    int keyCnt;
 
     // Start is called before the first frame update
     void Start()
     {
         isPush = false;
         audio = GetComponent<AudioSource>();
-        select = true;
         goaltimer = PlayerControl.TimeScore();
         goalscore = PlayerControl.ClearScore();
         rank = RankManger.ClearRank();
-        //goalTimeText.text = "Time:"+ goaltimer.ToString("f0") + "秒";//ゴールタイム
         goalScoreText.text = "Score:" + goalscore.ToString();//ゴールスコア
         fade = GetComponent<Fade>();
         stageName = StageDate.Instance.referer;
-       // stageText.text =   stageName.ToString();
-       
-        // Type == Number の場合
+        selectNum = 0;
+        keyCnt = 0;
+        for (int i = 0; i < keys.Count; i++)
+        {
+            keys[i].SetActive(false);
+        }
 
     }
 
@@ -59,7 +69,7 @@ public class GameClearScene : MonoBehaviour
     void Update()
     {
         float value;
-        if(float.TryParse(inputField.text,out value))
+        if (float.TryParse(inputField.text,out value))
         {
             if(value > maxValue)
             {
@@ -70,13 +80,28 @@ public class GameClearScene : MonoBehaviour
                 preValue = value;
             }
         }
+  
         Name();
-        Select();
-        if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
+        SelectMove();
+        if (isInput)
+        {
+            SelectKey();
+        }
+      
+        if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush && !isInput)
         {
             isPush = true;
             audio.PlayOneShot(selectSE);
-            if (select)
+            if (selectNum == 0)
+            {
+                icon.gameObject.SetActive(true);
+                for(int i = 0; i < keys.Count; i++)
+                {
+                    keys[i].SetActive(true);
+                }
+                isInput = true;
+            }
+            else if (selectNum ==1)
             {
                 StageDate.SetBool(StageDate.clearKey, true);
                 StageClearBool();
@@ -93,42 +118,69 @@ public class GameClearScene : MonoBehaviour
         }
     }
 
+  
+
     void Select()
     {
-        float ver = Input.GetAxis("Vertical");
-
-        if (select)
+        if (isSelect)
         {
-
-            stageSelect.GetComponent<Outline>().enabled = true;
-            title.GetComponent<Outline>().enabled = false;
+            return;
         }
-        else
+        for (int i = 0; i < images.Count; i++)
         {
-
-            stageSelect.GetComponent<Outline>().enabled = false;
-            title.GetComponent<Outline>().enabled = true;
+            images[i].GetComponent<Outline>().enabled = false;
         }
-
-        if (ver > 0.5f)
-        {
-            if (!select)
-            {
-                audio.PlayOneShot(moveSE);
-            }
-            select = true;
-
-        }
-        else if (ver < -0.5f)
-        {
-            if (select)
-            {
-                audio.PlayOneShot(moveSE);
-            }
-            select = false;
-        }
+        images[selectNum].GetComponent<Outline>().enabled = true;
+        isSelect = true;
 
     }
+
+
+
+    void SelectMove()
+    {
+        if (isPush)
+        {
+            return;
+        }
+        float hol = Input.GetAxis("SelectVerMove");
+        if (hol < -0.5f && !isMove)
+        {
+            selectNum--;
+            StartCoroutine(ChangeCoroutine());
+            if (selectNum < 0)
+            {
+                selectNum = 0;
+            }
+            isSelect = false;
+        }
+
+        if (hol > 0.5f && !isMove)
+        {
+            selectNum++;
+            StartCoroutine(ChangeCoroutine());
+            if (selectNum > images.Count - 1)
+            {
+                selectNum = images.Count - 1;
+            }
+            isSelect = false;
+        }
+
+        Select();
+    }
+
+    IEnumerator ChangeCoroutine()
+    {
+        isMove = true;
+        if (selectNum >= 0 && selectNum < images.Count)
+        {
+            audio.PlayOneShot(moveSE);
+            yield return new WaitForSeconds(0.4f);
+
+        }
+        isMove = false;
+    }
+
     void Name()
     {
         if (stageName == "StageEasy")
@@ -180,8 +232,60 @@ public class GameClearScene : MonoBehaviour
       
     }
 
+    //void IconRay()
+    //{
+    //    RaycastHit hit;
+    //    int layerMask = 1 << 8;
+    //    if (Physics.Raycast(
+    //                  icon.localPosition,
+    //                  new Vector3(0, 0, 1),
+    //                  out hit,
+    //                  Mathf.Infinity, layerMask))
+    //    {
+    //        Debug.Log(gameObject.name);
+    //    }
 
+    //    Debug.DrawRay(icon.localPosition, new Vector3(0,0,1),new Color(0,0,255), Mathf.Infinity);
+    //}
 
+    void SelectKey()
+    {
 
+        if (( Input.GetButtonDown("Jump")))
+        {
+            
+            if(icon.GetComponent<Icon>().GetText() != null)
+            {
+                keyText = icon.GetComponent<Icon>().GetText();
+                if(keyText == "ALLDELETE")
+                {
+                    inputField.text = "";
+                    keyCnt = 0;
+                }
+                else
+                {
+                    if(keyCnt <= maxValue)
+                    {
+                        inputField.text += keyText;
+                    }                   
+                }
+                keyCnt++;
+            }
+        }
+
+        if ( Input.GetButtonDown("Attack"))
+        {
+            keyCnt = 0;
+            for (int i = 0; i < keys.Count; i++)
+            {
+                keys[i].SetActive(false);
+            }
+            icon.gameObject.SetActive(false);
+            selectNum = 0;
+            isPush = false;
+            isInput = false;
+        }
+
+    }
 
 }
