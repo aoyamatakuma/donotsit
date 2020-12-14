@@ -13,10 +13,12 @@ public class Goal : MonoBehaviour
     public List<GameObject> ui;
     private bool isEvent;
     private GameObject camera;
+    private Renderer renderer;
 
     void Start()
     {
         fade = GetComponent<Fade>();
+        renderer = GetComponent<Renderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         chaseEnemy = GameObject.FindGameObjectWithTag("ChaseEnemy");
         camera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -45,6 +47,7 @@ public class Goal : MonoBehaviour
         player.SetActive(false);
         chaseEnemy.SetActive(false);
         camera.SetActive(false);
+        renderer.enabled = false;
         for(int i = 0; i < ui.Count; i++)
         {
             ui[i].SetActive(false);
