@@ -27,7 +27,7 @@ public class WallAbility : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, objVec);
         RaycastHit hit;
-        if(Physics.Raycast(ray,out hit,8.0f))
+        if(Physics.Raycast(ray,out hit,6.0f))
         {
             if (hit.collider.tag == "Wall")
             {
