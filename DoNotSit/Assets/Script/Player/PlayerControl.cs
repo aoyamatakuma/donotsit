@@ -127,7 +127,8 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(playerVec);
+        Debug.Log(playerRig.velocity);
         
         Tenmetu();
         //ノーマルステート
@@ -197,9 +198,21 @@ public class PlayerControl : MonoBehaviour
                     else if (turn < 0 && Rot.z > minAngleSet-angleSpeed*2 || turn < 0 && Rot.z < maxAngleSet)
                     { transform.Rotate(Vector3.forward * angleSpeed * (turn * turn)); }
                     break;
+                case 45:
+                    if (up > 0 && Rot.z > minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed * (up * up)); }
+                    else if (up < 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
+                    break;
                 case 90:
                     if (up > 0 && Rot.z > minAngleSet)
                     { transform.Rotate(Vector3.back * angleSpeed * (up*up)); }
+                    else if (up < 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
+                    break;
+                case 135:
+                    if (up > 0 && Rot.z > minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed * (up * up)); }
                     else if (up < 0 && Rot.z < maxAngleSet)
                     { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
                     break;
@@ -209,10 +222,22 @@ public class PlayerControl : MonoBehaviour
                     else if (turn < 0 && Rot.z > minAngleSet)
                     { transform.Rotate(Vector3.back * angleSpeed * (turn * turn)); }
                     break;
+                case 225:
+                    if (turn > 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed * (turn * turn)); }
+                    else if (turn < 0 && Rot.z > minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed * (turn * turn)); }
+                    break;
                 case 270:
                     if (up > 0&&Rot.z<maxAngleSet)
                     { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
                     else if (up < 0&&Rot.z>minAngleSet)
+                    { transform.Rotate(Vector3.back * angleSpeed * (up * up)); }
+                    break;
+                case 315:
+                    if (up > 0 && Rot.z < maxAngleSet)
+                    { transform.Rotate(Vector3.forward * angleSpeed * (up * up)); }
+                    else if (up < 0 && Rot.z > minAngleSet)
                     { transform.Rotate(Vector3.back * angleSpeed * (up * up)); }
                     break;
             }
@@ -1013,7 +1038,6 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
             }
-
         }
         Debug.Log(list[f] + ":  " + posi[0] + "," + posi[1] + "," + posi[2] + "," + posi[3]) ;
         Debug.Log(num[f] + ":  " + num[0] + "," + num[1] + "," + num[2] + "," + num[3]);
