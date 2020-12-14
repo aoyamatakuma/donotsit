@@ -326,10 +326,8 @@ public class PlayerControl : MonoBehaviour
                         hitPoint = point.point;
                     }
                     Debug.Log("違うオブジェ");
-                    test();
+                    coltest();
                 }
-
-
 
                 jumpFlag = false;
                 playerRig.velocity = Vector3.zero;
@@ -767,9 +765,9 @@ public class PlayerControl : MonoBehaviour
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             transform.rotation = Quaternion.FromToRotation(gameObject.transform.up, r);
           // RayObject();
-            refCount--;
-            colPlayer.isTrigger = false;
+            refCount--;          
         }
+        colPlayer.isTrigger = false;
     }
    
     //回転の判定
@@ -854,10 +852,10 @@ public class PlayerControl : MonoBehaviour
         float[] posi = new float[4];
         string[] num = new string[4];
 
-        posi[0] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(true))*100)/100;
-        posi[1] = Mathf.Floor( Vector3.Distance(hitPoint, wa.HeightPos(false))*100)/100;
-        posi[2] = Mathf.Floor( Vector3.Distance(hitPoint, wa.WidthPos(true))*100)/100;
-        posi[3] = Mathf.Floor( Vector3.Distance(hitPoint, wa.WidthPos(false))*100)/100;
+        posi[0] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(true)) * 100) / 100;
+        posi[1] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(false)) * 100) / 100;
+        posi[2] = Mathf.Floor(Vector3.Distance(hitPoint, wa.WidthPos(true)) * 100) / 100;
+        posi[3] = Mathf.Floor(Vector3.Distance(hitPoint, wa.WidthPos(false)) * 100) / 100;
         var list = new List<float>();
         list.AddRange(posi);
         list.Sort();
@@ -867,9 +865,16 @@ public class PlayerControl : MonoBehaviour
         {
             for (int j = 0; j < 4; j++)
             {
-                if (list[i] == posi[j]&&num[i]==null)
+                if (list[i] == posi[j])
                 {
-                    num[i] = j.ToString();
+                    if(num[i] == null)
+                    {
+                        num[i] = j.ToString();
+                    }
+                    else
+                    {
+                        num[i] = j.ToString();
+                    }
                 }
             }
         }
@@ -877,25 +882,25 @@ public class PlayerControl : MonoBehaviour
         bool go = false;
         int f = 0;
        
-
-
-
         while (!go)
         {
             switch (num[f])
             {
-                case "0":
-                   
+                case "0":                 
                     if (wa.colObjs[0] == null)
                     {
+                        //中の番号を取得
                         int a = int.Parse(num[f + 1]);
-                        if (list[f] == list[f + 1]&&wa.colObjs[a]==null)
+                        if (list[f] == list[f+1]&&wa.colObjs[a]==null)
                         {
-                            Debug.Log("上to左右");
                             if (a==2)
-                            { playerRot = Vector3.forward * 315; }
+                            { playerRot = Vector3.forward * 315;
+                                Debug.Log("上to右");
+                            }
                             if (a == 3)
-                            { playerRot = Vector3.forward * 45; }
+                            { playerRot = Vector3.forward * 45;
+                                Debug.Log("上to左");
+                            }
                         }
                         else
                         {
@@ -910,8 +915,7 @@ public class PlayerControl : MonoBehaviour
                         f++;
                     }
                     break;
-                case "1":
-                    
+                case "1":                    
                     if (wa.colObjs[1] == null)
                     {
                         int a = int.Parse(num[f+1]);
@@ -919,9 +923,13 @@ public class PlayerControl : MonoBehaviour
                         {
                             Debug.Log("したと左右");
                             if (a == 2)//右
-                            { playerRot = Vector3.forward * 225; }
+                            { playerRot = Vector3.forward * 225;
+                                Debug.Log("したと右");
+                            }
                             if (a == 3)//左
-                            { playerRot = Vector3.forward * 135; }
+                            { playerRot = Vector3.forward * 135;
+                                Debug.Log("したと左");
+                            }
                         }
                         else
                         {
@@ -945,9 +953,13 @@ public class PlayerControl : MonoBehaviour
                         {
                             Debug.Log("右to上下");
                             if (a == 0)//上
-                            { playerRot = Vector3.forward * 315; }
+                            { playerRot = Vector3.forward * 315;
+                                Debug.Log("右to上");
+                            }
                             if (a == 1)//下
-                            { playerRot = Vector3.forward * 225; }
+                            { playerRot = Vector3.forward * 225;
+                                Debug.Log("右to下");
+                            }
                         }
                         else
                         {
@@ -971,9 +983,13 @@ public class PlayerControl : MonoBehaviour
                         {
                             Debug.Log("左と上下");
                             if (a == 0)//上
-                            { playerRot = Vector3.forward * 45; }
+                            { playerRot = Vector3.forward * 45;
+                                Debug.Log("左と上");
+                            }
                             if (a == 1)//下
-                            { playerRot = Vector3.forward * 135; }
+                            { playerRot = Vector3.forward * 135;
+                                Debug.Log("左と下");
+                            }
                         }
                         else
                         {
