@@ -201,25 +201,6 @@ MonoBehaviour:
   m_Events:
     m_Signals: []
     m_Events: []
---- !u!95 &6073830581585947550
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6073830581585947545}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!82 &2111839221
 AudioSource:
   m_ObjectHideFlags: 0
@@ -317,6 +298,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &6073830581585947550
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6073830581585947545}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1055578221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -616,16 +616,21 @@ PrefabInstance:
     - target: {fileID: 5928063266603288964, guid: 0fa27d4b5d88e0e45b16c173fe36c8a8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.1550422
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5928063266603288964, guid: 0fa27d4b5d88e0e45b16c173fe36c8a8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9879079
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: 5928063266603288964, guid: 0fa27d4b5d88e0e45b16c173fe36c8a8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928063266603288964, guid: 0fa27d4b5d88e0e45b16c173fe36c8a8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
