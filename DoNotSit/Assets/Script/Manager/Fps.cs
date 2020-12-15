@@ -5,11 +5,15 @@ using UnityEngine;
 public class Fps : MonoBehaviour
 {
     static int targetFrameRate;
+    public bool cur;
     // Start is called before the first frame update
     void Awake()
     {
         Application.targetFrameRate = 60; //FPSを60に設定 
-        Cursor.visible = false;
+        if (cur == false)
+        {
+            Cursor.visible = false;
+        }
     }
 
     // Update is called once per frame
