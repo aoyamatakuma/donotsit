@@ -232,60 +232,56 @@ public class GameClearScene : MonoBehaviour
       
     }
 
-    //void IconRay()
-    //{
-    //    RaycastHit hit;
-    //    int layerMask = 1 << 8;
-    //    if (Physics.Raycast(
-    //                  icon.localPosition,
-    //                  new Vector3(0, 0, 1),
-    //                  out hit,
-    //                  Mathf.Infinity, layerMask))
-    //    {
-    //        Debug.Log(gameObject.name);
-    //    }
-
-    //    Debug.DrawRay(icon.localPosition, new Vector3(0,0,1),new Color(0,0,255), Mathf.Infinity);
-    //}
-
     void SelectKey()
     {
 
         if (( Input.GetButtonDown("Jump")))
-        {
-            
+        {     
             if(icon.GetComponent<Icon>().GetText() != null)
             {
+                if (icon.GetComponent<Icon>().keyObj != null)
+                {
+                    icon.GetComponent<Icon>().keyObj.GetComponent<KeyAction>().Push();
+                }         
                 keyText = icon.GetComponent<Icon>().GetText();
-                if(keyText == "ALLDELETE")
+                if(keyText == "DELETE")
                 {
                     inputField.text = "";
                     keyCnt = 0;
+                }
+                else if(keyText == "ENTER")
+                {
+                    if (icon.GetComponent<Icon>().keyObj != null)
+                    {
+                        icon.GetComponent<Icon>().keyObj.GetComponent<KeyAction>().Reset();
+                    }
+                    keyCnt = 0;
+                    for (int i = 0; i < keys.Count; i++)
+                    {
+                        keys[i].SetActive(false);
+                    }
+                    icon.gameObject.SetActive(false);
+                    selectNum = 0;
+                    isPush = false;
+                    StartCoroutine(Delay(0.5f));
                 }
                 else
                 {
                     if(keyCnt <= maxValue)
                     {
                         inputField.text += keyText;
+                        keyCnt++;
                     }                   
                 }
-                keyCnt++;
+              
             }
         }
+    }
 
-        if ( Input.GetButtonDown("Attack"))
-        {
-            keyCnt = 0;
-            for (int i = 0; i < keys.Count; i++)
-            {
-                keys[i].SetActive(false);
-            }
-            icon.gameObject.SetActive(false);
-            selectNum = 0;
-            isPush = false;
-            isInput = false;
-        }
-
+    IEnumerator Delay(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        isInput = false;
     }
 
 }

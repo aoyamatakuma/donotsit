@@ -11,6 +11,8 @@ public class Icon : MonoBehaviour
     public float speed;
     private RectTransform icon;
     private string keyText;
+    [HideInInspector]
+    public GameObject keyObj = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,11 +57,21 @@ public class Icon : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Key")
         {
             keyText = col.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
+            keyObj = col.gameObject;          
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Key")
+        {
+            keyText = null;
+            keyObj = null;
         }
     }
 
@@ -67,4 +79,6 @@ public class Icon : MonoBehaviour
     {
         return keyText;
     }
+
+ 
 }
