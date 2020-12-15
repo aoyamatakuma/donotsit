@@ -9,6 +9,7 @@ public class Fps : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 60; //FPSを60に設定 
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
