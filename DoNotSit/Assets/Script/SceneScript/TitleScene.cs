@@ -15,15 +15,26 @@ public class TitleScene : MonoBehaviour
     private int selectNum;
     private bool isSelect;
     private bool isMove;
-
+    private bool isDelete;
     bool status;
     Fade fade;
     float BGM;
     float SE;
     public AudioMixer mixer;
+
+    void Awake()
+    {
+        isDelete = StageDate.GetBool(StageDate.deleteKey, false);
+        if (!isDelete)
+        {
+            PlayerPrefs.DeleteAll();
+            StageDate.SetBool(StageDate.deleteKey, true);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
+        
         selectNum = images.Count -1;
         Select();
         isPush = false;

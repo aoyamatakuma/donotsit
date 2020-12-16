@@ -17,6 +17,7 @@ public class StageDate:SingletonMonoBehaviour<StageDate>
     public static string extraKey = "extra";
     public static string hardUnlockKey = "hardUnlock";
     public static string extraUnlockKey = "extraUnlock";
+    public static string deleteKey = "delete";
 
   
 
