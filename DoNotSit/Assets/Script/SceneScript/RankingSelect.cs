@@ -38,7 +38,7 @@ public class RankingSelect : MonoBehaviour
         if ((Input.GetKey(KeyCode.Space) || Input.GetButtonDown("Jump")) && !isPush)
         {
             isPush = true;
-
+            RankingScene.sceneNum = 1;
             // SceneManager.LoadScene("Stage" + selectNum + 1);
             if (selectNum == 0)
             {

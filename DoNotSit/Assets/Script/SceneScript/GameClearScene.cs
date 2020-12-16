@@ -92,6 +92,7 @@ public class GameClearScene : MonoBehaviour
         {
             isPush = true;
             audio.PlayOneShot(selectSE);
+            RankingScene.sceneNum = 0;
             if (selectNum == 0)
             {
                 icon.gameObject.SetActive(true);

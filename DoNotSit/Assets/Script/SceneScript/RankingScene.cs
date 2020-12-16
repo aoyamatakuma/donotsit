@@ -13,7 +13,7 @@ public class RankingScene : MonoBehaviour
 
     public GameObject stageSelect;
     public GameObject title;
-
+    public static int sceneNum;
     private bool select;
     private AudioSource audio;
     public AudioClip selectSE;
@@ -104,7 +104,15 @@ public class RankingScene : MonoBehaviour
             audio.PlayOneShot(selectSE);
             if (select)
             {
-                fade.StartFadeIn("StageSelect", true);
+                if(sceneNum == 0)
+                {
+                    fade.StartFadeIn("StageSelect", true);
+                }
+                else
+                {
+                    fade.StartFadeIn("RankingSelect", true);
+                }
+                
             }
             else
             {
