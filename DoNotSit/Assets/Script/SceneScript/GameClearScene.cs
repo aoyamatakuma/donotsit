@@ -261,9 +261,10 @@ public class GameClearScene : MonoBehaviour
                         keys[i].SetActive(false);
                     }
                     icon.gameObject.SetActive(false);
-                    selectNum = 0;
-                    isPush = false;
-                    StartCoroutine(Delay(0.5f));
+                    StageDate.SetBool(StageDate.clearKey, true);
+                    StageClearBool();
+                    QuickRanking.Instance.SaveRanking(nameText.text, stageName, (int)goalscore);
+                    fade.StartFadeIn(rankingName, true);
                 }
                 else
                 {
