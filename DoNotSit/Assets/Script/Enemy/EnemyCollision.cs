@@ -32,6 +32,7 @@ public class EnemyCollision : MonoBehaviour
             else
             {
                 player.Damage(damage);
+                Death();
             }
         }
         if (col.gameObject.tag == "ChaseEnemy")
