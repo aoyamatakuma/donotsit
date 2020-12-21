@@ -97,6 +97,8 @@ public class PlayerControl : MonoBehaviour
 
     bool flag = false;
 
+    float attackTime = 0;
+
     CapsuleCollider colPlayer;
     // Start is called before the first frame update
     void Start()
@@ -423,6 +425,24 @@ public class PlayerControl : MonoBehaviour
             fade.StartFadeIn("GameOver", false);
         }
     }
+    private void OnCollisionStay(Collision coll)
+    {
+        
+        if(currentPlayerState == PlayerState.Attack&&playerRig.velocity.magnitude<0.3f)
+        {
+            attackTime += Time.deltaTime;
+        }
+        if(attackTime>=1.5f)
+        {
+            coltest();
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            gameObject.transform.Rotate(playerRot);
+            SetAngle();
+            currentPlayerState = PlayerState.Normal;
+            refCount = ReflectCount;
+            attackTime = 0;
+        }
+    }
     void OnCollisionExit(Collision col)
     {
         if (colFlag)
@@ -430,6 +450,7 @@ public class PlayerControl : MonoBehaviour
             colFlag = false;
             colPlayer.isTrigger = false;
         }
+        attackTime = 0;
     }
 
     //リスタート用
@@ -810,17 +831,16 @@ public class PlayerControl : MonoBehaviour
         x = Mathf.Floor(x) / 10;
         y = Mathf.Floor(y) / 10;
 
+
         //どの位置にあたったか判定し回転する
         if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
         {
             if(wa.colObjs[0] ==null)
             {
                 playerRot = Vector3.forward * 0;
-
             }           
             else
             {
-
                 coltest();
             }
         }
@@ -829,11 +849,9 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[1] == null)
             {
                 playerRot = Vector3.forward * 180;
-
             }
             else
             {
-
                 coltest();
             }
         }
@@ -846,7 +864,6 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-
                 coltest();
             }
         }
@@ -873,7 +890,6 @@ public class PlayerControl : MonoBehaviour
     {
         //コンポーネント取得
         wa = hitObject.GetComponent<WallAbility>();
-
         ////どの位置にあたったか判定し回転する
         float[] posi = new float[4];
         string[] num = new string[4];
@@ -1039,7 +1055,7 @@ public class PlayerControl : MonoBehaviour
                     break;
             }
         }
-        Debug.Log(list[f] + ":  " + posi[0] + "," + posi[1] + "," + posi[2] + "," + posi[3]) ;
+        Debug.Log(list[f] + ":  " + posi[0] + "," + posi[1] + "," + posi[2] + "," + posi[3]);
         Debug.Log(num[f] + ":  " + num[0] + "," + num[1] + "," + num[2] + "," + num[3]);
         wallNum = wa.abilityNumber;
     }
@@ -1050,12 +1066,67 @@ public class PlayerControl : MonoBehaviour
         wa = hitObject.GetComponent<WallAbility>();
         float x = hitPoint.x;
         float y = hitPoint.y;
-
         x *= 10;
         y *= 10;
-
         x = Mathf.Floor(x) / 10;
         y = Mathf.Floor(y) / 10;
+
+        //どの位置にあたったか判定し回転する
+        if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
+        {
+            if (wa.colObjs[0] == null)
+            {
+                playerRot = Vector3.forward * 0;
+            }
+            else
+            {
+                coltest();
+            }
+        }
+        else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
+        {
+            if (wa.colObjs[1] == null)
+            {
+                playerRot = Vector3.forward * 180;
+            }
+            else
+            {
+                coltest();
+            }
+        }
+        else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
+        {
+            if (wa.colObjs[2] == null)
+            {
+                playerRot = Vector3.forward * 270;
+
+            }
+            else
+            {
+                coltest();
+            }
+        }
+        else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
+        {
+            if (wa.colObjs[3] == null)
+            {
+                playerRot = Vector3.forward * 90;
+
+            }
+            else
+            {
+                coltest();
+            }
+        }
+        else
+        {
+            coltest();
+        }
+        wallNum = wa.abilityNumber;
+
+
+
+
 
         Debug.Log(wa.Width(true));
         Debug.Log(wa.Width(false));
