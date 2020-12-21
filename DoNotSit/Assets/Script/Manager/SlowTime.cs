@@ -10,8 +10,12 @@ public class SlowTime : MonoBehaviour
     private CameraShakeScript camera;
     private PlayerControl player;
     private bool scale;
+    //AudioSource audio;
+    //public AudioClip slowSE;
+    //public AudioClip slowStopSE;
     void Start()
     {
+       // audio = GetComponent<AudioSource>();
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
@@ -27,6 +31,7 @@ public class SlowTime : MonoBehaviour
             {
                 Time.timeScale = 0;
             }
+            //  audio.PlayOneShot(slowSE);
             slowTime++;
             slowMotion = true;
             camera.slowFlag = true;
@@ -42,6 +47,7 @@ public class SlowTime : MonoBehaviour
             {
                 Time.timeScale = 0;
             }
+            //  audio.PlayOneShot(slowStopSE);
             camera.slowFlag = false;
             scale = false;
         }
