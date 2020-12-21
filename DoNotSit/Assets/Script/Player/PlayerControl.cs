@@ -428,12 +428,14 @@ public class PlayerControl : MonoBehaviour
     private void OnCollisionStay(Collision coll)
     {
         
-        if(currentPlayerState == PlayerState.Attack&&playerRig.velocity.magnitude<0.3f)
+        if(currentPlayerState == PlayerState.Attack&&playerRig.velocity.magnitude<0.7f)
         {
             attackTime += Time.deltaTime;
         }
         if(attackTime>=1.5f)
         {
+            hitObject = coll.gameObject;
+            hitPoint = gameObject.transform.position;
             coltest();
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             gameObject.transform.Rotate(playerRot);
