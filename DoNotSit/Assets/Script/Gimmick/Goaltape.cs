@@ -54,17 +54,20 @@ public class Goaltape : MonoBehaviour
         Debug.Log(nearNum);
         for(int i = 0; i < tapeObj.Count; i++)
         {
-            tapeObj[i].GetComponent<Cloth>().randomAcceleration = new Vector3(0, 0, 100);
+            tapeObj[i].GetComponent<Cloth>().enabled = true;
             Vector3 pos = tapeObj[i].transform.position;
-            if (i <= nearNum)
+            float x = Random.Range(-1, 1);
+            float z = Random.Range(-1, 1);
+            if (i ==0)
             {
-                pos.y += speed*Time.deltaTime;
+               pos.y += speed*Time.deltaTime;
             }
             else
             {
                 pos.y -= speed * Time.deltaTime;
             }
-
+            //pos.x += x * speed * Time.deltaTime;
+           // pos.z += z * speed * Time.deltaTime;
             tapeObj[i].transform.position = pos;
         }
     }
