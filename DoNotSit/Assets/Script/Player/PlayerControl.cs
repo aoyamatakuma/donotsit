@@ -128,10 +128,7 @@ public class PlayerControl : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        Debug.Log(playerVec);
-        Debug.Log(playerRig.velocity);
-        
+    {  
         Tenmetu();
         //ノーマルステート
         if (currentPlayerState == PlayerState.Normal)//ノーマル
@@ -362,6 +359,7 @@ public class PlayerControl : MonoBehaviour
                 switch (wallNum)
                 {
                     case 0://着地
+                        Debug.Log("tyakuti");
                         ReflectActionCount();
                         break;
                     case 1://沼の床
@@ -733,6 +731,7 @@ public class PlayerControl : MonoBehaviour
     //反射の数をカウントしない
     private void ReflectAction()
     {
+        Debug.Log("反射します");
         //CapsuleCollider col = GetComponent<CapsuleCollider>();
         colPlayer.isTrigger = true;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -754,7 +753,8 @@ public class PlayerControl : MonoBehaviour
     //反射の数をカウントする
     private void ReflectActionCount()
     {
-       // CapsuleCollider col = GetComponent<CapsuleCollider>();
+        Debug.Log("tomaru");
+        // CapsuleCollider col = GetComponent<CapsuleCollider>();
         colPlayer.isTrigger = true;
         if (refCount<1)
         {                    
@@ -766,6 +766,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
+            Debug.Log("反射します");
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             gameObject.transform.Rotate(playerRot);
             //当たったオブジェの向き取得
@@ -840,9 +841,11 @@ public class PlayerControl : MonoBehaviour
             if(wa.colObjs[0] ==null)
             {
                 playerRot = Vector3.forward * 0;
+                Debug.Log("UP");
             }           
             else
             {
+                Debug.Log("UPだけどむり");
                 coltest();
             }
         }
@@ -851,9 +854,11 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[1] == null)
             {
                 playerRot = Vector3.forward * 180;
+                Debug.Log("Down");
             }
             else
             {
+                Debug.Log("Downだけどむり");
                 coltest();
             }
         }
@@ -862,10 +867,11 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[2] == null)
             {
                 playerRot = Vector3.forward * 270;
-
+                Debug.Log("right");
             }
             else
             {
+                Debug.Log("rightだけど無理");
                 coltest();
             }
         }
@@ -874,15 +880,17 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[3] == null)
             {
                 playerRot = Vector3.forward * 90;
-
+                Debug.Log("left");
             }
             else
             {
+                Debug.Log("leftだけど無理");
                 coltest();
             }
         }
         else
         {
+            Debug.Log("何も該当していない");
             coltest();
         }
         wallNum = wa.abilityNumber;
@@ -895,11 +903,17 @@ public class PlayerControl : MonoBehaviour
         ////どの位置にあたったか判定し回転する
         float[] posi = new float[4];
         string[] num = new string[4];
+        Vector3 plPos = gameObject.transform.position;
         //各面の中心点のの距離を格納
-        posi[0] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(true)) * 100) / 100;
-        posi[1] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(false)) * 100) / 100;
-        posi[2] = Mathf.Floor(Vector3.Distance(hitPoint, wa.WidthPos(true)) * 100) / 100;
-        posi[3] = Mathf.Floor(Vector3.Distance(hitPoint, wa.WidthPos(false)) * 100) / 100;
+        //posi[0] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(true)) *100) / 100;
+        //posi[1] = Mathf.Floor(Vector3.Distance(hitPoint, wa.HeightPos(false)) * 100) / 100;
+        //posi[2] = Mathf.Floor(Vector3.Distance(hitPoint, wa.WidthPos(true)) * 100) / 100;
+        //posi[3] = Mathf.Floor(Vector3.Distance(hitPoint, wa.WidthPos(false)) * 100) / 100;
+
+        posi[0] = Mathf.Floor(Vector3.Distance(plPos, wa.HeightPos(true)) * 100) / 100;
+        posi[1] = Mathf.Floor(Vector3.Distance(plPos, wa.HeightPos(false)) * 100) / 100;
+        posi[2] = Mathf.Floor(Vector3.Distance(plPos, wa.WidthPos(true)) * 100) / 100;
+        posi[3] = Mathf.Floor(Vector3.Distance(plPos, wa.WidthPos(false)) * 100) / 100;
         //格納した値を短い順にする
         var list = new List<float>();
         list.AddRange(posi);
@@ -995,8 +1009,7 @@ public class PlayerControl : MonoBehaviour
                         f++;
                     }
                     break;
-                case "2":
-                    
+                case "2":                
                     if (wa.colObjs[2] == null)
                     {
                         int a = int.Parse(num[f + 1]);
@@ -1059,6 +1072,11 @@ public class PlayerControl : MonoBehaviour
         }
         Debug.Log(list[f] + ":  " + posi[0] + "," + posi[1] + "," + posi[2] + "," + posi[3]);
         Debug.Log(num[f] + ":  " + num[0] + "," + num[1] + "," + num[2] + "," + num[3]);
+        Debug.Log(wa.Width(true));
+        Debug.Log(wa.Width(false));
+        Debug.Log(wa.Height(true));
+        Debug.Log(wa.Height(false));
+        Debug.Log(hitPoint);
         wallNum = wa.abilityNumber;
     }
     //判定を見るよう
@@ -1073,60 +1091,7 @@ public class PlayerControl : MonoBehaviour
         x = Mathf.Floor(x) / 10;
         y = Mathf.Floor(y) / 10;
 
-        //どの位置にあたったか判定し回転する
-        if (y == wa.Height(true) || y + 0.1f == wa.Height(true) || y - 0.1f == wa.Height(true))
-        {
-            if (wa.colObjs[0] == null)
-            {
-                playerRot = Vector3.forward * 0;
-            }
-            else
-            {
-                coltest();
-            }
-        }
-        else if (y == wa.Height(false) || y + 0.1f == wa.Height(false) || y - 0.1f == wa.Height(false))
-        {
-            if (wa.colObjs[1] == null)
-            {
-                playerRot = Vector3.forward * 180;
-            }
-            else
-            {
-                coltest();
-            }
-        }
-        else if (x == wa.Width(true) || x + 0.1f == wa.Width(true) || x - 0.1f == wa.Width(true))
-        {
-            if (wa.colObjs[2] == null)
-            {
-                playerRot = Vector3.forward * 270;
-
-            }
-            else
-            {
-                coltest();
-            }
-        }
-        else if (x == wa.Width(false) || x + 0.1f == wa.Width(false) || x - 0.1f == wa.Width(false))
-        {
-            if (wa.colObjs[3] == null)
-            {
-                playerRot = Vector3.forward * 90;
-
-            }
-            else
-            {
-                coltest();
-            }
-        }
-        else
-        {
-            coltest();
-        }
-        wallNum = wa.abilityNumber;
-
-
+      
 
 
 
