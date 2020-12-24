@@ -5,17 +5,17 @@ using UnityEngine;
 public class SlowTime : MonoBehaviour
 {
     public bool slowMotion;
-    float slowTime;
     public float slowEnd;
     private CameraShakeScript camera;
     private PlayerControl player;
     private bool scale;
-    //AudioSource audio;
-    //public AudioClip slowSE;
-    //public AudioClip slowStopSE;
+    AudioSource audio;
+    public AudioClip slowSE;
+    public AudioClip slowStopSE;
+    private bool slowaudio;//一回鳴らすためのbool
     void Start()
     {
-       // audio = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
@@ -31,8 +31,11 @@ public class SlowTime : MonoBehaviour
             {
                 Time.timeScale = 0;
             }
-            //  audio.PlayOneShot(slowSE);
-            slowTime++;
+            if (slowaudio == false)
+            {
+                audio.PlayOneShot(slowSE);
+            }
+            slowaudio = true;
             slowMotion = true;
             camera.slowFlag = true;
             scale = true;
@@ -47,7 +50,8 @@ public class SlowTime : MonoBehaviour
             {
                 Time.timeScale = 0;
             }
-            //  audio.PlayOneShot(slowStopSE);
+            audio.PlayOneShot(slowStopSE);
+            slowaudio = false;
             camera.slowFlag = false;
             scale = false;
         }
