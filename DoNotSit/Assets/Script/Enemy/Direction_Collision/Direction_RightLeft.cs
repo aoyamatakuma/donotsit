@@ -16,11 +16,13 @@ public class Direction_RightLeft : MonoBehaviour
     PlayerControl player;
     public float score;
     bool isTouch;
+    Goaltape goal;
     void Start()
     {
         isBurst = false;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        goal = GameObject.FindGameObjectWithTag("Goal").GetComponent<Goaltape>();
         burstSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
         RandomDirection();
       
@@ -30,6 +32,14 @@ public class Direction_RightLeft : MonoBehaviour
 
     void Update()
     {
+        if (goal.isGoal)
+        {
+            for(int i = 0; i < effects.Count; i++)
+            {
+                effects[i].GetComponent<AudioSource>().enabled = false;
+            }
+            Death();
+        }
         Move();
     }
 

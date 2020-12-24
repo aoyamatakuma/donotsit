@@ -12,6 +12,7 @@ TagManager:
   - BlowAway
   - ChaseEnemy
   - Key
+  - Goal
   layers:
   - Default
   - TransparentFX

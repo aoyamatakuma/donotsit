@@ -10,12 +10,25 @@ public class EnemyCollision : MonoBehaviour
     public List<GameObject> effects;
     public float score;
     PlayerControl player;
-
+    Goaltape goal;
     void Start()
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShakeScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        goal = GameObject.FindGameObjectWithTag("Goal").GetComponent<Goaltape>();
         damageUI.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (goal.isGoal)
+        {
+            for (int i = 0; i < effects.Count; i++)
+            {
+                effects[i].GetComponent<AudioSource>().enabled = false;
+            }
+            Death();
+        }
     }
     
     void OnTriggerEnter(Collider col)
@@ -35,7 +48,7 @@ public class EnemyCollision : MonoBehaviour
                 Death();
             }
         }
-        if (col.gameObject.tag == "ChaseEnemy")
+        if (col.gameObject.tag == "ChaseEnemy" )
         {
             Death();
         }
