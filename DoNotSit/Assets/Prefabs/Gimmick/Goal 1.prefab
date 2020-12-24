@@ -69,7 +69,7 @@ Cloth:
   m_UseTethers: 1
   m_UseGravity: 0
   m_Damping: 0
-  m_ExternalAcceleration: {x: 100, y: 0, z: 0}
+  m_ExternalAcceleration: {x: 600, y: 0, z: 0}
   m_RandomAcceleration: {x: 100, y: 0, z: 100}
   m_WorldVelocityScale: 0.5
   m_WorldAccelerationScale: 1
@@ -392,14 +392,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5949790011221136912}
-  - component: {fileID: 5949790011221136916}
-  - component: {fileID: 5949790011221136919}
-  - component: {fileID: 5949790011221136918}
   - component: {fileID: 5949790011221136913}
   - component: {fileID: 5949790011221136917}
   m_Layer: 0
   m_Name: Goal 1
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -420,140 +417,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5949790011221136916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5949790011221136915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1697911464244634f8805a3f49f2de1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playableDirector: {fileID: 0}
-  ui:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  isbreak: 0
---- !u!114 &5949790011221136919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5949790011221136915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0b92d1207a0b5f459ce32138f76d555, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeOutPrefab: {fileID: 985631437893514359, guid: b1acbd4931931ca49aaf2004eee088ea,
-    type: 3}
-  fadeInPrefab: {fileID: 770964606592112835, guid: 33a41c8c3cbe97743a30e8dee3811c30,
-    type: 3}
-  fadeSE: {fileID: 8300000, guid: 3e3b0e6e896bb9742a80561a9dc2af56, type: 3}
---- !u!82 &5949790011221136918
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5949790011221136915}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -6108336050191783543, guid: 4144fa23b9eccc6409192db89e8c6a4c,
-    type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!65 &5949790011221136913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -582,7 +445,7 @@ MonoBehaviour:
   tapeObj:
   - {fileID: 1012182171375129100}
   - {fileID: 7284772636486152991}
-  speed: 30
+  speed: 80
 --- !u!1 &7284772636486152991
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +515,7 @@ Cloth:
   m_UseTethers: 1
   m_UseGravity: 0
   m_Damping: 0
-  m_ExternalAcceleration: {x: 100, y: 0, z: 0}
+  m_ExternalAcceleration: {x: 600, y: 0, z: 0}
   m_RandomAcceleration: {x: 100, y: 0, z: 100}
   m_WorldVelocityScale: 0.5
   m_WorldAccelerationScale: 1

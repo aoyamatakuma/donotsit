@@ -8,7 +8,8 @@ public class Goaltape : MonoBehaviour
     private GameObject nearObj;
     private int nearNum;
     public float speed;
-    bool isGoal;
+    [HideInInspector]
+    public bool isGoal;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +52,6 @@ public class Goaltape : MonoBehaviour
 
     void MoveObj()
     {
-        Debug.Log(nearNum);
         for(int i = 0; i < tapeObj.Count; i++)
         {
             tapeObj[i].GetComponent<Cloth>().enabled = true;
