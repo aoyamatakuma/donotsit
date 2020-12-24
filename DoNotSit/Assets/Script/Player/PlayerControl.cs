@@ -329,7 +329,7 @@ public class PlayerControl : MonoBehaviour
                 ob.SetActive(false);
             }
         }
-        test();
+       test();
     }
 
     //壁との当たり判定
@@ -425,12 +425,12 @@ public class PlayerControl : MonoBehaviour
     }
     private void OnCollisionStay(Collision coll)
     {
-        
-        if(currentPlayerState == PlayerState.Attack&&playerRig.velocity.magnitude<0.7f)
+        Debug.Log(hitObject);
+        if(currentPlayerState == PlayerState.Attack&&playerRig.velocity.magnitude<2.5f)
         {
             attackTime += Time.deltaTime;
         }
-        if(attackTime>=1.5f)
+        if(attackTime>=0.5f)
         {
             hitObject = coll.gameObject;
             hitPoint = gameObject.transform.position;
@@ -445,8 +445,10 @@ public class PlayerControl : MonoBehaviour
     }
     void OnCollisionExit(Collision col)
     {
+        Debug.Log("離れた");
         if (colFlag)
         {
+            Debug.Log("modosu");
             colFlag = false;
             colPlayer.isTrigger = false;
         }
@@ -755,7 +757,7 @@ public class PlayerControl : MonoBehaviour
     {
         Debug.Log("tomaru");
         // CapsuleCollider col = GetComponent<CapsuleCollider>();
-        colPlayer.isTrigger = true;
+        //colPlayer.isTrigger = true;
         if (refCount<1)
         {                    
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -783,7 +785,7 @@ public class PlayerControl : MonoBehaviour
           // RayObject();
             refCount--;
         }
-        colPlayer.isTrigger = false;
+      //  colPlayer.isTrigger = false;
     }
     //動く床の反射用
     private void ReflectMoveActionCount(GameObject colObj)
@@ -1198,5 +1200,23 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
+    }
+
+    private void ReloadPlay()
+    {
+        if (currentPlayerState == PlayerState.Attack && playerRig.velocity.magnitude < 2.5f)
+        {
+            attackTime += Time.deltaTime;
+        }
+        if (attackTime >= 0.5f)
+        {
+            coltest();
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            gameObject.transform.Rotate(playerRot);
+            SetAngle();
+            currentPlayerState = PlayerState.Normal;
+            refCount = ReflectCount;
+            attackTime = 0;
+        }
     }
 }
