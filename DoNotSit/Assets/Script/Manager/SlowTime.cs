@@ -50,7 +50,7 @@ public class SlowTime : MonoBehaviour
             {
                 Time.timeScale = 0;
             }
-            audio.PlayOneShot(slowStopSE);
+          //  audio.PlayOneShot(slowStopSE);
             slowaudio = false;
             camera.slowFlag = false;
             scale = false;
