@@ -879,6 +879,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3431917552988462080, guid: 4b4bf89b0e44b5844af69bdee082c2fd,
         type: 3}
+      propertyPath: ui.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431917552988462080, guid: 4b4bf89b0e44b5844af69bdee082c2fd,
+        type: 3}
       propertyPath: playableDirector
       value: 
       objectReference: {fileID: 8389641089211921584}

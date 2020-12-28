@@ -10,10 +10,14 @@ public class Goaltape : MonoBehaviour
     public float speed;
     [HideInInspector]
     public bool isGoal;
+    private float a;
+    public float delay = 0.3f;
+    private float cnt;
     // Start is called before the first frame update
     void Start()
     {
         isGoal = false;
+        a = 0;
     }
 
     // Update is called once per frame
@@ -21,7 +25,13 @@ public class Goaltape : MonoBehaviour
     {
         if (isGoal)
         {
-            MoveObj();
+            cnt ++;
+            if (cnt > delay)
+            {
+                a += Time.deltaTime;
+                MoveObj();
+            }
+          
         }
     }
 
@@ -60,11 +70,11 @@ public class Goaltape : MonoBehaviour
             float z = Random.Range(-1, 1);
             if (i ==0)
             {
-               pos.y += speed*Time.deltaTime;
+               pos.y += a*speed*Time.deltaTime;
             }
             else
             {
-                pos.y -= speed * Time.deltaTime;
+                pos.y -= a * speed *Time.deltaTime;
             }
             //pos.x += x * speed * Time.deltaTime;
            // pos.z += z * speed * Time.deltaTime;
