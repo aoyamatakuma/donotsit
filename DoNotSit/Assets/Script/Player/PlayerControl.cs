@@ -128,8 +128,16 @@ public class PlayerControl : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {  
-        Tenmetu();
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            // 速度ベクトルを表示
+            Debug.Log("速度ベクトル: " + playerRig.velocity);
+
+            // 速度を表示
+            Debug.Log("速度: " + playerRig.velocity.magnitude);
+        }
+            Tenmetu();
         //ノーマルステート
         if (currentPlayerState == PlayerState.Normal)//ノーマル
         {
@@ -142,6 +150,11 @@ public class PlayerControl : MonoBehaviour
         }
         if (currentPlayerState == PlayerState.Attack)//アタック中
         {
+            if(playerRig.velocity.magnitude>200)
+            {
+                playerRig.velocity =playerRig.velocity.normalized* 200;
+            }
+
             ob.SetActive(false);
             animator.SetBool("Jump", true);
         }
@@ -340,7 +353,7 @@ public class PlayerControl : MonoBehaviour
            
             if (!colFlag)
             {
-                Debug.Log("当たった");
+               // Debug.Log("当たった");
                 colFlag = true;
                 if (hitObject != col.gameObject)
                 {
@@ -349,7 +362,7 @@ public class PlayerControl : MonoBehaviour
                     {
                         hitPoint = point.point;
                     }
-                    Debug.Log("違うオブジェ");
+                  //  Debug.Log("違うオブジェ");
                     coltest();
                 }
 
@@ -359,7 +372,7 @@ public class PlayerControl : MonoBehaviour
                 switch (wallNum)
                 {
                     case 0://着地
-                        Debug.Log("tyakuti");
+                       // Debug.Log("tyakuti");
                         ReflectActionCount();
                         break;
                     case 1://沼の床
@@ -370,7 +383,7 @@ public class PlayerControl : MonoBehaviour
                         currentPlayerState = PlayerState.Normal;
                         break;
                     case 2://反射
-                        Debug.Log("hannsya");
+                        //Debug.Log("hannsya");
                         ReflectAction();
                         break;
                     case 4://とげ
@@ -425,7 +438,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void OnCollisionStay(Collision coll)
     {
-        Debug.Log(hitObject);
+        //Debug.Log(hitObject);
         if(currentPlayerState == PlayerState.Attack&&playerRig.velocity.magnitude<2.5f)
         {
             attackTime += Time.deltaTime;
@@ -445,10 +458,10 @@ public class PlayerControl : MonoBehaviour
     }
     void OnCollisionExit(Collision col)
     {
-        Debug.Log("離れた");
+     //   Debug.Log("離れた");
         if (colFlag)
         {
-            Debug.Log("modosu");
+           // Debug.Log("modosu");
             colFlag = false;
             colPlayer.isTrigger = false;
         }
@@ -755,7 +768,7 @@ public class PlayerControl : MonoBehaviour
     //反射の数をカウントする
     private void ReflectActionCount()
     {
-        Debug.Log("tomaru");
+       // Debug.Log("tomaru");
         // CapsuleCollider col = GetComponent<CapsuleCollider>();
         //colPlayer.isTrigger = true;
         if (refCount<1)
@@ -768,7 +781,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            Debug.Log("反射します");
+           // Debug.Log("反射します");
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             gameObject.transform.Rotate(playerRot);
             //当たったオブジェの向き取得
@@ -843,11 +856,11 @@ public class PlayerControl : MonoBehaviour
             if(wa.colObjs[0] ==null)
             {
                 playerRot = Vector3.forward * 0;
-                Debug.Log("UP");
+                //Debug.Log("UP");
             }           
             else
             {
-                Debug.Log("UPだけどむり");
+              //  Debug.Log("UPだけどむり");
                 coltest();
             }
         }
@@ -856,11 +869,11 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[1] == null)
             {
                 playerRot = Vector3.forward * 180;
-                Debug.Log("Down");
+             //   Debug.Log("Down");
             }
             else
             {
-                Debug.Log("Downだけどむり");
+               // Debug.Log("Downだけどむり");
                 coltest();
             }
         }
@@ -869,11 +882,11 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[2] == null)
             {
                 playerRot = Vector3.forward * 270;
-                Debug.Log("right");
+              //  Debug.Log("right");
             }
             else
             {
-                Debug.Log("rightだけど無理");
+               // Debug.Log("rightだけど無理");
                 coltest();
             }
         }
@@ -882,17 +895,17 @@ public class PlayerControl : MonoBehaviour
             if (wa.colObjs[3] == null)
             {
                 playerRot = Vector3.forward * 90;
-                Debug.Log("left");
+              //  Debug.Log("left");
             }
             else
             {
-                Debug.Log("leftだけど無理");
+              //  Debug.Log("leftだけど無理");
                 coltest();
             }
         }
         else
         {
-            Debug.Log("何も該当していない");
+          //  Debug.Log("何も該当していない");
             coltest();
         }
         wallNum = wa.abilityNumber;
@@ -962,23 +975,23 @@ public class PlayerControl : MonoBehaviour
                         {
                             if (a==2)
                             { playerRot = Vector3.forward * 315;
-                                Debug.Log("上to右");
+                               // Debug.Log("上to右");
                             }
                             if (a == 3)
                             { playerRot = Vector3.forward * 45;
-                                Debug.Log("上to左");
+                             //   Debug.Log("上to左");
                             }
                         }
                         else
                         {
-                            Debug.Log("上");
+                          //  Debug.Log("上");
                             playerRot = Vector3.forward * 0;
                         }
                         go = true;
                     }
                     else
                     {
-                        Debug.Log("上だけど無理");
+                      //  Debug.Log("上だけど無理");
                         f++;
                     }
                     break;
@@ -988,26 +1001,26 @@ public class PlayerControl : MonoBehaviour
                         int a = int.Parse(num[f+1]);
                         if (list[f] == list[f + 1] && wa.colObjs[a] == null)
                         {
-                            Debug.Log("したと左右");
+                           // Debug.Log("したと左右");
                             if (a == 2)//右
                             { playerRot = Vector3.forward * 225;
-                                Debug.Log("したと右");
+                            //    Debug.Log("したと右");
                             }
                             if (a == 3)//左
                             { playerRot = Vector3.forward * 135;
-                                Debug.Log("したと左");
+                            //    Debug.Log("したと左");
                             }
                         }
                         else
                         {
-                            Debug.Log("した");
+                         //   Debug.Log("した");
                             playerRot = Vector3.forward * 180;
                         }
                         go = true;
                     }
                     else
                     {
-                        Debug.Log("下だけど無理");
+                      //  Debug.Log("下だけど無理");
                         f++;
                     }
                     break;
@@ -1017,26 +1030,26 @@ public class PlayerControl : MonoBehaviour
                         int a = int.Parse(num[f + 1]);
                         if (list[f] == list[f + 1] && wa.colObjs[a] == null)
                         {
-                            Debug.Log("右to上下");
+                            //Debug.Log("右to上下");
                             if (a == 0)//上
                             { playerRot = Vector3.forward * 315;
                                 Debug.Log("右to上");
                             }
                             if (a == 1)//下
                             { playerRot = Vector3.forward * 225;
-                                Debug.Log("右to下");
+                              //  Debug.Log("右to下");
                             }
                         }
                         else
                         {
-                            Debug.Log("右");
+                          //  Debug.Log("右");
                             playerRot = Vector3.forward * 270;
                         }
                         go = true;
                     }
                     else
                     {
-                        Debug.Log("右だけど無理");
+                      //  Debug.Log("右だけど無理");
                         f++;
                     }
                     break;
@@ -1047,38 +1060,38 @@ public class PlayerControl : MonoBehaviour
                         int a = int.Parse(num[f + 1]);
                         if (list[f] == list[f + 1] && wa.colObjs[a] == null)
                         {
-                            Debug.Log("左と上下");
+                          //  Debug.Log("左と上下");
                             if (a == 0)//上
                             { playerRot = Vector3.forward * 45;
-                                Debug.Log("左と上");
+                               // Debug.Log("左と上");
                             }
                             if (a == 1)//下
                             { playerRot = Vector3.forward * 135;
-                                Debug.Log("左と下");
+                             //   Debug.Log("左と下");
                             }
                         }
                         else
                         {
-                            Debug.Log("左");
+                         //   Debug.Log("左");
                             playerRot = Vector3.forward * 90;
                         }
                         go = true;
                     }
                     else
                     {
-                        Debug.Log("左だけど無理");
+                      //  Debug.Log("左だけど無理");
                         f++;
                     }
                     break;
             }
         }
-        Debug.Log(list[f] + ":  " + posi[0] + "," + posi[1] + "," + posi[2] + "," + posi[3]);
-        Debug.Log(num[f] + ":  " + num[0] + "," + num[1] + "," + num[2] + "," + num[3]);
-        Debug.Log(wa.Width(true));
-        Debug.Log(wa.Width(false));
-        Debug.Log(wa.Height(true));
-        Debug.Log(wa.Height(false));
-        Debug.Log(hitPoint);
+        //Debug.Log(list[f] + ":  " + posi[0] + "," + posi[1] + "," + posi[2] + "," + posi[3]);
+        //Debug.Log(num[f] + ":  " + num[0] + "," + num[1] + "," + num[2] + "," + num[3]);
+        //Debug.Log(wa.Width(true));
+        //Debug.Log(wa.Width(false));
+        //Debug.Log(wa.Height(true));
+        //Debug.Log(wa.Height(false));
+        //Debug.Log(hitPoint);
         wallNum = wa.abilityNumber;
     }
     //判定を見るよう
